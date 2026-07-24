@@ -1,14 +1,15 @@
 ---
-// Define props from Astro
 const { title, subTitle, partners } = Astro.props;
 
 interface Partner {
-  icon: any;
-  name?: string;
-  href?: string;
+  src: {
+    src: string;
+    width: number;
+    height: number;
+  };
+  alt?: string;
 }
 
-// Define TypeScript interface for props
 interface Props {
   title: string;
   subTitle?: string;
@@ -19,31 +20,179 @@ interface Props {
 <section
   class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 2xl:max-w-full"
 >
-  {/* Title and description */}
-  <div class="mx-auto mb-6 w-full space-y-1 text-center sm:w-1/2 lg:w-1/3">
-    <h2
-      class="text-2xl leading-tight font-bold text-balance text-neutral-800 sm:text-3xl dark:text-neutral-200"
-    >
-      {title}
-    </h2>
-    {
-      subTitle && (
-        <p class="leading-tight text-pretty text-neutral-600 dark:text-neutral-400">
-          {subTitle}
-        </p>
-      )
-    }
-  </div>
   <div
-    class="flex flex-col items-center justify-center gap-y-2 sm:flex-row sm:gap-x-12 sm:gap-y-0 lg:gap-x-24"
+    class="rounded-[2rem] border border-[#DCE8FF] bg-white px-6 py-8 shadow-[0_24px_60px_-48px_rgba(30,58,255,0.18)] sm:px-8 lg:px-10"
   >
-    {/* Clients Group SVGs */}
-    {
-      partners.map(partner => (
-        <a href={partner.href} target="_blank" rel="noopener noreferrer">
-          <div set:html={partner.icon} />
-        </a>
-      ))
-    }
+    <div class="mx-auto mb-8 max-w-3xl text-center">
+      <h2 class="text-2xl font-bold text-[#10245F] sm:text-3xl">
+        {title}
+      </h2>
+      {subTitle && <p class="mt-2 leading-7 text-[#5B6785]">{subTitle}</p>}
+    </div>
+
+    <div class="logo-marquee-wrap" data-client-marquee>
+      <div class="logo-marquee-track" data-client-marquee-track>
+        <div class="logo-marquee-group" data-client-marquee-group>
+          {
+            partners.map(partner => (
+              <div class="logo-card">
+                <img
+                  src={partner.src.src}
+                  width={partner.src.width}
+                  height={partner.src.height}
+                  alt={partner.alt || 'Client logo'}
+                  class="logo-image"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+            ))
+          }
+        </div>
+
+        <div class="logo-marquee-group" aria-hidden="true">
+          {
+            partners.map(partner => (
+              <div class="logo-card">
+                <img
+                  src={partner.src.src}
+                  width={partner.src.width}
+                  height={partner.src.height}
+                  alt=""
+                  class="logo-image"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
   </div>
 </section>
+
+<script>
+  function initClientMarquees() {
+    document.querySelectorAll('[data-client-marquee]').forEach(marquee => {
+      if (!(marquee instanceof HTMLElement)) return;
+      if (marquee.dataset.bound === 'true') return;
+      marquee.dataset.bound = 'true';
+
+      const track = marquee.querySelector('[data-client-marquee-track]');
+      const group = marquee.querySelector('[data-client-marquee-group]');
+
+      if (!(track instanceof HTMLElement) || !(group instanceof HTMLElement))
+        return;
+
+      let animationFrame = 0;
+      let lastTime = 0;
+      let offset = 0;
+      let groupWidth = 0;
+      const pixelsPerSecond = 28;
+
+      const measure = () => {
+        groupWidth = group.getBoundingClientRect().width;
+        track.style.transform = 'translate3d(0, 0, 0)';
+        offset = 0;
+      };
+
+      const tick = (time: number) => {
+        if (!lastTime) lastTime = time;
+        const delta = time - lastTime;
+        lastTime = time;
+
+        if (groupWidth > 0) {
+          offset += (pixelsPerSecond * delta) / 1000;
+
+          if (offset >= groupWidth) {
+            offset = 0;
+          }
+
+          track.style.transform = `translate3d(-${offset}px, 0, 0)`;
+        }
+
+        animationFrame = window.requestAnimationFrame(tick);
+      };
+
+      window.addEventListener('resize', measure);
+
+      measure();
+      animationFrame = window.requestAnimationFrame(tick);
+
+      marquee.addEventListener('remove', () => {
+        window.cancelAnimationFrame(animationFrame);
+      });
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initClientMarquees);
+  } else {
+    initClientMarquees();
+  }
+</script>
+
+<style is:global>
+  .logo-marquee-wrap {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    padding: 0.5rem 0;
+  }
+
+  .logo-marquee-track {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    width: max-content;
+    will-change: transform;
+  }
+
+  .logo-marquee-group {
+    display: flex;
+    flex: 0 0 auto;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .logo-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+    width: 10rem;
+    height: 6.5rem;
+    padding: 0.75rem;
+    background: transparent;
+  }
+
+  .logo-image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    image-rendering: auto;
+  }
+
+  @media (min-width: 640px) {
+    .logo-marquee-track,
+    .logo-marquee-group {
+      gap: 1.25rem;
+    }
+
+    .logo-card {
+      width: 11.5rem;
+      height: 7.25rem;
+      padding: 0.9rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .logo-card {
+      width: 13rem;
+      height: 8rem;
+      padding: 1rem;
+    }
+  }
+</style>

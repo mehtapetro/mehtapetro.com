@@ -1,10 +1,10 @@
-# ScrewFast AI Guide
+# Mehta Petro AI Guide
 
 For AI assistants (Cursor, Copilot, Claude, ChatGPT): this file describes project structure, conventions, and where to find or add code. See [README.md](README.md) for human-facing setup and features.
 
 ## Project Overview
 
-ScrewFast is an Astro + Tailwind CSS + Preline UI template for landing pages, blogs, documentation, and product/content pages. Stack: Astro 7, Tailwind v4 (via `@tailwindcss/vite`), Preline (modals, accordions), Starlight (docs), Lenis (smooth scroll), GSAP (animations).
+Mehta Petro runs on an Astro + Tailwind CSS + Preline UI codebase for landing pages, blogs, documentation, and product/content pages. Stack: Astro 7, Tailwind v4 (via `@tailwindcss/vite`), Preline (modals, accordions), Starlight (docs), Lenis (smooth scroll), GSAP (animations).
 
 Marketing site locales: **en** and **fr** (file-based routes under `src/pages/` and `src/pages/fr/`). Use `getMarketingLocale()` from [`src/utils/locale.ts`](src/utils/locale.ts) for nav/footer/forms — do not rely only on `Astro.currentLocale` for marketing pages.
 

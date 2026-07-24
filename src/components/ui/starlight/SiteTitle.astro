@@ -1,5 +1,6 @@
 ---
-import mainLogo from '@images/starlight/screwfast_logo_dark.svg?raw';
+import { Image } from 'astro:assets';
+import logo from '@images/mprl_logo.png';
 import docsLogo from '@images/starlight/docs_logo.svg?raw';
 import type { Props } from '@astrojs/starlight/props';
 
@@ -9,12 +10,14 @@ const docs = '/' + locale + 'welcome-to-docs/';
 ---
 
 <span class="site-title flex">
-  <a class="main-logo" href={main} set:html={mainLogo} aria-label="ScrewFast" />
+  <a class="main-logo" href={main} aria-label="Mehta Petro">
+    <Image src={logo} alt="Mehta Petro" class="h-9 w-auto object-contain" />
+  </a>
   <a
     class="docs-logo"
     href={docs}
     set:html={docsLogo}
-    aria-label="ScrewFast Docs"
+    aria-label="Mehta Petro Docs"
   />
 </span>
 
@@ -44,6 +47,11 @@ const docs = '/' + locale + 'welcome-to-docs/';
     height: auto;
   }
   .site-title a:hover :global(svg) {
+    transform: translateY(calc(0.1rem * -1));
+    transition: transform 250ms cubic-bezier(0.33, 1, 0.68, 1);
+  }
+
+  .main-logo:hover :global(img) {
     transform: translateY(calc(0.1rem * -1));
     transition: transform 250ms cubic-bezier(0.33, 1, 0.68, 1);
   }

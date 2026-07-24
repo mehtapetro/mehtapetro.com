@@ -1,27 +1,29 @@
 const navBarLinks = [
   { name: 'Accueil', url: '/fr' },
+  { name: 'À propos', url: '/about-us' },
   { name: 'Produits', url: '/fr/products' },
-  { name: 'Services', url: '/fr/services' },
+  { name: 'Capacités', url: '/capabilities' },
   { name: 'Blog', url: '/fr/blog' },
   { name: 'Contact', url: '/fr/contact' },
 ];
 
 const footerLinks = [
   {
-    section: 'Écosystème',
+    section: 'Navigation',
     links: [
-      { name: 'Documentation', url: '/fr/welcome-to-docs/' },
-      { name: 'Outils et Équipements', url: '/fr/products' },
-      { name: 'Services de Construction', url: '/fr/services' },
+      { name: 'Accueil', url: '/fr' },
+      { name: 'À propos', url: '/about-us' },
+      { name: 'Produits', url: '/fr/products' },
+      { name: 'Capacités', url: '/capabilities' },
+      { name: 'Contact', url: '/fr/contact' },
     ],
   },
   {
-    section: 'Société',
+    section: 'Capacités',
     links: [
-      { name: 'À propos de nous', url: '#' },
+      { name: 'Manufacturing', url: '/capabilities/manufacturing' },
+      { name: 'Services', url: '/fr/services' },
       { name: 'Blog', url: '/fr/blog' },
-      { name: 'Carrières', url: '#' },
-      { name: 'Clients', url: '#' },
     ],
   },
 ];
@@ -29,7 +31,7 @@ const footerLinks = [
 const socialLinks = {
   facebook: '#',
   x: '#',
-  github: 'https://github.com/mearashadowfax/ScrewFast',
+  github: 'https://mehtapetro.com',
   google: '#',
   slack: '#',
 };

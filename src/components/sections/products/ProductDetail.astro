@@ -333,31 +333,17 @@ const { product } = Astro.props;
 
     btn.classList.remove(
       'active',
-      'bg-neutral-100',
-      'hover:border-transparent',
-      'dark:bg-white/[.05]'
+      'bg-[#EEF4FF]',
+      'hover:border-transparent'
     );
 
-    changeHeadingStyle(
-      btn,
-      ['text-neutral-800', 'dark:text-neutral-200'],
-      ['text-orange-400', 'dark:text-orange-300']
-    );
+    changeHeadingStyle(btn, ['text-neutral-800'], ['text-[#1E3AFF]']);
   }
 
   function setButtonActive(button: Element) {
-    button.classList.add(
-      'active',
-      'bg-neutral-100',
-      'hover:border-transparent',
-      'dark:bg-white/[.05]'
-    );
+    button.classList.add('active', 'bg-[#EEF4FF]', 'hover:border-transparent');
 
-    changeHeadingStyle(
-      button,
-      ['text-orange-400', 'dark:text-orange-300'],
-      ['text-neutral-800', 'dark:text-neutral-200']
-    );
+    changeHeadingStyle(button, ['text-[#1E3AFF]'], ['text-neutral-800']);
   }
 
   let activePanel = document.querySelector(
@@ -415,11 +401,7 @@ const { product } = Astro.props;
   const tabButtons = document.querySelectorAll('[data-target]');
 
   if (tabButtons.length > 0) {
-    changeHeadingStyle(
-      tabButtons[0],
-      ['text-orange-400', 'dark:text-orange-300'],
-      []
-    );
+    changeHeadingStyle(tabButtons[0], ['text-[#1E3AFF]'], []);
   }
 
   tabButtons.forEach(button => {

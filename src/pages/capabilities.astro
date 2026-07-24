@@ -1,0 +1,277 @@
+---
+import MainLayout from '@/layouts/MainLayout.astro';
+import { Image } from 'astro:assets';
+import { SITE } from '@data/constants';
+import facilityImageOne from '@images/dahej.jpeg';
+import facilityImageTwo from '@images/dahej_2.jpeg';
+
+const pageTitle = `Capabilities | ${SITE.title}`;
+const metaDescription =
+  'Explore the core capabilities of Mehta Petro-Refineries Limited, including manufacturing, quality-focused supply, and reliable industrial support.';
+const ogTitle = 'Capabilities | Mehta Petro';
+
+const facilities = [
+  {
+    id: 'palghar',
+    title: 'Palghar, Maharashtra',
+    heading: 'Our Plants & Machineries at Palghar, MH',
+    image: facilityImageOne,
+    alt: 'Manufacturing facility at Palghar, Maharashtra',
+    summary:
+      'Distillation, reaction, blending, storage, utilities, and fire safety infrastructure.',
+    points: [
+      '1400 KL/Month continuous distillation plant',
+      '600 KL/Month reaction vessel with vacuum facilities',
+      '10 lakh KCAL/HRS thermic fluid heater',
+      '04 lakh KCAL/HRS thermic fluid heater',
+      'Cooling tower for condensation purpose',
+      'Blending tank with high speed stirrer',
+      'Water softener & compressor',
+      'Diesel generator set',
+      'Fire fighting fire hydrant system with 2 lakh liters water storage facility',
+      '1500 KL storage facilities with O/H & U/G tanks',
+    ],
+  },
+  {
+    id: 'dahej',
+    title: 'Dahej, Gujarat',
+    heading: 'Our Plant & Machineries at Dahej, GJ',
+    image: facilityImageTwo,
+    alt: 'Manufacturing facility at Dahej, Gujarat',
+    summary:
+      'High-capacity vacuum distillation, catalytic processing, blending, storage, and SCADA integration.',
+    points: [
+      '5000 KL/Month continuous distillation plant under vacuum',
+      '1200 KL/Month catalytic process plant',
+      '20 lakh KCAL/HRS coal fire thermic fluid heater',
+      'Blending facility available — 06 Nos (10 KL each)',
+      'Water softener',
+      'Cooling tower',
+      'Compressor',
+      'Fire hydrant system',
+      '4500 KL storage facilities with overhead storage tanks',
+      '100 MT fully electronic weigh bridge',
+      'SCADA integrated plant',
+    ],
+  },
+];
+---
+
+<MainLayout
+  title={pageTitle}
+  customDescription={metaDescription}
+  customOgTitle={ogTitle}
+  structuredData={{
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    '@id': 'https://mehtapetro.com/capabilities',
+    url: 'https://mehtapetro.com/capabilities',
+    name: 'Capabilities | Mehta Petro',
+    description: metaDescription,
+    inLanguage: 'en-US',
+  }}
+>
+  <section
+    class="mx-auto mt-10 max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14"
+  >
+    <div
+      class="rounded-[2rem] border border-[#DCE8FF] bg-white px-6 py-10 text-center shadow-[0_28px_70px_-52px_rgba(16,36,95,0.24)] sm:px-8 lg:px-12 lg:py-14"
+    >
+      <span
+        class="inline-flex rounded-full border border-[#C7D9FF] bg-[#F8FAFF] px-4 py-1 text-xs font-semibold tracking-[0.18em] text-[#1E3AFF] uppercase"
+      >
+        Capabilities
+      </span>
+      <h1
+        class="mx-auto mt-5 max-w-4xl text-4xl font-extrabold tracking-tight text-balance text-[#10245F] md:text-5xl"
+      >
+        Industrial capability built around two manufacturing facilities, strong
+        process infrastructure, and reliable execution.
+      </h1>
+      <p class="mx-auto mt-5 max-w-3xl text-lg leading-8 text-[#5B6785]">
+        Mehta Petro-Refineries Limited supports industrial customers through two
+        facilities located in Palghar, Maharashtra and Dahej, Gujarat—backed by
+        production capability, storage infrastructure, and process-focused
+        operations designed for dependable supply.
+      </p>
+
+      <div class="mt-8 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+        <div class="rounded-2xl bg-[#F8FAFF] p-5 ring-1 ring-[#E3EBFF]">
+          <p
+            class="text-sm font-semibold tracking-[0.14em] text-[#1E3AFF] uppercase"
+          >
+            Facilities
+          </p>
+          <p class="mt-2 text-2xl font-bold text-[#10245F]">2</p>
+          <p class="mt-2 text-sm leading-7 text-[#5B6785]">
+            Manufacturing hubs in two strategic locations.
+          </p>
+        </div>
+        <div class="rounded-2xl bg-[#F8FAFF] p-5 ring-1 ring-[#E3EBFF]">
+          <p
+            class="text-sm font-semibold tracking-[0.14em] text-[#1E3AFF] uppercase"
+          >
+            Locations
+          </p>
+          <p class="mt-2 text-lg font-bold text-[#10245F]">Palghar & Dahej</p>
+          <p class="mt-2 text-sm leading-7 text-[#5B6785]">
+            Serving industrial requirements across Maharashtra and Gujarat.
+          </p>
+        </div>
+        <div class="rounded-2xl bg-[#F8FAFF] p-5 ring-1 ring-[#E3EBFF]">
+          <p
+            class="text-sm font-semibold tracking-[0.14em] text-[#1E3AFF] uppercase"
+          >
+            Products
+          </p>
+          <p class="mt-2 text-lg font-bold text-[#10245F]">
+            Solvents, Base Oils
+          </p>
+          <p class="mt-2 text-sm leading-7 text-[#5B6785]">
+            N-paraffins, olefins, and related petrochemical solutions.
+          </p>
+        </div>
+        <div class="rounded-2xl bg-[#F8FAFF] p-5 ring-1 ring-[#E3EBFF]">
+          <p
+            class="text-sm font-semibold tracking-[0.14em] text-[#1E3AFF] uppercase"
+          >
+            Focus
+          </p>
+          <p class="mt-2 text-lg font-bold text-[#10245F]">
+            Execution & Reliability
+          </p>
+          <p class="mt-2 text-sm leading-7 text-[#5B6785]">
+            Capability built around process discipline and operational support.
+          </p>
+        </div>
+      </div>
+
+      <div class="mt-8 flex flex-wrap items-center justify-center gap-3">
+        <a
+          href="/contact"
+          class="inline-flex rounded-xl bg-[#1E3AFF] px-5 py-3 text-sm font-semibold text-white transition duration-300 hover:bg-[#1632E0]"
+        >
+          Contact Our Team
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-[85rem] px-4 py-8 sm:px-6 lg:px-8 lg:py-12">
+    <div
+      class="rounded-[2rem] border border-[#DCE8FF] bg-[#F8FAFF] p-6 shadow-[0_24px_60px_-46px_rgba(16,36,95,0.22)] sm:p-8 lg:p-10"
+    >
+      <div class="max-w-3xl">
+        <p
+          class="text-sm font-semibold tracking-[0.18em] text-[#1E3AFF] uppercase"
+        >
+          Facilities Overview
+        </p>
+        <h2 class="mt-3 text-3xl font-bold text-[#10245F] md:text-4xl">
+          Two facilities across two strategic locations.
+        </h2>
+        <p class="mt-5 text-base leading-8 text-[#5B6785]">
+          Our capability is supported by two facilities in different locations,
+          allowing Mehta Petro to serve a broad industrial base with dependable
+          production capability, storage infrastructure, and process support.
+        </p>
+      </div>
+
+      <div class="mt-8 grid gap-4 sm:grid-cols-3">
+        <div class="rounded-2xl bg-white px-5 py-4 ring-1 ring-[#E3EBFF]">
+          <p
+            class="text-sm font-semibold tracking-[0.14em] text-[#1E3AFF] uppercase"
+          >
+            Manufacturing Base
+          </p>
+          <p class="mt-2 text-sm leading-7 text-[#5B6785]">
+            Built to support solvents, specialty base oils, n-paraffins,
+            olefins, and related petrochemical requirements.
+          </p>
+        </div>
+        <div class="rounded-2xl bg-white px-5 py-4 ring-1 ring-[#E3EBFF]">
+          <p
+            class="text-sm font-semibold tracking-[0.14em] text-[#1E3AFF] uppercase"
+          >
+            Infrastructure
+          </p>
+          <p class="mt-2 text-sm leading-7 text-[#5B6785]">
+            Process plants, blending systems, utilities, storage facilities,
+            safety systems, and weigh bridge support.
+          </p>
+        </div>
+        <div class="rounded-2xl bg-white px-5 py-4 ring-1 ring-[#E3EBFF]">
+          <p
+            class="text-sm font-semibold tracking-[0.14em] text-[#1E3AFF] uppercase"
+          >
+            Operational Focus
+          </p>
+          <p class="mt-2 text-sm leading-7 text-[#5B6785]">
+            Reliable production capability, storage readiness, and process
+            control aligned with industrial supply needs.
+          </p>
+        </div>
+      </div>
+
+      <div class="mt-10 grid gap-6 xl:grid-cols-2">
+        {
+          facilities.map((facility, facilityIndex) => (
+            <article
+              id={facility.id}
+              class="scroll-mt-28 overflow-hidden rounded-[1.75rem] border border-[#DCE8FF] bg-white shadow-[0_22px_55px_-42px_rgba(16,36,95,0.22)]"
+            >
+              <div class="overflow-hidden border-b border-[#E6EEFF]">
+                <Image
+                  src={facility.image}
+                  alt={facility.alt}
+                  class="h-72 w-full object-cover"
+                />
+              </div>
+              <div class="p-6 sm:p-7">
+                <div class="flex flex-wrap items-center gap-3">
+                  <p class="text-sm font-semibold tracking-[0.14em] text-[#1E3AFF] uppercase">
+                    Facility {facilityIndex + 1}
+                  </p>
+                  <span class="inline-flex rounded-full bg-[#EEF4FF] px-3 py-1 text-xs font-semibold text-[#10245F]">
+                    {facility.points.length} Key Installations
+                  </span>
+                </div>
+                <h3 class="mt-3 text-2xl font-bold text-[#10245F]">
+                  {facility.title}
+                </h3>
+                <p class="mt-2 text-sm font-medium text-[#5B6785]">
+                  {facility.heading}
+                </p>
+                <p class="mt-3 text-sm leading-7 text-[#5B6785]">
+                  {facility.summary}
+                </p>
+
+                <ol class="mt-6 space-y-3">
+                  {facility.points.map((point, index) => (
+                    <li class="grid grid-cols-[2.25rem_minmax(0,1fr)] items-start gap-3 border-t border-[#EDF2FF] pt-3 first:border-t-0 first:pt-0">
+                      <span class="inline-flex h-9 w-9 items-center justify-center rounded-full bg-[#EEF4FF] text-sm font-semibold text-[#1E3AFF]">
+                        {String(index + 1).padStart(2, '0')}
+                      </span>
+                      <span class="pt-1 text-sm leading-7 text-[#5B6785]">
+                        {point}
+                      </span>
+                    </li>
+                  ))}
+                </ol>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+
+      <div class="mt-8">
+        <a
+          href="/contact"
+          class="inline-flex rounded-xl bg-[#1E3AFF] px-5 py-3 text-sm font-semibold text-white transition duration-300 hover:bg-[#1632E0]"
+        >
+          Enquire About Our Facilities
+        </a>
+      </div>
+    </div>
+  </section>
+</MainLayout>

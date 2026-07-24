@@ -1,121 +1,219 @@
 ---
 // Import the necessary dependencies
 import FooterSocialLink from '@components/ui/links/FooterSocialLink.astro';
-import EmailFooterInput from '@components/ui/forms/input/EmailFooterInput.astro';
-import enStrings from '@utils/navigation.ts';
-import frStrings from '@utils/fr/navigation.ts';
 import Icon from '@components/ui/icons/Icon.astro';
+import enStrings from '@utils/navigation.ts';
 import BrandLogo from '@components/BrandLogo.astro';
-import { SITE } from '@data/constants';
-import { getMarketingLocale } from '@utils/locale';
+import isoLogoUrl from '@images/iso/ISO.svg?url';
+import isoCertificateUrl from '@images/iso/iso_certificate.pdf?url';
 
-const locale = getMarketingLocale(Astro.url.pathname, Astro.currentLocale);
-const strings = locale === 'fr' ? frStrings : enStrings;
-
-const sectionThreeTitle: string =
-  locale === 'fr' ? 'Rester à jour' : 'Stay up to date';
-const sectionThreeContent: string =
-  locale === 'fr'
-    ? 'Restez informé des derniers outils et des offres exclusives.'
-    : 'Stay updated with the latest tools and exclusive deals.';
-const crafted: string = locale === 'fr' ? 'Fabriqué par' : 'Crafted by';
-const hiringBadge: string = locale === 'fr' ? 'On recrute !' : "We're hiring!";
-const newsletterDemoMessage =
-  locale === 'fr'
-    ? 'Merci ! (démo — branchez un service e-mail pour collecter de vrais abonnés.)'
-    : 'Thanks! (Demo only — wire an email service to collect real subscribers.)';
+const strings = enStrings;
+const crafted = 'Crafted by';
+const companyEmail = 'info@mehtapetro.com';
+const companyPhone = '+91-022-44559090';
 ---
 
-<footer class="w-full bg-neutral-300 dark:bg-neutral-900">
+<footer class="mt-20 w-full border-t border-[#DCE8FF] bg-white text-[#10245F]">
   <div
-    class="mx-auto w-full max-w-[85rem] px-4 py-10 sm:px-6 lg:px-16 lg:pt-20 2xl:max-w-(--breakpoint-2xl)"
+    class="mx-auto w-full max-w-[85rem] px-4 py-12 sm:px-6 lg:px-16 lg:py-18 2xl:max-w-(--breakpoint-2xl)"
   >
-    <div class="grid grid-cols-2 gap-6 md:grid-cols-4 lg:grid-cols-5">
-      <div class="col-span-full lg:col-span-1">
-        {/* Brand Logo */}
-        <BrandLogo class="h-auto w-32" />
-      </div>
-      {/* An array of links for Product and Company sections */}
-      {
-        strings.footerLinks.map(section => (
-          <div class="col-span-1">
-            <h3 class="font-bold text-neutral-800 dark:text-neutral-200">
-              {section.section}
-            </h3>
-            <ul class="mt-3 grid space-y-3">
-              {section.links.map((link, index) => (
-                <li>
-                  <a
-                    href={link.url}
-                    class="inline-flex gap-x-2 rounded-lg text-neutral-600 ring-zinc-500 outline-hidden transition duration-300 hover:text-neutral-500 focus-visible:ring-3 dark:text-neutral-400 dark:ring-zinc-200 dark:hover:text-neutral-300 dark:focus:outline-hidden"
-                  >
-                    {link.name}
-                  </a>
-                  {section.section === 'Company' && index === 2 ? (
-                    <span class="ms-1 inline rounded-lg bg-orange-500 px-2 py-1 text-xs font-bold text-neutral-50">
-                      {hiringBadge}
-                    </span>
-                  ) : null}
-                </li>
-              ))}
-            </ul>
+    <div
+      class="grid gap-10 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)_minmax(0,0.95fr)] lg:gap-12"
+    >
+      <div>
+        <BrandLogo class="h-20 w-auto" />
+        <p class="mt-4 text-base font-semibold text-[#10245F]">
+          Mehta Petro-Refineries Limited
+        </p>
+        <p class="mt-3 max-w-md text-sm leading-7 text-[#5B6785]">
+          Leading manufacturer and supplier of petrochemical solvents, specialty
+          base oils, n-paraffins, olefins, and specialty chemicals for diverse
+          industrial applications.
+        </p>
+
+        <div
+          class="mt-6 grid max-w-md gap-4 sm:grid-cols-[minmax(0,0.75fr)_minmax(0,1.25fr)]"
+        >
+          <div
+            class="rounded-2xl border border-[#DCE8FF] bg-[#F8FAFF] px-5 py-4 shadow-[0_18px_44px_-38px_rgba(16,36,95,0.24)]"
+          >
+            <p
+              class="text-sm font-semibold tracking-[0.14em] text-[#1E3AFF] uppercase"
+            >
+              Since 1993
+            </p>
+            <p class="mt-2 text-sm font-semibold text-[#10245F]">
+              Over 32 years in business
+            </p>
+            <p class="mt-2 text-xs leading-6 text-[#5B6785]">
+              Serving industry with trusted experience and long-term
+              reliability.
+            </p>
           </div>
-        ))
-      }
 
-      <div class="col-span-2">
-        <h3 class="font-bold text-neutral-800 dark:text-neutral-200">
-          {sectionThreeTitle}
-        </h3>
+          <a
+            href={isoCertificateUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="group rounded-2xl border border-[#DCE8FF] bg-[#F8FAFF] px-4 py-4 shadow-[0_18px_44px_-38px_rgba(16,36,95,0.24)] outline-hidden transition duration-300 hover:-translate-y-0.5 hover:border-[#BDD1FF] hover:shadow-[0_24px_58px_-40px_rgba(30,58,255,0.3)] focus-visible:ring-3 focus-visible:ring-[#1E3AFF]/35"
+            aria-label="View ISO certification PDF"
+          >
+            <div class="flex items-center gap-3">
+              <img
+                src={isoLogoUrl}
+                alt="ISO certification logo"
+                class="h-16 w-auto shrink-0 object-contain"
+                loading="lazy"
+              />
+              <div>
+                <p class="text-sm font-semibold text-[#10245F]">
+                  ISO Certified
+                </p>
+                <p class="mt-1 text-xs leading-5 text-[#5B6785]">
+                  View certificate PDF
+                </p>
+                <p
+                  class="mt-2 text-xs font-semibold text-[#1E3AFF] transition group-hover:text-[#1632E0]"
+                >
+                  Open certificate →
+                </p>
+              </div>
+            </div>
+          </a>
+        </div>
 
-        <form data-demo-form data-demo-message={newsletterDemoMessage}>
-          <EmailFooterInput />
-          <p class="mt-3 text-sm text-neutral-600 dark:text-neutral-400">
-            {sectionThreeContent}
-          </p>
-        </form>
+        <div class="mt-6 flex flex-wrap gap-3">
+          <a
+            href={`mailto:${companyEmail}`}
+            class="inline-flex items-center rounded-full border border-[#DCE8FF] bg-white px-4 py-2 text-sm font-medium text-[#10245F] transition duration-300 hover:border-[#BDD1FF] hover:text-[#1E3AFF]"
+          >
+            {companyEmail}
+          </a>
+          <a
+            href={`tel:${companyPhone}`}
+            class="inline-flex items-center rounded-full border border-[#DCE8FF] bg-white px-4 py-2 text-sm font-medium text-[#10245F] transition duration-300 hover:border-[#BDD1FF] hover:text-[#1E3AFF]"
+          >
+            Call Us
+          </a>
+          <a
+            href="/contact"
+            class="inline-flex items-center rounded-full bg-[#1E3AFF] px-4 py-2 text-sm font-semibold text-white transition duration-300 hover:bg-[#1632E0]"
+          >
+            Contact Page
+          </a>
+        </div>
+
+        <div class="mt-6 flex flex-wrap items-center gap-3">
+          <p class="mr-2 text-sm font-semibold text-[#10245F]">Follow us</p>
+          <FooterSocialLink url={strings.socialLinks.facebook} label="Facebook">
+            <Icon name="facebookFooter" />
+          </FooterSocialLink>
+          <FooterSocialLink url={strings.socialLinks.youtube} label="YouTube">
+            <Icon name="youtubeFooter" />
+          </FooterSocialLink>
+          <FooterSocialLink url={strings.socialLinks.linkedin} label="LinkedIn">
+            <Icon name="linkedinFooter" />
+          </FooterSocialLink>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 gap-8 sm:gap-10">
+        {
+          strings.footerLinks.map(section => (
+            <div>
+              <h3 class="text-sm font-semibold tracking-[0.12em] text-[#10245F] uppercase">
+                {section.section}
+              </h3>
+              <ul class="mt-4 space-y-3">
+                {section.links.map(link => (
+                  <li>
+                    <a
+                      href={link.url}
+                      class="inline-flex rounded-lg text-sm text-[#5B6785] ring-zinc-500 outline-hidden transition duration-300 hover:text-[#1E3AFF] focus-visible:ring-3"
+                    >
+                      {link.name}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))
+        }
+      </div>
+
+      <div>
+        <div
+          class="rounded-[2rem] border border-[#DCE8FF] bg-[#F8FAFF] p-5 shadow-[0_24px_60px_-44px_rgba(30,58,255,0.24)]"
+        >
+          <div class="px-1 pt-1">
+            <p
+              class="text-sm font-semibold tracking-[0.14em] text-[#1E3AFF] uppercase"
+            >
+              Reach Us
+            </p>
+            <p class="mt-2 text-lg font-semibold text-[#10245F]">
+              Mehta Petro-Refineries Limited
+            </p>
+            <div class="mt-5 space-y-4 text-sm leading-6 text-[#5B6785]">
+              <div>
+                <p class="font-semibold text-[#10245F]">Address</p>
+                <p class="mt-1">
+                  509, HIVE 67, ICON Tower, Borsapada Road., Next to Raghuleela
+                  Mall. Kandivali (West). Mumbai 400067. India.
+                </p>
+              </div>
+              <div>
+                <p class="font-semibold text-[#10245F]">Phone</p>
+                <p class="mt-1">
+                  +91- 022-44559090 / 35218451 / 35218543 / 35219242 / 35219404.
+                </p>
+              </div>
+              <div>
+                <p class="font-semibold text-[#10245F]">Email</p>
+                <a
+                  href={`mailto:${companyEmail}`}
+                  class="mt-1 inline-flex rounded-lg text-[#10245F] transition duration-300 hover:text-[#1E3AFF]"
+                >
+                  {companyEmail}
+                </a>
+              </div>
+            </div>
+          </div>
+          <div
+            class="mt-5 overflow-hidden rounded-[1.5rem] border border-white bg-white p-2 shadow-[0_18px_40px_-34px_rgba(16,36,95,0.22)]"
+          >
+            <iframe
+              class="h-48 w-full rounded-[1rem]"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1541.2290128174448!2d72.84807711975354!3d19.214084595750542!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be71ccfa59893e3%3A0x6aab7ca9656cdb12!2sMehta%20Petro%20Refineries%20Ltd!5e1!3m2!1sen!2sin!4v1784645142716!5m2!1sen!2sin"
+              width="600"
+              height="450"
+              style="border:0;"
+              allowfullscreen
+              loading="lazy"
+              referrerpolicy="strict-origin-when-cross-origin"
+              title="Mehta Petro location map"></iframe>
+          </div>
+        </div>
       </div>
     </div>
 
     <div
-      class="mt-9 grid gap-y-2 sm:mt-12 sm:flex sm:items-center sm:justify-between sm:gap-y-0"
+      class="mt-10 flex flex-col gap-3 border-t border-[#E3EBFF] pt-6 md:flex-row md:items-center md:justify-between"
     >
-      <div class="flex items-center justify-between">
-        <p class="text-sm text-neutral-600 dark:text-neutral-400">
-          © <span id="current-year"></span>{` `}
-          {SITE.title}. {crafted}
-          {` `}
-          <a
-            class="rounded-lg font-medium underline underline-offset-2 ring-zinc-500 outline-hidden transition duration-300 hover:text-neutral-700 hover:decoration-dashed focus:outline-hidden focus-visible:ring-3 dark:ring-zinc-200 dark:hover:text-neutral-300"
-            href="https://www.gulamoff.dev/"
-            target="_blank"
-            rel="noopener noreferrer">gulamoff</a
-          >.
-        </p>
-      </div>
-
-      {/* Social Brands */}
-      <div>
-        <FooterSocialLink url={strings.socialLinks.facebook} label="Facebook"
-          ><Icon name="facebookFooter" />
-        </FooterSocialLink>
-
-        <FooterSocialLink url={strings.socialLinks.x} label="X"
-          ><Icon name="xFooter" /></FooterSocialLink
-        >
-
-        <FooterSocialLink url={strings.socialLinks.github} label="GitHub"
-          ><Icon name="githubFooter" />
-        </FooterSocialLink>
-
-        <FooterSocialLink url={strings.socialLinks.google} label="Google"
-          ><Icon name="googleFooter" />
-        </FooterSocialLink>
-
-        <FooterSocialLink url={strings.socialLinks.slack} label="Slack"
-          ><Icon name="slackFooter" />
-        </FooterSocialLink>
-      </div>
+      <p class="text-sm text-[#5B6785]">
+        © <span id="current-year"></span>{` `}
+        Mehta Petro-Refineries Limited. Since 1993.
+      </p>
+      <p class="text-sm text-[#5B6785]">
+        {crafted}
+        {` `}
+        <a
+          class="rounded-lg font-medium underline underline-offset-2 ring-zinc-500 outline-hidden transition duration-300 hover:text-[#1E3AFF] hover:decoration-dashed focus:outline-hidden focus-visible:ring-3"
+          href="https://eightharsh.com/"
+          target="_blank"
+          rel="noopener noreferrer">eightharsh</a
+        >.
+      </p>
     </div>
 
     <script>

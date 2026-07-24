@@ -1,0 +1,182 @@
+---
+import MainLayout from '@/layouts/MainLayout.astro';
+import { Image } from 'astro:assets';
+import { SITE } from '@data/constants';
+import aboutImage from '@images/about.jpeg';
+import directorImage from '@images/md/vinodmehta.avif';
+
+const pageTitle = `About Us | ${SITE.title}`;
+const metaDescription =
+  'Learn more about Mehta Petro-Refineries Limited, including who we are, our mission, our vision, our values, and the director’s message.';
+const ogTitle = 'About Us | Mehta Petro';
+---
+
+<MainLayout
+  title={pageTitle}
+  customDescription={metaDescription}
+  customOgTitle={ogTitle}
+  structuredData={{
+    '@context': 'https://schema.org',
+    '@type': 'AboutPage',
+    '@id': 'https://mehtapetro.com/about-us',
+    url: 'https://mehtapetro.com/about-us',
+    name: 'About Us | Mehta Petro',
+    description: metaDescription,
+    inLanguage: 'en-US',
+  }}
+>
+  <section
+    class="mx-auto mt-10 max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14"
+  >
+    <div
+      class="grid items-center gap-10 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:gap-14"
+    >
+      <div>
+        <span
+          class="inline-flex rounded-full border border-[#C7D9FF] bg-white px-4 py-1 text-xs font-semibold tracking-[0.18em] text-[#1E3AFF] uppercase"
+        >
+          About Us
+        </span>
+        <h1
+          class="mt-5 text-4xl font-extrabold tracking-tight text-balance text-[#10245F] md:text-5xl"
+        >
+          Mehta Petro — Serving Society through Science.
+        </h1>
+        <p class="mt-5 max-w-2xl text-lg leading-8 text-[#5B6785]">
+          Mehta Petro-Refineries Limited is a trusted name in petrochemical
+          hydrocarbon solvents, specialty base oils, n-paraffins, olefins, and
+          related solutions, built on decades of industrial experience,
+          responsible growth, and a strong commitment to customers and society.
+        </p>
+      </div>
+      <div
+        class="overflow-hidden rounded-[2rem] border border-[#DCE8FF] bg-white p-3 shadow-[0_28px_70px_-48px_rgba(16,36,95,0.35)]"
+      >
+        <Image
+          src={aboutImage}
+          alt="About Mehta Petro-Refineries Limited"
+          class="h-full w-full rounded-[1.5rem] object-cover"
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-[85rem] px-4 py-8 sm:px-6 lg:px-8 lg:py-12">
+    <div
+      class="rounded-[2rem] border border-[#DCE8FF] bg-white p-6 shadow-[0_24px_60px_-46px_rgba(16,36,95,0.28)] sm:p-8 lg:p-10"
+    >
+      <div class="max-w-3xl">
+        <p
+          class="text-sm font-semibold tracking-[0.18em] text-[#1E3AFF] uppercase"
+        >
+          Who We Are
+        </p>
+        <h2 class="mt-3 text-3xl font-bold text-[#10245F] md:text-4xl">
+          A science-led industrial company with strong values and long-term
+          vision.
+        </h2>
+        <p class="mt-5 text-base leading-8 text-[#5B6785]">
+          Mehta Petro-Refineries Limited has manufacturing facilities at Palghar
+          in Maharashtra and Dahej II in Gujarat, supported by state-of-the-art
+          technology and storage capacities. This infrastructure enables us to
+          serve a diverse spectrum of industries in the field of petrochemical
+          hydrocarbon solvents, specialty base oils, n-paraffins, olefins, and
+          related products.
+        </p>
+        <p class="mt-4 text-base leading-8 text-[#5B6785]">
+          With deep industry knowledge, responsible operating practices, and a
+          focus on enduring customer relationships, we continue to strengthen
+          our role as a dependable partner for industrial and manufacturing
+          requirements.
+        </p>
+      </div>
+
+      <div class="mt-10 grid gap-4 lg:grid-cols-3">
+        <div
+          class="rounded-2xl bg-[#F6F9FF] p-5 ring-1 ring-[#E3EBFF] lg:col-span-1"
+        >
+          <p
+            class="text-sm font-semibold tracking-[0.14em] text-[#1E3AFF] uppercase"
+          >
+            Our Mission
+          </p>
+          <p class="mt-3 text-base font-semibold text-[#10245F]">
+            Serving Society through Science.
+          </p>
+        </div>
+        <div
+          class="rounded-2xl bg-[#F6F9FF] p-5 ring-1 ring-[#E3EBFF] lg:col-span-1"
+        >
+          <p
+            class="text-sm font-semibold tracking-[0.14em] text-[#1E3AFF] uppercase"
+          >
+            Our Vision
+          </p>
+          <p class="mt-3 text-base font-semibold text-[#10245F]">
+            Be a leading sustainable chemistry solutions company.
+          </p>
+        </div>
+        <div
+          class="rounded-2xl bg-[#F6F9FF] p-5 ring-1 ring-[#E3EBFF] lg:col-span-1"
+        >
+          <p
+            class="text-sm font-semibold tracking-[0.14em] text-[#1E3AFF] uppercase"
+          >
+            Our Values
+          </p>
+          <p class="mt-3 text-base font-semibold text-[#10245F]">
+            Safety, Passion, Integrity, Care and Excellence.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-[85rem] px-4 py-8 sm:px-6 lg:px-8 lg:py-12">
+    <div
+      class="grid items-center gap-8 rounded-[2rem] border border-[#DCE8FF] bg-[#F8FAFF] p-6 shadow-[0_24px_60px_-46px_rgba(16,36,95,0.22)] sm:p-8 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:p-10"
+    >
+      <div
+        class="overflow-hidden rounded-[1.75rem] border border-white/80 bg-white p-3 shadow-[0_18px_40px_-34px_rgba(16,36,95,0.35)]"
+      >
+        <Image
+          src={directorImage}
+          alt="Mr. Vinod I. Mehta"
+          class="h-full w-full rounded-[1.3rem] object-cover"
+          format="avif"
+        />
+      </div>
+      <div>
+        <p
+          class="text-sm font-semibold tracking-[0.18em] text-[#1E3AFF] uppercase"
+        >
+          Director’s Message
+        </p>
+        <h2 class="mt-3 text-3xl font-bold text-[#10245F] md:text-4xl">
+          Leadership built on experience, values, and entrepreneurial vision.
+        </h2>
+        <p class="mt-5 text-base leading-8 text-[#5B6785]">
+          Mr. Vinod I. Mehta has been the Chairman and Director on the Board of
+          the company since incorporation. With his entrepreneurial skill,
+          dedication, high ethical standards, and vision to create strong core
+          values and principles, he has helped the company withstand a highly
+          competitive environment for well over 45 years.
+        </p>
+        <p class="mt-4 text-base leading-8 text-[#5B6785]">
+          Mr. Mehta has over 45 years of experience in the petrochemicals
+          industry, and under his guidance the company entered the manufacturing
+          business 31 years ago and successfully established products in the
+          paints, ink, and agro industries.
+        </p>
+        <div
+          class="mt-6 rounded-2xl border border-[#DCE8FF] bg-white px-5 py-4"
+        >
+          <p class="text-sm font-semibold text-[#10245F]">Mr. Vinod I. Mehta</p>
+          <p class="mt-1 text-sm text-[#5B6785]">
+            Chairman & Director, Mehta Petro-Refineries Limited
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</MainLayout>

@@ -42,15 +42,19 @@ interface Props {
 
 {/* Defining a grid container that holds all the content */}
 <section
-  class="mx-auto grid max-w-[85rem] gap-4 px-4 py-14 sm:px-6 md:grid-cols-2 md:items-center md:gap-8 lg:px-8 2xl:max-w-full"
+  class="relative mx-auto grid max-w-[85rem] gap-8 overflow-hidden rounded-[2rem] bg-gradient-to-br from-white via-[#F5F8FF] to-[#DCE8FF] px-6 py-12 shadow-[0_30px_90px_-55px_rgba(30,58,255,0.42)] sm:px-8 md:grid-cols-2 md:items-center lg:px-12 2xl:max-w-full"
 >
+  <div aria-hidden="true" class="pointer-events-none absolute inset-0">
+    <div class="absolute -top-24 right-[-6rem] h-72 w-72 rounded-full bg-[#1E3AFF]/18 blur-3xl"></div>
+    <div class="absolute bottom-0 left-[-5rem] h-64 w-64 rounded-full bg-white/70 blur-3xl"></div>
+  </div>
   {/* Title and description */}
-  <div>
+  <div class="relative z-10">
     {
       /* Each h1 and p tag renders a portion of the title and subTitle defined above */
     }
     <h1
-      class="block text-3xl font-bold tracking-tight text-balance text-neutral-800 sm:text-4xl lg:text-6xl lg:leading-tight dark:text-neutral-200"
+      class="block text-3xl font-bold tracking-tight text-balance text-neutral-900 sm:text-4xl lg:text-6xl lg:leading-tight"
     >
       {
         /* About Fragment: https://docs.astro.build/en/basics/astro-syntax/#fragments */
@@ -59,7 +63,7 @@ interface Props {
     </h1>
     {
       subTitle && (
-        <p class="mt-3 text-lg leading-relaxed text-pretty text-neutral-700 lg:w-4/5 dark:text-neutral-400">
+        <p class="mt-3 text-lg leading-relaxed text-pretty text-neutral-700 lg:w-4/5">
           {subTitle}
         </p>
       )
@@ -93,14 +97,14 @@ interface Props {
     }
   </div>
   {/* Hero Image Section — aspect ratio reserves space before the AVIF loads */}
-  <div class="flex w-full">
-    <div class="aspect-[4067/2576] w-full overflow-hidden">
+  <div class="relative z-10 flex w-full">
+    <div class="aspect-[4067/2576] w-full overflow-hidden rounded-[1.75rem] shadow-[0_25px_70px_-45px_rgba(30,58,255,0.55)]">
       {
         src && alt && (
           <Image
             src={src}
             alt={alt}
-            class="h-full w-full scale-110 object-cover object-center"
+            class="h-full w-full object-cover object-center"
             draggable={'false'}
             loading="eager"
             fetchpriority="high"

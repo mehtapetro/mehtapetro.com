@@ -50,7 +50,7 @@ export const Icons = {
       },
     ],
     class:
-      'mt-2 h-6 w-6 shrink-0 fill-neutral-700 hs-tab-active:fill-orange-400 dark:fill-neutral-300 dark:hs-tab-active:fill-orange-300 md:h-7 md:w-7',
+      'mt-2 h-6 w-6 shrink-0 fill-neutral-700 hs-tab-active:fill-[#1E3AFF] md:h-7 md:w-7',
     width: 48,
     height: 48,
     viewBox: '0 -960 960 960',
@@ -62,7 +62,7 @@ export const Icons = {
       },
     ],
     class:
-      'mt-2 h-6 w-6 shrink-0 fill-neutral-700 hs-tab-active:fill-orange-400 dark:fill-neutral-300 dark:hs-tab-active:fill-orange-300 md:h-7 md:w-7',
+      'mt-2 h-6 w-6 shrink-0 fill-neutral-700 hs-tab-active:fill-[#1E3AFF] md:h-7 md:w-7',
     width: 48,
     height: 48,
     viewBox: '0 -960 960 960',
@@ -74,7 +74,7 @@ export const Icons = {
       },
     ],
     class:
-      'h-6 w-6 shrink-0 text-neutral-700 hs-tab-active:text-orange-400 dark:text-neutral-300 dark:hs-tab-active:text-orange-300 md:h-7 md:w-7',
+      'h-6 w-6 shrink-0 text-neutral-700 hs-tab-active:text-[#1E3AFF] md:h-7 md:w-7',
     width: 24,
     height: 24,
     viewBox: '0 0 24 24',
@@ -93,7 +93,7 @@ export const Icons = {
         d: 'M12 19V5',
       },
     ],
-    class: 'h-5 w-5 shrink-0 text-orange-400 dark:text-orange-300',
+    class: 'h-5 w-5 shrink-0 text-[#1E3AFF]',
     width: 24,
     height: 24,
     viewBox: '0 0 24 24',
@@ -334,6 +334,46 @@ export const Icons = {
     fill: 'currentColor',
     title: 'Slack',
   },
+  youtubeFooter: {
+    paths: [
+      {
+        d: 'M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.376.505A3.016 3.016 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.376-.505a3.016 3.016 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814ZM9.545 15.568V8.432L15.818 12l-6.273 3.568Z',
+      },
+    ],
+    class:
+      'h-4 w-4 shrink-0 fill-current text-neutral-700 dark:text-neutral-400',
+    viewBox: '0 0 24 24',
+    fill: 'currentColor',
+    title: 'YouTube',
+  },
+  instagramFooter: {
+    paths: [
+      {
+        d: 'M7.75 2C4.574 2 2 4.574 2 7.75v8.5C2 19.426 4.574 22 7.75 22h8.5C19.426 22 22 19.426 22 16.25v-8.5C22 4.574 19.426 2 16.25 2h-8.5Zm0 2h8.5A3.75 3.75 0 0 1 20 7.75v8.5A3.75 3.75 0 0 1 16.25 20h-8.5A3.75 3.75 0 0 1 4 16.25v-8.5A3.75 3.75 0 0 1 7.75 4Zm9.25 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2ZM12 7a5 5 0 1 0 5 5 5 5 0 0 0-5-5Zm0 2a3 3 0 1 1-3 3 3 3 0 0 1 3-3Z',
+      },
+    ],
+    class:
+      'h-4 w-4 shrink-0 fill-current text-neutral-700 dark:text-neutral-400',
+    viewBox: '0 0 24 24',
+    fill: 'currentColor',
+    title: 'Instagram',
+  },
+  linkedinFooter: {
+    paths: [
+      {
+        d: 'M4.983 3.5a2.25 2.25 0 1 1 0 4.5 2.25 2.25 0 0 1 0-4.5ZM3 9h4v12H3V9Zm6.5 0h3.833v1.64h.055c.534-1.013 1.84-2.084 3.79-2.084C21.232 8.556 22 11.03 22 14.246V21h-4v-5.99c0-1.428-.026-3.264-1.988-3.264-1.99 0-2.294 1.554-2.294 3.158V21h-4V9Z',
+      },
+    ],
+    class:
+      'h-4 w-4 shrink-0 fill-current text-neutral-700 dark:text-neutral-400',
+    viewBox: '0 0 24 24',
+    fill: 'currentColor',
+    title: 'LinkedIn',
+  },
+  
+
+
+
   quotation: {
     paths: [
       {

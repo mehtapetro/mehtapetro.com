@@ -1,5 +1,5 @@
 {
-  "name": "screwfast-template",
+  "name": "mehta-petro-site",
   "type": "module",
   "version": "0.0.1",
   "scripts": {
@@ -17,6 +17,7 @@
     "@astrojs/mdx": "^7.0.3",
     "@astrojs/sitemap": "^3.7.3",
     "@astrojs/starlight": "^0.41.3",
+    "@astrojs/vercel": "^11.0.3",
     "@tailwindcss/vite": "^4.3.3",
     "astro": "^7.1.1",
     "clipboard": "^2.0.11",

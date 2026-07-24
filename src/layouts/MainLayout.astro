@@ -15,6 +15,8 @@ const {
   customDescription = null,
   customOgTitle = null,
   hideFooter = false,
+  fullWidth = false,
+  overlayNav = false,
 } = Astro.props;
 
 // Interface to type-check the properties
@@ -26,6 +28,8 @@ interface Props {
   customDescription?: string | null;
   customOgTitle?: string | null;
   hideFooter?: boolean;
+  fullWidth?: boolean;
+  overlayNav?: boolean;
 }
 ---
 
@@ -40,32 +44,23 @@ interface Props {
     />
     {/* Define the title of the page */}
     <title>{title}</title>
-    <script is:inline>
-      // Script to handle dark mode. It will check if the theme is stored in localStorage or if dark theme is preferred by system settings
-      if (
-        localStorage.getItem('hs_theme') === 'dark' ||
-        (!('hs_theme' in localStorage) &&
-          window.matchMedia('(prefers-color-scheme: dark)').matches)
-      ) {
-        document.documentElement.classList.add('dark');
-      } else {
-        document.documentElement.classList.remove('dark');
-      }
-    </script>
+
     <script>
       import '@scripts/lenisSmoothScroll.js';
       import '@scripts/demoForms.js';
+      import '@scripts/contactForm.js';
     </script>
   </head>
   <body
-    class="flex min-h-screen flex-col bg-neutral-200 selection:bg-yellow-400 selection:text-neutral-700 dark:bg-neutral-800"
+    class="relative flex min-h-screen flex-col bg-[#EEF4FF] text-neutral-900 selection:bg-[#1E3AFF] selection:text-neutral-50"
   >
     <a
       href="#main-content"
-      class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-100 focus:rounded-lg focus:bg-yellow-400 focus:px-4 focus:py-2 focus:text-neutral-800"
+      class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-100 focus:rounded-lg focus:bg-[#1E3AFF] focus:px-4 focus:py-2 focus:text-neutral-50"
     >
       Skip to content
     </a>
+
     {
       /*
     Setting up the main structure of the page.
@@ -73,9 +68,12 @@ interface Props {
     */
     }
     <div
-      class="mx-auto w-full max-w-(--breakpoint-2xl) grow px-4 sm:px-6 lg:px-8"
+      class:list={[
+        'relative z-10 w-full grow',
+        !fullWidth && 'mx-auto max-w-(--breakpoint-2xl) px-4 sm:px-6 lg:px-8',
+      ]}
     >
-      <Navbar />
+      <Navbar overlay={overlayNav} />
       <main id="main-content">
         <slot />
       </main>

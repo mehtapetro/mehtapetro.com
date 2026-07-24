@@ -1,38 +1,38 @@
 // An array of links for navigation bar
 const navBarLinks = [
   { name: 'Home', url: '/' },
+  { name: 'About Us', url: '/about-us' },
   { name: 'Products', url: '/products' },
-  { name: 'Services', url: '/services' },
+  { name: 'Capabilities', url: '/capabilities' },
   { name: 'Blog', url: '/blog' },
   { name: 'Contact', url: '/contact' },
 ];
 // An array of links for footer
 const footerLinks = [
   {
-    section: 'Ecosystem',
+    section: 'Navigation',
     links: [
-      { name: 'Documentation', url: '/welcome-to-docs/' },
-      { name: 'Tools & Equipment', url: '/products' },
-      { name: 'Construction Services', url: '/services' },
+      { name: 'Home', url: '/' },
+      { name: 'About Us', url: '/about-us' },
+      { name: 'Products', url: '/products' },
+      { name: 'Capabilities', url: '/capabilities' },
+      { name: 'Contact', url: '/contact' },
     ],
   },
   {
-    section: 'Company',
+    section: 'Capabilities',
     links: [
-      { name: 'About us', url: '#' },
+      { name: 'Manufacturing', url: '/capabilities/manufacturing' },
+      { name: 'Services', url: '/services' },
       { name: 'Blog', url: '/blog' },
-      { name: 'Careers', url: '#' },
-      { name: 'Customers', url: '#' },
     ],
   },
 ];
 // An object of links for social icons
 const socialLinks = {
-  facebook: 'https://www.facebook.com/',
-  x: 'https://twitter.com/',
-  github: 'https://github.com/mearashadowfax/ScrewFast',
-  google: 'https://www.google.com/',
-  slack: 'https://slack.com/',
+  facebook: 'https://www.facebook.com/mehtapetro',
+  youtube: 'https://www.youtube.com/@mehtapetro',
+  linkedin: 'https://www.linkedin.com/company/mehtapetro/',
 };
 
 export default {

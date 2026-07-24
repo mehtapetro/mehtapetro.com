@@ -12,11 +12,13 @@ interface Props {
 }
 ---
 
-<blockquote class="relative">
+<blockquote
+  class="relative rounded-[1.5rem] border border-[#DCE8FF] bg-[#F8FAFF] p-6 shadow-[0_18px_45px_-36px_rgba(30,58,255,0.28)]"
+>
   <Icon name="quotation" />
 
   <div class="relative z-10">
-    <p class="text-xl text-neutral-800 italic dark:text-neutral-200">
+    <p class="text-xl text-neutral-800 italic">
       {content}
     </p>
   </div>
@@ -33,7 +35,7 @@ interface Props {
         />
       </div>
       <div class="ms-4 grow">
-        <div class="font-bold text-neutral-800 dark:text-neutral-200">
+        <div class="font-bold text-neutral-800">
           {author}
         </div>
         <div class="text-xs text-neutral-500">{role}</div>
