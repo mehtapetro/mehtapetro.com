@@ -37,102 +37,50 @@ function readField(formData: FormData, name: string) {
   return typeof value === 'string' ? value.trim() : '';
 }
 
-function escapeHtml(value: string) {
-  return value
-    .replaceAll('&', '&amp;')
-    .replaceAll('<', '&lt;')
-    .replaceAll('>', '&gt;')
-    .replaceAll('"', '&quot;')
-    .replaceAll("'", '&#39;');
-}
+async function sendWithWeb3Forms(payload: ContactPayload) {
+  const accessKey = import.meta.env.WEB3FORMS_ACCESS_KEY;
 
-async function submitToPowerAutomate(payload: ContactPayload, webhookUrl: string) {
-  const response = await fetch(webhookUrl, {
+  if (!accessKey) {
+    throw new Error('Web3Forms access key is not configured.');
+  }
+
+  const submission = {
+    access_key: accessKey,
+    subject: `New website enquiry from ${payload.fullName}`,
+    from_name: 'Mehta Petro Website',
+    name: payload.fullName,
+    email: payload.email,
+    phone: payload.phone,
+    message: payload.message,
+    firstName: payload.firstName,
+    lastName: payload.lastName,
+    phoneCountryCode: payload.phoneCountryCode,
+    phoneNumber: payload.phoneNumber,
+    submittedAt: payload.submittedAt,
+    source: payload.source,
+  };
+
+  const response = await fetch('https://api.web3forms.com/submit', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
+      Accept: 'application/json',
     },
-    body: JSON.stringify(payload),
+    body: JSON.stringify(submission),
   });
 
-  if (!response.ok) {
-    const errorText = await response.text();
+  let responseBody: { success?: boolean; message?: string } | null = null;
+  const contentType = response.headers.get('content-type') || '';
+
+  if (contentType.includes('application/json')) {
+    responseBody = await response.json();
+  }
+
+  if (!response.ok || !responseBody?.success) {
     throw new Error(
-      `Power Automate webhook failed (${response.status}): ${errorText}`
+      responseBody?.message ||
+        `Web3Forms request failed with status ${response.status}.`
     );
-  }
-}
-
-async function sendWithResend(payload: ContactPayload) {
-  const apiKey = import.meta.env.RESEND_API_KEY;
-  const toEmail = import.meta.env.CONTACT_TO_EMAIL || 'info@mehtapetro.com';
-  const fromEmail = import.meta.env.CONTACT_FROM_EMAIL;
-
-  if (!apiKey || !fromEmail) {
-    throw new Error('Contact form email service is not configured.');
-  }
-
-  const subject = `New website enquiry from ${payload.fullName}`;
-
-  const html = `
-    <div style="font-family: Arial, sans-serif; color: #10245F; line-height: 1.6;">
-      <h2 style="margin-bottom: 16px;">New contact form submission</h2>
-      <table style="border-collapse: collapse; width: 100%; max-width: 720px;">
-        <tr>
-          <td style="padding: 8px 0; font-weight: 700; width: 160px;">Name</td>
-          <td style="padding: 8px 0;">${escapeHtml(payload.fullName)}</td>
-        </tr>
-        <tr>
-          <td style="padding: 8px 0; font-weight: 700;">Email</td>
-          <td style="padding: 8px 0;">${escapeHtml(payload.email)}</td>
-        </tr>
-        <tr>
-          <td style="padding: 8px 0; font-weight: 700;">Phone</td>
-          <td style="padding: 8px 0;">${escapeHtml(payload.phone || 'Not provided')}</td>
-        </tr>
-        <tr>
-          <td style="padding: 8px 0; font-weight: 700; vertical-align: top;">Message</td>
-          <td style="padding: 8px 0; white-space: pre-wrap;">${escapeHtml(payload.message)}</td>
-        </tr>
-        <tr>
-          <td style="padding: 8px 0; font-weight: 700;">Submitted</td>
-          <td style="padding: 8px 0;">${escapeHtml(payload.submittedAt)}</td>
-        </tr>
-      </table>
-    </div>
-  `;
-
-  const text = [
-    'New contact form submission',
-    '',
-    `Name: ${payload.fullName}`,
-    `Email: ${payload.email}`,
-    `Phone: ${payload.phone || 'Not provided'}`,
-    `Submitted: ${payload.submittedAt}`,
-    '',
-    'Message:',
-    payload.message,
-  ].join('\n');
-
-  const resendResponse = await fetch('https://api.resend.com/emails', {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${apiKey}`,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      from: fromEmail,
-      to: [toEmail],
-      reply_to: payload.email,
-      subject,
-      html,
-      text,
-    }),
-  });
-
-  if (!resendResponse.ok) {
-    const errorText = await resendResponse.text();
-    throw new Error(`Resend API error (${resendResponse.status}): ${errorText}`);
   }
 }
 
@@ -215,17 +163,7 @@ export const POST: APIRoute = async ({ request, url }) => {
       source: url.origin,
     };
 
-    const powerAutomateWebhook = import.meta.env.CONTACT_POWER_AUTOMATE_WEBHOOK;
-
-    if (powerAutomateWebhook) {
-      await submitToPowerAutomate(payload, powerAutomateWebhook);
-      return json(200, {
-        ok: true,
-        message: 'Thanks! Your message has been sent.',
-      });
-    }
-
-    await sendWithResend(payload);
+    await sendWithWeb3Forms(payload);
 
     return json(200, {
       ok: true,
