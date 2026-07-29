@@ -9,6 +9,9 @@ import Icon from '@components/ui/icons/Icon.astro';
 import { getMarketingLocale } from '@utils/locale';
 
 const locale = getMarketingLocale(Astro.url.pathname, Astro.currentLocale);
+const web3FormsAccessKey = import.meta.env.WEB3FORMS_ACCESS_KEY || '';
+const siteOrigin = Astro.site?.toString().replace(/\/$/, '') || 'https://mehtapetro.vercel.app';
+const contactSource = `${siteOrigin}${locale === 'fr' ? '/fr/contact' : '/contact'}`;
 
 const copy =
   locale === 'fr'
@@ -92,13 +95,18 @@ const copy =
         </h2>
         <form
           data-contact-form
-          action="/api/contact"
+          action="https://api.web3forms.com/submit"
           method="post"
           data-success-message={copy.successMessage}
           data-error-message={copy.errorMessage}
           data-sending-message={copy.sendingMessage}
         >
           <div class="grid gap-4">
+            <input type="hidden" name="access_key" value={web3FormsAccessKey} />
+            <input type="hidden" name="subject" value="New website enquiry from Mehta Petro" />
+            <input type="hidden" name="from_name" value="Mehta Petro Website" />
+            <input type="hidden" name="source" value={contactSource} />
+            <input type="hidden" name="redirect" value="false" />
             <div class="hidden" aria-hidden="true">
               <label for="company-name">Company</label>
               <input
@@ -113,12 +121,13 @@ const copy =
               <TextInput
                 id="hs-firstname-contacts"
                 label={copy.firstName}
-                name="hs-firstname-contacts"
+                name="firstName"
               />
               <TextInput
                 id="hs-lastname-contacts"
                 label={copy.lastName}
-                name="hs-lastname-contacts"
+                name="lastName"
+                required={false}
               />
             </div>
             <EmailContactInput id="hs-email-contacts" />
@@ -132,7 +141,7 @@ const copy =
             <TextAreaInput
               id="hs-about-contacts"
               label={copy.details}
-              name="hs-about-contacts"
+              name="message"
             />
           </div>
 

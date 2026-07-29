@@ -59,7 +59,7 @@ function initContactForms() {
       }
 
       try {
-        const response = await fetch(form.action || '/api/contact', {
+        const response = await fetch(form.action || 'https://api.web3forms.com/submit', {
           method: 'POST',
           body: new FormData(form),
           headers: {
@@ -74,12 +74,14 @@ function initContactForms() {
           payload = await response.json();
         }
 
-        if (!response.ok || !payload?.ok) {
+        const ok = response.ok && (payload?.success ?? payload?.ok);
+
+        if (!ok) {
           throw new Error(payload?.message || errorMessage);
         }
 
         form.reset();
-        setStatus(status, payload.message || successMessage, 'success');
+        setStatus(status, payload?.message || successMessage, 'success');
       } catch (error) {
         const message =
           error instanceof Error && error.message
