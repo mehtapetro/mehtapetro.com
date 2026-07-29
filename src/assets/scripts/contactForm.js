@@ -22,11 +22,11 @@ function setStatus(statusElement, message, variant) {
   statusElement.classList.add('text-[#1E3AFF]');
 }
 
-function buildSuccessPanel(message, subTitle, locale, contactPath) {
+function buildSuccessPanel(locale, contactPath) {
   const wrapper = document.createElement('div');
   wrapper.id = 'contact-success';
   wrapper.className =
-    'rounded-3xl border border-emerald-200 bg-linear-to-br from-emerald-50 to-white p-8 text-center shadow-[0_24px_70px_-45px_rgba(16,185,129,0.65)] sm:p-10';
+    'rounded-[2rem] border border-emerald-200/90 bg-linear-to-br from-emerald-50 via-white to-[#F5FAFF] p-8 text-center shadow-[0_30px_90px_-50px_rgba(16,185,129,0.45)] sm:p-10';
 
   const badge = document.createElement('div');
   badge.className =
@@ -41,20 +41,45 @@ function buildSuccessPanel(message, subTitle, locale, contactPath) {
 
   const title = document.createElement('h3');
   title.className = 'mt-2 text-2xl font-bold text-[#10245F] sm:text-3xl';
-  title.textContent = message;
+  title.textContent =
+    locale === 'fr'
+      ? 'Merci — votre demande est arrivée à notre équipe.'
+      : 'Thanks — your enquiry has reached our team.';
 
   const text = document.createElement('p');
-  text.className = 'mt-3 text-base text-neutral-600';
-  text.textContent = subTitle;
+  text.className = 'mt-3 text-base leading-7 text-neutral-600';
+  text.textContent =
+    locale === 'fr'
+      ? 'Nous avons bien reçu vos informations. Notre équipe examinera votre demande et vous répondra sous peu.'
+      : 'We’ve received your details successfully. Our team will review your request and get back to you shortly.';
+
+  const secondary = document.createElement('p');
+  secondary.className = 'mt-3 text-sm text-neutral-500';
+  secondary.textContent =
+    locale === 'fr'
+      ? 'En attendant, vous pouvez continuer à parcourir nos solutions, produits et ressources.'
+      : 'In the meantime, feel free to continue exploring our products, services, and resources.';
+
+  const actions = document.createElement('div');
+  actions.className =
+    'mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row';
 
   const cta = document.createElement('a');
   cta.href = contactPath;
   cta.className =
-    'mt-8 inline-flex items-center justify-center rounded-xl bg-[#1E3AFF] px-5 py-3 text-sm font-bold text-white transition duration-300 hover:bg-[#1632E0]';
+    'inline-flex items-center justify-center rounded-xl bg-[#1E3AFF] px-5 py-3 text-sm font-bold text-white transition duration-300 hover:bg-[#1632E0]';
   cta.textContent =
     locale === 'fr' ? 'Envoyer un autre message' : 'Send another message';
 
-  wrapper.append(badge, label, title, text, cta);
+  const secondaryCta = document.createElement('a');
+  secondaryCta.href = locale === 'fr' ? '/fr/products' : '/products';
+  secondaryCta.className =
+    'inline-flex items-center justify-center rounded-xl border border-[#D6E2FF] bg-white px-5 py-3 text-sm font-bold text-[#10245F] transition duration-300 hover:border-[#B8CBFF] hover:bg-[#F5F8FF]';
+  secondaryCta.textContent =
+    locale === 'fr' ? 'Voir les produits' : 'Explore products';
+
+  actions.append(cta, secondaryCta);
+  wrapper.append(badge, label, title, text, secondary, actions);
   return wrapper;
 }
 
@@ -130,12 +155,7 @@ function initContactForms() {
 
         if (formContainer instanceof HTMLElement) {
           form.remove();
-          const successPanel = buildSuccessPanel(
-            successMessage,
-            subTitle,
-            locale,
-            contactPath
-          );
+          const successPanel = buildSuccessPanel(locale, contactPath);
           formContainer.appendChild(successPanel);
           if (heading instanceof HTMLElement) {
             heading.scrollIntoView({ behavior: 'smooth', block: 'start' });
