@@ -1,8 +1,9 @@
 ---
 import MainLayout from '@/layouts/MainLayout.astro';
-import ProductDetail from '@components/sections/products/ProductDetail.astro';
+import ProductCategory from '@components/sections/products/ProductCategory.astro';
 import { getCollection } from 'astro:content';
 import { SITE } from '@data/constants';
+import { getProductCatalog } from '@data/productCatalog';
 
 export async function getStaticPaths() {
   const productEntries = await getCollection('products', ({ id }) =>
@@ -18,11 +19,12 @@ export async function getStaticPaths() {
 }
 
 const { product } = Astro.props;
+const categoryId = product.id.replace(/^en\//, '');
+const items = getProductCatalog('en', categoryId);
 
-const pageTitle: string = `${product.data.title} | ${SITE.title}`;
-const metaDescription = product.data.description;
-const ogTitle = `${product.data.title} | Hardware Tools | Mehta Petro`;
-const productSlug = product.data.title.toLowerCase().replace(/\s+/g, '-');
+const pageTitle: string = `${product.data.description} | ${SITE.title}`;
+const metaDescription = product.data.main.content;
+const ogTitle = `${product.data.description} | Products | Mehta Petro`;
 ---
 
 <MainLayout
@@ -31,15 +33,16 @@ const productSlug = product.data.title.toLowerCase().replace(/\s+/g, '-');
   customOgTitle={ogTitle}
   structuredData={{
     '@context': 'https://schema.org',
-    '@type': 'Product',
-    '@id': `${SITE.url}/products/${productSlug}`,
-    name: product.data.title,
-    description: product.data.description,
-    brand: {
-      '@type': 'Brand',
+    '@type': 'CollectionPage',
+    '@id': `${SITE.url}/products/${categoryId}`,
+    name: product.data.description,
+    description: product.data.main.content,
+    isPartOf: {
+      '@type': 'WebSite',
+      url: SITE.url,
       name: 'Mehta Petro',
     },
   }}
 >
-  <ProductDetail product={product} />
+  <ProductCategory category={product} items={items} />
 </MainLayout>

@@ -1,0 +1,54 @@
+---
+import MainLayout from '@/layouts/MainLayout.astro';
+import ProductDetail from '@components/sections/products/ProductDetail.astro';
+import { getCollection } from 'astro:content';
+import { SITE } from '@data/constants';
+import { getCatalogItem, getProductCatalog } from '@data/productCatalog';
+
+export async function getStaticPaths() {
+  const categories = await getCollection('products', ({ id }) => id.startsWith('fr/'));
+
+  return categories.flatMap(category => {
+    const categoryId = category.id.replace(/^fr\//, '');
+    return getProductCatalog('fr', categoryId).map(product => ({
+      params: { category: categoryId, product: product.slug },
+      props: { category, product },
+    }));
+  });
+}
+
+const { category, product } = Astro.props;
+const categoryId = category.id.replace(/^fr\//, '');
+const resolvedProduct = getCatalogItem('fr', categoryId, product.slug) || product;
+
+const pageTitle: string = `${resolvedProduct.title} | ${SITE.title}`;
+const metaDescription = resolvedProduct.description;
+const ogTitle = `${resolvedProduct.title} | Produits | Mehta Petro`;
+---
+
+<MainLayout
+  title={pageTitle}
+  lang="fr"
+  customDescription={metaDescription}
+  customOgTitle={ogTitle}
+  structuredData={{
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    '@id': `${SITE.url}/fr/products/${categoryId}/${resolvedProduct.slug}`,
+    name: resolvedProduct.title,
+    description: resolvedProduct.description,
+    brand: {
+      '@type': 'Brand',
+      name: 'Mehta Petro',
+    },
+    category: category.data.description,
+    inLanguage: 'fr',
+  }}
+>
+  <ProductDetail
+    categoryTitle={category.data.description}
+    categorySlug={categoryId}
+    product={resolvedProduct}
+    lang="fr"
+  />
+</MainLayout>

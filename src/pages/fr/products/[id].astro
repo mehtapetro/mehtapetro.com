@@ -1,8 +1,9 @@
 ---
 import MainLayout from '@/layouts/MainLayout.astro';
-import ProductDetail from '@components/sections/products/ProductDetail.astro';
+import ProductCategory from '@components/sections/products/ProductCategory.astro';
 import { getCollection } from 'astro:content';
 import { SITE } from '@data/constants';
+import { getProductCatalog } from '@data/productCatalog';
 
 export async function getStaticPaths() {
   const productEntries = await getCollection('products', ({ id }) =>
@@ -11,18 +12,19 @@ export async function getStaticPaths() {
   return productEntries.map(product => {
     const idWithoutLang = product.id.replace(/^fr\//, '');
     return {
-      params: { lang: 'fr', id: idWithoutLang },
+      params: { id: idWithoutLang },
       props: { product },
     };
   });
 }
 
 const { product } = Astro.props;
+const categoryId = product.id.replace(/^fr\//, '');
+const items = getProductCatalog('fr', categoryId);
 
-const pageTitle: string = `${product.data.title} | ${SITE.title}`;
-const metaDescription = product.data.description;
-const ogTitle = `${product.data.title} | Outils Matériels | Mehta Petro`;
-const productSlug = product.data.title.toLowerCase().replace(/\s+/g, '-');
+const pageTitle: string = `${product.data.description} | ${SITE.title}`;
+const metaDescription = product.data.main.content;
+const ogTitle = `${product.data.description} | Produits | Mehta Petro`;
 ---
 
 <MainLayout
@@ -32,16 +34,17 @@ const productSlug = product.data.title.toLowerCase().replace(/\s+/g, '-');
   customOgTitle={ogTitle}
   structuredData={{
     '@context': 'https://schema.org',
-    '@type': 'Product',
-    '@id': `${SITE.url}/fr/products/${productSlug}`,
-    name: product.data.title,
-    description: product.data.description,
-    brand: {
-      '@type': 'Brand',
+    '@type': 'CollectionPage',
+    '@id': `${SITE.url}/fr/products/${categoryId}`,
+    name: product.data.description,
+    description: product.data.main.content,
+    isPartOf: {
+      '@type': 'WebSite',
+      url: `${SITE.url}/fr`,
       name: 'Mehta Petro',
     },
     inLanguage: 'fr',
   }}
 >
-  <ProductDetail product={product} lang="fr" />
+  <ProductCategory category={product} items={items} lang="fr" />
 </MainLayout>
