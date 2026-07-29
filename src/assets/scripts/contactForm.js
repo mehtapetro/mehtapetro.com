@@ -75,16 +75,16 @@ function initContactForms() {
       }
 
       try {
-        const response = await fetch('https://api.web3forms.com/submit', {
+        const response = await fetch(form.action || '/api/contact', {
           method: 'POST',
           body: new FormData(form),
         });
 
         const data = await response.json();
 
-        if (data.success) {
+        if (response.ok && data.ok) {
           form.reset();
-          resultSafeSet(status, successMessage, 'success');
+          resultSafeSet(status, data.message || successMessage, 'success');
         } else {
           resultSafeSet(status, data.message || errorMessage, 'error');
         }
