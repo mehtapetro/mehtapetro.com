@@ -11,7 +11,10 @@ import { getMarketingLocale } from '@utils/locale';
 const locale = getMarketingLocale(Astro.url.pathname, Astro.currentLocale);
 const web3FormsAccessKey = import.meta.env.PUBLIC_WEB3FORMS_ACCESS_KEY || '';
 const siteOrigin = Astro.site?.toString().replace(/\/$/, '') || 'https://mehtapetro.vercel.app';
-const contactSource = `${siteOrigin}${locale === 'fr' ? '/fr/contact' : '/contact'}`;
+const contactPath = locale === 'fr' ? '/fr/contact' : '/contact';
+const contactSource = `${siteOrigin}${contactPath}`;
+const successParam = Astro.url.searchParams.get('success');
+const showSuccess = successParam === '1';
 
 const copy =
   locale === 'fr'
@@ -95,19 +98,15 @@ const copy =
         </h2>
         <form
           id="contact-form"
-          data-contact-form
-          action="/api/contact"
+          action="https://api.web3forms.com/submit"
           method="post"
-          data-success-message={copy.successMessage}
-          data-error-message={copy.errorMessage}
-          data-sending-message={copy.sendingMessage}
-          data-missing-key-message="Contact form is not configured yet. Please try again later."
         >
           <div class="grid gap-4">
             <input type="hidden" name="access_key" value={web3FormsAccessKey} />
             <input type="hidden" name="subject" value="New website enquiry from Mehta Petro" />
             <input type="hidden" name="from_name" value="Mehta Petro Website" />
             <input type="hidden" name="source" value={contactSource} />
+            <input type="hidden" name="redirect" value={`${contactSource}?success=1`} />
             <div class="hidden" aria-hidden="true">
               <label for="company-name">Company</label>
               <input
@@ -154,8 +153,13 @@ const copy =
             <p class="text-sm text-neutral-600">
               {copy.formSubTitle}
             </p>
-            <p class="mt-2 hidden text-sm" data-form-status aria-live="polite">
-            </p>
+            {
+              showSuccess ? (
+                <p class="mt-2 text-sm text-emerald-700" aria-live="polite">
+                  {copy.successMessage}
+                </p>
+              ) : null
+            }
           </div>
         </form>
       </div>
