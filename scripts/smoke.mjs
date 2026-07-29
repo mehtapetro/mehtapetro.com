@@ -2,7 +2,7 @@ import { createServer } from 'node:http';
 import { readFile } from 'node:fs/promises';
 import { join, extname } from 'node:path';
 
-const DIST = new URL('../dist/', import.meta.url).pathname;
+const DIST = new URL('../.vercel/output/static/', import.meta.url).pathname;
 const ROUTES = ['/', '/fr/', '/products/', '/blog/', '/contact/', '/404'];
 
 const MIME = {
