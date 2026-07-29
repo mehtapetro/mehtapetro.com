@@ -2,7 +2,8 @@
 import { Image } from 'astro:assets';
 import logo from '@images/mprl_logo.png';
 
-const { class: className = 'h-14 w-auto object-contain', ...rest } = Astro.props;
+const { class: className = 'h-14 w-auto object-contain', ...rest } =
+  Astro.props;
 ---
 
 <Image src={logo} alt="Mehta Petro" class={className} {...rest} />

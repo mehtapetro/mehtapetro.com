@@ -370,9 +370,6 @@ export const Icons = {
     fill: 'currentColor',
     title: 'LinkedIn',
   },
-  
-
-
 
   quotation: {
     paths: [

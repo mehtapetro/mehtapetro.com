@@ -2,7 +2,12 @@ function setStatus(statusElement, message, variant) {
   if (!statusElement) return;
 
   statusElement.textContent = message;
-  statusElement.classList.remove('hidden', 'text-red-600', 'text-emerald-700', 'text-[#1E3AFF]');
+  statusElement.classList.remove(
+    'hidden',
+    'text-red-600',
+    'text-emerald-700',
+    'text-[#1E3AFF]'
+  );
 
   if (variant === 'success') {
     statusElement.classList.add('text-emerald-700');
@@ -26,7 +31,8 @@ function initContactForms() {
 
     const status = form.querySelector('[data-form-status]');
     const submitButton = form.querySelector('button[type="submit"]');
-    const originalButtonText = submitButton?.textContent?.trim() || 'Send Message';
+    const originalButtonText =
+      submitButton?.textContent?.trim() || 'Send Message';
 
     form.addEventListener('submit', async event => {
       event.preventDefault();
@@ -76,7 +82,9 @@ function initContactForms() {
         setStatus(status, payload.message || successMessage, 'success');
       } catch (error) {
         const message =
-          error instanceof Error && error.message ? error.message : errorMessage;
+          error instanceof Error && error.message
+            ? error.message
+            : errorMessage;
         setStatus(status, message, 'error');
       } finally {
         form.removeAttribute('aria-busy');

@@ -331,11 +331,7 @@ const { product } = Astro.props;
   function setButtonInactive(btn: Element, activeButton: Element) {
     if (btn === activeButton) return;
 
-    btn.classList.remove(
-      'active',
-      'bg-[#EEF4FF]',
-      'hover:border-transparent'
-    );
+    btn.classList.remove('active', 'bg-[#EEF4FF]', 'hover:border-transparent');
 
     changeHeadingStyle(btn, ['text-neutral-800'], ['text-[#1E3AFF]']);
   }

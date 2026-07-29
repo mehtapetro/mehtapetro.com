@@ -45,8 +45,14 @@ interface Props {
   class="relative mx-auto grid max-w-[85rem] gap-8 overflow-hidden rounded-[2rem] bg-gradient-to-br from-white via-[#F5F8FF] to-[#DCE8FF] px-6 py-12 shadow-[0_30px_90px_-55px_rgba(30,58,255,0.42)] sm:px-8 md:grid-cols-2 md:items-center lg:px-12 2xl:max-w-full"
 >
   <div aria-hidden="true" class="pointer-events-none absolute inset-0">
-    <div class="absolute -top-24 right-[-6rem] h-72 w-72 rounded-full bg-[#1E3AFF]/18 blur-3xl"></div>
-    <div class="absolute bottom-0 left-[-5rem] h-64 w-64 rounded-full bg-white/70 blur-3xl"></div>
+    <div
+      class="absolute -top-24 right-[-6rem] h-72 w-72 rounded-full bg-[#1E3AFF]/18 blur-3xl"
+    >
+    </div>
+    <div
+      class="absolute bottom-0 left-[-5rem] h-64 w-64 rounded-full bg-white/70 blur-3xl"
+    >
+    </div>
   </div>
   {/* Title and description */}
   <div class="relative z-10">
@@ -98,7 +104,9 @@ interface Props {
   </div>
   {/* Hero Image Section — aspect ratio reserves space before the AVIF loads */}
   <div class="relative z-10 flex w-full">
-    <div class="aspect-[4067/2576] w-full overflow-hidden rounded-[1.75rem] shadow-[0_25px_70px_-45px_rgba(30,58,255,0.55)]">
+    <div
+      class="aspect-[4067/2576] w-full overflow-hidden rounded-[1.75rem] shadow-[0_25px_70px_-45px_rgba(30,58,255,0.55)]"
+    >
       {
         src && alt && (
           <Image

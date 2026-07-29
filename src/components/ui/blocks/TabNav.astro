@@ -46,12 +46,11 @@ Example:
     <span class="ms-6 grow">
       {/* Heading of the tab, changes color when active */}
       <span
-        class="block text-lg font-bold text-neutral-800 hs-tab-active:text-[#1E3AFF]"
+        class="hs-tab-active:text-[#1E3AFF] block text-lg font-bold text-neutral-800"
         >{heading}</span
       >
       {/* Content of the tab, changes color when active */}
-      <span
-        class="mt-1 block text-neutral-500 hs-tab-active:text-neutral-600"
+      <span class="hs-tab-active:text-neutral-600 mt-1 block text-neutral-500"
         >{content}</span
       >
     </span>

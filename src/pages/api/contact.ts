@@ -53,7 +53,10 @@ export const POST: APIRoute = async ({ request }) => {
       return json(400, { ok: false, message: 'First name is required.' });
     }
 
-    if (firstName.length > MAX_NAME_LENGTH || lastName.length > MAX_NAME_LENGTH) {
+    if (
+      firstName.length > MAX_NAME_LENGTH ||
+      lastName.length > MAX_NAME_LENGTH
+    ) {
       return json(400, {
         ok: false,
         message: 'Please keep the name fields under 80 characters.',
@@ -167,7 +170,8 @@ export const POST: APIRoute = async ({ request }) => {
 
       return json(502, {
         ok: false,
-        message: 'Unable to send your message right now. Please try again shortly.',
+        message:
+          'Unable to send your message right now. Please try again shortly.',
       });
     }
 
@@ -179,7 +183,8 @@ export const POST: APIRoute = async ({ request }) => {
     console.error('Contact form submission failed:', error);
     return json(500, {
       ok: false,
-      message: 'Unable to send your message right now. Please try again shortly.',
+      message:
+        'Unable to send your message right now. Please try again shortly.',
     });
   }
 };
