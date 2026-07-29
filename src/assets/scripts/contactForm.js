@@ -7,22 +7,29 @@ function setStatus(statusElement, message, variant) {
     'text-red-600',
     'text-emerald-700',
     'text-[#1E3AFF]',
+    'border-transparent',
+    'border-[#F2C9C9]',
+    'border-[#BFD8C4]',
+    'border-[#DCE8FF]',
+    'bg-[#FFF4F4]',
+    'bg-[#F3FBF5]',
+    'bg-[#F5F8FF]',
     'opacity-0',
     'translate-y-1'
   );
   statusElement.classList.add('transition-all', 'duration-300');
 
   if (variant === 'success') {
-    statusElement.classList.add('text-emerald-700');
+    statusElement.classList.add('text-emerald-700', 'border-[#BFD8C4]', 'bg-[#F3FBF5]');
     return;
   }
 
   if (variant === 'error') {
-    statusElement.classList.add('text-red-600');
+    statusElement.classList.add('text-red-600', 'border-[#F2C9C9]', 'bg-[#FFF4F4]');
     return;
   }
 
-  statusElement.classList.add('text-[#1E3AFF]');
+  statusElement.classList.add('text-[#1E3AFF]', 'border-[#DCE8FF]', 'bg-[#F5F8FF]');
 }
 
 function setButtonLoading(button, label) {
