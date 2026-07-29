@@ -7,40 +7,44 @@ function setStatus(statusElement, message, variant) {
     'text-red-600',
     'text-emerald-700',
     'text-[#1E3AFF]',
-    'border-transparent',
-    'border-[#F2C9C9]',
-    'border-[#BFD8C4]',
-    'border-[#DCE8FF]',
-    'bg-[#FFF4F4]',
-    'bg-[#F3FBF5]',
-    'bg-[#F5F8FF]',
-    'opacity-0',
-    'translate-y-1'
+    'opacity-0'
   );
-  statusElement.classList.add('transition-all', 'duration-300');
+  statusElement.classList.add('transition-opacity', 'duration-500');
 
   if (variant === 'success') {
-    statusElement.classList.add('text-emerald-700', 'border-[#BFD8C4]', 'bg-[#F3FBF5]');
+    statusElement.classList.add('text-emerald-700');
     return;
   }
 
   if (variant === 'error') {
-    statusElement.classList.add('text-red-600', 'border-[#F2C9C9]', 'bg-[#FFF4F4]');
+    statusElement.classList.add('text-red-600');
     return;
   }
 
-  statusElement.classList.add('text-[#1E3AFF]', 'border-[#DCE8FF]', 'bg-[#F5F8FF]');
+  statusElement.classList.add('text-[#1E3AFF]');
+}
+
+function hideStatus(statusElement) {
+  if (!(statusElement instanceof HTMLElement)) return;
+  statusElement.classList.add('opacity-0');
+  window.setTimeout(() => {
+    statusElement.textContent = '';
+    statusElement.classList.add('hidden');
+    statusElement.classList.remove('opacity-0');
+  }, 350);
 }
 
 function setButtonLoading(button, label) {
   if (!(button instanceof HTMLButtonElement)) return;
   button.disabled = true;
-  button.innerHTML = `<span class="inline-flex items-center gap-2"><span class="h-4 w-4 animate-spin rounded-full border-2 border-white/35 border-t-white"></span><span>${label}</span></span>`;
+  button.classList.add('cursor-wait', 'shadow-[0_20px_45px_-25px_rgba(30,58,255,0.95)]');
+  button.innerHTML = `<span class="inline-flex items-center gap-3"><span class="relative flex h-4 w-4"><span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-white/35 opacity-75"></span><span class="relative inline-flex h-4 w-4 animate-spin rounded-full border-2 border-white/35 border-t-white"></span></span><span>${label}</span></span>`;
 }
 
 function setButtonLabel(button, label) {
   if (!(button instanceof HTMLButtonElement)) return;
   button.disabled = false;
+  button.classList.remove('cursor-wait', 'shadow-[0_20px_45px_-25px_rgba(30,58,255,0.95)]');
   button.innerHTML = label;
 }
 
@@ -63,11 +67,15 @@ function initContactForms() {
       'Sorry, we could not send your message right now. Please try again.';
     const sendingMessage =
       form.dataset.sendingMessage || 'Sending your message…';
-    const sendAnotherMessage =
-      form.dataset.sendAnotherMessage || 'Send another message';
+    let successTimeoutId = 0;
 
     form.addEventListener('submit', async event => {
       event.preventDefault();
+
+      if (successTimeoutId) {
+        window.clearTimeout(successTimeoutId);
+        successTimeoutId = 0;
+      }
 
       if (!form.checkValidity()) {
         form.reportValidity();
@@ -107,7 +115,11 @@ function initContactForms() {
 
         form.reset();
         setStatus(status, successMessage, 'success');
-        setButtonLabel(submitButton, sendAnotherMessage);
+        setButtonLabel(submitButton, originalButtonText);
+        successTimeoutId = window.setTimeout(() => {
+          hideStatus(status);
+          successTimeoutId = 0;
+        }, 5000);
       } catch (error) {
         const message =
           error instanceof Error && error.message ? error.message : errorMessage;
