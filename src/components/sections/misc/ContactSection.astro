@@ -99,8 +99,8 @@ const copy =
         </h2>
         {
           showSuccess ? (
-            <div class="rounded-2xl border border-emerald-200 bg-emerald-50 p-6 text-center shadow-sm">
-              <div class="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-emerald-100 text-emerald-700">
+            <div id="contact-success" class="rounded-3xl border border-emerald-200 bg-linear-to-br from-emerald-50 to-white p-8 text-center shadow-[0_24px_70px_-45px_rgba(16,185,129,0.65)] sm:p-10">
+              <div class="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-emerald-100 text-emerald-700 shadow-sm ring-8 ring-emerald-100/70">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
@@ -113,11 +113,14 @@ const copy =
                   <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
                 </svg>
               </div>
-              <h3 class="mt-4 text-lg font-bold text-[#10245F]">{copy.successMessage}</h3>
-              <p class="mt-2 text-sm text-neutral-600">{copy.formSubTitle}</p>
+              <p class="mt-5 text-sm font-semibold uppercase tracking-[0.18em] text-emerald-700">
+                {locale === 'fr' ? 'Message envoyé' : 'Message sent'}
+              </p>
+              <h3 class="mt-2 text-2xl font-bold text-[#10245F] sm:text-3xl">{copy.successMessage}</h3>
+              <p class="mt-3 text-base text-neutral-600">{copy.formSubTitle}</p>
               <a
                 href={contactPath}
-                class="mt-6 inline-flex items-center justify-center rounded-xl bg-[#1E3AFF] px-4 py-3 text-sm font-bold text-white transition duration-300 hover:bg-[#1632E0]"
+                class="mt-8 inline-flex items-center justify-center rounded-xl bg-[#1E3AFF] px-5 py-3 text-sm font-bold text-white transition duration-300 hover:bg-[#1632E0]"
               >
                 {locale === 'fr' ? 'Envoyer un autre message' : 'Send another message'}
               </a>

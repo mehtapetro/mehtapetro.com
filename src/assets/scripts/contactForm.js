@@ -27,6 +27,11 @@ function resultSafeSet(statusElement, message, variant) {
 }
 
 function initContactForms() {
+  const successPanel = document.getElementById('contact-success');
+  if (successPanel instanceof HTMLElement) {
+    successPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
   document.querySelectorAll('#contact-form').forEach(form => {
     if (!(form instanceof HTMLFormElement)) return;
 
