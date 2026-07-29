@@ -79,91 +79,72 @@ const copy =
 ---
 
 <section class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
-  <div class="mx-auto max-w-2xl lg:max-w-5xl">
+  <div class="mx-auto max-w-5xl">
+
+    {/* ── Page header ── */}
     <div class="text-center">
-      <h1
-        class="text-2xl font-bold tracking-tight text-balance text-neutral-800 md:text-4xl md:leading-tight"
-      >
+      <span class="inline-flex rounded-full border border-[#C7D9FF] bg-white px-4 py-1 text-xs font-semibold tracking-[0.18em] text-[#1E3AFF] uppercase">
+        {locale === 'fr' ? 'Contactez-nous' : 'Get in touch'}
+      </span>
+      <h1 class="mt-5 text-4xl font-extrabold tracking-tight text-balance text-[#10245F] md:text-5xl">
         {copy.title}
       </h1>
-      <p class="mt-1 text-pretty text-neutral-600">
+      <p class="mx-auto mt-4 max-w-2xl text-lg leading-8 text-[#5B6785]">
         {copy.subTitle}
       </p>
     </div>
 
-    <div class="mt-12 grid items-center gap-6 lg:grid-cols-2 lg:gap-16">
-      <div class="relative overflow-hidden rounded-[2rem] border border-[#DCE8FF] bg-gradient-to-br from-white via-[#F8FAFF] to-[#EEF4FF] p-4 shadow-[0_30px_90px_-58px_rgba(30,58,255,0.34)] sm:p-6 lg:p-8">
-        <div aria-hidden="true" class="pointer-events-none absolute inset-0">
-          <div class="absolute -top-20 right-[-4rem] h-44 w-44 rounded-full bg-[#1E3AFF]/10 blur-3xl"></div>
-          <div class="absolute bottom-0 left-[-3rem] h-32 w-32 rounded-full bg-white/80 blur-3xl"></div>
-        </div>
-        <div class="relative">
-          <span class="inline-flex items-center rounded-full border border-[#DCE8FF] bg-white/80 px-3 py-1 text-[0.7rem] font-semibold tracking-[0.18em] text-[#1E3AFF] uppercase shadow-sm">
-            Mehta Petro
-          </span>
-          <h2 class="mt-4 text-xl font-bold text-[#10245F] sm:text-2xl">
-            {copy.formTitle}
-          </h2>
-        </div>
+    {/* ── Two-column grid ── */}
+    <div class="mt-12 grid items-start gap-8 lg:grid-cols-2">
+
+      {/* ── Form card ── */}
+      <div class="rounded-[2rem] border border-[#DCE8FF] bg-white p-6 shadow-[0_24px_60px_-46px_rgba(16,36,95,0.28)] sm:p-8">
+        <p class="text-sm font-semibold tracking-[0.14em] text-[#1E3AFF] uppercase">
+          {locale === 'fr' ? 'Envoyer un message' : 'Send a message'}
+        </p>
+        <h2 class="mt-2 text-xl font-bold text-[#10245F]">
+          {copy.formTitle}
+        </h2>
+
         <form
           id="contact-form"
           data-contact-form
           action="https://api.web3forms.com/submit"
           method="post"
-          class="relative mt-8 space-y-5"
+          class="mt-7 space-y-4"
           data-success-message={copy.successMessage}
           data-error-message={copy.errorMessage}
           data-sending-message={copy.sendingMessage}
           data-send-another-message={copy.sendAnother}
         >
-          <div class="grid gap-4">
-            <input type="hidden" name="access_key" value={web3FormsAccessKey} />
-            <input type="hidden" name="subject" value="New website enquiry from Mehta Petro" />
-            <input type="hidden" name="from_name" value="Mehta Petro Website" />
-            <input type="hidden" name="source" value={contactSource} />
-            <div class="hidden" aria-hidden="true">
-              <label for="company-name">Company</label>
-              <input
-                id="company-name"
-                type="text"
-                name="company"
-                tabindex="-1"
-                autocomplete="off"
-              />
-            </div>
-            <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
-              <TextInput
-                id="hs-firstname-contacts"
-                label={copy.firstName}
-                name="name"
-              />
-              <TextInput
-                id="hs-lastname-contacts"
-                label={copy.lastName}
-                name="lastName"
-                required={false}
-              />
-            </div>
-            <EmailContactInput id="hs-email-contacts" />
-            <PhoneInput
-              id="hs-phone-number"
-              countryId="hs-phone-country-code"
-              label={copy.phoneNumber}
-              countryLabel={copy.countryCode}
-              defaultCountryCode="IN"
-            />
-            <TextAreaInput
-              id="hs-about-contacts"
-              label={copy.details}
-              name="message"
-            />
+          <input type="hidden" name="access_key" value={web3FormsAccessKey} />
+          <input type="hidden" name="subject" value="New website enquiry from Mehta Petro" />
+          <input type="hidden" name="from_name" value="Mehta Petro Website" />
+          <input type="hidden" name="source" value={contactSource} />
+          {/* Honeypot */}
+          <div class="hidden" aria-hidden="true">
+            <label for="company-name">Company</label>
+            <input id="company-name" type="text" name="company" tabindex="-1" autocomplete="off" />
           </div>
 
-          <div class="rounded-2xl border border-[#DCE8FF] bg-white/80 px-4 py-4 shadow-[0_18px_44px_-38px_rgba(16,36,95,0.24)] backdrop-blur-sm">
-            <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-              <p class="max-w-md text-sm leading-6 text-[#4B5B85]">
-                {copy.formSubTitle}
-              </p>
+          <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <TextInput id="hs-firstname-contacts" label={copy.firstName} name="name" />
+            <TextInput id="hs-lastname-contacts" label={copy.lastName} name="lastName" required={false} />
+          </div>
+          <EmailContactInput id="hs-email-contacts" />
+          <PhoneInput
+            id="hs-phone-number"
+            countryId="hs-phone-country-code"
+            label={copy.phoneNumber}
+            countryLabel={copy.countryCode}
+            defaultCountryCode="IN"
+          />
+          <TextAreaInput id="hs-about-contacts" label={copy.details} name="message" />
+
+          {/* Status + helper strip */}
+          <div class="rounded-2xl bg-[#F6F9FF] px-5 py-4 ring-1 ring-[#E3EBFF]">
+            <div class="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+              <p class="text-sm text-[#5B6785]">{copy.formSubTitle}</p>
               <p
                 class="hidden rounded-full border border-transparent px-3 py-1 text-sm font-semibold"
                 data-form-status
@@ -172,50 +153,54 @@ const copy =
             </div>
           </div>
 
-          <div class="mt-4 grid">
-            <AuthBtn title={copy.send} />
-          </div>
+          <AuthBtn title={copy.send} />
         </form>
       </div>
 
-      <div class="divide-y divide-[#DCE8FF]">
-        <ContactIconBlock
-          heading={copy.knowledgeHeading}
-          content={copy.knowledgeContent}
-          isLinkVisible={true}
-          linkTitle={copy.knowledgeLink}
-          linkURL="#"
-          isArrowVisible={true}
-          ><Icon name="question" />
-        </ContactIconBlock>
+      {/* ── Info card ── */}
+      <div class="rounded-[2rem] border border-[#DCE8FF] bg-white p-6 shadow-[0_24px_60px_-46px_rgba(16,36,95,0.22)] sm:p-8">
+        <p class="text-sm font-semibold tracking-[0.14em] text-[#1E3AFF] uppercase">
+          {locale === 'fr' ? 'Nos coordonnées' : 'Contact information'}
+        </p>
+        <h2 class="mt-2 text-xl font-bold text-[#10245F]">
+          {locale === 'fr' ? 'Trouvez-nous ici' : 'Find us here'}
+        </h2>
+        <div class="mt-4 divide-y divide-[#DCE8FF]">
+          <ContactIconBlock
+            heading={copy.knowledgeHeading}
+            content={copy.knowledgeContent}
+            isLinkVisible={true}
+            linkTitle={copy.knowledgeLink}
+            linkURL="#"
+            isArrowVisible={true}
+          ><Icon name="question" /></ContactIconBlock>
 
-        <ContactIconBlock
-          heading={copy.faqHeading}
-          content={copy.faqContent}
-          isLinkVisible={true}
-          linkTitle={copy.faqLink}
-          linkURL="#"
-          isArrowVisible={true}
-          ><Icon name="chatBubble" />
-        </ContactIconBlock>
+          <ContactIconBlock
+            heading={copy.faqHeading}
+            content={copy.faqContent}
+            isLinkVisible={true}
+            linkTitle={copy.faqLink}
+            linkURL="#"
+            isArrowVisible={true}
+          ><Icon name="chatBubble" /></ContactIconBlock>
 
-        <ContactIconBlock
-          heading={copy.officeHeading}
-          content={copy.officeContent}
-          isAddressVisible={true}
-          addressContent="509, HIVE 67, ICON Tower, Borsapada Road, Next to Raghuleela Mall, Kandivali (West), Mumbai 400067, India."
-          ><Icon name="mapPin" />
-        </ContactIconBlock>
+          <ContactIconBlock
+            heading={copy.officeHeading}
+            content={copy.officeContent}
+            isAddressVisible={true}
+            addressContent="509, HIVE 67, ICON Tower, Borsapada Road, Next to Raghuleela Mall, Kandivali (West), Mumbai 400067, India."
+          ><Icon name="mapPin" /></ContactIconBlock>
 
-        <ContactIconBlock
-          heading={copy.emailHeading}
-          content={copy.emailContent}
-          isLinkVisible={true}
-          linkTitle="info@mehtapetro.com"
-          linkURL="mailto:info@mehtapetro.com"
-          ><Icon name="envelopeOpen" />
-        </ContactIconBlock>
+          <ContactIconBlock
+            heading={copy.emailHeading}
+            content={copy.emailContent}
+            isLinkVisible={true}
+            linkTitle="info@mehtapetro.com"
+            linkURL="mailto:info@mehtapetro.com"
+          ><Icon name="envelopeOpen" /></ContactIconBlock>
+        </div>
       </div>
+
     </div>
   </div>
 </section>
