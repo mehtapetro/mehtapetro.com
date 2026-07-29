@@ -10,9 +10,10 @@ import { getMarketingLocale } from '@utils/locale';
 
 const locale = getMarketingLocale(Astro.url.pathname, Astro.currentLocale);
 const web3FormsAccessKey = 'e138342b-b691-410c-a7fb-3b3ce5a49ea6';
-const siteOrigin = Astro.site?.toString().replace(/\/$/, '') || 'https://mehtapetro.vercel.app';
+const siteOrigin = 'https://mehtapetro.vercel.app';
 const contactPath = locale === 'fr' ? '/fr/contact' : '/contact';
 const contactSource = `${siteOrigin}${contactPath}`;
+const redirectUrl = `${contactSource}?success=1`;
 const successParam = Astro.url.searchParams.get('success');
 const showSuccess = successParam === '1';
 
@@ -106,7 +107,7 @@ const copy =
             <input type="hidden" name="subject" value="New website enquiry from Mehta Petro" />
             <input type="hidden" name="from_name" value="Mehta Petro Website" />
             <input type="hidden" name="source" value={contactSource} />
-            <input type="hidden" name="redirect" value={`${contactSource}?success=1`} />
+            <input type="hidden" name="redirect" value={redirectUrl} />
             <div class="hidden" aria-hidden="true">
               <label for="company-name">Company</label>
               <input
