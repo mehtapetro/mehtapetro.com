@@ -22,6 +22,8 @@ const copy =
         firstName: 'Prénom',
         lastName: 'Nom',
         details: 'Détails',
+        phoneNumber: 'Numéro de téléphone',
+        countryCode: 'Indicatif pays',
         send: 'Envoyer un message',
         successMessage: 'Merci ! Votre message a bien été envoyé.',
         errorMessage:
@@ -49,6 +51,8 @@ const copy =
         firstName: 'First Name',
         lastName: 'Last Name',
         details: 'Details',
+        phoneNumber: 'Phone Number',
+        countryCode: 'Country Code',
         send: 'Send Message',
         successMessage: 'Thanks! Your message has been sent.',
         errorMessage:
@@ -118,7 +122,13 @@ const copy =
               />
             </div>
             <EmailContactInput id="hs-email-contacts" />
-            <PhoneInput id="hs-phone-number" />
+            <PhoneInput
+              id="hs-phone-number"
+              countryId="hs-phone-country-code"
+              label={copy.phoneNumber}
+              countryLabel={copy.countryCode}
+              defaultCountryCode="IN"
+            />
             <TextAreaInput
               id="hs-about-contacts"
               label={copy.details}

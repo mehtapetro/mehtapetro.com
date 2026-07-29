@@ -71,3 +71,86 @@ Defined in [tsconfig.json](tsconfig.json).
 - Follow [MainLayout.astro](src/layouts/MainLayout.astro) for layout and Meta/SEO.
 - Use **Tailwind v4** only; do not use Tailwind v3 syntax.
 - Navigation/footer copy: edit [src/utils/navigation.ts](src/utils/navigation.ts) (and [src/utils/fr/navigation.ts](src/utils/fr/navigation.ts) for French); Navbar/Footer receive the default export as `strings`.
+
+## Contact form Microsoft 365 Excel integration
+
+The contact form API in `src/pages/api/contact.ts` supports two backends:
+
+1. `CONTACT_POWER_AUTOMATE_WEBHOOK` - preferred for Microsoft 365 / Excel collection
+2. Resend email fallback using `RESEND_API_KEY`, `CONTACT_FROM_EMAIL`, and `CONTACT_TO_EMAIL`
+
+### Recommended Microsoft 365 setup
+
+Use Power Automate because it can securely receive the form payload and append a row into an Excel table in OneDrive or SharePoint without exposing your Microsoft credentials in the site code.
+
+#### 1. Create the Excel file
+
+Create an Excel workbook in OneDrive or SharePoint with a table containing these columns:
+
+- `SubmittedAt`
+- `FirstName`
+- `LastName`
+- `FullName`
+- `Email`
+- `PhoneCountryCode`
+- `PhoneNumber`
+- `Phone`
+- `Message`
+- `Source`
+
+Important: convert the rows into an actual Excel **Table** and give it a clear name like `ContactLeads`.
+
+#### 2. Create the Power Automate flow
+
+In Power Automate:
+
+- Create a new flow
+- Choose **When an HTTP request is received** as the trigger
+- Use this JSON schema:
+
+```json
+{
+  "type": "object",
+  "properties": {
+    "firstName": { "type": "string" },
+    "lastName": { "type": "string" },
+    "fullName": { "type": "string" },
+    "email": { "type": "string" },
+    "phoneCountryCode": { "type": "string" },
+    "phoneNumber": { "type": "string" },
+    "phone": { "type": "string" },
+    "message": { "type": "string" },
+    "submittedAt": { "type": "string" },
+    "source": { "type": "string" }
+  },
+  "required": [
+    "firstName",
+    "email",
+    "message",
+    "submittedAt",
+    "source"
+  ]
+}
+```
+
+- Add an **Excel Online (Business) → Add a row into a table** step
+- Point it at your workbook and the `ContactLeads` table
+- Map the request fields into the table columns
+- Save the flow and copy the generated HTTP POST URL
+
+#### 3. Add the HTTP trigger URL to the site environment
+
+Set this environment variable where the Astro server runs:
+
+```bash
+CONTACT_POWER_AUTOMATE_WEBHOOK="https://your-flow-url-from-power-automate"
+```
+
+If this variable is present, the contact form will send submissions to Power Automate.
+If it is not present, the code falls back to the existing Resend email integration.
+
+### Notes
+
+- Do not put Microsoft usernames, passwords, or raw OAuth secrets in the frontend.
+- Keep the Power Automate HTTP trigger URL secret; treat it like a credential.
+- If needed later, you can extend the flow to also send Teams notifications or Outlook emails.
