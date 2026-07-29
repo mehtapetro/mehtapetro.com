@@ -9,7 +9,7 @@ import Icon from '@components/ui/icons/Icon.astro';
 import { getMarketingLocale } from '@utils/locale';
 
 const locale = getMarketingLocale(Astro.url.pathname, Astro.currentLocale);
-const web3FormsAccessKey = import.meta.env.PUBLIC_WEB3FORMS_ACCESS_KEY || '';
+const web3FormsAccessKey = 'e138342b-b691-410c-a7fb-3b3ce5a49ea6';
 const siteOrigin = Astro.site?.toString().replace(/\/$/, '') || 'https://mehtapetro.vercel.app';
 const contactPath = locale === 'fr' ? '/fr/contact' : '/contact';
 const contactSource = `${siteOrigin}${contactPath}`;
