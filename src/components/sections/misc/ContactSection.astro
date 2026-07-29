@@ -32,6 +32,7 @@ const copy =
         errorMessage:
           "Désolé, nous n'avons pas pu envoyer votre message pour le moment. Veuillez réessayer.",
         sendingMessage: 'Envoi en cours…',
+        captchaRequiredMessage: 'Veuillez confirmer que vous êtes humain avant d’envoyer votre message.',
         knowledgeHeading: 'Base de connaissances',
         knowledgeContent:
           'Parcourez tous nos articles de base de connaissances.',
@@ -61,6 +62,7 @@ const copy =
         errorMessage:
           'Sorry, we could not send your message right now. Please try again.',
         sendingMessage: 'Sending your message…',
+        captchaRequiredMessage: 'Please confirm you are human before sending your message.',
         knowledgeHeading: 'Knowledgebase',
         knowledgeContent: 'Browse through all of our knowledgebase articles.',
         knowledgeLink: 'Visit guides & tutorials',
@@ -112,6 +114,7 @@ const copy =
           data-success-message={copy.successMessage}
           data-error-message={copy.errorMessage}
           data-sending-message={copy.sendingMessage}
+          data-captcha-required-message={copy.captchaRequiredMessage}
         >
           <input type="hidden" name="access_key" value={web3FormsAccessKey} />
           <input type="hidden" name="subject" value="New website enquiry from Mehta Petro" />
@@ -136,6 +139,10 @@ const copy =
             defaultCountryCode="IN"
           />
           <TextAreaInput id="hs-about-contacts" label={copy.details} name="message" />
+
+          <div class="overflow-hidden rounded-2xl border border-[#DCE8FF] bg-[#F8FAFF] px-4 py-4">
+            <div class="h-captcha" data-captcha="true"></div>
+          </div>
 
           <div class="pt-2">
             <AuthBtn title={copy.send} />
@@ -195,4 +202,5 @@ const copy =
 
     </div>
   </div>
+  <script src="https://web3forms.com/client/script.js" async defer></script>
 </section>

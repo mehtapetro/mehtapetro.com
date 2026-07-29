@@ -67,6 +67,9 @@ function initContactForms() {
       'Sorry, we could not send your message right now. Please try again.';
     const sendingMessage =
       form.dataset.sendingMessage || 'Sending your message…';
+    const captchaRequiredMessage =
+      form.dataset.captchaRequiredMessage ||
+      'Please confirm you are human before sending your message.';
     let successTimeoutId = 0;
 
     form.addEventListener('submit', async event => {
@@ -79,6 +82,19 @@ function initContactForms() {
 
       if (!form.checkValidity()) {
         form.reportValidity();
+        return;
+      }
+
+      const captchaResponseField = form.querySelector(
+        'textarea[name="h-captcha-response"]'
+      );
+      const captchaValue =
+        captchaResponseField instanceof HTMLTextAreaElement
+          ? captchaResponseField.value.trim()
+          : '';
+
+      if (!captchaValue) {
+        setStatus(status, captchaRequiredMessage, 'error');
         return;
       }
 
@@ -114,6 +130,9 @@ function initContactForms() {
         }
 
         form.reset();
+        if (window.hcaptcha && typeof window.hcaptcha.reset === 'function') {
+          window.hcaptcha.reset();
+        }
         setStatus(status, successMessage, 'success');
         setButtonLabel(submitButton, originalButtonText);
         successTimeoutId = window.setTimeout(() => {
