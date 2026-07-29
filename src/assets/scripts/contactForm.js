@@ -49,6 +49,18 @@ function initContactForms() {
       const errorMessage =
         form.dataset.errorMessage ||
         'Sorry, we could not send your message right now. Please try again.';
+      const missingKeyMessage =
+        form.dataset.missingKeyMessage ||
+        'Contact form is not configured yet. Please try again later.';
+      const accessKeyField = form.querySelector('input[name="access_key"]');
+
+      if (
+        accessKeyField instanceof HTMLInputElement &&
+        !accessKeyField.value.trim()
+      ) {
+        setStatus(status, missingKeyMessage, 'error');
+        return;
+      }
 
       setStatus(status, sendingMessage, 'info');
       form.setAttribute('aria-busy', 'true');
