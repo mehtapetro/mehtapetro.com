@@ -6,8 +6,11 @@ function setStatus(statusElement, message, variant) {
     'hidden',
     'text-red-600',
     'text-emerald-700',
-    'text-[#1E3AFF]'
+    'text-[#1E3AFF]',
+    'opacity-0',
+    'translate-y-1'
   );
+  statusElement.classList.add('transition-all', 'duration-300');
 
   if (variant === 'success') {
     statusElement.classList.add('text-emerald-700');
@@ -31,7 +34,7 @@ function setButtonLoading(button, label) {
 function setButtonLabel(button, label) {
   if (!(button instanceof HTMLButtonElement)) return;
   button.disabled = false;
-  button.textContent = label;
+  button.innerHTML = label;
 }
 
 function initContactForms() {

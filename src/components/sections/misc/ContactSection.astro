@@ -13,9 +13,6 @@ const web3FormsAccessKey = 'e138342b-b691-410c-a7fb-3b3ce5a49ea6';
 const siteOrigin = 'https://mehtapetro.vercel.app';
 const contactPath = locale === 'fr' ? '/fr/contact' : '/contact';
 const contactSource = `${siteOrigin}${contactPath}`;
-const redirectUrl = `${contactSource}?success=1`;
-const successParam = Astro.url.searchParams.get('success');
-const showSuccess = successParam === '1';
 
 const copy =
   locale === 'fr'
@@ -104,86 +101,72 @@ const copy =
           data-contact-form
           action="https://api.web3forms.com/submit"
           method="post"
+          class="space-y-4"
           data-success-message={copy.successMessage}
           data-error-message={copy.errorMessage}
           data-sending-message={copy.sendingMessage}
           data-send-another-message={copy.sendAnother}
         >
-              <div class="grid gap-4">
-                <input type="hidden" name="access_key" value={web3FormsAccessKey} />
-                <input type="hidden" name="subject" value="New website enquiry from Mehta Petro" />
-                <input type="hidden" name="from_name" value="Mehta Petro Website" />
-                <input type="hidden" name="source" value={contactSource} />
-                <input type="hidden" name="redirect" value={redirectUrl} />
-                <p class="hidden" data-form-success-flag>{showSuccess ? '1' : '0'}</p>
-                <div class="hidden" aria-hidden="true">
-                  <label for="company-name">Company</label>
-                  <input
-                    id="company-name"
-                    type="text"
-                    name="company"
-                    tabindex="-1"
-                    autocomplete="off"
-                  />
-                </div>
-                <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                  <TextInput
-                    id="hs-firstname-contacts"
-                    label={copy.firstName}
-                    name="name"
-                  />
-                  <TextInput
-                    id="hs-lastname-contacts"
-                    label={copy.lastName}
-                    name="lastName"
-                    required={false}
-                  />
-                </div>
-                <EmailContactInput id="hs-email-contacts" />
-                <PhoneInput
-                  id="hs-phone-number"
-                  countryId="hs-phone-country-code"
-                  label={copy.phoneNumber}
-                  countryLabel={copy.countryCode}
-                  defaultCountryCode="IN"
-                />
-                <TextAreaInput
-                  id="hs-about-contacts"
-                  label={copy.details}
-                  name="message"
-                />
-              </div>
+          <div class="grid gap-4">
+            <input type="hidden" name="access_key" value={web3FormsAccessKey} />
+            <input type="hidden" name="subject" value="New website enquiry from Mehta Petro" />
+            <input type="hidden" name="from_name" value="Mehta Petro Website" />
+            <input type="hidden" name="source" value={contactSource} />
+            <div class="hidden" aria-hidden="true">
+              <label for="company-name">Company</label>
+              <input
+                id="company-name"
+                type="text"
+                name="company"
+                tabindex="-1"
+                autocomplete="off"
+              />
+            </div>
+            <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+              <TextInput
+                id="hs-firstname-contacts"
+                label={copy.firstName}
+                name="name"
+              />
+              <TextInput
+                id="hs-lastname-contacts"
+                label={copy.lastName}
+                name="lastName"
+                required={false}
+              />
+            </div>
+            <EmailContactInput id="hs-email-contacts" />
+            <PhoneInput
+              id="hs-phone-number"
+              countryId="hs-phone-country-code"
+              label={copy.phoneNumber}
+              countryLabel={copy.countryCode}
+              defaultCountryCode="IN"
+            />
+            <TextAreaInput
+              id="hs-about-contacts"
+              label={copy.details}
+              name="message"
+            />
+          </div>
 
-              <div class="mt-4 grid">
-                <AuthBtn title={copy.send} />
-              </div>
+          <div class="rounded-2xl border border-[#E4ECFF] bg-[#F8FAFF] px-4 py-3">
+            <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+              <p class="text-sm text-neutral-600">
+                {copy.formSubTitle}
+              </p>
+              <p
+                class="hidden text-sm font-medium"
+                data-form-status
+                aria-live="polite"
+              ></p>
+            </div>
+          </div>
 
-              <div class="mt-3 text-center">
-                <p class="text-sm text-neutral-600">
-                  {copy.formSubTitle}
-                </p>
-                <div class="mt-3 min-h-[3rem] text-center">
-                  <p class="text-sm text-neutral-600">
-                    {copy.formSubTitle}
-                  </p>
-                  <p class={`mt-2 text-sm ${showSuccess ? 'text-emerald-700' : 'hidden'}`} data-form-status aria-live="polite">
-                    {showSuccess ? copy.successMessage : ''}
-                  </p>
-                </div>
-              </div>
-              {
-                showSuccess ? (
-                  <div class="mt-6 flex justify-center">
-                    <a
-                      href={contactPath}
-                      class="inline-flex items-center justify-center rounded-xl border border-[#D6E2FF] bg-white px-5 py-3 text-sm font-bold text-[#10245F] transition duration-300 hover:border-[#B8CBFF] hover:bg-[#F5F8FF]"
-                    >
-                      {copy.sendAnother}
-                    </a>
-                  </div>
-                ) : null
-              }
-            </form>
+          <div class="mt-4 grid">
+            <AuthBtn title={copy.send} />
+          </div>
+        </form>
       </div>
 
       <div class="divide-y divide-[#DCE8FF]">
