@@ -128,8 +128,12 @@ const copy =
           ) : (
             <form
               id="contact-form"
+              data-contact-form
               action="https://api.web3forms.com/submit"
               method="post"
+              data-success-message={copy.successMessage}
+              data-error-message={copy.errorMessage}
+              data-sending-message={copy.sendingMessage}
             >
               <div class="grid gap-4">
                 <input type="hidden" name="access_key" value={web3FormsAccessKey} />
@@ -137,6 +141,7 @@ const copy =
                 <input type="hidden" name="from_name" value="Mehta Petro Website" />
                 <input type="hidden" name="source" value={contactSource} />
                 <input type="hidden" name="redirect" value={redirectUrl} />
+                <p class="hidden" data-form-success-flag>{showSuccess ? '1' : '0'}</p>
                 <div class="hidden" aria-hidden="true">
                   <label for="company-name">Company</label>
                   <input
@@ -183,6 +188,7 @@ const copy =
                 <p class="text-sm text-neutral-600">
                   {copy.formSubTitle}
                 </p>
+                <p class="mt-2 hidden text-sm" data-form-status aria-live="polite"></p>
               </div>
             </form>
           )
