@@ -94,6 +94,7 @@ const copy =
           {copy.formTitle}
         </h2>
         <form
+          id="contact-form"
           data-contact-form
           action="https://api.web3forms.com/submit"
           method="post"
@@ -107,7 +108,6 @@ const copy =
             <input type="hidden" name="subject" value="New website enquiry from Mehta Petro" />
             <input type="hidden" name="from_name" value="Mehta Petro Website" />
             <input type="hidden" name="source" value={contactSource} />
-            <input type="hidden" name="redirect" value="false" />
             <div class="hidden" aria-hidden="true">
               <label for="company-name">Company</label>
               <input
@@ -122,7 +122,7 @@ const copy =
               <TextInput
                 id="hs-firstname-contacts"
                 label={copy.firstName}
-                name="firstName"
+                name="name"
               />
               <TextInput
                 id="hs-lastname-contacts"

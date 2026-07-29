@@ -22,6 +22,10 @@ function setStatus(statusElement, message, variant) {
   statusElement.classList.add('text-[#1E3AFF]');
 }
 
+function resultSafeSet(statusElement, message, variant) {
+  setStatus(statusElement, message, variant);
+}
+
 function initContactForms() {
   document.querySelectorAll('[data-contact-form]').forEach(form => {
     if (!(form instanceof HTMLFormElement)) return;
@@ -62,7 +66,7 @@ function initContactForms() {
         return;
       }
 
-      setStatus(status, sendingMessage, 'info');
+      resultSafeSet(status, sendingMessage, 'info');
       form.setAttribute('aria-busy', 'true');
 
       if (submitButton instanceof HTMLButtonElement) {
@@ -71,35 +75,25 @@ function initContactForms() {
       }
 
       try {
-        const response = await fetch(form.action || 'https://api.web3forms.com/submit', {
+        const response = await fetch('https://api.web3forms.com/submit', {
           method: 'POST',
           body: new FormData(form),
-          headers: {
-            Accept: 'application/json',
-          },
         });
 
-        let payload = null;
-        const contentType = response.headers.get('content-type') || '';
+        const data = await response.json();
 
-        if (contentType.includes('application/json')) {
-          payload = await response.json();
+        if (data.success) {
+          form.reset();
+          resultSafeSet(status, successMessage, 'success');
+        } else {
+          resultSafeSet(status, data.message || errorMessage, 'error');
         }
-
-        const ok = response.ok && (payload?.success ?? payload?.ok);
-
-        if (!ok) {
-          throw new Error(payload?.message || errorMessage);
-        }
-
-        form.reset();
-        setStatus(status, payload?.message || successMessage, 'success');
       } catch (error) {
         const message =
           error instanceof Error && error.message
             ? error.message
             : errorMessage;
-        setStatus(status, message, 'error');
+        resultSafeSet(status, message, 'error');
       } finally {
         form.removeAttribute('aria-busy');
 
