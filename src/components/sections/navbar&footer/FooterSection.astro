@@ -6,6 +6,7 @@ import enStrings from '@utils/navigation.ts';
 import BrandLogo from '@components/BrandLogo.astro';
 import isoLogoUrl from '@images/iso/ISO.svg?url';
 import isoCertificateUrl from '@images/iso/iso_certificate.pdf?url';
+import ecoVadisLogoUrl from '@images/Ecovadis.png?url';
 
 const strings = enStrings;
 const crafted = 'Crafted by';
@@ -31,9 +32,7 @@ const companyPhone = '+91-022-44559090';
           industrial applications.
         </p>
 
-        <div
-          class="mt-6 grid max-w-md gap-4 sm:grid-cols-[minmax(0,0.75fr)_minmax(0,1.25fr)]"
-        >
+        <div class="mt-6 grid max-w-md gap-4">
           <div
             class="rounded-2xl border border-[#DCE8FF] bg-[#F8FAFF] px-5 py-4 shadow-[0_18px_44px_-38px_rgba(16,36,95,0.24)]"
           >
@@ -51,35 +50,59 @@ const companyPhone = '+91-022-44559090';
             </p>
           </div>
 
-          <a
-            href={isoCertificateUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="group rounded-2xl border border-[#DCE8FF] bg-[#F8FAFF] px-4 py-4 shadow-[0_18px_44px_-38px_rgba(16,36,95,0.24)] outline-hidden transition duration-300 hover:-translate-y-0.5 hover:border-[#BDD1FF] hover:shadow-[0_24px_58px_-40px_rgba(30,58,255,0.3)] focus-visible:ring-3 focus-visible:ring-[#1E3AFF]/35"
-            aria-label="View ISO certification PDF"
-          >
-            <div class="flex items-center gap-3">
-              <img
-                src={isoLogoUrl}
-                alt="ISO certification logo"
-                class="h-16 w-auto shrink-0 object-contain"
-                loading="lazy"
-              />
-              <div>
-                <p class="text-sm font-semibold text-[#10245F]">
-                  ISO Certified
-                </p>
-                <p class="mt-1 text-xs leading-5 text-[#5B6785]">
-                  View certificate PDF
-                </p>
-                <p
-                  class="mt-2 text-xs font-semibold text-[#1E3AFF] transition group-hover:text-[#1632E0]"
-                >
-                  Open certificate →
-                </p>
+          <div class="grid gap-4 sm:grid-cols-2">
+            <a
+              href={`${isoCertificateUrl}#page=1&zoom=page-fit`}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="group rounded-2xl border border-[#DCE8FF] bg-[#F8FAFF] px-4 py-4 shadow-[0_18px_44px_-38px_rgba(16,36,95,0.24)] outline-hidden transition duration-300 hover:-translate-y-0.5 hover:border-[#BDD1FF] hover:shadow-[0_24px_58px_-40px_rgba(30,58,255,0.3)] focus-visible:ring-3 focus-visible:ring-[#1E3AFF]/35"
+              aria-label="Preview ISO certificate PDF"
+              title="Preview ISO certificate PDF"
+            >
+              <div class="flex items-center gap-3">
+                <img
+                  src={isoLogoUrl}
+                  alt="ISO certification logo"
+                  class="h-14 w-auto shrink-0 object-contain"
+                  loading="lazy"
+                />
+                <div>
+                  <p class="text-sm font-semibold text-[#10245F]">
+                    ISO Certified
+                  </p>
+                  <p class="mt-1 text-xs leading-5 text-[#5B6785]">
+                    Preview certificate PDF
+                  </p>
+                  <p
+                    class="mt-2 text-xs font-semibold text-[#1E3AFF] transition group-hover:text-[#1632E0]"
+                  >
+                    Open preview →
+                  </p>
+                </div>
+              </div>
+            </a>
+
+            <div
+              class="rounded-2xl border border-[#DCE8FF] bg-[#F8FAFF] px-4 py-4 shadow-[0_18px_44px_-38px_rgba(16,36,95,0.24)]"
+            >
+              <div class="flex items-center gap-3">
+                <img
+                  src={ecoVadisLogoUrl}
+                  alt="EcoVadis sustainability logo"
+                  class="h-14 w-auto shrink-0 object-contain"
+                  loading="lazy"
+                />
+                <div>
+                  <p class="text-sm font-semibold text-[#10245F]">
+                    Sustainability
+                  </p>
+                  <p class="mt-1 text-xs leading-5 text-[#5B6785]">
+                    EcoVadis
+                  </p>
+                </div>
               </div>
             </div>
-          </a>
+          </div>
         </div>
 
         <div class="mt-6 flex flex-wrap gap-3">
