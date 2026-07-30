@@ -112,28 +112,29 @@ const ogTitle = 'About Us | Mehta Petro';
         </div>
       </div>
 
-      <!-- New Sustainability section: concise, scannable cards with green icons -->
+      <!-- New Sustainability section: refined layout, larger icons, improved spacing -->
       <section class="mt-8">
         <div class="mx-auto max-w-4xl rounded-2xl bg-white p-6 ring-1 ring-[#E8F6EE] shadow-[0_12px_30px_-18px_rgba(16,36,95,0.06)]">
           <div class="flex items-start justify-between gap-6">
             <div>
               <h3 class="text-lg font-semibold text-[#10245F]">Sustainability</h3>
-              <p class="mt-2 text-sm text-[#5B6785] max-w-prose">Our approach focuses on measurable improvements that reduce environmental impact and support communities.</p>
+              <p class="mt-2 text-sm text-[#5B6785] max-w-prose">We focus on practical, measurable actions that reduce environmental impact while supporting local communities.</p>
             </div>
+
             <div class="flex-shrink-0 hidden sm:block">
               <a href="/about-us#ecovadis" class="inline-flex items-center gap-3">
-                <div class="rounded-full bg-emerald-50 p-3 shadow-sm">
-                  <img src={ecovadisUrl} alt="EcoVadis badge" class="h-14 w-auto" loading="lazy" />
+                <div class="rounded-full bg-emerald-50 p-3 shadow-sm ring-1 ring-emerald-100">
+                  <img src={ecovadisUrl} alt="EcoVadis badge" class="h-18 w-auto sm:h-16 md:h-20 lg:h-24 object-contain" loading="lazy" />
                 </div>
               </a>
             </div>
           </div>
 
-          <div class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            <div class="flex gap-4 items-start p-4 rounded-lg hover:bg-[#F6FFFA] transition">
+          <div class="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <!-- Card -->
+            <div class="flex gap-4 items-start p-6 rounded-lg hover:bg-emerald-50 transition-shadow border border-transparent hover:border-emerald-100">
               <div class="text-emerald-600 mt-1">
-                <!-- Leaf icon -->
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 3c0 2.5-2 5-5 7s-7 5-7 9c4 0 6-3 9-6s4-3 7-6 3-3 3-3-3-1-7-1z"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 3c0 2.5-2 5-5 7s-7 5-7 9c4 0 6-3 9-6s4-3 7-6 3-3 3-3-3-1-7-1z"/></svg>
               </div>
               <div>
                 <p class="font-semibold text-sm text-[#10245F]">Climate action</p>
@@ -141,10 +142,10 @@ const ogTitle = 'About Us | Mehta Petro';
               </div>
             </div>
 
-            <div class="flex gap-4 items-start p-4 rounded-lg hover:bg-[#F6FFFA] transition">
+            <!-- Card -->
+            <div class="flex gap-4 items-start p-6 rounded-lg hover:bg-emerald-50 transition-shadow border border-transparent hover:border-emerald-100">
               <div class="text-emerald-600 mt-1">
-                <!-- Energy / bolt icon -->
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
               </div>
               <div>
                 <p class="font-semibold text-sm text-[#10245F]">Energy efficiency</p>
@@ -152,10 +153,10 @@ const ogTitle = 'About Us | Mehta Petro';
               </div>
             </div>
 
-            <div class="flex gap-4 items-start p-4 rounded-lg hover:bg-[#F6FFFA] transition">
+            <!-- Card -->
+            <div class="flex gap-4 items-start p-6 rounded-lg hover:bg-emerald-50 transition-shadow border border-transparent hover:border-emerald-100">
               <div class="text-emerald-600 mt-1">
-                <!-- Air icon -->
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8h13M7 12h9M5 16h11"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8h13M7 12h9M5 16h11"/></svg>
               </div>
               <div>
                 <p class="font-semibold text-sm text-[#10245F]">Air emissions</p>
@@ -163,10 +164,10 @@ const ogTitle = 'About Us | Mehta Petro';
               </div>
             </div>
 
-            <div class="flex gap-4 items-start p-4 rounded-lg hover:bg-[#F6FFFA] transition">
+            <!-- Card -->
+            <div class="flex gap-4 items-start p-6 rounded-lg hover:bg-emerald-50 transition-shadow border border-transparent hover:border-emerald-100">
               <div class="text-emerald-600 mt-1">
-                <!-- Recycle icon -->
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 17l3-3 3 3V6l6 6 3-3 3 3"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 17l3-3 3 3V6l6 6 3-3 3 3"/></svg>
               </div>
               <div>
                 <p class="font-semibold text-sm text-[#10245F]">Waste & recycling</p>
@@ -174,10 +175,10 @@ const ogTitle = 'About Us | Mehta Petro';
               </div>
             </div>
 
-            <div class="flex gap-4 items-start p-4 rounded-lg hover:bg-[#F6FFFA] transition">
+            <!-- Card -->
+            <div class="flex gap-4 items-start p-6 rounded-lg hover:bg-emerald-50 transition-shadow border border-transparent hover:border-emerald-100">
               <div class="text-emerald-600 mt-1">
-                <!-- Water droplet icon -->
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 2s5 4 5 8a5 5 0 11-10 0c0-4 5-8 5-8z"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 2s5 4 5 8a5 5 0 11-10 0c0-4 5-8 5-8z"/></svg>
               </div>
               <div>
                 <p class="font-semibold text-sm text-[#10245F]">Water management</p>
@@ -185,10 +186,10 @@ const ogTitle = 'About Us | Mehta Petro';
               </div>
             </div>
 
-            <div class="flex gap-4 items-start p-4 rounded-lg hover:bg-[#F6FFFA] transition">
+            <!-- Card -->
+            <div class="flex gap-4 items-start p-6 rounded-lg hover:bg-emerald-50 transition-shadow border border-transparent hover:border-emerald-100">
               <div class="text-emerald-600 mt-1">
-                <!-- Community / heart icon -->
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 016.364 0L12 7.636l1.318-1.318a4.5 4.5 0 116.364 6.364L12 20.682l-7.682-7.999a4.5 4.5 0 010-6.365z"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 016.364 0L12 7.636l1.318-1.318a4.5 4.5 0 116.364 6.364L12 20.682l-7.682-7.999a4.5 4.5 0 010-6.365z"/></svg>
               </div>
               <div>
                 <p class="font-semibold text-sm text-[#10245F]">Community care</p>
