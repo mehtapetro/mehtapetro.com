@@ -103,6 +103,22 @@ const locations = [
     directionsUrl: 'https://maps.app.goo.gl/uBWSCEKzM2LzDmdZ8',
   },
 ];
+
+const inquiryOptions = locale === 'fr' ? [
+  { value: 'product', label: 'Produit' },
+  { value: 'career', label: 'Carrière' },
+  { value: 'general', label: 'Général' },
+  { value: 'sales', label: 'Ventes' },
+  { value: 'support', label: 'Support' },
+  { value: 'other', label: 'Autre' },
+] : [
+  { value: 'product', label: 'Product' },
+  { value: 'career', label: 'Career' },
+  { value: 'general', label: 'General' },
+  { value: 'sales', label: 'Sales' },
+  { value: 'support', label: 'Support' },
+  { value: 'other', label: 'Other' },
+];
 ---
 
 <section class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
@@ -161,6 +177,25 @@ const locations = [
             countryLabel={copy.countryCode}
             defaultCountryCode="IN"
           />
+
+          <div class="mt-4">
+            <label for="hs-inquiry-type" class="block text-sm font-medium text-[#10245F] mb-2">
+              {locale === 'fr' ? 'Type de demande' : 'Inquiry type'}
+            </label>
+            <select
+              id="hs-inquiry-type"
+              name="inquiryType"
+              class="block w-full rounded-lg border border-[#DCE8FF] bg-white px-4 py-2 text-sm text-[#10245F] focus-visible:ring-3 focus-visible:ring-[#1E3AFF]/30"
+            >
+              <option value="" disabled selected>
+                {locale === 'fr' ? 'Sélectionner une option' : 'Select an option'}
+              </option>
+              {inquiryOptions.map(opt => (
+                <option value={opt.value}>{opt.label}</option>
+              ))}
+            </select>
+          </div>
+
           <TextAreaInput id="hs-about-contacts" label={copy.details} name="message" />
 
           <div class="pt-2">
