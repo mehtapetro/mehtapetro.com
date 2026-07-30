@@ -688,4 +688,4 @@ If you're interested in helping, you can contribute in several ways:
 
 This project is released under the MIT License. Please read the [LICENSE](https://mehtapetro.com) file for more details.
 
-**Note:** This website template has no affiliation with the companies displayed. Logos are used for demonstration purposes only and should be replaced in customized versions.
+**Note:** This website template has no affiliation with the companies displayed. Logos are used for demonstration purposes only and should be replaced in customized versions. HELLO bali
