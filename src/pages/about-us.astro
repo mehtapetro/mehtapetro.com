@@ -66,7 +66,7 @@ const ogTitle = 'About Us | Mehta Petro';
     <div
       class="rounded-[2rem] border border-[#DCE8FF] bg-white p-6 shadow-[0_24px_60px_-46px_rgba(16,36,95,0.28)] sm:p-8 lg:p-10"
     >
-      <div class="grid items-start gap-8 lg:grid-cols-2 lg:items-center">
+      <div>
         <div>
           <p class="text-sm font-semibold tracking-[0.18em] text-[#1E3AFF] uppercase">Who We Are</p>
           <h2 class="mt-3 text-3xl font-bold text-[#10245F] md:text-4xl">A science-led industrial company with strong values and long-term vision.</h2>
@@ -92,119 +92,9 @@ const ogTitle = 'About Us | Mehta Petro';
 
           <p class="mt-4 text-base leading-7 text-[#5B6785]">Our continued focus on responsible operations and customer service helps us deliver value while growing sustainably.</p>
 
-          <!-- Blended sustainability information (now inline to match Who We Are) -->
-          <div class="mt-6">
-            <h3 class="text-sm font-semibold text-[#10245F]">Sustainability highlights</h3>
-            <p class="mt-2 text-sm text-[#5B6785]">We integrate sustainable practices across operations to reduce impact and support communities.</p>
-            <ul class="mt-3 grid gap-2 text-sm text-[#5B6785] sm:grid-cols-2">
-              <li>• Climate action: reducing greenhouse gas emissions</li>
-              <li>• Air quality: controlling and monitoring emissions</li>
-              <li>• Energy efficiency: optimising energy use in plants</li>
-              <li>• Waste reduction: minimise, reuse, and recycle materials</li>
-              <li>• Responsible sourcing: ethical supplier partnerships</li>
-              <li>• Community care: supporting local wellbeing initiatives</li>
-            </ul>
-          </div>
         </div>
 
-        <div class="flex justify-center lg:justify-end items-center">
-          <!-- EcoVadis badge moved to the Sustainability section below -->
-        </div>
       </div>
-
-      <!-- New Sustainability section: refined layout, larger icons, improved spacing -->
-      <section class="mt-8">
-        <div class="mx-auto max-w-4xl rounded-2xl bg-white p-6 ring-1 ring-[#E8F6EE] shadow-[0_12px_30px_-18px_rgba(16,36,95,0.06)]">
-          <div class="flex items-start justify-between gap-6">
-            <div>
-              <h3 class="text-lg font-semibold text-[#10245F]">Sustainability</h3>
-              <p class="mt-2 text-sm text-[#5B6785] max-w-prose">We focus on practical, measurable actions that reduce environmental impact while supporting local communities.</p>
-            </div>
-
-            <div class="flex-shrink-0 hidden sm:block">
-              <a href="/about-us#ecovadis" class="inline-flex items-center gap-3">
-                <div class="rounded-full bg-emerald-50 p-3 shadow-sm ring-1 ring-emerald-100">
-                  <img src={ecovadisUrl} alt="EcoVadis badge" class="h-18 w-auto sm:h-16 md:h-20 lg:h-24 object-contain" loading="lazy" />
-                </div>
-              </a>
-            </div>
-          </div>
-
-          <div class="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            <!-- Card -->
-            <div class="flex gap-4 items-start p-6 rounded-lg hover:bg-emerald-50 transition-shadow border border-transparent hover:border-emerald-100">
-              <div class="text-emerald-600 mt-1">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 3c0 2.5-2 5-5 7s-7 5-7 9c4 0 6-3 9-6s4-3 7-6 3-3 3-3-3-1-7-1z"/></svg>
-              </div>
-              <div>
-                <p class="font-semibold text-sm text-[#10245F]">Climate action</p>
-                <p class="mt-1 text-sm text-[#5B6785]">Practical steps to lower greenhouse gas emissions across our operations.</p>
-              </div>
-            </div>
-
-            <!-- Card -->
-            <div class="flex gap-4 items-start p-6 rounded-lg hover:bg-emerald-50 transition-shadow border border-transparent hover:border-emerald-100">
-              <div class="text-emerald-600 mt-1">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-              </div>
-              <div>
-                <p class="font-semibold text-sm text-[#10245F]">Energy efficiency</p>
-                <p class="mt-1 text-sm text-[#5B6785]">Optimising energy use and investing in efficient equipment.</p>
-              </div>
-            </div>
-
-            <!-- Card -->
-            <div class="flex gap-4 items-start p-6 rounded-lg hover:bg-emerald-50 transition-shadow border border-transparent hover:border-emerald-100">
-              <div class="text-emerald-600 mt-1">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8h13M7 12h9M5 16h11"/></svg>
-              </div>
-              <div>
-                <p class="font-semibold text-sm text-[#10245F]">Air emissions</p>
-                <p class="mt-1 text-sm text-[#5B6785]">Monitoring and controlling emissions to protect air quality.</p>
-              </div>
-            </div>
-
-            <!-- Card -->
-            <div class="flex gap-4 items-start p-6 rounded-lg hover:bg-emerald-50 transition-shadow border border-transparent hover:border-emerald-100">
-              <div class="text-emerald-600 mt-1">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 17l3-3 3 3V6l6 6 3-3 3 3"/></svg>
-              </div>
-              <div>
-                <p class="font-semibold text-sm text-[#10245F]">Waste & recycling</p>
-                <p class="mt-1 text-sm text-[#5B6785]">Reducing waste and improving reuse and recycling where possible.</p>
-              </div>
-            </div>
-
-            <!-- Card -->
-            <div class="flex gap-4 items-start p-6 rounded-lg hover:bg-emerald-50 transition-shadow border border-transparent hover:border-emerald-100">
-              <div class="text-emerald-600 mt-1">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 2s5 4 5 8a5 5 0 11-10 0c0-4 5-8 5-8z"/></svg>
-              </div>
-              <div>
-                <p class="font-semibold text-sm text-[#10245F]">Water management</p>
-                <p class="mt-1 text-sm text-[#5B6785]">Careful use and treatment of water to protect local resources.</p>
-              </div>
-            </div>
-
-            <!-- Card -->
-            <div class="flex gap-4 items-start p-6 rounded-lg hover:bg-emerald-50 transition-shadow border border-transparent hover:border-emerald-100">
-              <div class="text-emerald-600 mt-1">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 016.364 0L12 7.636l1.318-1.318a4.5 4.5 0 116.364 6.364L12 20.682l-7.682-7.999a4.5 4.5 0 010-6.365z"/></svg>
-              </div>
-              <div>
-                <p class="font-semibold text-sm text-[#10245F]">Community care</p>
-                <p class="mt-1 text-sm text-[#5B6785]">Supporting local wellbeing and safety initiatives.</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="mt-6 text-right">
-            <a href="/about-us#learn-more" class="inline-flex items-center gap-2 text-sm text-emerald-600 font-semibold">Learn more
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5l7 7-7 7"/></svg>
-            </a>
-          </div>
-        </div>
-      </section>
 
       <div class="mt-10 grid gap-4 lg:grid-cols-3">
         <div
@@ -247,6 +137,48 @@ const ogTitle = 'About Us | Mehta Petro';
     </div>
   </section>
 
+
+  <section class="mx-auto max-w-[85rem] px-4 py-8 sm:px-6 lg:px-8 lg:py-12">
+    <div class="rounded-[2rem] border border-[#D6F0DF] bg-white p-6 shadow-[0_20px_55px_-46px_rgba(16,90,45,0.35)] sm:p-8 lg:p-10">
+      <div class="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+        <div class="max-w-2xl">
+          <p class="text-sm font-semibold tracking-[0.14em] text-emerald-700 uppercase">Sustainability</p>
+          <h2 class="mt-2 text-2xl font-bold text-[#10245F] md:text-3xl">Responsible growth with measurable environmental action.</h2>
+          <p class="mt-3 text-sm leading-7 text-[#5B6785]">We improve operations through practical sustainability actions across climate, energy, water, and waste management.</p>
+        </div>
+        <div class="flex-shrink-0">
+          <img src={ecovadisUrl} alt="EcoVadis badge" class="h-16 w-auto sm:h-20 lg:h-24 object-contain" loading="lazy" />
+        </div>
+      </div>
+
+      <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div class="rounded-xl border border-emerald-100 bg-[#F7FFFA] p-5">
+          <p class="text-sm font-semibold text-[#10245F]">Climate action</p>
+          <p class="mt-2 text-sm text-[#5B6785]">Reducing greenhouse gas emissions with focused process improvements.</p>
+        </div>
+        <div class="rounded-xl border border-emerald-100 bg-[#F7FFFA] p-5">
+          <p class="text-sm font-semibold text-[#10245F]">Energy efficiency</p>
+          <p class="mt-2 text-sm text-[#5B6785]">Using efficient systems to lower energy intensity in operations.</p>
+        </div>
+        <div class="rounded-xl border border-emerald-100 bg-[#F7FFFA] p-5">
+          <p class="text-sm font-semibold text-[#10245F]">Air emissions</p>
+          <p class="mt-2 text-sm text-[#5B6785]">Monitoring and controlling emissions to support cleaner air.</p>
+        </div>
+        <div class="rounded-xl border border-emerald-100 bg-[#F7FFFA] p-5">
+          <p class="text-sm font-semibold text-[#10245F]">Waste management</p>
+          <p class="mt-2 text-sm text-[#5B6785]">Minimising waste through reduction, reuse, and recycling practices.</p>
+        </div>
+        <div class="rounded-xl border border-emerald-100 bg-[#F7FFFA] p-5">
+          <p class="text-sm font-semibold text-[#10245F]">Water stewardship</p>
+          <p class="mt-2 text-sm text-[#5B6785]">Protecting water resources through responsible usage and treatment.</p>
+        </div>
+        <div class="rounded-xl border border-emerald-100 bg-[#F7FFFA] p-5">
+          <p class="text-sm font-semibold text-[#10245F]">Community care</p>
+          <p class="mt-2 text-sm text-[#5B6785]">Supporting local wellbeing and safe industrial development.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <section class="mx-auto max-w-[85rem] px-4 py-8 sm:px-6 lg:px-8 lg:py-12">
     <div
@@ -295,37 +227,5 @@ const ogTitle = 'About Us | Mehta Petro';
       </div>
     </div>
 
-    <style>
-      /* Prevent flash-of-unstyled-content by keeping reveal elements hidden via CSS
-         and let JS only toggle the 'reveal' class to make them visible */
-      [data-reveal].reveal-target {
-        opacity: 0;
-        transform: translateY(24px);
-      }
-      [data-reveal].reveal-target.reveal {
-        opacity: 1;
-        transform: translateY(0);
-        transition: opacity 700ms ease-out, transform 700ms ease-out;
-      }
-    </style>
-
-    <script>
-      (function(){
-        const reveals = document.querySelectorAll('[data-reveal]');
-        if (!('IntersectionObserver' in window)) {
-          reveals.forEach(el => el.classList.add('reveal'));
-          return;
-        }
-        const io = new IntersectionObserver((entries) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              (entry.target as HTMLElement).classList.add('reveal');
-              io.unobserve(entry.target);
-            }
-          });
-        }, { threshold: 0.15 });
-        reveals.forEach(el => io.observe(el));
-      })();
-    </script>
   </section>
 </MainLayout>
