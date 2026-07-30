@@ -176,7 +176,7 @@ const ogTitle = 'About Us | Mehta Petro';
           reveals.forEach(el => {
             // initial hidden state via inline styles
             el.classList.add('opacity-0','translate-y-6');
-            el.style.transition = 'opacity 700ms ease-out, transform 700ms ease-out';
+            (el as HTMLElement).style.transition = 'opacity 700ms ease-out, transform 700ms ease-out';
             io.observe(el);
           });
         })();
