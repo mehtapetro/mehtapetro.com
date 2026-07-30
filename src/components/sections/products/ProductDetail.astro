@@ -1,6 +1,5 @@
 ---
 import ProductTabBtn from '@components/ui/buttons/ProductTabBtn.astro';
-import PrimaryCTA from '@components/ui/buttons/PrimaryCTA.astro';
 import { Image } from 'astro:assets';
 import type { ProductCatalogItem } from '@data/productCatalog';
 
@@ -20,16 +19,69 @@ const copy =
         overview: 'Description',
         specifications: 'Spécifications',
         blueprints: 'Plans',
+        openInquiry: product.ctaTitle || 'Envoyer une demande',
+        inquiryTitle: 'Envoyer une demande',
+        inquirySubTitle: `Recevez une réponse rapide de notre équipe au sujet de ${product.title}.`,
+        firstName: 'Prénom',
+        lastName: 'Nom',
+        email: 'E-mail',
+        phone: 'Téléphone',
+        inquiryType: 'Type de demande',
+        selectInquiryType: 'Type de demande',
+        message: 'Message',
+        send: 'Envoyer le message',
+        close: 'Fermer',
+        successMessage:
+          'Merci de nous avoir contactés. Notre équipe vous répondra très prochainement.',
+        errorMessage:
+          "Désolé, nous n'avons pas pu envoyer votre message pour le moment. Veuillez réessayer.",
+        sendingMessage: 'Envoi en cours…',
       }
     : {
         back: 'Back to category',
         overview: 'Description',
         specifications: 'Specifications',
         blueprints: 'Blueprints',
+        openInquiry: product.ctaTitle || 'Send inquiry',
+        inquiryTitle: 'Send inquiry',
+        inquirySubTitle: `Get a quick response from our team about ${product.title}.`,
+        firstName: 'First Name',
+        lastName: 'Last Name',
+        email: 'Email',
+        phone: 'Phone Number',
+        inquiryType: 'Inquiry type',
+        selectInquiryType: 'Inquiry type',
+        message: 'Message',
+        send: 'Send Message',
+        close: 'Close',
+        successMessage:
+          'Thank you for contacting us. Our team shall get in touch with you shortly.',
+        errorMessage:
+          'Sorry, we could not send your message right now. Please try again.',
+        sendingMessage: 'Sending your message…',
       };
 
 const categoryHref =
   lang === 'fr' ? `/fr/products/${categorySlug}/` : `/products/${categorySlug}/`;
+const web3FormsAccessKey = '0e6f5e46-f620-429a-ab06-a8e61f81c419';
+const formSource = Astro.url.pathname;
+const inquiryOptions = lang === 'fr'
+  ? [
+      { value: 'product', label: 'Produit' },
+      { value: 'career', label: 'Carrière' },
+      { value: 'general', label: 'Général' },
+      { value: 'sales', label: 'Ventes' },
+      { value: 'support', label: 'Support' },
+      { value: 'other', label: 'Autre' },
+    ]
+  : [
+      { value: 'product', label: 'Product' },
+      { value: 'career', label: 'Career' },
+      { value: 'general', label: 'General' },
+      { value: 'sales', label: 'Sales' },
+      { value: 'support', label: 'Support' },
+      { value: 'other', label: 'Other' },
+    ];
 ---
 
 <div
@@ -112,7 +164,13 @@ const categoryHref =
               {product.longDescriptionSubTitle}
             </p>
             <p class="mt-5">
-              <PrimaryCTA title={product.ctaTitle} url={product.ctaURL} />
+              <button
+                type="button"
+                data-product-inquiry-open
+                class="group inline-flex items-center justify-center gap-x-2 rounded-xl border border-transparent bg-[#1E3AFF] px-5 py-3 text-sm font-bold text-neutral-50 shadow-[0_20px_45px_-25px_rgba(30,58,255,0.95)] ring-[#AFC2FF] transition duration-300 outline-hidden hover:bg-[#1632E0] focus-visible:ring-3 active:bg-[#122AB8] disabled:pointer-events-none disabled:opacity-50 2xl:text-base"
+              >
+                {copy.openInquiry}
+              </button>
             </p>
           </div>
 
@@ -242,6 +300,138 @@ const categoryHref =
         </div>
       </div>
     </div>
+  </div>
+</div>
+
+<div
+  id="product-inquiry-modal"
+  class="fixed inset-0 z-120 hidden items-center justify-center p-4"
+  aria-hidden="true"
+>
+  <button
+    type="button"
+    data-product-inquiry-close
+    class="absolute inset-0 bg-[#10245F]/55 backdrop-blur-[1px]"
+    aria-label={copy.close}
+  ></button>
+  <div class="relative z-10 w-full max-w-2xl rounded-2xl border border-[#DCE8FF] bg-white p-6 shadow-[0_30px_80px_-40px_rgba(16,36,95,0.45)] sm:p-8">
+    <div class="flex items-start justify-between gap-4">
+      <div>
+        <h2 class="text-2xl font-bold text-[#10245F]">{copy.inquiryTitle}</h2>
+        <p class="mt-2 text-sm leading-6 text-[#5B6785]">{copy.inquirySubTitle}</p>
+      </div>
+      <button
+        type="button"
+        data-product-inquiry-close
+        class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-[#DCE8FF] text-[#5B6785] transition duration-300 hover:border-[#BDD1FF] hover:text-[#1E3AFF]"
+        aria-label={copy.close}
+      >
+        ✕
+      </button>
+    </div>
+
+    <form
+      class="mt-6 space-y-4"
+      data-contact-form
+      action="https://api.web3forms.com/submit"
+      method="post"
+      data-success-message={copy.successMessage}
+      data-error-message={copy.errorMessage}
+      data-sending-message={copy.sendingMessage}
+    >
+      <input type="hidden" name="access_key" value={web3FormsAccessKey} />
+      <input type="hidden" name="subject" value="New product enquiry from Mehta Petro website" />
+      <input type="hidden" name="from_name" value="Mehta Petro Product Inquiry" />
+      <input type="hidden" name="source" value={formSource} />
+      <input type="hidden" name="product_name" value={product.title} />
+      <input type="checkbox" name="botcheck" class="hidden" style="display: none;" tabindex="-1" autocomplete="off" />
+
+      <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+        <div>
+          <label for="product-inquiry-first-name" class="sr-only">{copy.firstName}</label>
+          <input
+            id="product-inquiry-first-name"
+            name="name"
+            type="text"
+            required
+            class="block w-full rounded-lg border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm text-neutral-700 placeholder:text-neutral-500 focus:border-neutral-200 focus:ring-3 focus:ring-neutral-400 focus:outline-hidden"
+            placeholder={copy.firstName}
+          />
+        </div>
+        <div>
+          <label for="product-inquiry-last-name" class="sr-only">{copy.lastName}</label>
+          <input
+            id="product-inquiry-last-name"
+            name="lastName"
+            type="text"
+            class="block w-full rounded-lg border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm text-neutral-700 placeholder:text-neutral-500 focus:border-neutral-200 focus:ring-3 focus:ring-neutral-400 focus:outline-hidden"
+            placeholder={copy.lastName}
+          />
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+        <div>
+          <label for="product-inquiry-email" class="sr-only">{copy.email}</label>
+          <input
+            id="product-inquiry-email"
+            name="email"
+            type="email"
+            required
+            class="block w-full rounded-lg border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm text-neutral-700 placeholder:text-neutral-500 focus:border-neutral-200 focus:ring-3 focus:ring-neutral-400 focus:outline-hidden"
+            placeholder={copy.email}
+          />
+        </div>
+        <div>
+          <label for="product-inquiry-phone" class="sr-only">{copy.phone}</label>
+          <input
+            id="product-inquiry-phone"
+            name="phone"
+            type="tel"
+            class="block w-full rounded-lg border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm text-neutral-700 placeholder:text-neutral-500 focus:border-neutral-200 focus:ring-3 focus:ring-neutral-400 focus:outline-hidden"
+            placeholder={copy.phone}
+          />
+        </div>
+      </div>
+
+      <div>
+        <label for="product-inquiry-type" class="sr-only">{copy.inquiryType}</label>
+        <select
+          id="product-inquiry-type"
+          name="inquiryType"
+          required
+          class="block w-full rounded-lg border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm text-neutral-700 focus:border-neutral-200 focus:ring-3 focus:ring-neutral-400 focus:outline-hidden"
+        >
+          <option value="" disabled selected>{copy.selectInquiryType}</option>
+          {inquiryOptions.map(option => (
+            <option value={option.value}>{option.label}</option>
+          ))}
+        </select>
+      </div>
+
+      <div>
+        <label for="product-inquiry-message" class="sr-only">{copy.message}</label>
+        <textarea
+          id="product-inquiry-message"
+          name="message"
+          rows="4"
+          required
+          class="block w-full rounded-lg border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm text-neutral-700 placeholder:text-neutral-500 focus:border-neutral-200 focus:ring-3 focus:ring-neutral-400 focus:outline-hidden"
+          placeholder={copy.message}
+        ></textarea>
+      </div>
+
+      <div class="pt-1">
+        <button
+          type="submit"
+          class="inline-flex items-center justify-center rounded-xl bg-[#1E3AFF] px-5 py-3 text-sm font-bold text-white shadow-[0_20px_45px_-25px_rgba(30,58,255,0.95)] transition duration-300 hover:bg-[#1632E0] active:bg-[#122AB8]"
+        >
+          {copy.send}
+        </button>
+      </div>
+
+      <p class="hidden min-h-[1.5rem] text-sm leading-6" data-form-status aria-live="polite"></p>
+    </form>
   </div>
 </div>
 
@@ -426,5 +616,37 @@ const categoryHref =
       setButtonActive(button);
       switchPanel(nextPanel);
     });
+  });
+
+  const inquiryModal = document.getElementById('product-inquiry-modal');
+  const inquiryOpenButtons = document.querySelectorAll('[data-product-inquiry-open]');
+  const inquiryCloseButtons = document.querySelectorAll('[data-product-inquiry-close]');
+
+  const closeInquiryModal = () => {
+    if (!(inquiryModal instanceof HTMLElement)) return;
+    inquiryModal.classList.add('hidden');
+    inquiryModal.classList.remove('flex');
+    inquiryModal.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('overflow-hidden');
+  };
+
+  const openInquiryModal = () => {
+    if (!(inquiryModal instanceof HTMLElement)) return;
+    inquiryModal.classList.remove('hidden');
+    inquiryModal.classList.add('flex');
+    inquiryModal.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('overflow-hidden');
+  };
+
+  inquiryOpenButtons.forEach(button => {
+    button.addEventListener('click', openInquiryModal);
+  });
+
+  inquiryCloseButtons.forEach(button => {
+    button.addEventListener('click', closeInquiryModal);
+  });
+
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape') closeInquiryModal();
   });
 </script>
