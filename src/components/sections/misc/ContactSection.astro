@@ -201,7 +201,7 @@ const locations = [
                   data-accordion-button
                 >
                   <div class="mt-1 flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-[#DCE8FF] bg-white text-[#1E3AFF] shadow-[0_12px_30px_-24px_rgba(30,58,255,0.45)]">
-                    <Icon name="mapPin" />
+                    <img src="https://cdn.jsdelivr.net/npm/heroicons@2.0.13/20/solid/map-pin.svg" alt="Location" class="h-5 w-5" loading="lazy" />
                   </div>
                   <div class="min-w-0">
                     <p class="text-[0.72rem] font-semibold tracking-[0.16em] text-[#1E3AFF] uppercase">
@@ -214,10 +214,15 @@ const locations = [
                       {location.content}
                     </p>
                   </div>
-                  <span class="ml-auto inline-flex h-8 w-8 items-center justify-center rounded-full bg-white text-[#5B6785] transition-transform" aria-hidden>+</span>
+
+                  <span class="ml-auto inline-flex h-8 w-8 items-center justify-center rounded-full bg-white text-[#5B6785] transition-transform" aria-hidden>
+                    <svg class="h-4 w-4" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+                      <path d="M6 8l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                  </span>
                 </button>
 
-                <div id={`loc-panel-${i}`} class="max-h-0 overflow-hidden transition-[max-height] duration-300 px-5" data-accordion-panel hidden>
+                <div id={`loc-panel-${i}`} class="max-h-0 overflow-hidden px-5" data-accordion-panel hidden style="opacity:0;padding-top:0;padding-bottom:0;transition:max-height 350ms cubic-bezier(.2,.8,.2,1),opacity 250ms ease,padding 250ms ease;">
                   <p class="mt-3 pb-4 text-sm leading-7 text-[#5B6785]">
                     {location.address}
                   </p>
@@ -252,11 +257,24 @@ const locations = [
                   const panelId = b.getAttribute('aria-controls')!;
                   const panel = document.getElementById(panelId) as HTMLElement | null;
                   if (panel) {
-                    panel.style.maxHeight = '';
-                    panel.hidden = true;
+                    // start collapse animation
+                    // ensure maxHeight is current height so transition can animate to 0
+                    panel.style.maxHeight = panel.scrollHeight + 'px';
+                    // trigger layout then collapse
+                    requestAnimationFrame(() => {
+                      panel.style.maxHeight = '0px';
+                      (panel.style as any).opacity = '0';
+                      panel.style.paddingTop = '0px';
+                      panel.style.paddingBottom = '0px';
+                      // remove after transition
+                      panel.addEventListener('transitionend', function handler() {
+                        panel.hidden = true;
+                        panel.removeEventListener('transitionend', handler);
+                      });
+                    });
                   }
                   const icon = b.querySelector('[aria-hidden]') as HTMLElement | null;
-                  if (icon) (icon.style as any).transform = '';
+                  if (icon) (icon.style as any).transform = 'rotate(0deg)';
                 });
 
                 // If it was previously closed, open it
@@ -266,13 +284,21 @@ const locations = [
                   const panel = document.getElementById(panelId) as HTMLElement | null;
                   if (panel) {
                     panel.hidden = false;
-                    // allow the browser to compute layout so scrollHeight is accurate
+                    // set starting styles for smooth animation
+                    panel.style.maxHeight = '0px';
+                    (panel.style as any).opacity = '0';
+                    panel.style.paddingTop = '0px';
+                    panel.style.paddingBottom = '0px';
+                    // allow the browser to compute layout so scrollHeight is accurate and then expand
                     requestAnimationFrame(() => {
                       panel.style.maxHeight = panel.scrollHeight + 'px';
+                      (panel.style as any).opacity = '1';
+                      panel.style.paddingTop = '0.75rem';
+                      panel.style.paddingBottom = '1.25rem';
                     });
                   }
                   const icon = btn.querySelector('[aria-hidden]') as HTMLElement | null;
-                  if (icon) (icon.style as any).transform = 'rotate(45deg)';
+                  if (icon) (icon.style as any).transform = 'rotate(180deg)';
                 }
               });
 
