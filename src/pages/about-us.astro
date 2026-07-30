@@ -108,11 +108,102 @@ const ogTitle = 'About Us | Mehta Petro';
         </div>
 
         <div class="flex justify-center lg:justify-end items-center">
-          <div data-reveal class="reveal-target flex items-center justify-center rounded-full bg-gradient-to-br from-[#EFF6FF] to-transparent p-6">
-            <img src={ecovadisUrl} alt="EcoVadis badge" class="h-40 sm:h-48 md:h-56 lg:h-64 w-auto object-contain" loading="lazy" />
-          </div>
+          <!-- EcoVadis badge moved to the Sustainability section below -->
         </div>
       </div>
+
+      <!-- New Sustainability section: concise, scannable cards with green icons -->
+      <section class="mt-8">
+        <div class="mx-auto max-w-4xl rounded-2xl bg-white p-6 ring-1 ring-[#E8F6EE] shadow-[0_12px_30px_-18px_rgba(16,36,95,0.06)]">
+          <div class="flex items-start justify-between gap-6">
+            <div>
+              <h3 class="text-lg font-semibold text-[#10245F]">Sustainability</h3>
+              <p class="mt-2 text-sm text-[#5B6785] max-w-prose">Our approach focuses on measurable improvements that reduce environmental impact and support communities.</p>
+            </div>
+            <div class="flex-shrink-0 hidden sm:block">
+              <a href="/about-us#ecovadis" class="inline-flex items-center gap-3">
+                <div class="rounded-full bg-emerald-50 p-3 shadow-sm">
+                  <img src={ecovadisUrl} alt="EcoVadis badge" class="h-14 w-auto" loading="lazy" />
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <div class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            <div class="flex gap-4 items-start p-4 rounded-lg hover:bg-[#F6FFFA] transition">
+              <div class="text-emerald-600 mt-1">
+                <!-- Leaf icon -->
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 3c0 2.5-2 5-5 7s-7 5-7 9c4 0 6-3 9-6s4-3 7-6 3-3 3-3-3-1-7-1z"/></svg>
+              </div>
+              <div>
+                <p class="font-semibold text-sm text-[#10245F]">Climate action</p>
+                <p class="mt-1 text-sm text-[#5B6785]">Practical steps to lower greenhouse gas emissions across our operations.</p>
+              </div>
+            </div>
+
+            <div class="flex gap-4 items-start p-4 rounded-lg hover:bg-[#F6FFFA] transition">
+              <div class="text-emerald-600 mt-1">
+                <!-- Energy / bolt icon -->
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+              </div>
+              <div>
+                <p class="font-semibold text-sm text-[#10245F]">Energy efficiency</p>
+                <p class="mt-1 text-sm text-[#5B6785]">Optimising energy use and investing in efficient equipment.</p>
+              </div>
+            </div>
+
+            <div class="flex gap-4 items-start p-4 rounded-lg hover:bg-[#F6FFFA] transition">
+              <div class="text-emerald-600 mt-1">
+                <!-- Air icon -->
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8h13M7 12h9M5 16h11"/></svg>
+              </div>
+              <div>
+                <p class="font-semibold text-sm text-[#10245F]">Air emissions</p>
+                <p class="mt-1 text-sm text-[#5B6785]">Monitoring and controlling emissions to protect air quality.</p>
+              </div>
+            </div>
+
+            <div class="flex gap-4 items-start p-4 rounded-lg hover:bg-[#F6FFFA] transition">
+              <div class="text-emerald-600 mt-1">
+                <!-- Recycle icon -->
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 17l3-3 3 3V6l6 6 3-3 3 3"/></svg>
+              </div>
+              <div>
+                <p class="font-semibold text-sm text-[#10245F]">Waste & recycling</p>
+                <p class="mt-1 text-sm text-[#5B6785]">Reducing waste and improving reuse and recycling where possible.</p>
+              </div>
+            </div>
+
+            <div class="flex gap-4 items-start p-4 rounded-lg hover:bg-[#F6FFFA] transition">
+              <div class="text-emerald-600 mt-1">
+                <!-- Water droplet icon -->
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 2s5 4 5 8a5 5 0 11-10 0c0-4 5-8 5-8z"/></svg>
+              </div>
+              <div>
+                <p class="font-semibold text-sm text-[#10245F]">Water management</p>
+                <p class="mt-1 text-sm text-[#5B6785]">Careful use and treatment of water to protect local resources.</p>
+              </div>
+            </div>
+
+            <div class="flex gap-4 items-start p-4 rounded-lg hover:bg-[#F6FFFA] transition">
+              <div class="text-emerald-600 mt-1">
+                <!-- Community / heart icon -->
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 016.364 0L12 7.636l1.318-1.318a4.5 4.5 0 116.364 6.364L12 20.682l-7.682-7.999a4.5 4.5 0 010-6.365z"/></svg>
+              </div>
+              <div>
+                <p class="font-semibold text-sm text-[#10245F]">Community care</p>
+                <p class="mt-1 text-sm text-[#5B6785]">Supporting local wellbeing and safety initiatives.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-6 text-right">
+            <a href="/about-us#learn-more" class="inline-flex items-center gap-2 text-sm text-emerald-600 font-semibold">Learn more
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+        </div>
+      </section>
 
       <div class="mt-10 grid gap-4 lg:grid-cols-3">
         <div
