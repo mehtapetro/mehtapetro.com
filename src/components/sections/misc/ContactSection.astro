@@ -201,7 +201,10 @@ const locations = [
                   data-accordion-button
                 >
                   <div class="mt-1 flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-[#DCE8FF] bg-white text-[#1E3AFF] shadow-[0_12px_30px_-24px_rgba(30,58,255,0.45)]">
-                    <img src="https://cdn.jsdelivr.net/npm/heroicons@2.0.13/20/solid/map-pin.svg" alt="Location" class="h-5 w-5" loading="lazy" />
+                    <!-- Google 'place' style pin (inline SVG) -->
+                    <svg class="h-5 w-5 text-[#1E3AFF]" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+                      <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.999 2.5 2.5 0 0 1 12 11.5z" />
+                    </svg>
                   </div>
                   <div class="min-w-0">
                     <p class="text-[0.72rem] font-semibold tracking-[0.16em] text-[#1E3AFF] uppercase">
@@ -216,7 +219,7 @@ const locations = [
                   </div>
 
                   <span class="ml-auto inline-flex h-8 w-8 items-center justify-center rounded-full bg-white text-[#5B6785] transition-transform" aria-hidden>
-                    <svg class="h-4 w-4" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+                    <svg data-chevron class="h-4 w-4 transition-transform" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
                       <path d="M6 8l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                     </svg>
                   </span>
@@ -247,80 +250,99 @@ const locations = [
             const buttons = Array.from(document.querySelectorAll('[data-accordion-button]')) as HTMLButtonElement[];
             if (!buttons.length) return;
 
-            buttons.forEach((btn) => {
-              btn.addEventListener('click', () => {
-                const expanded = btn.getAttribute('aria-expanded') === 'true';
+            function closePanel(panel: HTMLElement, chevron: HTMLElement | null) {
+              // prepare for collapse animation
+              panel.style.maxHeight = panel.scrollHeight + 'px';
+              requestAnimationFrame(() => {
+                panel.style.maxHeight = '0px';
+                (panel.style as any).opacity = '0';
+                panel.style.paddingTop = '0px';
+                panel.style.paddingBottom = '0px';
+              });
 
-                // Close all panels
-                buttons.forEach((b) => {
-                  b.setAttribute('aria-expanded', 'false');
-                  const panelId = b.getAttribute('aria-controls')!;
-                  const panel = document.getElementById(panelId) as HTMLElement | null;
-                  if (panel) {
-                    // start collapse animation
-                    // ensure maxHeight is current height so transition can animate to 0
-                    panel.style.maxHeight = panel.scrollHeight + 'px';
-                    // trigger layout then collapse
-                    requestAnimationFrame(() => {
-                      panel.style.maxHeight = '0px';
-                      (panel.style as any).opacity = '0';
-                      panel.style.paddingTop = '0px';
-                      panel.style.paddingBottom = '0px';
-                      // remove after transition
-                      panel.addEventListener('transitionend', function handler() {
-                        panel.hidden = true;
-                        panel.removeEventListener('transitionend', handler);
-                      });
-                    });
+              // hide after transition completes
+              panel.addEventListener('transitionend', function handler(e) {
+                // ensure the event is for max-height (some browsers report other properties)
+                if ((e as TransitionEvent).propertyName === 'max-height' || (e as TransitionEvent).propertyName === 'opacity') {
+                  panel.hidden = true;
+                  panel.removeEventListener('transitionend', handler);
+                }
+              }, { once: true });
+
+              if (chevron) (chevron.style as any).transform = 'rotate(0deg)';
+              panel.setAttribute('data-open', 'false');
+            }
+
+            function openPanel(panel: HTMLElement, chevron: HTMLElement | null) {
+              panel.hidden = false;
+              // reset to collapsed state then expand
+              panel.style.maxHeight = '0px';
+              (panel.style as any).opacity = '0';
+              panel.style.paddingTop = '0px';
+              panel.style.paddingBottom = '0px';
+
+              requestAnimationFrame(() => {
+                panel.style.maxHeight = panel.scrollHeight + 'px';
+                (panel.style as any).opacity = '1';
+                panel.style.paddingTop = '0.75rem';
+                panel.style.paddingBottom = '1.25rem';
+              });
+
+              if (chevron) (chevron.style as any).transform = 'rotate(180deg)';
+              panel.setAttribute('data-open', 'true');
+            }
+
+            buttons.forEach((btn) => {
+              const panelId = btn.getAttribute('aria-controls')!;
+              const panel = document.getElementById(panelId) as HTMLElement | null;
+              const chevron = btn.querySelector('[data-chevron]') as HTMLElement | null;
+
+              btn.addEventListener('click', (event) => {
+                event.preventDefault();
+                const isExpanded = btn.getAttribute('aria-expanded') === 'true';
+
+                // Close other panels
+                buttons.forEach((otherBtn) => {
+                  if (otherBtn === btn) return;
+                  otherBtn.setAttribute('aria-expanded', 'false');
+                  const otherPanelId = otherBtn.getAttribute('aria-controls')!;
+                  const otherPanel = document.getElementById(otherPanelId) as HTMLElement | null;
+                  const otherChevron = otherBtn.querySelector('[data-chevron]') as HTMLElement | null;
+                  if (otherPanel && otherPanel.getAttribute('data-open') === 'true') {
+                    closePanel(otherPanel, otherChevron);
                   }
-                  const icon = b.querySelector('[aria-hidden]') as HTMLElement | null;
-                  if (icon) (icon.style as any).transform = 'rotate(0deg)';
                 });
 
-                // If it was previously closed, open it
-                if (!expanded) {
-                  btn.setAttribute('aria-expanded', 'true');
-                  const panelId = btn.getAttribute('aria-controls')!;
-                  const panel = document.getElementById(panelId) as HTMLElement | null;
-                  if (panel) {
-                    panel.hidden = false;
-                    // set starting styles for smooth animation
-                    panel.style.maxHeight = '0px';
-                    (panel.style as any).opacity = '0';
-                    panel.style.paddingTop = '0px';
-                    panel.style.paddingBottom = '0px';
-                    // allow the browser to compute layout so scrollHeight is accurate and then expand
-                    requestAnimationFrame(() => {
-                      panel.style.maxHeight = panel.scrollHeight + 'px';
-                      (panel.style as any).opacity = '1';
-                      panel.style.paddingTop = '0.75rem';
-                      panel.style.paddingBottom = '1.25rem';
-                    });
+                if (panel) {
+                  if (isExpanded) {
+                    btn.setAttribute('aria-expanded', 'false');
+                    closePanel(panel, chevron);
+                  } else {
+                    btn.setAttribute('aria-expanded', 'true');
+                    openPanel(panel, chevron);
                   }
-                  const icon = btn.querySelector('[aria-hidden]') as HTMLElement | null;
-                  if (icon) (icon.style as any).transform = 'rotate(180deg)';
                 }
               });
 
-              // Allow keyboard activation with Enter/Space
+              // keyboard
               btn.addEventListener('keydown', (e: KeyboardEvent) => {
                 if (e.key === 'Enter' || e.key === ' ') {
                   e.preventDefault();
-                  (btn as HTMLButtonElement).click();
+                  btn.click();
                 }
               });
-            });
 
-            // Ensure panels are collapsed on page load
-            window.addEventListener('load', () => {
-              buttons.forEach((b) => {
-                const panelId = b.getAttribute('aria-controls')!;
-                const panel = document.getElementById(panelId) as HTMLElement | null;
-                if (panel) {
-                  panel.style.maxHeight = '';
-                  panel.hidden = true;
-                }
-              });
+              // initialize closed
+              if (panel) {
+                panel.hidden = true;
+                panel.style.maxHeight = '0px';
+                (panel.style as any).opacity = '0';
+                panel.style.paddingTop = '0px';
+                panel.style.paddingBottom = '0px';
+                panel.setAttribute('data-open', 'false');
+                // set same transition as inline style to be safe
+                panel.style.transition = 'max-height 350ms cubic-bezier(.2,.8,.2,1), opacity 250ms ease, padding 250ms ease';
+              }
             });
           })();
         </script>
