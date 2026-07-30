@@ -239,30 +239,31 @@ const locations = [
 
         <script>
           (function () {
-            const buttons = Array.from(document.querySelectorAll('[data-accordion-button]'));
+            const buttons = Array.from(document.querySelectorAll('[data-accordion-button]')) as HTMLButtonElement[];
             if (!buttons.length) return;
 
-            buttons.forEach(btn => {
+            buttons.forEach((btn) => {
               btn.addEventListener('click', () => {
                 const expanded = btn.getAttribute('aria-expanded') === 'true';
 
                 // Close all panels
-                buttons.forEach(b => {
+                buttons.forEach((b) => {
                   b.setAttribute('aria-expanded', 'false');
-                  const panelId = b.getAttribute('aria-controls');
-                  const panel = document.getElementById(panelId);
+                  const panelId = b.getAttribute('aria-controls')!;
+                  const panel = document.getElementById(panelId) as HTMLElement | null;
                   if (panel) {
-                    panel.style.maxHeight = null;
+                    panel.style.maxHeight = '';
                     panel.hidden = true;
                   }
-                  const icon = b.querySelector('[aria-hidden]');
-                  if (icon) icon.style.transform = '';
+                  const icon = b.querySelector('[aria-hidden]') as HTMLElement | null;
+                  if (icon) (icon.style as any).transform = '';
                 });
 
                 // If it was previously closed, open it
                 if (!expanded) {
                   btn.setAttribute('aria-expanded', 'true');
-                  const panel = document.getElementById(btn.getAttribute('aria-controls'));
+                  const panelId = btn.getAttribute('aria-controls')!;
+                  const panel = document.getElementById(panelId) as HTMLElement | null;
                   if (panel) {
                     panel.hidden = false;
                     // allow the browser to compute layout so scrollHeight is accurate
@@ -270,26 +271,27 @@ const locations = [
                       panel.style.maxHeight = panel.scrollHeight + 'px';
                     });
                   }
-                  const icon = btn.querySelector('[aria-hidden]');
-                  if (icon) icon.style.transform = 'rotate(45deg)';
+                  const icon = btn.querySelector('[aria-hidden]') as HTMLElement | null;
+                  if (icon) (icon.style as any).transform = 'rotate(45deg)';
                 }
               });
 
               // Allow keyboard activation with Enter/Space
-              btn.addEventListener('keydown', (e) => {
+              btn.addEventListener('keydown', (e: KeyboardEvent) => {
                 if (e.key === 'Enter' || e.key === ' ') {
                   e.preventDefault();
-                  btn.click();
+                  (btn as HTMLButtonElement).click();
                 }
               });
             });
 
             // Ensure panels are collapsed on page load
             window.addEventListener('load', () => {
-              buttons.forEach(b => {
-                const panel = document.getElementById(b.getAttribute('aria-controls'));
+              buttons.forEach((b) => {
+                const panelId = b.getAttribute('aria-controls')!;
+                const panel = document.getElementById(panelId) as HTMLElement | null;
                 if (panel) {
-                  panel.style.maxHeight = null;
+                  panel.style.maxHeight = '';
                   panel.hidden = true;
                 }
               });
