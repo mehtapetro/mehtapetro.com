@@ -179,16 +179,14 @@ const inquiryOptions = locale === 'fr' ? [
           />
 
           <div class="mt-4">
-            <label for="hs-inquiry-type" class="block text-sm font-medium text-[#10245F] mb-2">
-              {locale === 'fr' ? 'Type de demande' : 'Inquiry type'}
-            </label>
+            <label for="hs-inquiry-type" class="sr-only">{locale === 'fr' ? 'Type de demande' : 'Inquiry type'}</label>
             <select
               id="hs-inquiry-type"
               name="inquiryType"
-              class="block w-full rounded-lg border border-[#DCE8FF] bg-white px-4 py-2 text-sm text-[#10245F] focus-visible:ring-3 focus-visible:ring-[#1E3AFF]/30"
+              class="block w-full rounded-lg border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm text-neutral-700 placeholder:text-neutral-500 focus:border-neutral-200 focus:ring-3 focus:ring-neutral-400 focus:outline-hidden disabled:pointer-events-none disabled:opacity-50"
             >
               <option value="" disabled selected>
-                {locale === 'fr' ? 'Sélectionner une option' : 'Select an option'}
+                {locale === 'fr' ? 'Type de demande' : 'Inquiry type'}
               </option>
               {inquiryOptions.map(opt => (
                 <option value={opt.value}>{opt.label}</option>
