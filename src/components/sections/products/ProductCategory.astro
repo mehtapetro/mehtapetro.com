@@ -3,6 +3,7 @@ import { Image } from 'astro:assets';
 import SubProductCard from '@components/ui/cards/SubProductCard.astro';
 import type { CollectionEntry } from 'astro:content';
 import type { ProductCatalogItem } from '@data/productCatalog';
+import PhoneInput from '@components/ui/forms/input/PhoneInput.astro';
 
 const { category, items, lang = 'en' } = Astro.props;
 
@@ -25,6 +26,7 @@ const copy =
         lastName: 'Nom',
         email: 'E-mail',
         phone: 'Téléphone',
+        countryCode: 'Indicatif pays',
         inquiryType: 'Type de demande',
         message: 'Message',
         send: 'Envoyer le message',
@@ -46,6 +48,7 @@ const copy =
         lastName: 'Last Name',
         email: 'Email',
         phone: 'Phone Number',
+        countryCode: 'Country Code',
         inquiryType: 'Inquiry type',
         message: 'Message',
         send: 'Send Message',
@@ -179,7 +182,7 @@ const inquiryOptions = lang === 'fr'
 
       <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <input
-          name="name"
+          name="firstName"
           type="text"
           required
           class="block w-full rounded-lg border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm text-neutral-700 placeholder:text-neutral-500 focus:border-neutral-200 focus:ring-3 focus:ring-neutral-400 focus:outline-hidden"
@@ -193,7 +196,7 @@ const inquiryOptions = lang === 'fr'
         />
       </div>
 
-      <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+      <div class="grid grid-cols-1 gap-4">
         <input
           name="email"
           type="email"
@@ -201,13 +204,14 @@ const inquiryOptions = lang === 'fr'
           class="block w-full rounded-lg border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm text-neutral-700 placeholder:text-neutral-500 focus:border-neutral-200 focus:ring-3 focus:ring-neutral-400 focus:outline-hidden"
           placeholder={copy.email}
         />
-        <input
-          name="phone"
-          type="tel"
-          class="block w-full rounded-lg border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm text-neutral-700 placeholder:text-neutral-500 focus:border-neutral-200 focus:ring-3 focus:ring-neutral-400 focus:outline-hidden"
-          placeholder={copy.phone}
-        />
       </div>
+      <PhoneInput
+        id="category-inquiry-phone"
+        countryId="category-inquiry-country-code"
+        label={copy.phone}
+        countryLabel={copy.countryCode}
+        defaultCountryCode="IN"
+      />
 
       <select
         name="inquiryType"

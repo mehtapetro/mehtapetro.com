@@ -2,6 +2,7 @@
 import ProductTabBtn from '@components/ui/buttons/ProductTabBtn.astro';
 import { Image } from 'astro:assets';
 import type { ProductCatalogItem } from '@data/productCatalog';
+import PhoneInput from '@components/ui/forms/input/PhoneInput.astro';
 
 interface Props {
   categoryTitle: string;
@@ -26,6 +27,7 @@ const copy =
         lastName: 'Nom',
         email: 'E-mail',
         phone: 'Téléphone',
+        countryCode: 'Indicatif pays',
         inquiryType: 'Type de demande',
         selectInquiryType: 'Type de demande',
         message: 'Message',
@@ -49,6 +51,7 @@ const copy =
         lastName: 'Last Name',
         email: 'Email',
         phone: 'Phone Number',
+        countryCode: 'Country Code',
         inquiryType: 'Inquiry type',
         selectInquiryType: 'Inquiry type',
         message: 'Message',
@@ -351,7 +354,7 @@ const inquiryOptions = lang === 'fr'
           <label for="product-inquiry-first-name" class="sr-only">{copy.firstName}</label>
           <input
             id="product-inquiry-first-name"
-            name="name"
+            name="firstName"
             type="text"
             required
             class="block w-full rounded-lg border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm text-neutral-700 placeholder:text-neutral-500 focus:border-neutral-200 focus:ring-3 focus:ring-neutral-400 focus:outline-hidden"
@@ -370,7 +373,7 @@ const inquiryOptions = lang === 'fr'
         </div>
       </div>
 
-      <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+      <div class="grid grid-cols-1 gap-4">
         <div>
           <label for="product-inquiry-email" class="sr-only">{copy.email}</label>
           <input
@@ -382,17 +385,14 @@ const inquiryOptions = lang === 'fr'
             placeholder={copy.email}
           />
         </div>
-        <div>
-          <label for="product-inquiry-phone" class="sr-only">{copy.phone}</label>
-          <input
-            id="product-inquiry-phone"
-            name="phone"
-            type="tel"
-            class="block w-full rounded-lg border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm text-neutral-700 placeholder:text-neutral-500 focus:border-neutral-200 focus:ring-3 focus:ring-neutral-400 focus:outline-hidden"
-            placeholder={copy.phone}
-          />
-        </div>
       </div>
+      <PhoneInput
+        id="product-inquiry-phone"
+        countryId="product-inquiry-country-code"
+        label={copy.phone}
+        countryLabel={copy.countryCode}
+        defaultCountryCode="IN"
+      />
 
       <div>
         <label for="product-inquiry-type" class="sr-only">{copy.inquiryType}</label>
