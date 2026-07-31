@@ -18,7 +18,13 @@ const pageTitle = `${SITE.title}`;
 const metaDescription = SITE.description_short;
 ---
 
-<MainLayout title={pageTitle} customDescription={metaDescription} preloadImage={introPoster.src} fullWidth overlayNav>
+<MainLayout
+  title={pageTitle}
+  customDescription={metaDescription}
+  preloadImage={introPoster.src}
+  fullWidth
+  overlayNav
+>
   <!-- Hero Section -->
   <section class="relative h-screen min-h-[720px] overflow-hidden bg-[#07142F]">
     <video
@@ -35,7 +41,9 @@ const metaDescription = SITE.description_short;
     <script is:inline>
       // Defer video playback until user interaction to reduce initial payload and LCP impact
       (function () {
-        const vid = document.querySelector('video[aria-label="Mehta Petro-Refineries Limited facility"]');
+        const vid = document.querySelector(
+          'video[aria-label="Mehta Petro-Refineries Limited facility"]'
+        );
         if (!vid || !(vid instanceof HTMLVideoElement)) return;
         function tryPlay() {
           try {
