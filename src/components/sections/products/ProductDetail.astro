@@ -8,83 +8,45 @@ interface Props {
   categoryTitle: string;
   categorySlug: string;
   product: ProductCatalogItem;
-  lang?: 'en' | 'fr';
 }
 
-const { categoryTitle, categorySlug, product, lang = 'en' } = Astro.props;
+const { categoryTitle, categorySlug, product } = Astro.props;
 
-const copy =
-  lang === 'fr'
-    ? {
-        back: 'Retour à la catégorie',
-        overview: 'Description',
-        specifications: 'Spécifications',
-        blueprints: 'Plans',
-        openInquiry: product.ctaTitle || 'Envoyer une demande',
-        inquiryTitle: 'Envoyer une demande',
-        inquirySubTitle: `Recevez une réponse rapide de notre équipe au sujet de ${product.title}.`,
-        firstName: 'Prénom',
-        lastName: 'Nom',
-        email: 'E-mail',
-        phone: 'Téléphone',
-        countryCode: 'Indicatif pays',
-        inquiryType: 'Type de demande',
-        selectInquiryType: 'Type de demande',
-        message: 'Message',
-        send: 'Envoyer le message',
-        close: 'Fermer',
-        successMessage:
-          'Merci de nous avoir contactés. Notre équipe vous répondra très prochainement.',
-        errorMessage:
-          "Désolé, nous n'avons pas pu envoyer votre message pour le moment. Veuillez réessayer.",
-        sendingMessage: 'Envoi en cours…',
-      }
-    : {
-        back: 'Back to category',
-        overview: 'Description',
-        specifications: 'Specifications',
-        blueprints: 'Blueprints',
-        openInquiry: product.ctaTitle || 'Send inquiry',
-        inquiryTitle: 'Send inquiry',
-        inquirySubTitle: `Get a quick response from our team about ${product.title}.`,
-        firstName: 'First Name',
-        lastName: 'Last Name',
-        email: 'Email',
-        phone: 'Phone Number',
-        countryCode: 'Country Code',
-        inquiryType: 'Inquiry type',
-        selectInquiryType: 'Inquiry type',
-        message: 'Message',
-        send: 'Send Message',
-        close: 'Close',
-        successMessage:
-          'Thank you for contacting us. Our team shall get in touch with you shortly.',
-        errorMessage:
-          'Sorry, we could not send your message right now. Please try again.',
-        sendingMessage: 'Sending your message…',
-      };
+const copy = {
+  back: 'Back to category',
+  overview: 'Description',
+  specifications: 'Specifications',
+  blueprints: 'Blueprints',
+  openInquiry: product.ctaTitle || 'Send inquiry',
+  inquiryTitle: 'Send inquiry',
+  inquirySubTitle: `Get a quick response from our team about ${product.title}.`,
+  firstName: 'First Name',
+  lastName: 'Last Name',
+  email: 'Email',
+  phone: 'Phone Number',
+  countryCode: 'Country Code',
+  inquiryType: 'Inquiry type',
+  selectInquiryType: 'Inquiry type',
+  message: 'Message',
+  send: 'Send Message',
+  close: 'Close',
+  successMessage:
+    'Thank you for contacting us. Our team shall get in touch with you shortly.',
+  errorMessage: 'Sorry, we could not send your message right now. Please try again.',
+  sendingMessage: 'Sending your message…',
+};
 
-const categoryHref =
-  lang === 'fr' ? `/fr/products/${categorySlug}/` : `/products/${categorySlug}/`;
+const categoryHref = `/products/${categorySlug}/`;
 const web3FormsAccessKey = '0e6f5e46-f620-429a-ab06-a8e61f81c419';
 const formSource = Astro.url.pathname;
-const inquiryOptions = lang === 'fr'
-  ? [
-      { value: 'product', label: 'Produit' },
-      { value: 'career', label: 'Carrière' },
-      { value: 'general', label: 'Général' },
-      { value: 'sales', label: 'Ventes' },
-      { value: 'support', label: 'Support' },
-      { value: 'other', label: 'Autre' },
-    ]
-  : [
-      { value: 'product', label: 'Product' },
-      { value: 'career', label: 'Career' },
-      { value: 'general', label: 'General' },
-      { value: 'sales', label: 'Sales' },
-      { value: 'support', label: 'Support' },
-      { value: 'other', label: 'Other' },
-    ];
+const inquiryOptions = [
+  { value: 'product', label: 'Product' },
+  { value: 'career', label: 'Career' },
+  { value: 'general', label: 'General' },
+  { value: 'sales', label: 'Sales' },
+  { value: 'support', label: 'Support' },
+  { value: 'other', label: 'Other' },
+];
 ---
 
 <div

@@ -2,13 +2,13 @@ import ogImageSrc from '@images/social.png';
 
 export const SITE = {
   title: 'Mehta Petro',
-  tagline: 'Energy and Petrochemical Solutions',
+  tagline: 'Solvent & Petrochemical Solutions',
   description:
-    'Mehta Petro provides dependable energy and petrochemical solutions built to support your operations with quality and reliability.',
+    'Mehta Petro provides dependable solvent and petrochemical solutions built to support your operations with quality and reliability.',
   description_short:
-    'Mehta Petro provides dependable energy and petrochemical solutions built to support your operations.',
+    'Mehta Petro provides dependable solvent and petrochemical solutions built to support your operations.',
   url: 'https://mehtapetro.com',
-  author: 'Emil Gulamov',
+  author: 'Mehta Petro',
 };
 
 export const SEO = {
@@ -35,9 +35,9 @@ export const OG = {
   locale: 'en_US',
   type: 'website',
   url: SITE.url,
-  title: `${SITE.title}: Energy & Petrochemical Solutions`,
+  title: `${SITE.title}: Solvent & Petrochemical Solutions`,
   description:
-    'Equip your operations with Mehta Petro’s dependable energy and petrochemical solutions. Built for reliability, safety, and long-term performance.',
+    'Equip your operations with Mehta Petro’s dependable solvent and petrochemical solutions. Built for reliability, safety, and long-term performance.',
   image: ogImageSrc,
 };
 

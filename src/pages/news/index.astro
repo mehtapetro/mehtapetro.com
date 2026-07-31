@@ -1,0 +1,104 @@
+---
+// Import necessary components, modules and types
+import MainLayout from '@/layouts/MainLayout.astro';
+import CardBlog from '@components/ui/cards/CardBlog.astro';
+import CardBlogRecent from '@components/ui/cards/CardBlogRecent.astro';
+import { getCollection } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+import { SITE } from '@data/constants';
+
+// Get all blog posts in English and sort them based on publish date
+
+const englishBlogEntries = await getCollection('blog', ({ id }) => {
+  return id.startsWith('en/');
+});
+
+
+const blogPosts: CollectionEntry<'blog'>[] = englishBlogEntries.sort(
+  (a: CollectionEntry<'blog'>, b: CollectionEntry<'blog'>) =>
+    b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+
+// Separate the most recent post from others
+const mostRecentPost: CollectionEntry<'blog'> | undefined = blogPosts[0];
+const otherPosts: CollectionEntry<'blog'>[] = blogPosts.slice(1);
+
+// Define variables for page content
+const title: string = 'Newsroom';
+const subTitle: string =
+  'Explore the latest news, updates, and insights from Mehta Petro to keep up with our company developments and industry presence.';
+
+const pageTitle: string = `News | ${SITE.title}`;
+const metaDescription =
+  "Stay up-to-date with the latest trends and developments in the construction industry with insights from Mehta Petro's team of industry experts.";
+const ogTitle = 'Company News | Mehta Petro';
+---
+
+<MainLayout
+  title={pageTitle}
+  customDescription={metaDescription}
+  customOgTitle={ogTitle}
+  structuredData={{
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    '@id': 'https://mehtapetro.com/news',
+    url: 'https://mehtapetro.com/news',
+    name: 'News | Mehta Petro',
+    description:
+      "Stay up-to-date with the latest trends and developments in the construction industry with insights from Mehta Petro's team of industry experts.",
+    isPartOf: {
+      '@type': 'WebSite',
+      url: 'https://mehtapetro.com',
+      name: 'Mehta Petro',
+      description:
+        'Mehta Petro offers top-tier hardware tools and expert construction services to meet all your project needs.',
+    },
+    inLanguage: 'en-US',
+  }}
+>
+  <section
+    class="mx-auto max-w-[85rem] space-y-8 px-4 pt-16 sm:px-6 lg:px-8 2xl:max-w-full"
+  >
+    {/* Page header */}
+    <div class="mx-auto max-w-3xl text-left sm:text-center">
+      <h1
+        class="block text-4xl font-bold tracking-tight text-balance text-neutral-800 md:text-5xl lg:text-6xl dark:text-neutral-200"
+      >
+        {title}
+      </h1>
+
+      <p
+        class="mt-4 text-lg text-pretty text-neutral-600 dark:text-neutral-400"
+      >
+        {subTitle}
+      </p>
+    </div>
+  </section>
+
+  <section
+    class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 2xl:max-w-full"
+  >
+    {
+      blogPosts.length === 0 ? (
+        <p class="text-center text-neutral-600 dark:text-neutral-400">
+          No news yet. Check back soon.
+        </p>
+      ) : (
+        <div class="grid gap-6 lg:grid-cols-2">
+          {otherPosts.map(blogEntry => (
+            <CardBlog blogEntry={blogEntry} />
+          ))}
+        </div>
+      )
+    }
+  </section>
+  {/* Most recent news post */}
+  {
+    mostRecentPost && (
+      <section class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 2xl:max-w-full">
+        <CardBlogRecent blogEntry={mostRecentPost} />
+      </section>
+    )
+  }
+  
+</MainLayout>

@@ -45,7 +45,6 @@ const socialImage = Astro.url.origin + socialImageRes.src; // Get the full URL o
 
 const languages: { [key: string]: string } = {
   en: '',
-  fr: 'fr',
 };
 
 function createHref(_lang: string, prefix: string, path: string): string {
@@ -102,10 +101,7 @@ const appleTouchIcon = await getImage({
 }
 
 {/* Facebook Meta Tags */}
-<meta
-  property="og:locale"
-  content={basePath.startsWith('/fr') ? 'fr_FR' : 'en_US'}
-/>
+<meta property="og:locale" content={'en_US'} />
 <meta property="og:url" content={canonical} />
 <meta property="og:type" content="website" />
 <meta property="og:title" content={ogTitle} />

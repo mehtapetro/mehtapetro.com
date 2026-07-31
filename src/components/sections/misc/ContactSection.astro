@@ -5,113 +5,71 @@ import EmailContactInput from '@components/ui/forms/input/EmailContactInput.astr
 import PhoneInput from '@components/ui/forms/input/PhoneInput.astro';
 import TextAreaInput from '@components/ui/forms/input/TextAreaInput.astro';
 import Icon from '@components/ui/icons/Icon.astro';
-import { getMarketingLocale } from '@utils/locale';
 
-const locale = getMarketingLocale(Astro.url.pathname, Astro.currentLocale);
+const locale = 'en';
 const web3FormsAccessKey = 'e138342b-b691-410c-a7fb-3b3ce5a49ea6';
 const siteOrigin = 'https://mehtapetro.vercel.app';
-const contactPath = locale === 'fr' ? '/fr/contact' : '/contact';
+const contactPath = '/contact';
 const contactSource = `${siteOrigin}${contactPath}`;
 
-const copy =
-  locale === 'fr'
-    ? {
-        title: 'Contactez-nous',
-        subTitle:
-          "Vous avez des questions ou souhaitez discuter d'un projet ? Contactez-nous et laissons-nous élaborer la solution parfaite avec nos outils et services.",
-        formTitle: 'Remplissez le formulaire ci-dessous',
-        firstName: 'Prénom',
-        lastName: 'Nom',
-        details: 'Détails',
-        phoneNumber: 'Numéro de téléphone',
-        countryCode: 'Indicatif pays',
-        send: 'Envoyer un message',
-        successMessage:
-          'Merci de nous avoir contactés. Notre équipe vous répondra très prochainement.',
-        errorMessage:
-          "Désolé, nous n'avons pas pu envoyer votre message pour le moment. Veuillez réessayer.",
-        sendingMessage: 'Envoi en cours…',
-        directionsLabel: 'Obtenir l’itinéraire',
-        corporateHeading: 'Adresse du siège social',
-        corporateContent: 'Mehta Petro-Refineries Limited',
-        corporateAddress:
-          '509, HIVE-67, Borasapada Road, Next to Raghuleela Mall, Near Poinsure Gymkhana, Kandivali (West), Mumbai - 400067. Maharashtra',
-        factoryOneHeading: 'Usine I',
-        factoryOneContent: 'Palghar Manufacturing Facility',
-        factoryOneAddress:
-          'Plot No. 1, Dewan & Sons Udyog, Village - Mahim, Palghar - 401 404, Maharashtra',
-        factoryTwoHeading: 'Usine II',
-        factoryTwoContent: 'Dahej Manufacturing Facility',
-        factoryTwoAddress:
-          'D-2/CH-15, GIDC Dahej II, Dahej, Bharuch - 392 160, Gujarat',
-        emailHeading: 'Contactez-nous par e-mail',
-        emailContent: 'Préférez-vous le texte écrit ? Envoyez-nous un e-mail à',
-      }
-    : {
-        title: 'Contact us',
-        subTitle:
-          "Have questions or want to discuss a project? Reach out, and let's craft the perfect solution with our tools and services.",
-        formTitle: 'Fill in the form below',
-        firstName: 'First Name',
-        lastName: 'Last Name',
-        details: 'Details',
-        phoneNumber: 'Phone Number',
-        countryCode: 'Country Code',
-        send: 'Send Message',
-        successMessage:
-          'Thank you for contacting us. Our team shall get in touch with you shortly.',
-        errorMessage:
-          'Sorry, we could not send your message right now. Please try again.',
-        sendingMessage: 'Sending your message…',
-        directionsLabel: 'Get directions',
-        corporateHeading: 'Corporate Office Address',
-        corporateContent: 'Mehta Petro-Refineries Limited',
-        corporateAddress:
-          '509, HIVE-67, Borasapada Road, Next to Raghuleela Mall, Near Poinsure Gymkhana, Kandivali (West), Mumbai - 400067. Maharashtra',
-        factoryOneHeading: 'Factory I',
-        factoryOneContent: 'Palghar Manufacturing Facility',
-        factoryOneAddress:
-          'Plot No. 1, Dewan & Sons Udyog, Village - Mahim, Palghar - 401 404, Maharashtra',
-        factoryTwoHeading: 'Factory II',
-        factoryTwoContent: 'Dahej Manufacturing Facility',
-        factoryTwoAddress:
-          'D-2/CH-15, GIDC Dahej II, Dahej, Bharuch - 392 160, Gujarat',
-        emailHeading: 'Contact us by email',
-        emailContent: 'Prefer the written word? Drop us an email at',
-      };
+const copy = {
+  title: 'Contact us',
+  subTitle:
+    "Have questions or want to discuss a project? Reach out, and let's craft the perfect solution with our tools and services.",
+  formTitle: 'Fill in the form below',
+  firstName: 'First Name',
+  lastName: 'Last Name',
+  details: 'Details',
+  phoneNumber: 'Phone Number',
+  countryCode: 'Country Code',
+  send: 'Send Message',
+  successMessage:
+    'Thank you for contacting us. Our team shall get in touch with you shortly.',
+  errorMessage:
+    'Sorry, we could not send your message right now. Please try again.',
+  sendingMessage: 'Sending your message…',
+  directionsLabel: 'Get directions',
+  corporateHeading: 'Corporate Office Address',
+  corporateContent: 'Mehta Petro-Refineries Limited',
+  corporateAddress:
+    '509, HIVE-67, Borasapada Road, Next to Raghuleela Mall, Near Poinsure Gymkhana, Kandivali (West), Mumbai - 400067. Maharashtra',
+  factoryOneHeading: 'Factory I',
+  factoryOneContent: 'Palghar Manufacturing Facility',
+  factoryOneAddress:
+    'Plot No. 1, Dewan & Sons Udyog, Village - Mahim, Palghar - 401 404, Maharashtra',
+  factoryTwoHeading: 'Factory II',
+  factoryTwoContent: 'Dahej Manufacturing Facility',
+  factoryTwoAddress:
+    'D-2/CH-15, GIDC Dahej II, Dahej, Bharuch - 392 160, Gujarat',
+  emailHeading: 'Contact us by email',
+  emailContent: 'Prefer the written word? Drop us an email at',
+};
 
 const locations = [
   {
     heading: copy.corporateHeading,
-    label: locale === 'fr' ? 'Siège social' : 'Corporate office',
+    label: 'Corporate office',
     content: copy.corporateContent,
     address: copy.corporateAddress,
     directionsUrl: 'https://maps.app.goo.gl/hgSz19X7oDFZaYdZ6',
   },
   {
     heading: copy.factoryOneHeading,
-    label: locale === 'fr' ? 'Site de production' : 'Manufacturing site',
+    label: 'Manufacturing site',
     content: copy.factoryOneContent,
     address: copy.factoryOneAddress,
     directionsUrl: 'https://maps.app.goo.gl/caGEQ7bkokJNAsXB9',
   },
   {
     heading: copy.factoryTwoHeading,
-    label: locale === 'fr' ? 'Site de production' : 'Manufacturing site',
+    label: 'Manufacturing site',
     content: copy.factoryTwoContent,
     address: copy.factoryTwoAddress,
     directionsUrl: 'https://maps.app.goo.gl/uBWSCEKzM2LzDmdZ8',
   },
 ];
 
-const inquiryOptions = locale === 'fr' ? [
-  { value: 'product', label: 'Produit' },
-  { value: 'career', label: 'Carrière' },
-  { value: 'general', label: 'Général' },
-  { value: 'sales', label: 'Ventes' },
-  { value: 'support', label: 'Support' },
-  { value: 'other', label: 'Autre' },
-] : [
+const inquiryOptions = [
   { value: 'product', label: 'Product' },
   { value: 'career', label: 'Career' },
   { value: 'general', label: 'General' },
@@ -126,9 +84,7 @@ const inquiryOptions = locale === 'fr' ? [
 
     {/* ── Page header ── */}
     <div class="text-center">
-      <span class="inline-flex rounded-full border border-[#C0D6FF] bg-white px-4 py-1 text-xs font-semibold tracking-wider text-[#0039E6] uppercase">
-        {locale === 'fr' ? 'Contactez-nous' : 'Get in touch'}
-      </span>
+      <span class="inline-flex rounded-full border border-[#C0D6FF] bg-white px-4 py-1 text-xs font-semibold tracking-wider text-[#0039E6] uppercase">Get in touch</span>
       <h1 class="mt-5 text-4xl font-extrabold tracking-tight text-balance text-[#0A1F4D] md:text-5xl">
         {copy.title}
       </h1>
@@ -143,9 +99,7 @@ const inquiryOptions = locale === 'fr' ? [
       {/* ── Form card ── */}
       <div class="flex flex-col rounded-2xl border border-[#D4E4FF] bg-white p-6 shadow-lg sm:p-8 overflow-hidden">
         <div class="mb-6 border-b border-[#E3EBFF] pb-4">
-          <p class="text-sm font-semibold tracking-wider text-[#0039E6] uppercase">
-            {locale === 'fr' ? 'Envoyer un message' : 'Send a message'}
-          </p>
+          <p class="text-sm font-semibold tracking-wider text-[#0039E6] uppercase">Send a message</p>
           <h2 class="mt-2 text-2xl font-bold text-[#0A1F4D]">
             {copy.formTitle}
           </h2>
@@ -187,9 +141,7 @@ const inquiryOptions = locale === 'fr' ? [
               name="inquiryType"
               class="block w-full rounded-lg border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm text-neutral-700 placeholder:text-neutral-500 focus:border-neutral-200 focus:ring-3 focus:ring-neutral-400 focus:outline-hidden disabled:pointer-events-none disabled:opacity-50"
             >
-              <option value="" disabled selected>
-                {locale === 'fr' ? 'Type de demande' : 'Inquiry type'}
-              </option>
+              <option value="" disabled selected>Inquiry type</option>
               {inquiryOptions.map(opt => (
                 <option value={opt.value}>{opt.label}</option>
               ))}
