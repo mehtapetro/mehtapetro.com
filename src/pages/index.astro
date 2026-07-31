@@ -35,7 +35,7 @@ const metaDescription = SITE.description_short;
     <script>
       // Defer video playback until user interaction to reduce initial payload and LCP impact
       (function () {
-        const vid = document.querySelector('video[aria-label="Mehta Petro-Refineries Limited facility"]');
+        const vid = /** @type {HTMLVideoElement | null} */ (document.querySelector('video[aria-label="Mehta Petro-Refineries Limited facility"]'));
         if (!vid) return;
         function tryPlay() {
           // Attempt to play; browsers may block autoplay with sound, but video is muted
