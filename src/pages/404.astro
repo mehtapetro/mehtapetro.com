@@ -6,6 +6,7 @@ import { SITE } from '@data/constants';
 
 // Define types for translations
 const pageTitle = `Page Not Found | ${SITE.title}`;
+const metaDescription = "The page you requested couldn't be found. Return to the Mehta Petro homepage for products, services, and contact information.";
 const lang = 'en';
 const subTitle = "Oops, this isn't the tool you were looking for!";
 const content =
@@ -15,7 +16,7 @@ const backTitle = 'Go Back';
 const homeHref = '/';
 ---
 
-<MainLayout title={pageTitle} lang={lang} hideFooter>
+<MainLayout title={pageTitle} lang={lang} hideFooter customDescription={metaDescription}>
   <section class="min-h-[calc(100svh-5.5rem)]" aria-labelledby="subtitle">
     <div
       class="pointer-events-none fixed inset-0 z-10 grid place-content-center px-4"

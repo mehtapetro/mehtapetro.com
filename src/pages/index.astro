@@ -1,5 +1,6 @@
 ---
 import MainLayout from '@/layouts/MainLayout.astro';
+import { SITE } from '@data/constants';
 import ClientsSection from '@components/sections/landing/ClientsSection.astro';
 import FeaturesNavs from '@components/sections/features/FeaturesNavs.astro';
 import FAQ from '@components/sections/misc/FAQ.astro';
@@ -14,7 +15,10 @@ import mprlLogo from '@images/mprl_logo.png';
 import { clientLogos } from '@/data_files/clientLogos';
 ---
 
-<MainLayout fullWidth overlayNav>
+const pageTitle = `${SITE.title}`;
+const metaDescription = SITE.description_short;
+
+<MainLayout title={pageTitle} customDescription={metaDescription} fullWidth overlayNav>
   <!-- Hero Section -->
   <section class="relative h-screen min-h-[720px] overflow-hidden bg-[#07142F]">
     <video
