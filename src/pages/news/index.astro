@@ -13,7 +13,6 @@ const englishBlogEntries = await getCollection('blog', ({ id }) => {
   return id.startsWith('en/');
 });
 
-
 const blogPosts: CollectionEntry<'blog'>[] = englishBlogEntries.sort(
   (a: CollectionEntry<'blog'>, b: CollectionEntry<'blog'>) =>
     b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
@@ -100,5 +99,4 @@ const ogTitle = 'Company News | Mehta Petro';
       </section>
     )
   }
-  
 </MainLayout>

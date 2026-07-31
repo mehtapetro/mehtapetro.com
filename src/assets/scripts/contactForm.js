@@ -37,14 +37,20 @@ function hideStatus(statusElement) {
 function setButtonLoading(button, label) {
   if (!(button instanceof HTMLButtonElement)) return;
   button.disabled = true;
-  button.classList.add('cursor-wait', 'shadow-[0_20px_45px_-25px_rgba(30,58,255,0.95)]');
+  button.classList.add(
+    'cursor-wait',
+    'shadow-[0_20px_45px_-25px_rgba(30,58,255,0.95)]'
+  );
   button.innerHTML = `<span class="inline-flex items-center gap-3"><span class="relative flex h-4 w-4"><span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-white/35 opacity-75"></span><span class="relative inline-flex h-4 w-4 animate-spin rounded-full border-2 border-white/35 border-t-white"></span></span><span>${label}</span></span>`;
 }
 
 function setButtonLabel(button, label) {
   if (!(button instanceof HTMLButtonElement)) return;
   button.disabled = false;
-  button.classList.remove('cursor-wait', 'shadow-[0_20px_45px_-25px_rgba(30,58,255,0.95)]');
+  button.classList.remove(
+    'cursor-wait',
+    'shadow-[0_20px_45px_-25px_rgba(30,58,255,0.95)]'
+  );
   button.innerHTML = label;
 }
 
@@ -99,13 +105,16 @@ function initContactForms() {
       setButtonLoading(submitButton, sendingMessage);
 
       try {
-        const response = await fetch(form.action || 'https://api.web3forms.com/submit', {
-          method: 'POST',
-          body: new FormData(form),
-          headers: {
-            Accept: 'application/json',
-          },
-        });
+        const response = await fetch(
+          form.action || 'https://api.web3forms.com/submit',
+          {
+            method: 'POST',
+            body: new FormData(form),
+            headers: {
+              Accept: 'application/json',
+            },
+          }
+        );
 
         const data = await response.json();
 
@@ -122,7 +131,9 @@ function initContactForms() {
         }, 5000);
       } catch (error) {
         const message =
-          error instanceof Error && error.message ? error.message : errorMessage;
+          error instanceof Error && error.message
+            ? error.message
+            : errorMessage;
         setStatus(status, message, 'error');
         setButtonLabel(submitButton, originalButtonText);
       } finally {

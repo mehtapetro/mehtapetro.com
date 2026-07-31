@@ -19,61 +19,91 @@ const companyEmail = 'info@mehtapetro.com';
           alt="Mehta Petro-Refineries Limited"
           class="h-16 w-auto"
         />
-        <p class="mt-3 text-sm font-semibold text-white/88">Mehta Petro-Refineries Limited</p>
+        <p class="mt-3 text-sm font-semibold text-white/88">
+          Mehta Petro-Refineries Limited
+        </p>
         <p class="mt-5 max-w-md text-sm leading-relaxed text-white/74">
-          Manufacturer and supplier of petrochemical solvents, specialty base oils,
-          n-paraffins, olefins, and specialty chemicals since 1993.
+          Manufacturer and supplier of petrochemical solvents, specialty base
+          oils, n-paraffins, olefins, and specialty chemicals since 1993.
         </p>
       </div>
 
       <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-1">
-        {strings.footerLinks.map(section => (
-          <div>
-            <details class="lg:hidden" data-section={section.section}>
-              <summary class="flex items-center justify-between text-[11px] font-semibold tracking-[0.2em] text-white/54 uppercase py-2">
-                <span>{section.section}</span>
-                <svg class="h-4 w-4 text-white/70" viewBox="0 0 20 20" fill="none" aria-hidden>
-                  <path d="M6 8l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                </svg>
-              </summary>
-              <ul class="mt-2 space-y-2 pl-0">
-                {section.links.map(link => (
-                  <li>
-                    <a href={link.url} class="text-sm font-medium text-white/80 transition-colors hover:text-white block py-1">
-                      {link.name}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </details>
+        {
+          strings.footerLinks.map(section => (
+            <div>
+              <details class="lg:hidden" data-section={section.section}>
+                <summary class="flex items-center justify-between py-2 text-[11px] font-semibold tracking-[0.2em] text-white/54 uppercase">
+                  <span>{section.section}</span>
+                  <svg
+                    class="h-4 w-4 text-white/70"
+                    viewBox="0 0 20 20"
+                    fill="none"
+                    aria-hidden
+                  >
+                    <path
+                      d="M6 8l4 4 4-4"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </summary>
+                <ul class="mt-2 space-y-2 pl-0">
+                  {section.links.map(link => (
+                    <li>
+                      <a
+                        href={link.url}
+                        class="block py-1 text-sm font-medium text-white/80 transition-colors hover:text-white"
+                      >
+                        {link.name}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </details>
 
-            <div class="hidden lg:block">
-              <h3 class="text-[11px] font-semibold tracking-[0.2em] text-white/54 uppercase">
-                {section.section}
-              </h3>
-              <ul class="mt-4 space-y-2">
-                {section.links.map(link => (
-                  <li>
-                    <a
-                      href={link.url}
-                      class="text-sm font-medium text-white/80 transition-colors hover:text-white"
-                    >
-                      {link.name}
-                    </a>
-                  </li>
-                ))}
-              </ul>
+              <div class="hidden lg:block">
+                <h3 class="text-[11px] font-semibold tracking-[0.2em] text-white/54 uppercase">
+                  {section.section}
+                </h3>
+                <ul class="mt-4 space-y-2">
+                  {section.links.map(link => (
+                    <li>
+                      <a
+                        href={link.url}
+                        class="text-sm font-medium text-white/80 transition-colors hover:text-white"
+                      >
+                        {link.name}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
-          </div>
-        ))}
+          ))
+        }
       </div>
 
       <div>
         <details class="lg:hidden" data-section="Contact">
-          <summary class="flex items-center justify-between text-[11px] font-semibold tracking-[0.2em] text-white/54 uppercase py-2">
+          <summary
+            class="flex items-center justify-between py-2 text-[11px] font-semibold tracking-[0.2em] text-white/54 uppercase"
+          >
             <span>Contact</span>
-            <svg class="h-4 w-4 text-white/70" viewBox="0 0 20 20" fill="none" aria-hidden>
-              <path d="M6 8l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            <svg
+              class="h-4 w-4 text-white/70"
+              viewBox="0 0 20 20"
+              fill="none"
+              aria-hidden
+            >
+              <path
+                d="M6 8l4 4 4-4"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
             </svg>
           </summary>
 
@@ -91,18 +121,35 @@ const companyEmail = 'info@mehtapetro.com';
             <div>
               <p class="text-xs font-medium text-white/54 uppercase">Phone</p>
               <div class="mt-3 grid grid-cols-2 gap-2 text-sm text-white/82">
-                <a href="tel:+910224455909" class="transition-colors hover:text-white">022-44559090</a>
-                <a href="tel:+912235218451" class="transition-colors hover:text-white">35218451</a>
-                <a href="tel:+912235218543" class="transition-colors hover:text-white">35218543</a>
-                <a href="tel:+912235219242" class="transition-colors hover:text-white">35219242</a>
-                <a href="tel:+912235219404" class="transition-colors hover:text-white">35219404</a>
+                <a
+                  href="tel:+910224455909"
+                  class="transition-colors hover:text-white">022-44559090</a
+                >
+                <a
+                  href="tel:+912235218451"
+                  class="transition-colors hover:text-white">35218451</a
+                >
+                <a
+                  href="tel:+912235218543"
+                  class="transition-colors hover:text-white">35218543</a
+                >
+                <a
+                  href="tel:+912235219242"
+                  class="transition-colors hover:text-white">35219242</a
+                >
+                <a
+                  href="tel:+912235219404"
+                  class="transition-colors hover:text-white">35219404</a
+                >
               </div>
             </div>
           </div>
         </details>
 
         <div class="hidden lg:block">
-          <h3 class="text-[11px] font-semibold tracking-[0.2em] text-white/54 uppercase">
+          <h3
+            class="text-[11px] font-semibold tracking-[0.2em] text-white/54 uppercase"
+          >
             Contact
           </h3>
 
@@ -119,12 +166,29 @@ const companyEmail = 'info@mehtapetro.com';
 
             <div>
               <p class="text-xs font-medium text-white/54 uppercase">Phone</p>
-              <div class="mt-3 grid grid-cols-1 gap-y-2 text-sm text-white/82 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
-                <a href="tel:+910224455909" class="transition-colors hover:text-white">022-44559090</a>
-                <a href="tel:+912235218451" class="transition-colors hover:text-white">35218451</a>
-                <a href="tel:+912235218543" class="transition-colors hover:text-white">35218543</a>
-                <a href="tel:+912235219242" class="transition-colors hover:text-white">35219242</a>
-                <a href="tel:+912235219404" class="transition-colors hover:text-white">35219404</a>
+              <div
+                class="mt-3 grid grid-cols-1 gap-y-2 text-sm text-white/82 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2"
+              >
+                <a
+                  href="tel:+910224455909"
+                  class="transition-colors hover:text-white">022-44559090</a
+                >
+                <a
+                  href="tel:+912235218451"
+                  class="transition-colors hover:text-white">35218451</a
+                >
+                <a
+                  href="tel:+912235218543"
+                  class="transition-colors hover:text-white">35218543</a
+                >
+                <a
+                  href="tel:+912235219242"
+                  class="transition-colors hover:text-white">35219242</a
+                >
+                <a
+                  href="tel:+912235219404"
+                  class="transition-colors hover:text-white">35219404</a
+                >
               </div>
             </div>
           </div>
@@ -132,7 +196,9 @@ const companyEmail = 'info@mehtapetro.com';
       </div>
 
       <div>
-        <h3 class="text-[11px] font-semibold tracking-[0.2em] text-white/54 uppercase">
+        <h3
+          class="text-[11px] font-semibold tracking-[0.2em] text-white/54 uppercase"
+        >
           Corporate Office
         </h3>
         <p class="mt-5 max-w-md text-sm leading-relaxed text-white/74">
@@ -140,16 +206,15 @@ const companyEmail = 'info@mehtapetro.com';
           Kandivali (West), Mumbai 400067, India
         </p>
 
-          <div class="mt-5 overflow-hidden rounded-2xl border border-white/12">
+        <div class="mt-5 overflow-hidden rounded-2xl border border-white/12">
           <iframe
-            class="h-36 sm:h-48 w-full"
+            class="h-36 w-full sm:h-48"
             src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7535.136593831896!2d72.848887!3d19.214049!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be71ccfa59893e3%3A0x6aab7ca9656cdb12!2sMehta%20Petro%20Refineries%20Ltd!5e0!3m2!1sen!2sin!4v1785383107592!5m2!1sen!2sin"
             style="border:0;"
             allowfullscreen=""
             loading="lazy"
             referrerpolicy="strict-origin-when-cross-origin"
-            title="Mehta Petro location map"
-          ></iframe>
+            title="Mehta Petro location map"></iframe>
         </div>
 
         <div class="mt-5 flex items-center gap-3">
@@ -161,7 +226,9 @@ const companyEmail = 'info@mehtapetro.com';
           />
           <div>
             <p class="text-xs font-medium text-white/54 uppercase">Certified</p>
-            <p class="mt-1 text-sm font-semibold text-white/88">ISO 9001:2015</p>
+            <p class="mt-1 text-sm font-semibold text-white/88">
+              ISO 9001:2015
+            </p>
             <a
               href={`${isoCertificateUrl}#page=1&zoom=page-fit`}
               target="_blank"
@@ -177,22 +244,37 @@ const companyEmail = 'info@mehtapetro.com';
     </div>
 
     <div class="mt-10 border-t border-white/10 pt-6">
-      <div class="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
+      <div
+        class="flex flex-col gap-5 md:flex-row md:items-center md:justify-between"
+      >
         <div class="footer-follow">
-          <p class="text-[11px] font-semibold tracking-[0.2em] text-white/54 uppercase">
+          <p
+            class="text-[11px] font-semibold tracking-[0.2em] text-white/54 uppercase"
+          >
             Follow Us
           </p>
-          <div class="mt-3 flex items-center gap-3 footer-follow-icons md:justify-start">
-            <FooterSocialLink url={strings.socialLinks.facebook} label="Facebook">
+          <div
+            class="footer-follow-icons mt-3 flex items-center gap-3 md:justify-start"
+          >
+            <FooterSocialLink
+              url={strings.socialLinks.facebook}
+              label="Facebook"
+            >
               <Icon name="facebookFooter" />
             </FooterSocialLink>
             <FooterSocialLink url={strings.socialLinks.youtube} label="YouTube">
               <Icon name="youtubeFooter" />
             </FooterSocialLink>
-            <FooterSocialLink url={strings.socialLinks.instagram} label="Instagram">
+            <FooterSocialLink
+              url={strings.socialLinks.instagram}
+              label="Instagram"
+            >
               <Icon name="instagramFooter" />
             </FooterSocialLink>
-            <FooterSocialLink url={strings.socialLinks.linkedin} label="LinkedIn">
+            <FooterSocialLink
+              url={strings.socialLinks.linkedin}
+              label="LinkedIn"
+            >
               <Icon name="linkedinFooter" />
             </FooterSocialLink>
           </div>
@@ -200,7 +282,8 @@ const companyEmail = 'info@mehtapetro.com';
 
         <div class="text-center md:text-right">
           <p class="text-sm text-white/64">
-            © <span id="current-year"></span> Mehta Petro-Refineries Limited. All rights reserved.
+            © <span id="current-year"></span> Mehta Petro-Refineries Limited. All
+            rights reserved.
           </p>
           <p class="mt-2 text-sm text-white/64">
             Crafted by
@@ -223,16 +306,22 @@ const companyEmail = 'info@mehtapetro.com';
     </script>
     <style>
       /* Desktop keeps the original layout; mobile gets collapsible visuals and animation */
-      details summary { cursor: pointer; }
-      details summary svg { transition: transform 720ms cubic-bezier(.22,.9,.29,1); }
-      details[open] summary svg { transform: rotate(180deg); }
+      details summary {
+        cursor: pointer;
+      }
+      details summary svg {
+        transition: transform 720ms cubic-bezier(0.22, 0.9, 0.29, 1);
+      }
+      details[open] summary svg {
+        transform: rotate(180deg);
+      }
 
       @media (max-width: 1023px) {
         /* Make the summary clearly look like a larger horizontal toggle bar on mobile */
         details {
           position: relative; /* container for animated divider */
           padding-bottom: 0.6rem; /* keep some distance below values and summary */
-          transition: padding-bottom 360ms cubic-bezier(.22,.9,.29,1);
+          transition: padding-bottom 360ms cubic-bezier(0.22, 0.9, 0.29, 1);
         }
 
         details summary {
@@ -243,11 +332,14 @@ const companyEmail = 'info@mehtapetro.com';
           padding: 0.75rem 0;
           border-radius: 0;
           background: transparent;
-          transition: background-color 220ms ease, box-shadow 220ms ease, transform 220ms ease;
+          transition:
+            background-color 220ms ease,
+            box-shadow 220ms ease,
+            transform 220ms ease;
           width: 100%;
           font-size: 0.875rem; /* match footer link size on mobile */
           font-weight: 600;
-          color: rgba(255,255,255,0.95);
+          color: rgba(255, 255, 255, 0.95);
           -webkit-tap-highlight-color: transparent; /* remove tap highlight on mobile */
           -webkit-touch-callout: none;
           -webkit-user-select: none;
@@ -262,11 +354,13 @@ const companyEmail = 'info@mehtapetro.com';
           left: 0;
           right: 0;
           height: 1px;
-          background: rgba(255,255,255,0.12);
+          background: rgba(255, 255, 255, 0.12);
           bottom: 0;
           z-index: 0;
           pointer-events: none;
-          transition: transform 420ms cubic-bezier(.22,.9,.29,1), opacity 260ms ease;
+          transition:
+            transform 420ms cubic-bezier(0.22, 0.9, 0.29, 1),
+            opacity 260ms ease;
           transform: translateY(0);
         }
 
@@ -293,7 +387,9 @@ const companyEmail = 'info@mehtapetro.com';
           opacity: 0;
           overflow: hidden;
           will-change: max-height, opacity;
-          transition: max-height 700ms cubic-bezier(.22,.9,.29,1), opacity 420ms ease;
+          transition:
+            max-height 700ms cubic-bezier(0.22, 0.9, 0.29, 1),
+            opacity 420ms ease;
           margin-top: 0.5rem;
           padding-left: 0.25rem;
         }
@@ -301,17 +397,23 @@ const companyEmail = 'info@mehtapetro.com';
         details[open] ul {
           max-height: 1000px; /* large enough to reveal content */
           opacity: 1;
-          transition: max-height 860ms cubic-bezier(.22,.9,.29,1), opacity 520ms ease 80ms;
+          transition:
+            max-height 860ms cubic-bezier(0.22, 0.9, 0.29, 1),
+            opacity 520ms ease 80ms;
         }
 
         /* Extra-smooth animation for Contact section */
-        details[data-section="Contact"] ul {
+        details[data-section='Contact'] ul {
           will-change: max-height, opacity;
-          transition: max-height 900ms cubic-bezier(.22,.9,.29,1), opacity 620ms ease;
+          transition:
+            max-height 900ms cubic-bezier(0.22, 0.9, 0.29, 1),
+            opacity 620ms ease;
         }
 
-        details[data-section="Contact"][open] ul {
-          transition: max-height 1080ms cubic-bezier(.22,.9,.29,1), opacity 720ms ease 120ms;
+        details[data-section='Contact'][open] ul {
+          transition:
+            max-height 1080ms cubic-bezier(0.22, 0.9, 0.29, 1),
+            opacity 720ms ease 120ms;
         }
 
         /* Animate list items for a smoother feel */
@@ -319,17 +421,34 @@ const companyEmail = 'info@mehtapetro.com';
           transform: translateY(-8px);
           opacity: 0;
           will-change: transform, opacity;
-          transition: transform 520ms cubic-bezier(.22,.9,.29,1), opacity 420ms ease;
+          transition:
+            transform 520ms cubic-bezier(0.22, 0.9, 0.29, 1),
+            opacity 420ms ease;
         }
 
-        details[open] ul li:nth-child(1) { transition-delay: 80ms; }
-        details[open] ul li:nth-child(2) { transition-delay: 140ms; }
-        details[open] ul li:nth-child(3) { transition-delay: 200ms; }
-        details[open] ul li:nth-child(4) { transition-delay: 260ms; }
-        details[open] ul li:nth-child(5) { transition-delay: 320ms; }
-        details[open] ul li:nth-child(6) { transition-delay: 380ms; }
+        details[open] ul li:nth-child(1) {
+          transition-delay: 80ms;
+        }
+        details[open] ul li:nth-child(2) {
+          transition-delay: 140ms;
+        }
+        details[open] ul li:nth-child(3) {
+          transition-delay: 200ms;
+        }
+        details[open] ul li:nth-child(4) {
+          transition-delay: 260ms;
+        }
+        details[open] ul li:nth-child(5) {
+          transition-delay: 320ms;
+        }
+        details[open] ul li:nth-child(6) {
+          transition-delay: 380ms;
+        }
 
-        details[open] ul li { transform: translateY(0); opacity: 1; }
+        details[open] ul li {
+          transform: translateY(0);
+          opacity: 1;
+        }
 
         /* Ensure content appears above divider */
         details summary,
@@ -339,10 +458,15 @@ const companyEmail = 'info@mehtapetro.com';
         }
 
         /* Remove hover transform/highlight on mobile to avoid sudden visual feedback */
-        details summary:hover { background: transparent; transform: none; }
+        details summary:hover {
+          background: transparent;
+          transform: none;
+        }
 
         /* Make the follow-us block centered on mobile (heading + icons) */
-        .footer-follow { text-align: center; }
+        .footer-follow {
+          text-align: center;
+        }
         .footer-follow-icons {
           width: 100%;
           justify-content: center;
@@ -351,7 +475,10 @@ const companyEmail = 'info@mehtapetro.com';
         }
 
         /* Ensure icon children are spaced evenly and remain tappable */
-        .footer-follow-icons > * { margin-left: 0.375rem; margin-right: 0.375rem; }
+        .footer-follow-icons > * {
+          margin-left: 0.375rem;
+          margin-right: 0.375rem;
+        }
       }
     </style>
   </div>

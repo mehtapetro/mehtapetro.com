@@ -5,7 +5,9 @@ function isMobile() {
   return window.matchMedia('(max-width: 1023px)').matches;
 }
 
-function clamp(v, a, b) { return Math.max(a, Math.min(b, v)); }
+function clamp(v, a, b) {
+  return Math.max(a, Math.min(b, v));
+}
 
 function animateSpring(element, getTargetHeight, onComplete) {
   let running = true;
@@ -32,7 +34,8 @@ function animateSpring(element, getTargetHeight, onComplete) {
     height += velocity * dt * 1000; // scale to px/s
 
     // small threshold to stop
-    const isSettled = Math.abs(velocity) < 0.02 && Math.abs(height - target) < 0.5;
+    const isSettled =
+      Math.abs(velocity) < 0.02 && Math.abs(height - target) < 0.5;
 
     element.style.height = `${Math.max(0, height)}px`;
 
@@ -47,7 +50,9 @@ function animateSpring(element, getTargetHeight, onComplete) {
 
   requestAnimationFrame(frame);
 
-  return () => { running = false; };
+  return () => {
+    running = false;
+  };
 }
 
 function initFooterAccordions() {
@@ -63,7 +68,9 @@ function initFooterAccordions() {
     if (!summary) return;
 
     // find the first sibling element that is not summary
-    const content = Array.from(details.children).find(n => n.tagName.toLowerCase() !== 'summary');
+    const content = Array.from(details.children).find(
+      n => n.tagName.toLowerCase() !== 'summary'
+    );
     if (!content) return;
 
     // don't modify layout on init to avoid jumps; only set styles when animating
@@ -95,14 +102,18 @@ function initFooterAccordions() {
 
       const targetH = measureOpenHeight();
 
-      animCancel = animateSpring(content, () => targetH, () => {
-        isAnimating = false;
-        details.setAttribute('open', '');
-        content.style.height = '';
-        content.style.overflow = '';
-        content.style.willChange = '';
-        animCancel = null;
-      });
+      animCancel = animateSpring(
+        content,
+        () => targetH,
+        () => {
+          isAnimating = false;
+          details.setAttribute('open', '');
+          content.style.height = '';
+          content.style.overflow = '';
+          content.style.willChange = '';
+          animCancel = null;
+        }
+      );
     }
 
     function closeNow() {
@@ -118,17 +129,21 @@ function initFooterAccordions() {
       content.style.willChange = 'height, opacity';
       content.style.height = `${startH}px`;
 
-      animCancel = animateSpring(content, () => 0, () => {
-        isAnimating = false;
-        details.removeAttribute('open');
-        content.style.height = '';
-        content.style.overflow = '';
-        content.style.willChange = '';
-        animCancel = null;
-      });
+      animCancel = animateSpring(
+        content,
+        () => 0,
+        () => {
+          isAnimating = false;
+          details.removeAttribute('open');
+          content.style.height = '';
+          content.style.overflow = '';
+          content.style.willChange = '';
+          animCancel = null;
+        }
+      );
     }
 
-    summary.addEventListener('click', (e) => {
+    summary.addEventListener('click', e => {
       // only handle on mobile
       if (!isMobile()) return;
       e.preventDefault();
@@ -139,7 +154,7 @@ function initFooterAccordions() {
     });
 
     // keyboard: space/enter
-    summary.addEventListener('keydown', (e) => {
+    summary.addEventListener('keydown', e => {
       if (!isMobile()) return;
       if (e.key === ' ' || e.key === 'Enter') {
         e.preventDefault();

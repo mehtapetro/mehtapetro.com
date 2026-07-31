@@ -6,7 +6,9 @@ import { SITE } from '@data/constants';
 import { getCatalogItem, getProductCatalog } from '@data/productCatalog';
 
 export async function getStaticPaths() {
-  const categories = await getCollection('products', ({ id }) => id.startsWith('en/'));
+  const categories = await getCollection('products', ({ id }) =>
+    id.startsWith('en/')
+  );
 
   return categories.flatMap(category => {
     const categoryId = category.id.replace(/^en\//, '');
@@ -19,7 +21,8 @@ export async function getStaticPaths() {
 
 const { category, product } = Astro.props;
 const categoryId = category.id.replace(/^en\//, '');
-const resolvedProduct = getCatalogItem('en', categoryId, product.slug) || product;
+const resolvedProduct =
+  getCatalogItem('en', categoryId, product.slug) || product;
 
 const pageTitle: string = `${resolvedProduct.title} | ${SITE.title}`;
 const metaDescription = resolvedProduct.description;

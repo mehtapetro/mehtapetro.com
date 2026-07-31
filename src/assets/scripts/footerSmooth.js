@@ -15,13 +15,18 @@ function initFooterSmooth() {
   detailsList.forEach(details => {
     const summary = details.querySelector('summary');
     if (!summary) return;
-    const content = Array.from(details.children).find(c => c.tagName.toLowerCase() !== 'summary');
+    const content = Array.from(details.children).find(
+      c => c.tagName.toLowerCase() !== 'summary'
+    );
     if (!content) return;
 
     // Ensure content has transition styles
     content.style.overflow = 'hidden';
-    content.style.transition = 'max-height 520ms cubic-bezier(.22,.9,.29,1), opacity 420ms ease';
-    content.style.maxHeight = details.hasAttribute('open') ? `${content.scrollHeight}px` : '0px';
+    content.style.transition =
+      'max-height 520ms cubic-bezier(.22,.9,.29,1), opacity 420ms ease';
+    content.style.maxHeight = details.hasAttribute('open')
+      ? `${content.scrollHeight}px`
+      : '0px';
     content.style.opacity = details.hasAttribute('open') ? '1' : '0';
 
     let transitioning = false;
@@ -36,7 +41,7 @@ function initFooterSmooth() {
       content.style.maxHeight = `${content.scrollHeight}px`;
       content.style.opacity = '1';
 
-      const onEnd = (e) => {
+      const onEnd = e => {
         if (e.target !== content) return;
         content.removeEventListener('transitionend', onEnd);
         // cleanup inline maxHeight so it can expand naturally if content changes
@@ -58,11 +63,11 @@ function initFooterSmooth() {
       // set explicit starting height then collapse to 0
       content.style.maxHeight = `${content.scrollHeight}px`;
       // force reflow
-      ;(content.offsetHeight);
+      content.offsetHeight;
       content.style.maxHeight = '0px';
       content.style.opacity = '0';
 
-      const onEnd = (e) => {
+      const onEnd = e => {
         if (e.target !== content) return;
         content.removeEventListener('transitionend', onEnd);
         details.removeAttribute('open');
@@ -74,7 +79,7 @@ function initFooterSmooth() {
       content.addEventListener('transitionend', onEnd);
     }
 
-    summary.addEventListener('click', (e) => {
+    summary.addEventListener('click', e => {
       if (!isMobile()) return; // only on mobile
       e.preventDefault();
 
@@ -82,7 +87,7 @@ function initFooterSmooth() {
       else open();
     });
 
-    summary.addEventListener('keydown', (e) => {
+    summary.addEventListener('keydown', e => {
       if (!isMobile()) return;
       if (e.key === ' ' || e.key === 'Enter') {
         e.preventDefault();
@@ -104,7 +109,8 @@ function initFooterSmooth() {
   });
 }
 
-if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initFooterSmooth);
+if (document.readyState === 'loading')
+  document.addEventListener('DOMContentLoaded', initFooterSmooth);
 else initFooterSmooth();
 
 export {};

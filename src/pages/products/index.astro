@@ -29,8 +29,7 @@ const iconMap: Record<string, string> = {
     'M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z',
   'acid-corrosion-inhibitors':
     'M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z',
-  'trading-solvents':
-    'M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4',
+  'trading-solvents': 'M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4',
 };
 
 const productEntries = (
@@ -61,7 +60,7 @@ const featuredCategory = categoryCards[0];
 
 const pageTitle: string = `Products | ${SITE.title}`;
 const metaDescription =
-  'Explore Mehta Petro-Refineries Limited\'s comprehensive range of petrochemical solvents, specialty base oils, n-paraffins, olefins, and specialty chemicals.';
+  "Explore Mehta Petro-Refineries Limited's comprehensive range of petrochemical solvents, specialty base oils, n-paraffins, olefins, and specialty chemicals.";
 const ogTitle = 'Products | Mehta Petro';
 ---
 
@@ -79,31 +78,59 @@ const ogTitle = 'Products | Mehta Petro';
     inLanguage: 'en-US',
   }}
 >
-  <section class="mx-auto mt-10 max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
+  <section
+    class="mx-auto mt-10 max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14"
+  >
     <div class="grid items-center gap-10 lg:grid-cols-[1fr_0.9fr] lg:gap-14">
       <div>
-        <span class="inline-flex rounded-full border border-[#C0D6FF] bg-white px-4 py-1 text-xs font-semibold tracking-wider text-[#0039E6] uppercase">
+        <span
+          class="inline-flex rounded-full border border-[#C0D6FF] bg-white px-4 py-1 text-xs font-semibold tracking-wider text-[#0039E6] uppercase"
+        >
           Our Products
         </span>
-        <h1 class="mt-6 max-w-4xl text-4xl font-extrabold tracking-tight text-balance text-[#0A1F4D] md:text-5xl">
-          Industrial Products Built for Consistent Supply and Practical Performance
+        <h1
+          class="mt-6 max-w-4xl text-4xl font-extrabold tracking-tight text-balance text-[#0A1F4D] md:text-5xl"
+        >
+          Industrial Products Built for Consistent Supply and Practical
+          Performance
         </h1>
-        <p class="mt-5 max-w-3xl text-base leading-relaxed text-[#4A5F8C] sm:text-lg">
-          Explore our petrochemical range across solvents, base oils, glycols, drilling fluids, and specialty additives. Each category is organized to help industrial buyers quickly find the right product and request details with confidence.
+        <p
+          class="mt-5 max-w-3xl text-base leading-relaxed text-[#4A5F8C] sm:text-lg"
+        >
+          Explore our petrochemical range across solvents, base oils, glycols,
+          drilling fluids, and specialty additives. Each category is organized
+          to help industrial buyers quickly find the right product and request
+          details with confidence.
         </p>
 
         <div class="mt-8 grid gap-4 sm:grid-cols-3">
-          <div class="rounded-2xl border border-[#D4E4FF] bg-white p-5 shadow-lg">
-            <div class="text-3xl font-extrabold text-[#0039E6]">{categoryCards.length}</div>
-            <p class="mt-2 text-sm font-semibold text-[#0A1F4D]">Product Categories</p>
+          <div
+            class="rounded-2xl border border-[#D4E4FF] bg-white p-5 shadow-lg"
+          >
+            <div class="text-3xl font-extrabold text-[#0039E6]">
+              {categoryCards.length}
+            </div>
+            <p class="mt-2 text-sm font-semibold text-[#0A1F4D]">
+              Product Categories
+            </p>
           </div>
-          <div class="rounded-2xl border border-[#D4E4FF] bg-white p-5 shadow-lg">
-            <div class="text-3xl font-extrabold text-[#0039E6]">{totalProducts}</div>
-            <p class="mt-2 text-sm font-semibold text-[#0A1F4D]">Products Listed</p>
+          <div
+            class="rounded-2xl border border-[#D4E4FF] bg-white p-5 shadow-lg"
+          >
+            <div class="text-3xl font-extrabold text-[#0039E6]">
+              {totalProducts}
+            </div>
+            <p class="mt-2 text-sm font-semibold text-[#0A1F4D]">
+              Products Listed
+            </p>
           </div>
-          <div class="rounded-2xl border border-[#D4E4FF] bg-white p-5 shadow-lg">
+          <div
+            class="rounded-2xl border border-[#D4E4FF] bg-white p-5 shadow-lg"
+          >
             <div class="text-3xl font-extrabold text-[#0039E6]">B2B</div>
-            <p class="mt-2 text-sm font-semibold text-[#0A1F4D]">Industrial Focus</p>
+            <p class="mt-2 text-sm font-semibold text-[#0A1F4D]">
+              Industrial Focus
+            </p>
           </div>
         </div>
       </div>
@@ -117,7 +144,7 @@ const ogTitle = 'Products | Mehta Petro';
                 alt={featuredCategory.imageAlt}
                 class="h-80 w-full object-cover"
               />
-              <div class="absolute inset-0 bg-linear-to-t from-[#0A1F4D]/78 via-[#0A1F4D]/30 to-transparent"></div>
+              <div class="absolute inset-0 bg-linear-to-t from-[#0A1F4D]/78 via-[#0A1F4D]/30 to-transparent" />
               <div class="absolute inset-x-0 bottom-0 p-6 sm:p-7">
                 <p class="text-xs font-semibold tracking-wide text-white/80 uppercase">
                   Featured Category
@@ -132,7 +159,8 @@ const ogTitle = 'Products | Mehta Petro';
             </div>
             <div class="flex flex-wrap items-center justify-between gap-4 p-6">
               <p class="text-sm leading-relaxed text-[#4A5F8C]">
-                {featuredCategory.productCount} products available in this category.
+                {featuredCategory.productCount} products available in this
+                category.
               </p>
               <a
                 href={featuredCategory.href}
@@ -148,7 +176,9 @@ const ogTitle = 'Products | Mehta Petro';
   </section>
 
   <section class="mx-auto max-w-[85rem] px-4 py-6 sm:px-6 lg:px-8 lg:py-10">
-    <div class="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+    <div
+      class="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between"
+    >
       <div>
         <p class="text-sm font-semibold tracking-wide text-[#0039E6] uppercase">
           Categories
@@ -157,8 +187,11 @@ const ogTitle = 'Products | Mehta Petro';
           Browse by product category
         </h2>
       </div>
-      <p class="max-w-2xl text-sm leading-relaxed text-[#4A5F8C] sm:text-base sm:text-right">
-        Each category leads to a dedicated page with multiple products and individual product detail pages.
+      <p
+        class="max-w-2xl text-sm leading-relaxed text-[#4A5F8C] sm:text-right sm:text-base"
+      >
+        Each category leads to a dedicated page with multiple products and
+        individual product detail pages.
       </p>
     </div>
 
@@ -175,13 +208,23 @@ const ogTitle = 'Products | Mehta Petro';
                 alt={category.imageAlt}
                 class="h-52 w-full object-cover"
               />
-              <div class="absolute inset-0 bg-linear-to-t from-[#0A1F4D]/65 via-[#0A1F4D]/20 to-transparent"></div>
-              <div class="absolute left-4 top-4 flex h-11 w-11 items-center justify-center rounded-xl bg-white/92 text-[#0039E6] backdrop-blur-sm">
-                <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                  <path stroke-linecap="round" stroke-linejoin="round" d={category.icon} />
+              <div class="absolute inset-0 bg-linear-to-t from-[#0A1F4D]/65 via-[#0A1F4D]/20 to-transparent" />
+              <div class="absolute top-4 left-4 flex h-11 w-11 items-center justify-center rounded-xl bg-white/92 text-[#0039E6] backdrop-blur-sm">
+                <svg
+                  class="h-5 w-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d={category.icon}
+                  />
                 </svg>
               </div>
-              <div class="absolute bottom-4 right-4 rounded-full bg-white/92 px-3 py-1 text-xs font-semibold text-[#0A1F4D] backdrop-blur-sm">
+              <div class="absolute right-4 bottom-4 rounded-full bg-white/92 px-3 py-1 text-xs font-semibold text-[#0A1F4D] backdrop-blur-sm">
                 {category.productCount} products
               </div>
             </div>
@@ -207,14 +250,19 @@ const ogTitle = 'Products | Mehta Petro';
   </section>
 
   <section class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
-    <div class="rounded-2xl border border-[#D4E4FF] bg-white p-8 shadow-lg sm:p-10">
+    <div
+      class="rounded-2xl border border-[#D4E4FF] bg-white p-8 shadow-lg sm:p-10"
+    >
       <div class="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-center">
         <div>
           <h2 class="text-2xl font-bold text-[#0A1F4D] md:text-3xl">
             Need specifications, COA, or product guidance?
           </h2>
           <p class="mt-4 max-w-3xl text-base leading-relaxed text-[#4A5F8C]">
-            If you already know the category you need, open it and review the available products. If you want help selecting the right material, our team can share technical details and respond to your requirement directly.
+            If you already know the category you need, open it and review the
+            available products. If you want help selecting the right material,
+            our team can share technical details and respond to your requirement
+            directly.
           </p>
         </div>
         <div class="flex flex-col gap-3 sm:flex-row lg:flex-col">

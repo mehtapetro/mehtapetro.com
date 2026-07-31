@@ -28,7 +28,9 @@ const selectedCountry = countryPhoneCodes.find(
 );
 ---
 
-<div class="grid grid-cols-1 gap-3 sm:grid-cols-[minmax(0,180px)_minmax(0,1fr)]">
+<div
+  class="grid grid-cols-1 gap-3 sm:grid-cols-[minmax(0,180px)_minmax(0,1fr)]"
+>
   <div>
     <label for={countryId} class="sr-only">{countryLabel}</label>
     <select

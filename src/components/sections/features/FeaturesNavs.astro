@@ -70,15 +70,15 @@ interface Props {
           <div>
             {
               tabs.map((tab, index) => (
-                  <TabContent
-                    id={`tabs-with-card-${index + 1}`}
-                    aria={`tabs-with-card-item-${index + 1}`}
-                    src={tab.src}
-                    alt={tab.alt}
-                    first={tab.first}
-                    second={tab.second}
-                    srcName={tab.srcName}
-                  />
+                <TabContent
+                  id={`tabs-with-card-${index + 1}`}
+                  aria={`tabs-with-card-item-${index + 1}`}
+                  src={tab.src}
+                  alt={tab.alt}
+                  first={tab.first}
+                  second={tab.second}
+                  srcName={tab.srcName}
+                />
               ))
             }
           </div>
