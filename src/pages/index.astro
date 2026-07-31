@@ -1,473 +1,263 @@
 ---
 import MainLayout from '@/layouts/MainLayout.astro';
 import ClientsSection from '@components/sections/landing/ClientsSection.astro';
-import FeaturesGeneral from '@components/sections/features/FeaturesGeneral.astro';
 import FeaturesNavs from '@components/sections/features/FeaturesNavs.astro';
 import FAQ from '@components/sections/misc/FAQ.astro';
-import introVideo from '@images/intro.mp4?url';
+import introVideo from '@images/intro-hero.mp4?url';
+import introPoster from '@images/intro-poster.jpg';
 import faqs from '@data/faqs.json';
-import features from '@data/features.json';
 import construction from '@images/construction-image.avif';
 import tools from '@images/automated-tools.avif';
 import dashboard from '@images/dashboard-image.avif';
+import isoLogo from '@images/iso/ISO.svg';
+import mprlLogo from '@images/mprl_logo.png';
 import { clientLogos } from '@/data_files/clientLogos';
 ---
 
 <MainLayout fullWidth overlayNav>
-  <section class="relative min-h-screen overflow-hidden bg-[#091126]">
+  <!-- Hero Section -->
+  <section class="relative h-screen min-h-[720px] overflow-hidden bg-[#07142F]">
     <video
       class="absolute inset-0 h-full w-full object-cover"
       src={introVideo}
+      poster={introPoster.src}
       autoplay
       muted
       loop
       playsinline
-      preload="auto"
-      aria-label="Mehta Petro-Refineries Limited introduction video"></video>
+      preload="metadata"
+      disablepictureinpicture
+      aria-label="Mehta Petro-Refineries Limited facility"></video>
 
     <div
-      class="absolute inset-0 bg-linear-to-br from-[#061022]/76 via-[#091126]/52 to-[#0C1C4C]/72"
+      class="absolute inset-0 bg-linear-to-br from-[#061022]/45 via-[#091126]/28 to-[#0C1C4C]/38"
     >
     </div>
     <div
-      class="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.18),transparent_30%),radial-gradient(circle_at_bottom_right,rgba(30,58,255,0.28),transparent_24%)]"
+      class="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.18),transparent_34%),radial-gradient(circle_at_bottom_right,rgba(0,57,230,0.28),transparent_28%)]"
     >
     </div>
 
     <div
-      class="relative z-10 mx-auto flex min-h-screen w-full max-w-[85rem] items-center px-4 sm:px-6 lg:px-8"
+      class="relative z-10 mx-auto flex h-full w-full max-w-[85rem] items-center px-4 sm:px-6 lg:px-8"
     >
-      <div
-        class="grid w-full gap-10 pt-32 pb-14 sm:pt-36 sm:pb-16 lg:grid-cols-[minmax(0,1.15fr)_minmax(20rem,0.85fr)] lg:items-end lg:gap-12 lg:pt-40 lg:pb-18"
-      >
-        <div class="max-w-4xl text-white">
-          <span
-            class="inline-flex rounded-full border border-white/20 bg-white/12 px-4 py-1.5 text-xs font-semibold tracking-[0.18em] uppercase backdrop-blur-sm"
-          >
-            Since 1993 • Serving Society through Science
-          </span>
+      <div class="w-full pt-28 pb-16 sm:pt-32 sm:pb-20 lg:pt-24 lg:pb-16">
+        <div class="w-full max-w-6xl">
+          <div class="mb-8 sm:mb-10">
+            <img src={mprlLogo.src} alt="Mehta Petro-Refineries Limited" class="h-18 w-auto sm:h-20 md:h-24" />
+          </div>
 
           <h1
-            class="mt-6 max-w-5xl text-4xl font-extrabold tracking-tight text-balance sm:text-5xl lg:text-7xl lg:leading-[1.05]"
+            class="w-full max-w-6xl text-4xl font-extrabold tracking-tight text-balance text-white sm:text-5xl md:text-6xl lg:text-[4.35rem] lg:leading-none lg:whitespace-nowrap"
           >
             Mehta Petro-Refineries Limited
           </h1>
 
-          <p
-            class="mt-5 max-w-3xl text-base leading-8 text-white/84 sm:text-lg"
-          >
-            Trusted industrial supply for petrochemical solvents, specialty base
-            oils, n-paraffins, olefins, and performance-focused chemical
-            solutions backed by practical service, dependable quality, and
-            responsive coordination.
+          <p class="mt-6 max-w-2xl text-base leading-relaxed text-white/86 sm:text-lg">
+            Reliable supply of solvents, base oils, glycols, and specialty chemicals backed by clear specifications and responsive support.
           </p>
 
-          <div
-            class="mt-8 flex flex-col items-start gap-3 sm:flex-row sm:flex-wrap"
-          >
+          <div class="mt-9 flex flex-col gap-4 sm:flex-row">
             <a
               href="/contact"
-              class="inline-flex items-center justify-center rounded-xl bg-[#1E3AFF] px-6 py-3 text-sm font-semibold text-white transition duration-300 hover:bg-[#1632E0]"
+              class="inline-flex items-center justify-center rounded-xl bg-[#0039E6] px-7 py-4 text-base font-semibold text-white shadow-lg transition-colors hover:bg-[#0033CC]"
             >
-              Contact Team
+              Get in Touch
             </a>
             <a
-              href="/capabilities"
-              class="inline-flex items-center justify-center rounded-xl border border-white/18 bg-white/10 px-6 py-3 text-sm font-semibold text-white backdrop-blur-sm transition duration-300 hover:bg-white/16"
+              href="/products"
+              class="inline-flex items-center justify-center rounded-xl border border-white/24 bg-white/12 px-7 py-4 text-base font-semibold text-white backdrop-blur-md transition-colors hover:bg-white/18"
             >
-              Explore Capabilities
+              View Our Products
             </a>
           </div>
 
-          <div class="mt-8 flex flex-wrap gap-3">
-            <span
-              class="inline-flex rounded-full border border-white/16 bg-white/10 px-4 py-2 text-sm font-medium text-white/90 backdrop-blur-sm"
-            >
-              Trusted Clients
-            </span>
-            <span
-              class="inline-flex rounded-full border border-white/16 bg-white/10 px-4 py-2 text-sm font-medium text-white/90 backdrop-blur-sm"
-            >
-              Long-Term Supply Relationships
-            </span>
-            <span
-              class="inline-flex rounded-full border border-white/16 bg-white/10 px-4 py-2 text-sm font-medium text-white/90 backdrop-blur-sm"
-            >
-              Quality-First Supply
-            </span>
-          </div>
-        </div>
-
-        <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-1">
-          <div
-            class="rounded-[1.75rem] border border-white/14 bg-white/10 p-6 text-white shadow-[0_32px_80px_-56px_rgba(0,0,0,0.85)] backdrop-blur-md"
-          >
-            <p
-              class="text-xs font-semibold tracking-[0.16em] text-white/72 uppercase"
-            >
-              Industrial strengths
-            </p>
-            <div class="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-2">
-              <div>
-                <p class="text-3xl font-extrabold">33+</p>
-                <p class="mt-1 text-sm text-white/72">
-                  years of industry presence
-                </p>
-              </div>
-              <div>
-                <p class="text-3xl font-extrabold">2</p>
-                <p class="mt-1 text-sm text-white/72">
-                  facilities across key locations
-                </p>
-              </div>
-              <div>
-                <p class="text-sm font-semibold text-white">
-                  Reliable documentation
-                </p>
-                <p class="mt-1 text-sm leading-6 text-white/72">
-                  Product information and commercial clarity for informed
-                  decisions.
-                </p>
-              </div>
-              <div>
-                <p class="text-sm font-semibold text-white">
-                  Responsive coordination
-                </p>
-                <p class="mt-1 text-sm leading-6 text-white/72">
-                  Practical support from inquiry to supply planning and
-                  dispatch.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div
-            class="rounded-[1.75rem] border border-white/14 bg-[#0A1634]/54 p-6 text-white shadow-[0_32px_80px_-56px_rgba(0,0,0,0.85)] backdrop-blur-md"
-          >
-            <p
-              class="text-xs font-semibold tracking-[0.16em] text-white/72 uppercase"
-            >
-              Operational focus
-            </p>
-            <ul class="mt-5 space-y-3 text-sm leading-6 text-white/82">
-              <li class="flex gap-3">
-                <span
-                  class="mt-1 h-2.5 w-2.5 shrink-0 rounded-full bg-[#6D89FF]"
-                ></span>
-                Industrial solutions aligned to application, quality, and supply expectations.
-              </li>
-              <li class="flex gap-3">
-                <span
-                  class="mt-1 h-2.5 w-2.5 shrink-0 rounded-full bg-[#6D89FF]"
-                ></span>
-                Support for recurring requirements and dependable buyer relationships.
-              </li>
-              <li class="flex gap-3">
-                <span
-                  class="mt-1 h-2.5 w-2.5 shrink-0 rounded-full bg-[#6D89FF]"
-                ></span>
-                Responsive commercial coordination from product inquiry to dispatch
-                planning.
-              </li>
-            </ul>
+          <div class="mt-8 flex flex-wrap gap-3 text-sm text-white/90">
+            <span class="rounded-full border border-white/18 bg-white/10 px-4 py-2 backdrop-blur-sm">Aromatic & aliphatic solvents</span>
+            <span class="rounded-full border border-white/18 bg-white/10 px-4 py-2 backdrop-blur-sm">Base oils & glycols</span>
+            <span class="rounded-full border border-white/18 bg-white/10 px-4 py-2 backdrop-blur-sm">Drilling fluids & additives</span>
           </div>
         </div>
       </div>
     </div>
 
-    <div
-      class="absolute inset-x-0 bottom-0 h-24 bg-linear-to-t from-[#EEF4FF] via-[#EEF4FF]/65 to-transparent"
-    >
-    </div>
+    <div class="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-linear-to-t from-[#E8F0FF] to-transparent"></div>
   </section>
 
-  <section
-    class="relative z-20 mx-auto -mt-14 max-w-[85rem] px-4 sm:px-6 lg:px-8"
-  >
-    <div class="grid gap-4 md:grid-cols-3">
-      <div
-        class="rounded-[1.6rem] border border-[#DCE8FF] bg-white/90 p-6 shadow-[0_28px_70px_-52px_rgba(30,58,255,0.42)] backdrop-blur-sm"
-      >
-        <p class="text-sm font-semibold text-[#1E3AFF]">Dependable legacy</p>
-        <h2 class="mt-2 text-xl font-bold text-neutral-800">
-          Over 33 years of trusted industrial support
-        </h2>
-        <p class="mt-3 text-sm leading-6 text-neutral-600">
-          Built on continuity, commercial clarity, and long-term customer
-          relationships.
+  <!-- Overview Section -->
+  <section class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <div class="rounded-2xl border border-[#D4E4FF] bg-white p-8 shadow-lg">
+        <div class="text-5xl font-extrabold text-[#0039E6] sm:text-6xl">33+</div>
+        <h3 class="mt-4 text-lg font-bold text-[#0A1F4D]">Years of Experience</h3>
+        <p class="mt-2 text-sm leading-relaxed text-[#4A5F8C]">
+          Serving industrial customers since 1993.
         </p>
       </div>
-      <div
-        class="rounded-[1.6rem] border border-[#DCE8FF] bg-white/90 p-6 shadow-[0_28px_70px_-52px_rgba(30,58,255,0.42)] backdrop-blur-sm"
-      >
-        <p class="text-sm font-semibold text-[#1E3AFF]">
-          Multi-location operations
-        </p>
-        <h2 class="mt-2 text-xl font-bold text-neutral-800">
-          Stronger reach through strategic facilities
-        </h2>
-        <p class="mt-3 text-sm leading-6 text-neutral-600">
-          Operations across different locations support planning flexibility and
-          industrial servicing.
+
+      <div class="rounded-2xl border border-[#D4E4FF] bg-white p-8 shadow-lg">
+        <div class="text-5xl font-extrabold text-[#0039E6] sm:text-6xl">2</div>
+        <h3 class="mt-4 text-lg font-bold text-[#0A1F4D]">Manufacturing Facilities</h3>
+        <p class="mt-2 text-sm leading-relaxed text-[#4A5F8C]">
+          Facilities in Palghar and Dahej supporting reliable production.
         </p>
       </div>
-      <div
-        class="rounded-[1.6rem] border border-[#DCE8FF] bg-white/90 p-6 shadow-[0_28px_70px_-52px_rgba(30,58,255,0.42)] backdrop-blur-sm"
-      >
-        <p class="text-sm font-semibold text-[#1E3AFF]">Customer response</p>
-        <h2 class="mt-2 text-xl font-bold text-neutral-800">
-          From inquiry to dispatch support
-        </h2>
-        <p class="mt-3 text-sm leading-6 text-neutral-600">
-          Our team focuses on product guidance, documentation, and responsive
-          coordination.
+
+      <div class="rounded-2xl border border-[#D4E4FF] bg-white p-8 shadow-lg sm:col-span-2 lg:col-span-1">
+        <div class="flex h-16 items-center">
+          <img src={isoLogo.src} alt="ISO 9001:2015 Certified" class="h-16 w-auto" />
+        </div>
+        <h3 class="mt-4 text-lg font-bold text-[#0A1F4D]">ISO 9001:2015 Certified</h3>
+        <p class="mt-2 text-sm leading-relaxed text-[#4A5F8C]">
+          Quality systems aligned with consistent industrial supply.
         </p>
       </div>
     </div>
   </section>
 
+  <!-- Clients Section -->
   <ClientsSection
-    title="Trusted Across Industrial Sectors"
-    subTitle="Supporting manufacturers, processors, and industrial buyers with dependable supply and responsive service."
+    title="Trusted by Industry Leaders"
+    subTitle="We're proud to partner with manufacturers and processors who demand reliability."
     partners={clientLogos}
   />
 
-  <section class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
-    <div class="grid gap-8 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)]">
-      <div
-        class="rounded-[2rem] border border-[#DCE8FF] bg-white/88 p-6 shadow-[0_30px_80px_-52px_rgba(30,58,255,0.3)] sm:p-8"
-      >
-        <span
-          class="text-sm font-semibold tracking-[0.14em] text-[#1E3AFF] uppercase"
+  <!-- Core Message -->
+  <section
+    class="mx-auto max-w-[85rem] px-4 py-16 sm:px-6 lg:px-8 lg:py-24"
+  >
+    <div class="grid gap-12 lg:grid-cols-2 lg:gap-16">
+      <!-- Left Content -->
+      <div>
+        <div class="inline-flex items-center gap-2 rounded-full bg-[#E8F0FF] px-4 py-2">
+          <span class="text-sm font-semibold text-[#0039E6]">Our Approach</span>
+        </div>
+        
+        <h2
+          class="mt-6 text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-[#0A1F4D]"
         >
-          Built around industrial needs
-        </span>
-        <h2 class="mt-3 text-3xl font-bold text-balance text-neutral-800">
-          A more focused way to support your product and supply requirements
+          Built for dependable industrial supply.
         </h2>
-        <p class="mt-4 max-w-3xl text-base leading-7 text-neutral-600">
-          Mehta Petro combines product understanding, responsive coordination,
-          and dependable commercial support so buyers can move faster with more
-          confidence.
+
+        <p class="mt-6 text-base leading-relaxed text-[#4A5F8C] sm:text-lg">
+          We help industrial buyers source the right material with clear documentation, responsive communication, and supply support that fits day-to-day operations.
         </p>
 
-        <div class="mt-8 grid gap-5 md:grid-cols-2">
-          <article
-            class="rounded-[1.5rem] border border-[#DCE8FF] bg-[#F8FAFF] p-5"
-          >
-            <p
-              class="text-xs font-semibold tracking-[0.16em] text-[#1E3AFF] uppercase"
-            >
-              01
-            </p>
-            <h3 class="mt-2 text-xl font-bold text-neutral-800">
-              Discuss your requirement
-            </h3>
-            <p class="mt-3 text-sm leading-6 text-neutral-600">
-              Share your product category, volume expectation, or application
-              need with our team.
-            </p>
-          </article>
+        <div class="mt-8 space-y-4">
+          <div class="flex items-start gap-4">
+            <div class="mt-1 flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#E8F0FF]">
+              <svg class="h-5 w-5 text-[#0039E6]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+            </div>
+            <div>
+              <h4 class="font-semibold text-[#0A1F4D]">Same-Day Quotes</h4>
+              <p class="mt-1 text-sm text-[#4A5F8C]">Get pricing and availability fast</p>
+            </div>
+          </div>
 
-          <article
-            class="rounded-[1.5rem] border border-[#DCE8FF] bg-[#F8FAFF] p-5"
-          >
-            <p
-              class="text-xs font-semibold tracking-[0.16em] text-[#1E3AFF] uppercase"
-            >
-              02
-            </p>
-            <h3 class="mt-2 text-xl font-bold text-neutral-800">
-              Receive practical support
-            </h3>
-            <p class="mt-3 text-sm leading-6 text-neutral-600">
-              Get documentation, product information, and commercial guidance
-              tailored to your requirement.
-            </p>
-          </article>
+          <div class="flex items-start gap-4">
+            <div class="mt-1 flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#E8F0FF]">
+              <svg class="h-5 w-5 text-[#0039E6]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
+            </div>
+            <div>
+              <h4 class="font-semibold text-[#0A1F4D]">Complete Documentation</h4>
+              <p class="mt-1 text-sm text-[#4A5F8C]">COAs, MSDSs, and specs upfront</p>
+            </div>
+          </div>
 
-          <article
-            class="rounded-[1.5rem] border border-[#DCE8FF] bg-[#F8FAFF] p-5"
-          >
-            <p
-              class="text-xs font-semibold tracking-[0.16em] text-[#1E3AFF] uppercase"
-            >
-              03
-            </p>
-            <h3 class="mt-2 text-xl font-bold text-neutral-800">
-              Plan with confidence
-            </h3>
-            <p class="mt-3 text-sm leading-6 text-neutral-600">
-              Work with a team focused on clear communication, consistency, and
-              ongoing support.
-            </p>
-          </article>
-
-          <article
-            class="rounded-[1.5rem] border border-[#DCE8FF] bg-[#F8FAFF] p-5"
-          >
-            <p
-              class="text-xs font-semibold tracking-[0.16em] text-[#1E3AFF] uppercase"
-            >
-              04
-            </p>
-            <h3 class="mt-2 text-xl font-bold text-neutral-800">
-              Build long-term continuity
-            </h3>
-            <p class="mt-3 text-sm leading-6 text-neutral-600">
-              Develop a dependable relationship for recurring industrial product
-              and supply needs.
-            </p>
-          </article>
+          <div class="flex items-start gap-4">
+            <div class="mt-1 flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#E8F0FF]">
+              <svg class="h-5 w-5 text-[#0039E6]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <div>
+              <h4 class="font-semibold text-[#0A1F4D]">On-Time Delivery</h4>
+              <p class="mt-1 text-sm text-[#4A5F8C]">Your schedule is our priority</p>
+            </div>
+          </div>
         </div>
+
+        <a
+          href="/contact"
+          class="mt-8 inline-flex items-center text-[#0039E6] font-semibold transition-colors hover:text-[#0033CC]"
+        >
+          Talk to our team
+        </a>
       </div>
 
-      <div
-        class="rounded-[2rem] border border-[#DCE8FF] bg-[#10245F] p-6 text-white shadow-[0_32px_85px_-55px_rgba(16,36,95,0.8)] sm:p-8"
-      >
-        <span
-          class="text-sm font-semibold tracking-[0.14em] text-white/72 uppercase"
-        >
-          Why teams choose Mehta Petro
-        </span>
-        <h2 class="mt-3 text-3xl font-bold text-balance">
-          Commercial clarity with operational confidence
-        </h2>
-
-        <div class="mt-8 space-y-4">
-          <div class="rounded-2xl border border-white/10 bg-white/6 p-5">
-            <h3 class="text-lg font-semibold">Quality-conscious supply</h3>
-            <p class="mt-2 text-sm leading-6 text-white/72">
-              A practical focus on product consistency and suitability for
-              industrial applications.
-            </p>
-          </div>
-          <div class="rounded-2xl border border-white/10 bg-white/6 p-5">
-            <h3 class="text-lg font-semibold">Clear documentation</h3>
-            <p class="mt-2 text-sm leading-6 text-white/72">
-              Straightforward product and commercial information that helps
-              buyers move faster.
-            </p>
-          </div>
-          <div class="rounded-2xl border border-white/10 bg-white/6 p-5">
-            <h3 class="text-lg font-semibold">Responsive commercial support</h3>
-            <p class="mt-2 text-sm leading-6 text-white/72">
-              Timely communication for product queries, coordination, and
-              ongoing requirements.
-            </p>
-          </div>
-          <div class="rounded-2xl border border-white/10 bg-white/6 p-5">
-            <h3 class="text-lg font-semibold">
-              Long-term relationship mindset
-            </h3>
-            <p class="mt-2 text-sm leading-6 text-white/72">
-              Built around dependable service, continuity, and trust across
-              repeat business cycles.
-            </p>
-          </div>
+      <!-- Right Support Grid -->
+      <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6">
+        <div class="rounded-xl border border-[#D4E4FF] bg-white p-6">
+          <div class="text-sm font-semibold text-[#0039E6]">Since 1993</div>
+          <div class="mt-2 text-base font-bold text-[#0A1F4D]">Long-term manufacturing experience</div>
         </div>
 
-        <div class="mt-8 rounded-[1.5rem] bg-white/10 p-5 backdrop-blur-sm">
-          <p class="text-sm font-semibold text-white">
-            Need product or capability assistance?
-          </p>
-          <p class="mt-2 text-sm leading-6 text-white/72">
-            Connect with our team for product guidance, documentation, and
-            commercial support.
-          </p>
-          <div class="mt-4 flex flex-col gap-3 sm:flex-row">
-            <a
-              href="/contact"
-              class="inline-flex items-center justify-center rounded-xl bg-white px-5 py-3 text-sm font-semibold text-[#10245F] transition duration-300 hover:bg-[#E7EEFF]"
-            >
-              Contact Team
-            </a>
-            <a
-              href="/capabilities"
-              class="inline-flex items-center justify-center rounded-xl border border-white/16 bg-white/8 px-5 py-3 text-sm font-semibold text-white transition duration-300 hover:bg-white/14"
-            >
-              View Capabilities
-            </a>
-          </div>
+        <div class="rounded-xl border border-[#D4E4FF] bg-white p-6">
+          <div class="text-sm font-semibold text-[#0039E6]">Product support</div>
+          <div class="mt-2 text-base font-bold text-[#0A1F4D]">Clear specs and documentation</div>
+        </div>
+
+        <div class="rounded-xl border border-[#D4E4FF] bg-white p-6">
+          <div class="text-sm font-semibold text-[#0039E6]">Supply network</div>
+          <div class="mt-2 text-base font-bold text-[#0A1F4D]">Palghar and Dahej facilities</div>
+        </div>
+
+        <div class="rounded-xl border border-[#D4E4FF] bg-white p-6">
+          <div class="text-sm font-semibold text-[#0039E6]">Industrial focus</div>
+          <div class="mt-2 text-base font-bold text-[#0A1F4D]">B2B sourcing with responsive coordination</div>
+        </div>
+
+        <div class="sm:col-span-2 rounded-xl border border-[#D4E4FF] bg-[#0039E6] p-6 text-white">
+          <div class="text-sm font-semibold text-white/85">Need a custom requirement?</div>
+          <div class="mt-2 text-base font-bold">We can help with product selection, packaging, and supply planning.</div>
+          <a
+            href="/contact"
+            class="mt-4 inline-flex items-center rounded-lg bg-white px-5 py-2.5 text-sm font-semibold text-[#0039E6] transition hover:bg-[#F5F9FF]"
+          >
+            Discuss Your Needs
+          </a>
         </div>
       </div>
     </div>
   </section>
 
-  <FeaturesGeneral
-    title="Built for Industrial Reliability"
-    subTitle="From sourcing and quality control to dependable dispatch and responsive support, Mehta Petro helps industrial teams keep operations moving with confidence."
-    features={features}
-  />
-
+  <!-- Product Solutions -->
   <FeaturesNavs
-    title=`Solutions from <span class="text-[#1E3AFF]">Mehta Petro</span> tailored for modern petrochemical and industrial requirements.`
+    title=`<span class="text-[#0039E6]">Product Categories</span> We Supply`
     tabs={[
       {
         heading: 'Specialty Solvents & Base Oils',
         content:
-          'Source dependable solvent and base oil solutions backed by consistent specifications, practical support, and reliable commercial coordination.',
+          'High-purity solvents and base oils for industrial applications. Consistent specs, full documentation, and bulk quantities available.',
         svg: 'tools',
         src: tools,
-        alt: 'Industrial product and logistics visual representing solvents and base oils',
+        alt: 'Chemical products and laboratory',
         first: true,
       },
       {
-        heading: 'Consistent Supply & Logistics',
+        heading: 'N-Paraffins & Olefins',
         content:
-          'Plan confidently with dependable dispatch, clear communication, and supply support designed to help your operations avoid unnecessary disruption.',
+          'Reliable supply of n-paraffins and olefins for manufacturing. Batch-tested quality with complete traceability.',
         svg: 'dashboard',
         src: dashboard,
-        alt: 'Supply planning and industrial logistics visual',
+        alt: 'Chemical processing and quality control',
         second: true,
       },
       {
-        heading: 'Responsive Commercial Support',
+        heading: 'Custom Requirements',
         content:
-          'Work with a team that values timely responses, transparent coordination, and long-term relationships built on reliability and trust.',
+          'Need something specific? We work with clients on custom formulations, packaging, and delivery schedules.',
         svg: 'house',
         src: construction,
-        alt: 'Industrial partnership and commercial support visual',
+        alt: 'Custom chemical solutions',
       },
     ]}
   />
 
-  <section class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
-    <div
-      class="overflow-hidden rounded-[2rem] border border-[#DCE8FF] bg-linear-to-r from-[#10245F] via-[#1632A1] to-[#1E3AFF] p-8 text-white shadow-[0_34px_90px_-56px_rgba(16,36,95,0.82)] md:p-10 lg:p-12"
-    >
-      <div class="grid gap-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center">
-        <div>
-          <p
-            class="text-sm font-semibold tracking-[0.16em] text-white/72 uppercase"
-          >
-            Ready to connect?
-          </p>
-          <h2 class="mt-3 text-3xl font-bold text-balance md:text-4xl">
-            Let’s discuss your industrial product and supply requirements.
-          </h2>
-          <p class="mt-4 max-w-2xl text-base leading-7 text-white/80">
-            Whether you need product guidance, documentation, or commercial
-            support, our team is ready to help you move forward with clarity.
-          </p>
-        </div>
-        <div class="flex flex-col gap-3 sm:flex-row lg:flex-col">
-          <a
-            href="/contact"
-            class="inline-flex items-center justify-center rounded-xl bg-white px-6 py-3 text-sm font-semibold text-[#10245F] transition duration-300 hover:bg-[#EAF0FF]"
-          >
-            Contact Team
-          </a>
-          <a
-            href="/about-us"
-            class="inline-flex items-center justify-center rounded-xl border border-white/16 bg-white/8 px-6 py-3 text-sm font-semibold text-white transition duration-300 hover:bg-white/14"
-          >
-            Learn About Us
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <FAQ title="Frequently<br />asked questions" faqs={faqs} />
+  <!-- FAQ -->
+  <FAQ title="Common<br />Questions" faqs={faqs} />
 </MainLayout>

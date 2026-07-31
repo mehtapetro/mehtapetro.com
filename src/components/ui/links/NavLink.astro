@@ -21,7 +21,7 @@ If URL is '/' (home page), assign ID as 'home'
   href={url}
   data-nav-url={url}
   data-astro-prefetch
-  class="rounded-lg text-base font-medium text-neutral-600 ring-zinc-500 outline-hidden transition duration-300 hover:text-[#1E3AFF] focus-visible:ring-3 md:py-3 md:text-sm 2xl:text-base"
+  class="inline-flex rounded-xl px-3 py-2 text-sm font-semibold text-[#4A5F8C] ring-zinc-500 outline-hidden transition-colors duration-300 hover:bg-[#F5F9FF] hover:text-[#0039E6] focus-visible:ring-3 md:px-4 md:py-2.5"
 >
   {name}
 </a>
@@ -41,8 +41,8 @@ If URL is '/' (home page), assign ID as 'home'
           : currentPath === href || currentPath.startsWith(`${href}/`);
 
       if (isActive) {
-        link.classList.remove('text-neutral-600', 'hover:text-[#1E3AFF]');
-        link.classList.add('text-[#1E3AFF]');
+        link.classList.remove('text-[#4A5F8C]', 'hover:bg-[#F5F9FF]', 'hover:text-[#0039E6]');
+        link.classList.add('bg-[#E8F0FF]', 'text-[#0039E6]');
         link.setAttribute('aria-current', 'page');
       }
     });

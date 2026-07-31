@@ -6,7 +6,7 @@ function setStatus(statusElement, message, variant) {
     'hidden',
     'text-red-600',
     'text-emerald-700',
-    'text-[#1E3AFF]',
+    'text-[#0039E6]',
     'opacity-0'
   );
   statusElement.classList.add('transition-opacity', 'duration-500');
@@ -21,7 +21,7 @@ function setStatus(statusElement, message, variant) {
     return;
   }
 
-  statusElement.classList.add('text-[#1E3AFF]');
+  statusElement.classList.add('text-[#0039E6]');
 }
 
 function hideStatus(statusElement) {

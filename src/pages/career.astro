@@ -1,0 +1,134 @@
+---
+import MainLayout from '@/layouts/MainLayout.astro';
+import { SITE } from '@data/constants';
+
+const pageTitle = `Career | ${SITE.title}`;
+const metaDescription = 'Join our team at Mehta Petro-Refineries Limited. Explore career opportunities and become part of our growing family.';
+const ogTitle = 'Career | Mehta Petro';
+---
+
+<MainLayout
+  title={pageTitle}
+  customDescription={metaDescription}
+  customOgTitle={ogTitle}
+  structuredData={{
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    '@id': 'https://mehtapetro.com/career',
+    url: 'https://mehtapetro.com/career',
+    name: 'Career | Mehta Petro',
+    description: metaDescription,
+    inLanguage: 'en-US',
+  }}
+>
+  <section class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
+    <div class="mx-auto max-w-4xl">
+      <!-- Header -->
+      <div class="text-center">
+        <span class="inline-flex rounded-full border border-[#C0D6FF] bg-white px-4 py-1 text-xs font-semibold tracking-wider text-[#0039E6] uppercase">
+          Career
+        </span>
+        <h1 class="mt-5 text-4xl font-extrabold tracking-tight text-balance text-[#0A1F4D] md:text-5xl">
+          Join Our Team
+        </h1>
+        <p class="mx-auto mt-4 max-w-2xl text-base sm:text-lg leading-relaxed text-[#4A5F8C]">
+          Build your career with a trusted name in the petrochemical industry. We're always looking for talented individuals who share our commitment to quality and innovation.
+        </p>
+      </div>
+
+      <!-- Main Content -->
+      <div class="mt-12 space-y-8">
+        <!-- Why Join Us -->
+        <div class="rounded-2xl border border-[#D4E4FF] bg-white p-6 shadow-lg sm:p-8">
+          <h2 class="text-2xl font-bold text-[#0A1F4D]">Why Join Mehta Petro?</h2>
+          
+          <div class="mt-6 grid gap-6 sm:grid-cols-2">
+            <div class="flex gap-4">
+              <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#E8F0FF]">
+                <svg class="h-5 w-5 text-[#0039E6]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-semibold text-[#0A1F4D]">Growth Opportunities</h3>
+                <p class="mt-1 text-sm text-[#4A5F8C]">Career development and learning programs</p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#E8F0FF]">
+                <svg class="h-5 w-5 text-[#0039E6]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-semibold text-[#0A1F4D]">Great Team</h3>
+                <p class="mt-1 text-sm text-[#4A5F8C]">Work with experienced professionals</p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#E8F0FF]">
+                <svg class="h-5 w-5 text-[#0039E6]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-semibold text-[#0A1F4D]">Safety First</h3>
+                <p class="mt-1 text-sm text-[#4A5F8C]">Comprehensive safety protocols</p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#E8F0FF]">
+                <svg class="h-5 w-5 text-[#0039E6]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-semibold text-[#0A1F4D]">Competitive Benefits</h3>
+                <p class="mt-1 text-sm text-[#4A5F8C]">Attractive compensation packages</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Current Openings -->
+        <div class="rounded-2xl border border-[#D4E4FF] bg-white p-6 shadow-lg sm:p-8">
+          <h2 class="text-2xl font-bold text-[#0A1F4D]">Current Openings</h2>
+          <p class="mt-3 text-sm text-[#4A5F8C]">
+            We're currently reviewing applications for various positions. Please send your resume to explore opportunities.
+          </p>
+        </div>
+
+        <!-- Application Process -->
+        <div class="rounded-2xl border border-[#D4E4FF] bg-gradient-to-br from-white to-[#F5F9FF] p-6 shadow-lg sm:p-8">
+          <h2 class="text-2xl font-bold text-[#0A1F4D]">How to Apply</h2>
+          <p class="mt-3 text-base leading-relaxed text-[#4A5F8C]">
+            Interested in joining our team? Send your resume and cover letter to:
+          </p>
+          
+          <div class="mt-6 flex flex-col gap-4 sm:flex-row sm:items-center">
+            <a 
+              href="mailto:careers@mehtapetro.com" 
+              class="inline-flex items-center justify-center rounded-xl bg-[#0039E6] px-6 py-3 text-base font-semibold text-white shadow-lg transition hover:bg-[#0033CC]"
+            >
+              careers@mehtapetro.com
+            </a>
+            <span class="text-sm text-[#4A5F8C]">or</span>
+            <a 
+              href="mailto:info@mehtapetro.com" 
+              class="inline-flex items-center justify-center rounded-xl border-2 border-[#D4E4FF] bg-white px-6 py-3 text-base font-semibold text-[#0039E6] transition hover:border-[#0039E6] hover:bg-[#F5F9FF]"
+            >
+              info@mehtapetro.com
+            </a>
+          </div>
+
+          <p class="mt-6 text-sm text-[#4A5F8C]">
+            Include your resume, cover letter, and relevant certifications. We'll review your application and get back to you if there's a suitable match.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</MainLayout>

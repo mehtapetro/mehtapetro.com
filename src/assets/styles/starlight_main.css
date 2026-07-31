@@ -8,11 +8,11 @@
 }
 /* Dark mode colors. */
 :root {
-  --primary-button-hover: #1632e0;
+  --primary-button-hover: #0033cc;
   --backdrop-color: #071326cc;
-  --sl-color-accent: #5d7cff;
-  --sl-color-accent-high: #dce5ff;
-  --sl-color-accent-low: #132285;
+  --sl-color-accent: #0039e6;
+  --sl-color-accent-high: #d4e4ff;
+  --sl-color-accent-low: #002285;
   --sl-color-black: #181818;
   --sl-color-gray-1: #eee;
   --sl-color-gray-2: #c2c2c2;
@@ -29,11 +29,11 @@
 
 /* Light mode colors. */
 :root[data-theme='light'] {
-  --primary-button-hover: #1632e0;
-  --backdrop-color: #eef4ffcc;
-  --sl-color-accent: #1e3aff;
-  --sl-color-accent-high: #132285;
-  --sl-color-accent-low: #dce8ff;
+  --primary-button-hover: #0033cc;
+  --backdrop-color: #e8f0ffcc;
+  --sl-color-accent: #0039e6;
+  --sl-color-accent-high: #002285;
+  --sl-color-accent-low: #d4e4ff;
   --sl-color-black: #fff;
   --sl-color-gray-1: #272727;
   --sl-color-gray-2: #383838;

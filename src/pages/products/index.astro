@@ -1,70 +1,68 @@
 ---
-// Importing necessary components
 import MainLayout from '@/layouts/MainLayout.astro';
-import PrimaryCTA from '@components/ui/buttons/PrimaryCTA.astro';
-import CardSmall from '@components/ui/cards/CardSmall.astro';
-import CardWide from '@components/ui/cards/CardWide.astro';
-import FeaturesStatsAlt from '@components/sections/features/FeaturesStatsAlt.astro';
-import TestimonialsSectionAlt from '@components/sections/testimonials/TestimonialsSectionAlt.astro';
-
-// Importing necessary functions from Astro
+import { Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
-import type { CollectionEntry } from 'astro:content';
 import { SITE } from '@data/constants';
+import { getProductCatalog } from '@data/productCatalog';
 
-// Fetching all the product related content and sorting it by main.id
-const product: CollectionEntry<'products'>[] = (
-  await getCollection('products', ({ id }) => {
-    return id.startsWith('en/');
-  })
-).sort(
-  (a: CollectionEntry<'products'>, b: CollectionEntry<'products'>) =>
-    a.data.main.id - b.data.main.id
+const iconMap: Record<string, string> = {
+  'aromatic-hydrocarbon-solvents':
+    'M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z',
+  'aliphatic-hydrocarbon-solvents':
+    'M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z',
+  'dearomatized-hydrocarbon-fluids':
+    'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z',
+  'petroleum-ethers':
+    'M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z',
+  'rubber-process-oil':
+    'M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4',
+  glycols:
+    'M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3',
+  'base-oils':
+    'M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z',
+  'printing-ink-coating-oils':
+    'M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01',
+  'industrial-greases-esters':
+    'M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z M15 12a3 3 0 11-6 0 3 3 0 016 0z',
+  'drilling-fluids': 'M13 10V3L4 14h7v7l9-11h-7z',
+  'esters-derivatives':
+    'M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z',
+  'acid-corrosion-inhibitors':
+    'M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z',
+  'trading-solvents':
+    'M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4',
+};
+
+const productEntries = (
+  await getCollection('products', ({ id }) => id.startsWith('en/'))
+).sort((a, b) => a.data.main.id - b.data.main.id);
+
+const categoryCards = productEntries.map(entry => {
+  const categoryId = entry.id.replace(/^en\//, '');
+
+  return {
+    id: categoryId,
+    title: entry.data.description,
+    subTitle: entry.data.title,
+    description: entry.data.main.content,
+    image: entry.data.main.imgMain,
+    imageAlt: entry.data.main.imgAlt,
+    href: `/products/${categoryId}/`,
+    productCount: getProductCatalog('en', categoryId).length,
+    icon: iconMap[categoryId] ?? iconMap['trading-solvents'],
+  };
+});
+
+const totalProducts = categoryCards.reduce(
+  (sum, category) => sum + category.productCount,
+  0
 );
-
-// Define variables for page content
-const title: string = 'Products';
-const subTitle: string =
-  'Explore the durability and precision of Mehta Petro tools, designed for both professionals and enthusiasts. Each of our products is crafted with precision and built to last, ensuring you have the right tool for every job.';
-
-// Testimonial data that will be rendered in the component
-const testimonials = [
-  // First testimonial data
-  {
-    content:
-      ' "Since switching to Mehta Petro\'s hardware tools, the efficiency on our construction sites has skyrocketed. The durability of the hex bolts and precision of the machine screws are simply unmatched. It\'s refreshing to work with a company that truly understands the daily demands of the industry." ',
-    author: 'Jason Clark',
-    role: 'Site Foreman | TopBuild',
-    avatarSrc:
-      'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=facearea&facepad=2&w=320&h=320&q=80',
-    avatarAlt: 'Image Description',
-  },
-  // Second testimonial data
-  {
-    content:
-      ' "As an interior designer, I\'m always looking for high-quality materials and tools that help bring my visions to life. Mehta Petro\'s mixed screws assortment has been a game-changer for my projects, providing the perfect blend of quality and variety. The outstanding customer support was just the cherry on top!" ',
-    author: 'Maria Gonzalez',
-    role: 'Interior Designer | Creative Spaces',
-    avatarSrc:
-      'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=1376&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D8&auto=format&fit=facearea&facepad=2&w=320&h=320&q=80',
-    avatarAlt: 'Image Description',
-  },
-  // Third testimonial data
-  {
-    content:
-      " \"I've been a professional carpenter for over 15 years, and I can sincerely say that Mehta Petro's tap bolts and nuts are some of the best I've used. They grip like no other, and I have full confidence in every joint and fixture. Plus, the service is impeccable – they truly care about my project's success.\" ",
-    author: 'Richard Kim',
-    role: 'Master Carpenter | WoodWright',
-    avatarSrc:
-      'https://images.unsplash.com/photo-1474176857210-7287d38d27c6?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D8&auto=format&fit=facearea&facepad=2&w=320&h=320&q=80',
-    avatarAlt: 'Image Description',
-  },
-];
+const featuredCategory = categoryCards[0];
 
 const pageTitle: string = `Products | ${SITE.title}`;
 const metaDescription =
-  'Explore the durability and precision of Mehta Petro tools, designed for both professionals and enthusiasts.';
-const ogTitle = 'Hardware Tools | Mehta Petro';
+  'Explore Mehta Petro-Refineries Limited\'s comprehensive range of petrochemical solvents, specialty base oils, n-paraffins, olefins, and specialty chemicals.';
+const ogTitle = 'Products | Mehta Petro';
 ---
 
 <MainLayout
@@ -73,72 +71,167 @@ const ogTitle = 'Hardware Tools | Mehta Petro';
   customOgTitle={ogTitle}
   structuredData={{
     '@context': 'https://schema.org',
-    '@type': 'WebPage',
+    '@type': 'CollectionPage',
     '@id': 'https://mehtapetro.com/products',
     url: 'https://mehtapetro.com/products',
-    name: 'Hardware Tools | Mehta Petro',
-    description:
-      'Explore the durability and precision of Mehta Petro tools, designed for both professionals and enthusiasts.',
-    isPartOf: {
-      '@type': 'WebSite',
-      url: 'https://mehtapetro.com',
-      name: 'Mehta Petro',
-      description:
-        'Mehta Petro offers top-tier hardware tools and expert construction services to meet all your project needs.',
-    },
+    name: 'Products | Mehta Petro',
+    description: metaDescription,
     inLanguage: 'en-US',
   }}
 >
-  <div
-    class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 2xl:max-w-full"
-  >
-    <div class="mb-4 flex items-center justify-between gap-8 sm:mb-8 md:mb-12">
-      <div class="flex items-center gap-12">
-        <h1
-          class="text-2xl font-bold tracking-tight text-balance text-neutral-800 md:text-4xl md:leading-tight dark:text-neutral-200"
-        >
-          {title}
+  <section class="mx-auto mt-10 max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
+    <div class="grid items-center gap-10 lg:grid-cols-[1fr_0.9fr] lg:gap-14">
+      <div>
+        <span class="inline-flex rounded-full border border-[#C0D6FF] bg-white px-4 py-1 text-xs font-semibold tracking-wider text-[#0039E6] uppercase">
+          Our Products
+        </span>
+        <h1 class="mt-6 max-w-4xl text-4xl font-extrabold tracking-tight text-balance text-[#0A1F4D] md:text-5xl">
+          Industrial Products Built for Consistent Supply and Practical Performance
         </h1>
-        {
-          subTitle && (
-            <p class="hidden max-w-(--breakpoint-sm) text-pretty text-neutral-600 md:block dark:text-neutral-400">
-              {subTitle}
-            </p>
-          )
-        }
+        <p class="mt-5 max-w-3xl text-base leading-relaxed text-[#4A5F8C] sm:text-lg">
+          Explore our petrochemical range across solvents, base oils, glycols, drilling fluids, and specialty additives. Each category is organized to help industrial buyers quickly find the right product and request details with confidence.
+        </p>
+
+        <div class="mt-8 grid gap-4 sm:grid-cols-3">
+          <div class="rounded-2xl border border-[#D4E4FF] bg-white p-5 shadow-lg">
+            <div class="text-3xl font-extrabold text-[#0039E6]">{categoryCards.length}</div>
+            <p class="mt-2 text-sm font-semibold text-[#0A1F4D]">Product Categories</p>
+          </div>
+          <div class="rounded-2xl border border-[#D4E4FF] bg-white p-5 shadow-lg">
+            <div class="text-3xl font-extrabold text-[#0039E6]">{totalProducts}</div>
+            <p class="mt-2 text-sm font-semibold text-[#0A1F4D]">Products Listed</p>
+          </div>
+          <div class="rounded-2xl border border-[#D4E4FF] bg-white p-5 shadow-lg">
+            <div class="text-3xl font-extrabold text-[#0039E6]">B2B</div>
+            <p class="mt-2 text-sm font-semibold text-[#0A1F4D]">Industrial Focus</p>
+          </div>
+        </div>
       </div>
-      <PrimaryCTA title="Customer Stories" url="#testimonials" noArrow={true} />
-    </div>
-    {
-      /* Displaying products in alternating styles. Alternative product gets different card styling.
-    Maps through all product entries and displays them with either CardSmall or CardWide based on their position. */
-    }
-    <section class="grid grid-cols-1 gap-4 sm:grid-cols-3 md:gap-6 xl:gap-8">
+
       {
-        product.map((product, index) => {
-          const position = index % 4;
-          if (position === 0 || position === 3) {
-            return <CardSmall product={product} />;
-          } else {
-            return <CardWide product={product} />;
-          }
-        })
+        featuredCategory && (
+          <div class="overflow-hidden rounded-2xl border border-[#D4E4FF] bg-white shadow-lg">
+            <div class="relative">
+              <Image
+                src={featuredCategory.image}
+                alt={featuredCategory.imageAlt}
+                class="h-80 w-full object-cover"
+              />
+              <div class="absolute inset-0 bg-linear-to-t from-[#0A1F4D]/78 via-[#0A1F4D]/30 to-transparent"></div>
+              <div class="absolute inset-x-0 bottom-0 p-6 sm:p-7">
+                <p class="text-xs font-semibold tracking-wide text-white/80 uppercase">
+                  Featured Category
+                </p>
+                <h2 class="mt-2 text-2xl font-bold text-white">
+                  {featuredCategory.title}
+                </h2>
+                <p class="mt-2 max-w-lg text-sm leading-relaxed text-white/85">
+                  {featuredCategory.subTitle}
+                </p>
+              </div>
+            </div>
+            <div class="flex flex-wrap items-center justify-between gap-4 p-6">
+              <p class="text-sm leading-relaxed text-[#4A5F8C]">
+                {featuredCategory.productCount} products available in this category.
+              </p>
+              <a
+                href={featuredCategory.href}
+                class="inline-flex items-center justify-center rounded-xl bg-[#0039E6] px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#0033CC]"
+              >
+                View Category
+              </a>
+            </div>
+          </div>
+        )
       }
-    </section>
-  </div>
-  {/* Features statistics section */}
-  <FeaturesStatsAlt
-    title="Why Choose Mehta Petro?"
-    subTitle="Transform your ideas into tangible results with Mehta Petro tools. Whether you're starting with a sketch on a napkin or diving into a comprehensive construction project, our tools are engineered to help you build with confidence."
-    benefits={[
-      'Robust and reliable tools for long-lasting performance.',
-      'Innovative solutions tailored to modern construction needs.',
-      "Customer support dedicated to your project's success.",
-    ]}
-  />
-  {/* Testimonials section */}
-  <TestimonialsSectionAlt
-    title="What Our Customers Say"
-    testimonials={testimonials}
-  />
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-[85rem] px-4 py-6 sm:px-6 lg:px-8 lg:py-10">
+    <div class="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+      <div>
+        <p class="text-sm font-semibold tracking-wide text-[#0039E6] uppercase">
+          Categories
+        </p>
+        <h2 class="mt-2 text-3xl font-bold text-[#0A1F4D] md:text-4xl">
+          Browse by product category
+        </h2>
+      </div>
+      <p class="max-w-2xl text-sm leading-relaxed text-[#4A5F8C] sm:text-base sm:text-right">
+        Each category leads to a dedicated page with multiple products and individual product detail pages.
+      </p>
+    </div>
+
+    <div class="mt-10 grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
+      {
+        categoryCards.map(category => (
+          <a
+            href={category.href}
+            class="group overflow-hidden rounded-2xl border border-[#D4E4FF] bg-white shadow-lg transition-colors hover:border-[#0039E6]"
+          >
+            <div class="relative overflow-hidden border-b border-[#E5EEFF] bg-[#F5F9FF]">
+              <Image
+                src={category.image}
+                alt={category.imageAlt}
+                class="h-52 w-full object-cover"
+              />
+              <div class="absolute inset-0 bg-linear-to-t from-[#0A1F4D]/65 via-[#0A1F4D]/20 to-transparent"></div>
+              <div class="absolute left-4 top-4 flex h-11 w-11 items-center justify-center rounded-xl bg-white/92 text-[#0039E6] backdrop-blur-sm">
+                <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d={category.icon} />
+                </svg>
+              </div>
+              <div class="absolute bottom-4 right-4 rounded-full bg-white/92 px-3 py-1 text-xs font-semibold text-[#0A1F4D] backdrop-blur-sm">
+                {category.productCount} products
+              </div>
+            </div>
+
+            <div class="p-6">
+              <p class="text-xs font-semibold tracking-wide text-[#0039E6] uppercase">
+                {category.subTitle}
+              </p>
+              <h3 class="mt-2 text-xl font-bold text-[#0A1F4D] group-hover:text-[#0039E6]">
+                {category.title}
+              </h3>
+              <p class="mt-3 text-sm leading-relaxed text-[#4A5F8C]">
+                {category.description}
+              </p>
+              <div class="mt-5 text-sm font-semibold text-[#0039E6] group-hover:text-[#0033CC]">
+                Explore products
+              </div>
+            </div>
+          </a>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
+    <div class="rounded-2xl border border-[#D4E4FF] bg-white p-8 shadow-lg sm:p-10">
+      <div class="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-center">
+        <div>
+          <h2 class="text-2xl font-bold text-[#0A1F4D] md:text-3xl">
+            Need specifications, COA, or product guidance?
+          </h2>
+          <p class="mt-4 max-w-3xl text-base leading-relaxed text-[#4A5F8C]">
+            If you already know the category you need, open it and review the available products. If you want help selecting the right material, our team can share technical details and respond to your requirement directly.
+          </p>
+        </div>
+        <div class="flex flex-col gap-3 sm:flex-row lg:flex-col">
+          <a
+            href="/contact"
+            class="inline-flex items-center justify-center rounded-xl bg-[#0039E6] px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#0033CC]"
+          >
+            Request Product Information
+          </a>
+          <a
+            href="/capabilities"
+            class="inline-flex items-center justify-center rounded-xl border border-[#D4E4FF] bg-[#F5F9FF] px-6 py-3 text-sm font-semibold text-[#0039E6] transition-colors hover:border-[#0039E6] hover:bg-white"
+          >
+            View Our Facilities
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
 </MainLayout>

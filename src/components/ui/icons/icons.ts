@@ -292,8 +292,7 @@ export const Icons = {
         d: 'M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.628 3.874 10.35 9.101 11.647Z',
       },
     ],
-    class:
-      'h-4 w-4 shrink-0 fill-current text-neutral-700 dark:text-neutral-400',
+    class: 'h-[18px] w-[18px] shrink-0 fill-current',
     viewBox: '0 0 24 24',
     fill: 'currentColor',
     title: 'Facebook',
@@ -340,8 +339,7 @@ export const Icons = {
         d: 'M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.376.505A3.016 3.016 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.376-.505a3.016 3.016 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814ZM9.545 15.568V8.432L15.818 12l-6.273 3.568Z',
       },
     ],
-    class:
-      'h-4 w-4 shrink-0 fill-current text-neutral-700 dark:text-neutral-400',
+    class: 'h-[18px] w-[18px] shrink-0 fill-current',
     viewBox: '0 0 24 24',
     fill: 'currentColor',
     title: 'YouTube',
@@ -352,8 +350,7 @@ export const Icons = {
         d: 'M7.75 2C4.574 2 2 4.574 2 7.75v8.5C2 19.426 4.574 22 7.75 22h8.5C19.426 22 22 19.426 22 16.25v-8.5C22 4.574 19.426 2 16.25 2h-8.5Zm0 2h8.5A3.75 3.75 0 0 1 20 7.75v8.5A3.75 3.75 0 0 1 16.25 20h-8.5A3.75 3.75 0 0 1 4 16.25v-8.5A3.75 3.75 0 0 1 7.75 4Zm9.25 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2ZM12 7a5 5 0 1 0 5 5 5 5 0 0 0-5-5Zm0 2a3 3 0 1 1-3 3 3 3 0 0 1 3-3Z',
       },
     ],
-    class:
-      'h-4 w-4 shrink-0 fill-current text-neutral-700 dark:text-neutral-400',
+    class: 'h-[18px] w-[18px] shrink-0 fill-current',
     viewBox: '0 0 24 24',
     fill: 'currentColor',
     title: 'Instagram',
@@ -364,8 +361,7 @@ export const Icons = {
         d: 'M4.983 3.5a2.25 2.25 0 1 1 0 4.5 2.25 2.25 0 0 1 0-4.5ZM3 9h4v12H3V9Zm6.5 0h3.833v1.64h.055c.534-1.013 1.84-2.084 3.79-2.084C21.232 8.556 22 11.03 22 14.246V21h-4v-5.99c0-1.428-.026-3.264-1.988-3.264-1.99 0-2.294 1.554-2.294 3.158V21h-4V9Z',
       },
     ],
-    class:
-      'h-4 w-4 shrink-0 fill-current text-neutral-700 dark:text-neutral-400',
+    class: 'h-[18px] w-[18px] shrink-0 fill-current',
     viewBox: '0 0 24 24',
     fill: 'currentColor',
     title: 'LinkedIn',

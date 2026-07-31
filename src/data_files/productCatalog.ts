@@ -3,10 +3,10 @@ import productImage1 from '@images/product-image-1.avif';
 import productImage2 from '@images/product-image-2.avif';
 import productImage3 from '@images/product-image-3.avif';
 import productImage4 from '@images/product-image-4.avif';
-import productMain1 from '@images/product-image-main-1.avif';
-import productMain2 from '@images/product-image-main-2.avif';
-import productMain3 from '@images/product-image-main-3.avif';
-import productMain4 from '@images/product-image-main-4.avif';
+import productMainImage1 from '@images/product-image-main-1.avif';
+import productMainImage2 from '@images/product-image-main-2.avif';
+import productMainImage3 from '@images/product-image-main-3.avif';
+import productMainImage4 from '@images/product-image-main-4.avif';
 import blueprint1 from '@images/blueprint-1.avif';
 import blueprint2 from '@images/blueprint-2.avif';
 
@@ -42,36 +42,90 @@ export interface ProductCatalogItem {
   };
 }
 
-const categoryAssets = {
-  'item-t845': {
+const categoryAssets: Record<
+  string,
+  { imgCard: ImageMetadata; imgMain: ImageMetadata; imgAlt: string }
+> = {
+  'aromatic-hydrocarbon-solvents': {
     imgCard: productImage1,
-    imgMain: productMain1,
-    imgAlt: 'Machine screws product range',
+    imgMain: productMainImage1,
+    imgAlt: 'Aromatic hydrocarbon solvent sample',
   },
-  'item-a765': {
+  'aliphatic-hydrocarbon-solvents': {
     imgCard: productImage2,
-    imgMain: productMain2,
-    imgAlt: 'Assorted screws product range',
+    imgMain: productMainImage2,
+    imgAlt: 'Aliphatic hydrocarbon solvent sample',
   },
-  'item-b203': {
+  'dearomatized-hydrocarbon-fluids': {
     imgCard: productImage3,
-    imgMain: productMain3,
-    imgAlt: 'Tap bolts and nuts product range',
+    imgMain: productMainImage3,
+    imgAlt: 'Dearomatized hydrocarbon fluid sample',
   },
-  'item-f303': {
+  'petroleum-ethers': {
     imgCard: productImage4,
-    imgMain: productMain4,
-    imgAlt: 'Hex bolts product range',
+    imgMain: productMainImage4,
+    imgAlt: 'Petroleum ether sample',
   },
-} as const;
+  'rubber-process-oil': {
+    imgCard: productImage1,
+    imgMain: productMainImage1,
+    imgAlt: 'Rubber process oil sample',
+  },
+  glycols: {
+    imgCard: productImage2,
+    imgMain: productMainImage2,
+    imgAlt: 'Glycol sample',
+  },
+  'base-oils': {
+    imgCard: productImage3,
+    imgMain: productMainImage3,
+    imgAlt: 'Base oil sample',
+  },
+  'printing-ink-coating-oils': {
+    imgCard: productImage4,
+    imgMain: productMainImage4,
+    imgAlt: 'Printing ink and coating oil sample',
+  },
+  'industrial-greases-esters': {
+    imgCard: productImage1,
+    imgMain: productMainImage1,
+    imgAlt: 'Industrial grease and ester sample',
+  },
+  'drilling-fluids': {
+    imgCard: productImage2,
+    imgMain: productMainImage2,
+    imgAlt: 'Drilling fluid sample',
+  },
+  'esters-derivatives': {
+    imgCard: productImage3,
+    imgMain: productMainImage3,
+    imgAlt: 'Ester derivative sample',
+  },
+  'acid-corrosion-inhibitors': {
+    imgCard: productImage4,
+    imgMain: productMainImage4,
+    imgAlt: 'Acid corrosion inhibitor sample',
+  },
+  'trading-solvents': {
+    imgCard: productImage1,
+    imgMain: productMainImage1,
+    imgAlt: 'Trading solvent sample',
+  },
+};
 
 function withAssets(
-  categoryId: keyof typeof categoryAssets,
-  item: Omit<ProductCatalogItem, 'imgCard' | 'imgMain' | 'imgAlt' | 'blueprints'>
+  categoryId: string,
+  item: Omit<
+    ProductCatalogItem,
+    'imgCard' | 'imgMain' | 'imgAlt' | 'blueprints'
+  >
 ): ProductCatalogItem {
+  const assets =
+    categoryAssets[categoryId] || categoryAssets['aromatic-hydrocarbon-solvents'];
+
   return {
     ...item,
-    ...categoryAssets[categoryId],
+    ...assets,
     blueprints: {
       first: blueprint1,
       second: blueprint2,
@@ -80,755 +134,819 @@ function withAssets(
 }
 
 const enCatalog: Record<string, ProductCatalogItem[]> = {
-  'item-t845': [
-    withAssets('item-t845', {
-      slug: 'standard-machine-screws',
-      title: 'Standard Machine Screws',
-      description: 'General-purpose machine screws for dependable everyday assembly.',
+  'aromatic-hydrocarbon-solvents': [
+    withAssets('aromatic-hydrocarbon-solvents', {
+      slug: 'toluene',
+      title: 'Toluene',
+      description:
+        'Industrial aromatic solvent used in paints, coatings, adhesives, and chemical processing.',
       mainContent:
-        'Designed for repeatable fastening in industrial equipment, panels, and fabricated assemblies, this standard machine screw range balances accuracy, holding strength, and smooth installation.',
-      longDescriptionTitle: 'Reliable fastening for day-to-day production needs',
+        'Toluene offers strong solvency and consistent quality for industrial manufacturing, blending, and formulation requirements.',
+      longDescriptionTitle: 'Reliable aromatic solvent performance',
       longDescriptionSubTitle:
-        'Standard Machine Screws are built for consistent quality across maintenance, fabrication, and OEM assembly workflows where dependable fit and easy replacement matter most.',
-      ctaTitle: 'Contact sales to learn more',
+        'Suitable for industrial coatings, thinners, adhesives, and general chemical applications where dependable solvency is required.',
+      ctaTitle: 'Request Product Information',
       ctaURL: '/contact',
       descriptionList: [
-        { title: 'Consistent threading', subTitle: 'Clean thread formation helps reduce installation issues during repetitive assembly.' },
-        { title: 'Balanced durability', subTitle: 'Suitable for common industrial environments requiring dependable long-term fastening.' },
-        { title: 'Broad usability', subTitle: 'Works well across equipment housings, machine covers, brackets, and control panels.' },
+        { title: 'High solvency', subTitle: 'Supports paint, resin, and adhesive systems.' },
+        { title: 'Consistent quality', subTitle: 'Supplied with dependable batch control.' },
+        { title: 'Industrial ready', subTitle: 'Suitable for large-scale commercial use.' },
       ],
       specificationsLeft: [
-        { title: 'Material options', subTitle: 'Available in industrial-grade steel for reliable mechanical performance.' },
-        { title: 'Finish', subTitle: 'Protective finishing supports longer service life in standard operating conditions.' },
-        { title: 'Size range', subTitle: 'Offered in a broad range of diameters and lengths for varied assembly needs.' },
-        { title: 'Applications', subTitle: 'Suitable for machinery, electrical panels, fabricated parts, and workshop repairs.' },
+        { title: 'Purity', subTitle: '99.5% min' },
+        { title: 'Boiling point', subTitle: '110-111°C' },
+        { title: 'Specific gravity', subTitle: '0.865-0.870 at 20°C' },
+        { title: 'Flash point', subTitle: '4°C' },
       ],
       specificationsRight: [
-        { title: 'Drive compatibility', subTitle: 'Can be specified with head and drive configurations suited to your installation process.' },
-        { title: 'Assembly efficiency', subTitle: 'Helps maintenance and production teams standardize common fastening tasks.' },
-        { title: 'Replacement friendly', subTitle: 'Easy to stock and replace during preventive or breakdown maintenance.' },
-        { title: 'Supply format', subTitle: 'Available in boxed quantities tailored for routine industrial consumption.' },
+        { title: 'Appearance', subTitle: 'Clear liquid' },
+        { title: 'Water content', subTitle: '0.05% max' },
+        { title: 'Aromatic content', subTitle: 'High' },
+        { title: 'Packaging', subTitle: 'Bulk, drums, tankers' },
       ],
     }),
-    withAssets('item-t845', {
-      slug: 'fine-thread-machine-screws',
-      title: 'Fine Thread Machine Screws',
-      description: 'Precision-threaded screws for tighter fit and refined equipment assembly.',
+    withAssets('aromatic-hydrocarbon-solvents', {
+      slug: 'xylene',
+      title: 'Xylene',
+      description:
+        'Mixed aromatic solvent for printing inks, rubber processing, coatings, and cleaning applications.',
       mainContent:
-        'This fine-thread machine screw range is intended for applications where fit, alignment, and repeatable tightening quality are critical for equipment performance and finish.',
-      longDescriptionTitle: 'Higher precision for controlled fastening conditions',
+        'Xylene delivers dependable evaporation characteristics and solvent strength for formulation-heavy industrial applications.',
+      longDescriptionTitle: 'Strong mixed aromatic solvent',
       longDescriptionSubTitle:
-        'Fine Thread Machine Screws are well suited to assemblies that demand careful clamping, smoother engagement, and improved control during installation.',
-      ctaTitle: 'Request technical assistance',
+        'Well suited for coatings, cleaning, chemical manufacturing, and blending operations that require aromatic strength.',
+      ctaTitle: 'Request Product Information',
       ctaURL: '/contact',
       descriptionList: [
-        { title: 'Refined engagement', subTitle: 'Fine threads support controlled tightening and improved alignment in precision applications.' },
-        { title: 'Cleaner finish', subTitle: 'Useful in equipment builds where visual neatness and accurate fit both matter.' },
-        { title: 'Stable performance', subTitle: 'Engineered for repeatable fastening quality in controlled production environments.' },
+        { title: 'Balanced evaporation', subTitle: 'Supports controlled drying and workability.' },
+        { title: 'Good resin compatibility', subTitle: 'Works across many industrial systems.' },
+        { title: 'B2B supply support', subTitle: 'Available for recurring industrial demand.' },
       ],
       specificationsLeft: [
-        { title: 'Thread profile', subTitle: 'Fine-thread geometry supports smoother engagement and more precise adjustment.' },
-        { title: 'Recommended use', subTitle: 'Best suited to instruments, fabricated panels, and controlled mechanical assemblies.' },
-        { title: 'Tolerance focus', subTitle: 'Developed for applications where tighter assembly feel and repeatability are preferred.' },
-        { title: 'Material strength', subTitle: 'Manufactured using dependable industrial-grade material selections.' },
+        { title: 'Purity', subTitle: '98.5% min' },
+        { title: 'Boiling range', subTitle: '137-144°C' },
+        { title: 'Specific gravity', subTitle: '0.860-0.870 at 20°C' },
+        { title: 'Flash point', subTitle: '27°C min' },
       ],
       specificationsRight: [
-        { title: 'Installation control', subTitle: 'Supports more measured tightening in applications sensitive to over-clamping.' },
-        { title: 'Dimensional range', subTitle: 'Can be supplied across multiple sizes to match production requirements.' },
-        { title: 'Typical sectors', subTitle: 'Useful in precision fabrication, electronics housings, light engineering, and machine building.' },
-        { title: 'Supply support', subTitle: 'Packaged to simplify batch handling for workshop and production use.' },
-      ],
-    }),
-    withAssets('item-t845', {
-      slug: 'panel-assembly-machine-screws',
-      title: 'Panel Assembly Machine Screws',
-      description: 'Fastening solution tailored for enclosures, panels, and access assemblies.',
-      mainContent:
-        'Panel Assembly Machine Screws are optimized for dependable fastening in cabinet builds, equipment enclosures, access panels, and modular assemblies that require neat and repeatable closure.',
-      longDescriptionTitle: 'Built for enclosure and panel fabrication workflows',
-      longDescriptionSubTitle:
-        'This product line supports frequent access, serviceability, and consistent fastening quality for electrical, process, and machine panel applications.',
-      ctaTitle: 'Talk to our product team',
-      ctaURL: '/contact',
-      descriptionList: [
-        { title: 'Panel-ready fit', subTitle: 'Designed for enclosure, cabinet, and access-panel fastening requirements.' },
-        { title: 'Service-friendly', subTitle: 'Suitable for assemblies that may require repeated opening and closing during maintenance.' },
-        { title: 'Orderly presentation', subTitle: 'Helps maintain a neat visible finish in front-facing equipment and panel systems.' },
-      ],
-      specificationsLeft: [
-        { title: 'Use case', subTitle: 'Effective for control cabinets, process panels, fabricated covers, and access hatches.' },
-        { title: 'Head options', subTitle: 'Can be aligned to the appearance and tool-access needs of the assembly.' },
-        { title: 'Finish quality', subTitle: 'Protective finishing supports durability in indoor and sheltered industrial settings.' },
-        { title: 'Batch supply', subTitle: 'Supplied in production-friendly packaging for assembly line usage.' },
-      ],
-      specificationsRight: [
-        { title: 'Maintenance benefit', subTitle: 'Supports organized, repeatable removal and reinstallation during service work.' },
-        { title: 'Assembly neatness', subTitle: 'Suitable where both fastening integrity and visual presentation matter.' },
-        { title: 'Compatibility', subTitle: 'Adaptable to a range of panel materials and fabricated sub-assemblies.' },
-        { title: 'Industry fit', subTitle: 'Used in electrical systems, machine fabrication, utilities, and industrial interiors.' },
+        { title: 'Appearance', subTitle: 'Clear liquid' },
+        { title: 'Water content', subTitle: '0.05% max' },
+        { title: 'Odor', subTitle: 'Characteristic aromatic' },
+        { title: 'Packaging', subTitle: 'Bulk, drums, tankers' },
       ],
     }),
   ],
-  'item-a765': [
-    withAssets('item-a765', {
-      slug: 'general-purpose-assorted-screws',
-      title: 'General Purpose Assorted Screws',
-      description: 'A versatile assorted screw set for workshop, maintenance, and installation use.',
+  'aliphatic-hydrocarbon-solvents': [
+    withAssets('aliphatic-hydrocarbon-solvents', {
+      slug: 'n-hexane',
+      title: 'n-Hexane',
+      description:
+        'Fast-evaporating aliphatic solvent for extraction, cleaning, and industrial process use.',
       mainContent:
-        'This general-purpose assorted screw set gives teams immediate access to a practical mix of sizes and profiles, reducing downtime and keeping installation work moving efficiently.',
-      longDescriptionTitle: 'A practical assortment for daily fastening work',
+        'n-Hexane is widely used where clean evaporation and low aromatic content are important for efficient processing.',
+      longDescriptionTitle: 'Fast drying aliphatic solvent',
       longDescriptionSubTitle:
-        'General Purpose Assorted Screws are curated to support maintenance teams, workshop operations, and multi-purpose fabrication jobs where having the right screw available saves time.',
-      ctaTitle: 'Contact sales to learn more',
+        'Designed for industrial extraction, cleaning, and process use where light hydrocarbon performance matters.',
+      ctaTitle: 'Request Product Information',
       ctaURL: '/contact',
       descriptionList: [
-        { title: 'Useful variety', subTitle: 'Includes a balanced range of sizes and types for common assembly and repair tasks.' },
-        { title: 'Time-saving stock', subTitle: 'Reduces the need to source individual screws for routine workshop requirements.' },
-        { title: 'Workshop ready', subTitle: 'Supports maintenance benches, utility teams, and general industrial operations.' },
+        { title: 'Low aromatic content', subTitle: 'Suitable for sensitive applications.' },
+        { title: 'Quick evaporation', subTitle: 'Helps speed up process cycles.' },
+        { title: 'Consistent supply', subTitle: 'Built for regular industrial requirements.' },
       ],
       specificationsLeft: [
-        { title: 'Assortment type', subTitle: 'Mixed screw formats selected for broad day-to-day industrial usefulness.' },
-        { title: 'Material selection', subTitle: 'Produced using dependable materials suitable for routine fastening needs.' },
-        { title: 'Storage convenience', subTitle: 'Packaged for simple identification and quick access during active jobs.' },
-        { title: 'Primary applications', subTitle: 'Useful in maintenance, assembly support, light fabrication, and on-site repairs.' },
+        { title: 'Purity', subTitle: '97% min' },
+        { title: 'Boiling point', subTitle: '68-69°C' },
+        { title: 'Specific gravity', subTitle: '0.655-0.665 at 20°C' },
+        { title: 'Flash point', subTitle: '-22°C' },
       ],
-      tableData: [
-        {
-          feature: ['Specification', 'Value'],
-          description: [
-            ['Assortment style', 'General workshop mix'],
-            ['Typical usage', 'Maintenance and repair'],
-            ['Packaging', 'Mixed set'],
-            ['Application focus', 'Everyday fastening'],
-          ],
-        },
+      specificationsRight: [
+        { title: 'Aromatics', subTitle: '0.1% max' },
+        { title: 'Water', subTitle: '0.01% max' },
+        { title: 'Appearance', subTitle: 'Clear liquid' },
+        { title: 'Packaging', subTitle: 'Drums, bulk' },
       ],
     }),
-    withAssets('item-a765', {
-      slug: 'precision-assorted-screws',
-      title: 'Precision Assorted Screws',
-      description: 'Selected screw assortment for finer installations and controlled assembly work.',
+    withAssets('aliphatic-hydrocarbon-solvents', {
+      slug: 'mineral-spirits',
+      title: 'Mineral Spirits',
+      description:
+        'General-purpose aliphatic solvent for paints, maintenance cleaning, and industrial thinning.',
       mainContent:
-        'Precision Assorted Screws are intended for jobs where fit, consistency, and cleaner installation results are especially important across smaller assemblies and refined fabrication work.',
-      longDescriptionTitle: 'Curated assortment for more exact assembly requirements',
+        'Mineral spirits provide reliable cleaning and thinning performance with balanced volatility for broad industrial use.',
+      longDescriptionTitle: 'Versatile petroleum solvent',
       longDescriptionSubTitle:
-        'This assortment supports teams working on precision-oriented builds that call for smaller, neater, and better-matched fastening options.',
-      ctaTitle: 'Request technical assistance',
+        'Commonly selected for cleaning, degreasing, and thinning operations across industrial environments.',
+      ctaTitle: 'Request Product Information',
       ctaURL: '/contact',
       descriptionList: [
-        { title: 'Refined mix', subTitle: 'Focused on sizes and types commonly used in more controlled assembly settings.' },
-        { title: 'Cleaner installations', subTitle: 'Supports neater finish quality in fabricated or enclosed assemblies.' },
-        { title: 'Reduced guesswork', subTitle: 'Provides an organized set of options for repeated precision work.' },
+        { title: 'Multi-purpose use', subTitle: 'Supports cleaning, thinning, and degreasing.' },
+        { title: 'Controlled drying', subTitle: 'Balanced evaporation supports usability.' },
+        { title: 'Commercially practical', subTitle: 'Suitable for routine plant consumption.' },
       ],
       specificationsLeft: [
-        { title: 'Assortment focus', subTitle: 'Configured for finer mechanical, panel, and light engineering applications.' },
-        { title: 'Handling', subTitle: 'Conveniently grouped for easier part selection during careful assembly work.' },
-        { title: 'Quality consistency', subTitle: 'Supports repeatable installation outcomes across small-batch builds.' },
-        { title: 'Use environment', subTitle: 'Suitable for fabrication rooms, service workshops, and precision assembly areas.' },
+        { title: 'Distillation range', subTitle: '140-200°C' },
+        { title: 'Specific gravity', subTitle: '0.765-0.785 at 15°C' },
+        { title: 'Flash point', subTitle: '38°C min' },
+        { title: 'Aromatics', subTitle: '18-22%' },
       ],
-      tableData: [
-        {
-          feature: ['Specification', 'Value'],
-          description: [
-            ['Assortment style', 'Precision mix'],
-            ['Typical usage', 'Refined assembly'],
-            ['Packaging', 'Sorted set'],
-            ['Application focus', 'Controlled installation'],
-          ],
-        },
-      ],
-    }),
-    withAssets('item-a765', {
-      slug: 'heavy-duty-assorted-screws',
-      title: 'Heavy Duty Assorted Screws',
-      description: 'Mixed screw set designed for tougher workshop and site-duty fastening needs.',
-      mainContent:
-        'Heavy Duty Assorted Screws combine a practical range of stronger fastening options for crews handling installation, fixtures, structural support work, and rugged maintenance jobs.',
-      longDescriptionTitle: 'Assortment built for more demanding fastening jobs',
-      longDescriptionSubTitle:
-        'This mixed set is useful where teams require harder-working screw options for frequent industrial handling and more robust applications.',
-      ctaTitle: 'Talk to our product team',
-      ctaURL: '/contact',
-      descriptionList: [
-        { title: 'Rugged selection', subTitle: 'Built around screw types commonly required in heavier workshop and site conditions.' },
-        { title: 'Operational flexibility', subTitle: 'Supports mixed-duty tasks without requiring multiple separate fastener kits.' },
-        { title: 'Field usefulness', subTitle: 'Practical for mobile teams, maintenance contractors, and utility works.' },
-      ],
-      specificationsLeft: [
-        { title: 'Application range', subTitle: 'Suitable for harsher workshop tasks, utility assemblies, and field maintenance.' },
-        { title: 'Packaging style', subTitle: 'Prepared for dependable storage and quick retrieval in active environments.' },
-        { title: 'Material approach', subTitle: 'Selected for stronger service expectations and practical working durability.' },
-        { title: 'Worksite value', subTitle: 'Helps reduce delays caused by missing screw types during multi-step jobs.' },
-      ],
-      tableData: [
-        {
-          feature: ['Specification', 'Value'],
-          description: [
-            ['Assortment style', 'Heavy-duty mix'],
-            ['Typical usage', 'Site and workshop jobs'],
-            ['Packaging', 'Mixed industrial set'],
-            ['Application focus', 'Demanding fastening'],
-          ],
-        },
+      specificationsRight: [
+        { title: 'Color', subTitle: 'Water white to pale' },
+        { title: 'Residue', subTitle: 'Low' },
+        { title: 'Odor', subTitle: 'Mild petroleum' },
+        { title: 'Packaging', subTitle: 'Drums, bulk' },
       ],
     }),
   ],
-  'item-b203': [
-    withAssets('item-b203', {
-      slug: 'standard-tap-bolts-and-nuts',
-      title: 'Standard Tap Bolts and Nuts Set',
-      description: 'Versatile tap bolts and nuts for routine construction and assembly work.',
+  'dearomatized-hydrocarbon-fluids': [
+    withAssets('dearomatized-hydrocarbon-fluids', {
+      slug: 'dearomatized-fluid-d60',
+      title: 'Dearomatized Fluid D60',
+      description:
+        'Low-odor hydrocarbon solvent for applications requiring reduced aromatic content.',
       mainContent:
-        'This standard tap bolts and nuts set provides a dependable fastening option for day-to-day industrial assembly, structural support, and equipment installation tasks.',
-      longDescriptionTitle: 'Trusted fastening for regular industrial assembly',
+        'D60 is a dearomatized fluid developed for industrial users who need cleaner odor profile and stable process performance.',
+      longDescriptionTitle: 'Cleaner low-odor process fluid',
       longDescriptionSubTitle:
-        'Standard Tap Bolts and Nuts are selected for practical use across fabrication, construction support, and workshop assembly where strength and fit consistency are essential.',
-      ctaTitle: 'Contact sales to learn more',
+        'A suitable option for sensitive industrial use where lower aromatics and improved workplace comfort matter.',
+      ctaTitle: 'Request Product Information',
       ctaURL: '/contact',
       descriptionList: [
-        { title: 'Reliable hold', subTitle: 'Offers secure mechanical joining for routine industrial and construction applications.' },
-        { title: 'Balanced assortment', subTitle: 'Sized to support varied day-to-day bolt-and-nut fastening requirements.' },
-        { title: 'Workshop flexibility', subTitle: 'Useful across fabrication benches, maintenance areas, and assembly operations.' },
+        { title: 'Low odor', subTitle: 'Helps create a more comfortable handling environment.' },
+        { title: 'Reduced aromatics', subTitle: 'Supports cleaner process selection.' },
+        { title: 'Good stability', subTitle: 'Dependable in routine plant use.' },
       ],
       specificationsLeft: [
-        { title: 'Material composition', subTitle: 'Produced using dependable steel grades suited to everyday mechanical service.' },
-        { title: 'Finish protection', subTitle: 'Surface treatment supports practical corrosion resistance in common environments.' },
-        { title: 'Set format', subTitle: 'Delivered as matched bolt-and-nut quantities for organized usage.' },
-        { title: 'Applications', subTitle: 'Suitable for fixtures, fabricated supports, brackets, and workshop assemblies.' },
+        { title: 'Flash point', subTitle: '60°C min' },
+        { title: 'Specific gravity', subTitle: '0.780-0.800 at 15°C' },
+        { title: 'Aromatics', subTitle: '0.5% max' },
+        { title: 'Boiling range', subTitle: '180-220°C' },
       ],
       specificationsRight: [
-        { title: 'Thread accuracy', subTitle: 'Consistent threading promotes easier installation and secure mating.' },
-        { title: 'Assembly use', subTitle: 'Helps standardize regular fastening work across multiple project types.' },
-        { title: 'Maintenance value', subTitle: 'Easy to keep in stock for ongoing servicing and replacement needs.' },
-        { title: 'Supply support', subTitle: 'Packaged for practical handling in industrial stores and maintenance rooms.' },
+        { title: 'Appearance', subTitle: 'Clear liquid' },
+        { title: 'Color', subTitle: 'Water white' },
+        { title: 'Aniline point', subTitle: '70-80°C' },
+        { title: 'Packaging', subTitle: 'Drums, bulk' },
       ],
     }),
-    withAssets('item-b203', {
-      slug: 'structural-tap-bolts-and-nuts',
-      title: 'Structural Tap Bolts and Nuts Set',
-      description: 'Higher-strength tap bolts and nuts for structural support and load-focused assemblies.',
+    withAssets('dearomatized-hydrocarbon-fluids', {
+      slug: 'dearomatized-fluid-d80',
+      title: 'Dearomatized Fluid D80',
+      description:
+        'Higher flash point dearomatized hydrocarbon fluid for safer industrial handling.',
       mainContent:
-        'Structural Tap Bolts and Nuts are intended for more demanding support applications where fastening integrity, joint confidence, and dependable mechanical holding are priorities.',
-      longDescriptionTitle: 'Built for stronger, more demanding fastening joints',
+        'D80 offers a reduced-aromatic solvent profile with improved handling comfort and suitability for demanding industrial processes.',
+      longDescriptionTitle: 'Higher flash point dearomatized solvent',
       longDescriptionSubTitle:
-        'This set supports teams working on structural frames, heavy supports, and tougher industrial assemblies that require a stronger fastening profile.',
-      ctaTitle: 'Request technical assistance',
+        'Useful in applications where process safety, lower odor, and dependable solvency are all important.',
+      ctaTitle: 'Request Product Information',
       ctaURL: '/contact',
       descriptionList: [
-        { title: 'Stronger joint confidence', subTitle: 'Designed for assemblies where secure structural performance is especially important.' },
-        { title: 'Industrial duty focus', subTitle: 'Useful in support frames, structural brackets, and fabricated heavy-duty components.' },
-        { title: 'Project readiness', subTitle: 'Helps keep essential stronger fasteners available for demanding jobs.' },
+        { title: 'Safer handling profile', subTitle: 'Higher flash point supports operational safety.' },
+        { title: 'Low odor profile', subTitle: 'Suitable for indoor and enclosed work areas.' },
+        { title: 'Industrial consistency', subTitle: 'Supplied for repeat commercial use.' },
       ],
       specificationsLeft: [
-        { title: 'Strength emphasis', subTitle: 'Material and sizing choices are oriented toward higher-duty structural applications.' },
-        { title: 'Protective finish', subTitle: 'Surface protection supports longer service life in industrial settings.' },
-        { title: 'Use cases', subTitle: 'Applicable in frame work, equipment supports, utility structures, and fabricated assemblies.' },
-        { title: 'Kit utility', subTitle: 'Matched nuts and bolts improve selection speed during installation planning.' },
+        { title: 'Flash point', subTitle: '80°C min' },
+        { title: 'Specific gravity', subTitle: '0.790-0.810 at 15°C' },
+        { title: 'Aromatics', subTitle: '0.5% max' },
+        { title: 'Boiling range', subTitle: '210-250°C' },
       ],
       specificationsRight: [
-        { title: 'Mechanical performance', subTitle: 'Supports applications where secure load-bearing fastener performance is expected.' },
-        { title: 'Thread quality', subTitle: 'Manufactured for reliable threading and practical site installation.' },
-        { title: 'Assembly consistency', subTitle: 'Promotes repeatable fastening quality in tougher project conditions.' },
-        { title: 'Industry fit', subTitle: 'Relevant to construction support, utility installations, and industrial fabrication.' },
-      ],
-    }),
-    withAssets('item-b203', {
-      slug: 'corrosion-resistant-tap-bolts-and-nuts',
-      title: 'Corrosion-Resistant Tap Bolts and Nuts Set',
-      description: 'Tap bolts and nuts with enhanced surface protection for harsher environments.',
-      mainContent:
-        'This corrosion-resistant tap bolts and nuts set is intended for installations where longer-lasting surface protection and dependable fastening performance are both required.',
-      longDescriptionTitle: 'Made for installations exposed to tougher service conditions',
-      longDescriptionSubTitle:
-        'Corrosion-Resistant Tap Bolts and Nuts help maintenance and project teams manage assemblies exposed to moisture, handling, and more demanding industrial conditions.',
-      ctaTitle: 'Talk to our product team',
-      ctaURL: '/contact',
-      descriptionList: [
-        { title: 'Improved protection', subTitle: 'Enhanced finish helps slow corrosion effects in more exposed applications.' },
-        { title: 'Longer service support', subTitle: 'Useful where reduced replacement frequency adds operational value.' },
-        { title: 'Flexible deployment', subTitle: 'Can be used in site installs, maintenance upgrades, and industrial outdoor support work.' },
-      ],
-      specificationsLeft: [
-        { title: 'Surface treatment', subTitle: 'Protection-focused finishing helps defend the fastener surface over time.' },
-        { title: 'Application scope', subTitle: 'Suitable for exposed industrial areas, utilities, and maintenance-critical supports.' },
-        { title: 'Matched set supply', subTitle: 'Provides coordinated bolt-and-nut quantities for efficient deployment.' },
-        { title: 'Operational benefit', subTitle: 'Supports more durable fastening outcomes where environment matters.' },
-      ],
-      specificationsRight: [
-        { title: 'Maintenance advantage', subTitle: 'Can help reduce premature fastener replacement in exposed settings.' },
-        { title: 'Installation quality', subTitle: 'Retains the practical usability expected in day-to-day field installation.' },
-        { title: 'Mechanical reliability', subTitle: 'Balances corrosion resistance with dependable fastening performance.' },
-        { title: 'Target sectors', subTitle: 'Useful in utilities, fabrication yards, industrial exteriors, and project maintenance.' },
+        { title: 'Appearance', subTitle: 'Clear liquid' },
+        { title: 'Color', subTitle: 'Water white' },
+        { title: 'Odor', subTitle: 'Very mild' },
+        { title: 'Packaging', subTitle: 'Drums, bulk' },
       ],
     }),
   ],
-  'item-f303': [
-    withAssets('item-f303', {
-      slug: 'industrial-hex-bolts',
-      title: 'Industrial Hex Bolts',
-      description: 'Dependable hex bolts for general industrial fastening and fabrication use.',
+  'petroleum-ethers': [
+    withAssets('petroleum-ethers', {
+      slug: 'petroleum-ether-40-60',
+      title: 'Petroleum Ether 40/60',
+      description:
+        'Light petroleum fraction for extraction, cleaning, and controlled evaporation use.',
       mainContent:
-        'Industrial Hex Bolts are designed for regular-duty fastening across fabrication, machinery support, and workshop assembly where strong, straightforward fastening is required.',
-      longDescriptionTitle: 'A dependable hex bolt range for broad industrial use',
+        'Petroleum Ether 40/60 is selected for light-duty extraction and cleaning processes that need quick evaporation.',
+      longDescriptionTitle: 'Light industrial petroleum ether',
       longDescriptionSubTitle:
-        'This product line is suited to teams that need reliable, easy-to-specify hex bolts for workshop production, machine support, and general industrial installation.',
-      ctaTitle: 'Contact sales to learn more',
+        'Useful for extraction and process cleaning applications requiring narrow boiling range behavior.',
+      ctaTitle: 'Request Product Information',
       ctaURL: '/contact',
       descriptionList: [
-        { title: 'Solid mechanical hold', subTitle: 'Provides dependable clamping strength for routine industrial connections.' },
-        { title: 'Wide application value', subTitle: 'Useful across fabricated frames, equipment supports, and machine structures.' },
-        { title: 'Practical specification', subTitle: 'Easy to integrate into standard workshop and project fastening requirements.' },
+        { title: 'Narrow boiling range', subTitle: 'Supports predictable solvent behavior.' },
+        { title: 'Fast evaporation', subTitle: 'Suitable for quick turnaround processes.' },
+        { title: 'Clean finish', subTitle: 'Low residue after use.' },
       ],
       specificationsLeft: [
-        { title: 'Material', subTitle: 'Produced using industrial-grade material choices for reliable performance.' },
-        { title: 'Thread design', subTitle: 'Engineered to support secure fastening and practical installation.' },
-        { title: 'Size coverage', subTitle: 'Available across multiple dimensions to support varied structural needs.' },
-        { title: 'Applications', subTitle: 'Useful in fabrication, machinery, structures, and utility support installations.' },
+        { title: 'Boiling range', subTitle: '40-60°C' },
+        { title: 'Specific gravity', subTitle: '0.620-0.650 at 20°C' },
+        { title: 'Flash point', subTitle: 'Below 0°C' },
+        { title: 'Aromatics', subTitle: '0.1% max' },
       ],
       specificationsRight: [
-        { title: 'Service suitability', subTitle: 'Appropriate for regular-duty industrial and project environments.' },
-        { title: 'Installation ease', subTitle: 'Hex-head format supports familiar tooling and efficient site handling.' },
-        { title: 'Procurement value', subTitle: 'Simple to stock for routine project and workshop demand.' },
-        { title: 'Operational fit', subTitle: 'Balances fastening strength with practical day-to-day usability.' },
+        { title: 'Residue', subTitle: 'Very low' },
+        { title: 'Water', subTitle: '0.01% max' },
+        { title: 'Appearance', subTitle: 'Clear liquid' },
+        { title: 'Packaging', subTitle: 'Drums, cans' },
       ],
     }),
-    withAssets('item-f303', {
-      slug: 'high-tensile-hex-bolts',
-      title: 'High-Tensile Hex Bolts',
-      description: 'High-strength hex bolts for demanding structural and mechanical assemblies.',
+    withAssets('petroleum-ethers', {
+      slug: 'petroleum-ether-60-80',
+      title: 'Petroleum Ether 60/80',
+      description:
+        'Medium boiling petroleum ether for laboratory, extraction, and industrial cleaning.',
       mainContent:
-        'High-Tensile Hex Bolts are intended for more demanding applications where stronger fastening performance and greater confidence in load-focused assemblies are required.',
-      longDescriptionTitle: 'High-strength fastening for critical load-bearing applications',
+        'Petroleum Ether 60/80 provides a balanced evaporation rate for industrial users who need clean solvent performance.',
+      longDescriptionTitle: 'Balanced evaporation petroleum ether',
       longDescriptionSubTitle:
-        'This range is relevant for industrial users who need a stronger hex bolt option for structural systems, fabricated heavy assemblies, and mechanically demanding installations.',
-      ctaTitle: 'Request technical assistance',
+        'Suitable for extraction, formulation support, and industrial cleaning applications.',
+      ctaTitle: 'Request Product Information',
       ctaURL: '/contact',
       descriptionList: [
-        { title: 'Stronger performance', subTitle: 'Developed for applications needing greater fastening confidence under heavier duty.' },
-        { title: 'Structural suitability', subTitle: 'Useful in supports, frames, and mechanical assemblies with stronger performance expectations.' },
-        { title: 'Engineering-ready', subTitle: 'Supports projects where fastening specification matters more closely.' },
+        { title: 'Process flexibility', subTitle: 'Works across multiple industrial uses.' },
+        { title: 'Stable range', subTitle: 'Controlled volatility supports consistency.' },
+        { title: 'Low residue', subTitle: 'Leaves cleaner surfaces after evaporation.' },
       ],
       specificationsLeft: [
-        { title: 'Strength focus', subTitle: 'Designed around higher-strength expectations for demanding installations.' },
-        { title: 'Use environment', subTitle: 'Suitable for industrial structures, fabricated assemblies, and load-conscious mechanical work.' },
-        { title: 'Thread integrity', subTitle: 'Manufactured to support secure engagement and fastening consistency.' },
-        { title: 'Range options', subTitle: 'Can be matched to multiple size and assembly requirements.' },
+        { title: 'Boiling range', subTitle: '60-80°C' },
+        { title: 'Specific gravity', subTitle: '0.640-0.660 at 20°C' },
+        { title: 'Flash point', subTitle: '-20°C approx' },
+        { title: 'Aromatics', subTitle: '0.1% max' },
       ],
       specificationsRight: [
-        { title: 'Load confidence', subTitle: 'Better suited to assemblies that demand stronger fastening behaviour.' },
-        { title: 'Project fit', subTitle: 'Relevant to infrastructure support, heavy fabrication, and industrial machine systems.' },
-        { title: 'Specification utility', subTitle: 'Useful where material and performance selection are more deliberate.' },
-        { title: 'Procurement support', subTitle: 'Can be supplied to align with recurring project and plant needs.' },
+        { title: 'Residue', subTitle: 'Very low' },
+        { title: 'Water', subTitle: '0.01% max' },
+        { title: 'Appearance', subTitle: 'Clear liquid' },
+        { title: 'Packaging', subTitle: 'Drums, cans' },
       ],
     }),
-    withAssets('item-f303', {
-      slug: 'corrosion-resistant-hex-bolts',
-      title: 'Corrosion-Resistant Hex Bolts',
-      description: 'Protective-finish hex bolts for exposed industrial and utility applications.',
+  ],
+  'rubber-process-oil': [
+    withAssets('rubber-process-oil', {
+      slug: 'aromatic-rpo',
+      title: 'Aromatic Rubber Process Oil',
+      description:
+        'Processing oil developed for rubber compounding and improved polymer workability.',
       mainContent:
-        'Corrosion-Resistant Hex Bolts are suited to installations where environmental exposure makes surface protection and long-term service reliability more important.',
-      longDescriptionTitle: 'Surface-protected hex bolts for exposed service conditions',
+        'Aromatic rubber process oil supports compounding efficiency and helps improve the handling and processing of rubber blends.',
+      longDescriptionTitle: 'Rubber compounding support oil',
       longDescriptionSubTitle:
-        'This hex bolt range helps project and maintenance teams improve fastener durability in applications exposed to moisture, handling, and outdoor industrial conditions.',
-      ctaTitle: 'Talk to our product team',
+        'Chosen by manufacturers for dependable compatibility and process support in rubber operations.',
+      ctaTitle: 'Request Product Information',
       ctaURL: '/contact',
       descriptionList: [
-        { title: 'Enhanced protection', subTitle: 'Protective finishing helps maintain fastener condition in more exposed environments.' },
-        { title: 'Longer service outlook', subTitle: 'Supports installations where durability and reduced replacement are valuable.' },
-        { title: 'Field suitability', subTitle: 'Useful for outdoor supports, utilities, and industrial maintenance upgrades.' },
+        { title: 'Good polymer compatibility', subTitle: 'Suitable for rubber compounding lines.' },
+        { title: 'Process support', subTitle: 'Helps improve workability and handling.' },
+        { title: 'Industrial consistency', subTitle: 'Supports repeatable manufacturing output.' },
       ],
       specificationsLeft: [
-        { title: 'Finish type', subTitle: 'Selected surface protection supports corrosion resistance in exposed use cases.' },
-        { title: 'Application range', subTitle: 'Suitable for external supports, industrial structures, and site installations.' },
-        { title: 'Mechanical value', subTitle: 'Combines practical fastening performance with more durable surface behaviour.' },
-        { title: 'Supply format', subTitle: 'Available in quantities appropriate for project and maintenance planning.' },
+        { title: 'Viscosity at 100°C', subTitle: '15-25 cSt' },
+        { title: 'Specific gravity', subTitle: '0.950-0.970 at 15°C' },
+        { title: 'Flash point', subTitle: '220°C min' },
+        { title: 'Pour point', subTitle: '-15°C max' },
       ],
       specificationsRight: [
-        { title: 'Maintenance benefit', subTitle: 'Can help extend intervals between fastener replacement in harsher settings.' },
-        { title: 'Installation familiarity', subTitle: 'Retains standard hex-head usability for routine industrial tooling.' },
-        { title: 'Sector fit', subTitle: 'Appropriate for utilities, project sites, processing areas, and exposed fabricated systems.' },
-        { title: 'Operational reliability', subTitle: 'Supports stronger lifecycle value in environmental service conditions.' },
+        { title: 'Aromatic content', subTitle: '25-35%' },
+        { title: 'Color', subTitle: 'Dark amber' },
+        { title: 'Aniline point', subTitle: '50-70°C' },
+        { title: 'Packaging', subTitle: 'Bulk, drums' },
+      ],
+    }),
+    withAssets('rubber-process-oil', {
+      slug: 'paraffinic-rpo',
+      title: 'Paraffinic Rubber Process Oil',
+      description:
+        'Cleaner process oil option for selected rubber and polymer applications.',
+      mainContent:
+        'Paraffinic rubber process oil is used where a lighter, cleaner profile is preferred while maintaining dependable process behavior.',
+      longDescriptionTitle: 'Cleaner process oil for rubber use',
+      longDescriptionSubTitle:
+        'Supports selected rubber applications with a balanced handling profile and good consistency.',
+      ctaTitle: 'Request Product Information',
+      ctaURL: '/contact',
+      descriptionList: [
+        { title: 'Cleaner profile', subTitle: 'Suitable where lower aromatic character is preferred.' },
+        { title: 'Stable handling', subTitle: 'Supports smooth production use.' },
+        { title: 'Consistent quality', subTitle: 'Designed for commercial processing needs.' },
+      ],
+      specificationsLeft: [
+        { title: 'Viscosity at 100°C', subTitle: '10-18 cSt' },
+        { title: 'Specific gravity', subTitle: '0.870-0.900 at 15°C' },
+        { title: 'Flash point', subTitle: '210°C min' },
+        { title: 'Pour point', subTitle: '-12°C max' },
+      ],
+      specificationsRight: [
+        { title: 'Aromatic content', subTitle: 'Low to moderate' },
+        { title: 'Color', subTitle: 'Pale amber' },
+        { title: 'Odor', subTitle: 'Mild' },
+        { title: 'Packaging', subTitle: 'Bulk, drums' },
+      ],
+    }),
+  ],
+  glycols: [
+    withAssets('glycols', {
+      slug: 'monoethylene-glycol',
+      title: 'Monoethylene Glycol (MEG)',
+      description:
+        'Industrial glycol for coolants, antifreeze systems, and chemical intermediate applications.',
+      mainContent:
+        'MEG is widely used across industrial cooling systems, antifreeze formulations, and downstream chemical manufacturing.',
+      longDescriptionTitle: 'Widely used industrial glycol',
+      longDescriptionSubTitle:
+        'A dependable product for process plants, coolant systems, and formulation-based applications.',
+      ctaTitle: 'Request Product Information',
+      ctaURL: '/contact',
+      descriptionList: [
+        { title: 'High purity', subTitle: 'Suitable for demanding industrial use.' },
+        { title: 'System support', subTitle: 'Common choice for coolant formulations.' },
+        { title: 'Multi-industry use', subTitle: 'Used across manufacturing segments.' },
+      ],
+      specificationsLeft: [
+        { title: 'Purity', subTitle: '99.8% min' },
+        { title: 'Specific gravity', subTitle: '1.115 at 20°C' },
+        { title: 'Water', subTitle: '0.1% max' },
+        { title: 'Color', subTitle: '10 APHA max' },
+      ],
+      specificationsRight: [
+        { title: 'Diethylene glycol', subTitle: '0.04% max' },
+        { title: 'Chloride', subTitle: 'Low' },
+        { title: 'Appearance', subTitle: 'Clear liquid' },
+        { title: 'Packaging', subTitle: 'Bulk, drums' },
+      ],
+    }),
+    withAssets('glycols', {
+      slug: 'diethylene-glycol',
+      title: 'Diethylene Glycol (DEG)',
+      description:
+        'Industrial glycol used in resins, plasticizers, coolants, and processing applications.',
+      mainContent:
+        'DEG provides useful hygroscopic and solvency characteristics for chemical manufacturing and formulation work.',
+      longDescriptionTitle: 'Flexible glycol for industrial processing',
+      longDescriptionSubTitle:
+        'Supports resin, coolant, and formulation industries with reliable commercial-grade quality.',
+      ctaTitle: 'Request Product Information',
+      ctaURL: '/contact',
+      descriptionList: [
+        { title: 'Useful solvency', subTitle: 'Works well in multiple industrial systems.' },
+        { title: 'Hygroscopic behavior', subTitle: 'Suitable for moisture-sensitive uses.' },
+        { title: 'Consistent supply', subTitle: 'Available for routine B2B demand.' },
+      ],
+      specificationsLeft: [
+        { title: 'Purity', subTitle: '99.0% min' },
+        { title: 'Specific gravity', subTitle: '1.118 at 20°C' },
+        { title: 'Boiling point', subTitle: '245°C approx' },
+        { title: 'Water', subTitle: '0.2% max' },
+      ],
+      specificationsRight: [
+        { title: 'Color', subTitle: '15 APHA max' },
+        { title: 'Appearance', subTitle: 'Clear liquid' },
+        { title: 'Odor', subTitle: 'Mild' },
+        { title: 'Packaging', subTitle: 'Bulk, drums' },
+      ],
+    }),
+  ],
+  'base-oils': [
+    withAssets('base-oils', {
+      slug: 'base-oil-sn150',
+      title: 'Base Oil SN150',
+      description:
+        'Light base oil for lubricant blending, hydraulic oils, and industrial fluid applications.',
+      mainContent:
+        'SN150 is a commonly used light neutral base oil that supports lubricant formulation and general industrial blending.',
+      longDescriptionTitle: 'Light viscosity base oil',
+      longDescriptionSubTitle:
+        'Used in lubricant manufacturing where stable viscosity and reliable blending performance are required.',
+      ctaTitle: 'Request Product Information',
+      ctaURL: '/contact',
+      descriptionList: [
+        { title: 'Blending friendly', subTitle: 'Works well in industrial lubricant manufacture.' },
+        { title: 'Stable quality', subTitle: 'Dependable for recurring production needs.' },
+        { title: 'Broad use case', subTitle: 'Suitable for multiple fluid systems.' },
+      ],
+      specificationsLeft: [
+        { title: 'Viscosity at 40°C', subTitle: '28-32 cSt' },
+        { title: 'Viscosity at 100°C', subTitle: '4.5-5.5 cSt' },
+        { title: 'Viscosity index', subTitle: '90 min' },
+        { title: 'Pour point', subTitle: '-12°C max' },
+      ],
+      specificationsRight: [
+        { title: 'Flash point', subTitle: '200°C min' },
+        { title: 'Color', subTitle: '1.0 ASTM max' },
+        { title: 'Sulfur', subTitle: '0.4% max' },
+        { title: 'Packaging', subTitle: 'Bulk, drums' },
+      ],
+    }),
+    withAssets('base-oils', {
+      slug: 'base-oil-sn500',
+      title: 'Base Oil SN500',
+      description:
+        'Heavier base oil for gear oils, marine lubricants, greases, and industrial blends.',
+      mainContent:
+        'SN500 supports heavier-duty lubricant applications where higher viscosity and stronger oil film are important.',
+      longDescriptionTitle: 'Heavy viscosity base oil',
+      longDescriptionSubTitle:
+        'A practical base stock for industrial and marine lubricant blending requirements.',
+      ctaTitle: 'Request Product Information',
+      ctaURL: '/contact',
+      descriptionList: [
+        { title: 'Higher viscosity', subTitle: 'Suitable for heavier lubrication needs.' },
+        { title: 'Strong film strength', subTitle: 'Supports equipment protection.' },
+        { title: 'Industrial suitability', subTitle: 'Used in demanding lubricant systems.' },
+      ],
+      specificationsLeft: [
+        { title: 'Viscosity at 40°C', subTitle: '90-110 cSt' },
+        { title: 'Viscosity at 100°C', subTitle: '10.5-12.5 cSt' },
+        { title: 'Viscosity index', subTitle: '85 min' },
+        { title: 'Pour point', subTitle: '-9°C max' },
+      ],
+      specificationsRight: [
+        { title: 'Flash point', subTitle: '240°C min' },
+        { title: 'Color', subTitle: '2.5 ASTM max' },
+        { title: 'Sulfur', subTitle: '0.5% max' },
+        { title: 'Packaging', subTitle: 'Bulk, drums' },
+      ],
+    }),
+  ],
+  'printing-ink-coating-oils': [
+    withAssets('printing-ink-coating-oils', {
+      slug: 'printing-ink-oil',
+      title: 'Printing Ink Oil',
+      description:
+        'Specialty process oil for printing ink manufacture and formulation support.',
+      mainContent:
+        'Printing Ink Oil is developed to support ink flow, pigment interaction, and commercial-scale production consistency.',
+      longDescriptionTitle: 'Specialty oil for ink systems',
+      longDescriptionSubTitle:
+        'Designed for printing ink manufacturers looking for steady formulation performance and supply reliability.',
+      ctaTitle: 'Request Product Information',
+      ctaURL: '/contact',
+      descriptionList: [
+        { title: 'Ink formulation support', subTitle: 'Assists flow and processing behavior.' },
+        { title: 'Stable quality', subTitle: 'Built for recurring manufacturing cycles.' },
+        { title: 'Commercial supply', subTitle: 'Suitable for industrial production environments.' },
+      ],
+      specificationsLeft: [
+        { title: 'Viscosity at 40°C', subTitle: '30-40 cSt' },
+        { title: 'Specific gravity', subTitle: '0.900-0.920 at 15°C' },
+        { title: 'Flash point', subTitle: '220°C min' },
+        { title: 'Pour point', subTitle: '-10°C max' },
+      ],
+      specificationsRight: [
+        { title: 'Color', subTitle: 'Light to medium' },
+        { title: 'Odor', subTitle: 'Mild' },
+        { title: 'Aromatic content', subTitle: 'Controlled' },
+        { title: 'Packaging', subTitle: 'Drums, bulk' },
+      ],
+    }),
+    withAssets('printing-ink-coating-oils', {
+      slug: 'coating-process-oil',
+      title: 'Coating Process Oil',
+      description:
+        'Industrial oil for coating and surface treatment formulations.',
+      mainContent:
+        'Coating Process Oil supports coating manufacture with dependable viscosity behavior and process consistency.',
+      longDescriptionTitle: 'Support oil for coating systems',
+      longDescriptionSubTitle:
+        'Useful in coating and treatment applications where stable processing and formulation control matter.',
+      ctaTitle: 'Request Product Information',
+      ctaURL: '/contact',
+      descriptionList: [
+        { title: 'Consistent flow', subTitle: 'Supports blending and manufacturing stability.' },
+        { title: 'Industrial fit', subTitle: 'Suitable for coating process lines.' },
+        { title: 'Supply reliability', subTitle: 'Built around B2B repeat demand.' },
+      ],
+      specificationsLeft: [
+        { title: 'Viscosity at 40°C', subTitle: '35-50 cSt' },
+        { title: 'Specific gravity', subTitle: '0.890-0.915 at 15°C' },
+        { title: 'Flash point', subTitle: '210°C min' },
+        { title: 'Pour point', subTitle: '-6°C max' },
+      ],
+      specificationsRight: [
+        { title: 'Color', subTitle: 'Light amber' },
+        { title: 'Odor', subTitle: 'Mild petroleum' },
+        { title: 'Residue', subTitle: 'Low' },
+        { title: 'Packaging', subTitle: 'Drums, bulk' },
+      ],
+    }),
+  ],
+  'industrial-greases-esters': [
+    withAssets('industrial-greases-esters', {
+      slug: 'synthetic-ester-additive',
+      title: 'Synthetic Ester Additive',
+      description:
+        'High-performance ester additive for grease, lubricant, and specialty fluid formulations.',
+      mainContent:
+        'Synthetic Ester Additive helps improve lubricity, temperature performance, and formulation stability in demanding industrial systems.',
+      longDescriptionTitle: 'Performance additive for advanced formulations',
+      longDescriptionSubTitle:
+        'Selected for applications that require stronger lubricity and dependable performance under thermal stress.',
+      ctaTitle: 'Request Product Information',
+      ctaURL: '/contact',
+      descriptionList: [
+        { title: 'Enhanced lubricity', subTitle: 'Supports smoother operating conditions.' },
+        { title: 'Thermal stability', subTitle: 'Suitable for high-temperature service.' },
+        { title: 'Formulation value', subTitle: 'Improves premium product performance.' },
+      ],
+      specificationsLeft: [
+        { title: 'Viscosity at 40°C', subTitle: '30-50 cSt' },
+        { title: 'Viscosity index', subTitle: '140 min' },
+        { title: 'Pour point', subTitle: '-40°C max' },
+        { title: 'Flash point', subTitle: '250°C min' },
+      ],
+      specificationsRight: [
+        { title: 'Acid number', subTitle: '0.2 mg KOH/g max' },
+        { title: 'Water', subTitle: '0.05% max' },
+        { title: 'Color', subTitle: '2.0 ASTM max' },
+        { title: 'Packaging', subTitle: 'Drums, pails' },
+      ],
+    }),
+    withAssets('industrial-greases-esters', {
+      slug: 'grease-base-fluid',
+      title: 'Grease Base Fluid',
+      description:
+        'Base fluid for industrial grease manufacture and heavy-duty lubrication systems.',
+      mainContent:
+        'Grease Base Fluid is developed for grease makers seeking dependable structure support and industrial consistency.',
+      longDescriptionTitle: 'Dependable base fluid for grease systems',
+      longDescriptionSubTitle:
+        'Works in grease formulation programs where stable viscosity and repeatable blending are required.',
+      ctaTitle: 'Request Product Information',
+      ctaURL: '/contact',
+      descriptionList: [
+        { title: 'Formulation stability', subTitle: 'Supports repeatable grease manufacturing.' },
+        { title: 'Good base characteristics', subTitle: 'Suitable for various grease chemistries.' },
+        { title: 'Commercial grade', subTitle: 'Designed for ongoing B2B production.' },
+      ],
+      specificationsLeft: [
+        { title: 'Viscosity at 40°C', subTitle: '80-120 cSt' },
+        { title: 'Viscosity index', subTitle: '95 min' },
+        { title: 'Pour point', subTitle: '-9°C max' },
+        { title: 'Flash point', subTitle: '230°C min' },
+      ],
+      specificationsRight: [
+        { title: 'Color', subTitle: 'Amber' },
+        { title: 'Oxidation stability', subTitle: 'Good' },
+        { title: 'Odor', subTitle: 'Mild' },
+        { title: 'Packaging', subTitle: 'Bulk, drums' },
+      ],
+    }),
+  ],
+  'drilling-fluids': [
+    withAssets('drilling-fluids', {
+      slug: 'oil-based-drilling-fluid',
+      title: 'Oil-Based Drilling Fluid',
+      description:
+        'Specialized drilling fluid for lubricity, wellbore stability, and challenging field conditions.',
+      mainContent:
+        'Oil-Based Drilling Fluid is designed to support drilling efficiency, cuttings transport, and performance in demanding operating environments.',
+      longDescriptionTitle: 'Advanced support for drilling operations',
+      longDescriptionSubTitle:
+        'Useful where lubrication, stability, and field-ready fluid behavior are essential to performance.',
+      ctaTitle: 'Request Product Information',
+      ctaURL: '/contact',
+      descriptionList: [
+        { title: 'Improved lubricity', subTitle: 'Helps reduce torque and drag.' },
+        { title: 'Operational stability', subTitle: 'Supports difficult drilling conditions.' },
+        { title: 'Field-ready performance', subTitle: 'Suitable for industrial project requirements.' },
+      ],
+      specificationsLeft: [
+        { title: 'Density range', subTitle: 'Customizable' },
+        { title: 'Viscosity', subTitle: 'Project specific' },
+        { title: 'Flash point', subTitle: '200°C min' },
+        { title: 'Pour point', subTitle: '-15°C max' },
+      ],
+      specificationsRight: [
+        { title: 'Lubricity', subTitle: 'Excellent' },
+        { title: 'Water tolerance', subTitle: 'Controlled' },
+        { title: 'Appearance', subTitle: 'Dark process fluid' },
+        { title: 'Supply mode', subTitle: 'Bulk project supply' },
+      ],
+    }),
+    withAssets('drilling-fluids', {
+      slug: 'drilling-base-oil',
+      title: 'Drilling Base Oil',
+      description:
+        'Base oil for drilling fluid systems and energy-sector industrial applications.',
+      mainContent:
+        'Drilling Base Oil is supplied for fluid-system preparation where stable base performance and dependable project supply are required.',
+      longDescriptionTitle: 'Base oil for field fluid systems',
+      longDescriptionSubTitle:
+        'A practical product for drilling-related formulations that need stable, repeatable oil characteristics.',
+      ctaTitle: 'Request Product Information',
+      ctaURL: '/contact',
+      descriptionList: [
+        { title: 'Project suitability', subTitle: 'Supports oilfield fluid preparation.' },
+        { title: 'Stable quality', subTitle: 'Helps maintain process consistency.' },
+        { title: 'Commercial supply', subTitle: 'Available for large-volume requirements.' },
+      ],
+      specificationsLeft: [
+        { title: 'Flash point', subTitle: '160°C min' },
+        { title: 'Specific gravity', subTitle: '0.790-0.820 at 15°C' },
+        { title: 'Viscosity at 40°C', subTitle: '2-4 cSt' },
+        { title: 'Pour point', subTitle: '-15°C max' },
+      ],
+      specificationsRight: [
+        { title: 'Aromatics', subTitle: 'Controlled' },
+        { title: 'Sulfur', subTitle: 'Low' },
+        { title: 'Appearance', subTitle: 'Clear liquid' },
+        { title: 'Supply mode', subTitle: 'Bulk, drums' },
+      ],
+    }),
+  ],
+  'esters-derivatives': [
+    withAssets('esters-derivatives', {
+      slug: 'dibutyl-phthalate',
+      title: 'Dibutyl Phthalate (DBP)',
+      description:
+        'Industrial ester used in plasticizers, coatings, adhesives, and specialty formulations.',
+      mainContent:
+        'DBP is a versatile ester derivative used across industrial sectors that require plasticization, flexibility, and formulation performance.',
+      longDescriptionTitle: 'Flexible industrial ester derivative',
+      longDescriptionSubTitle:
+        'Commonly selected for industrial compounding and formulation systems needing dependable softening performance.',
+      ctaTitle: 'Request Product Information',
+      ctaURL: '/contact',
+      descriptionList: [
+        { title: 'Formulation flexibility', subTitle: 'Supports multiple industrial uses.' },
+        { title: 'Plasticizing action', subTitle: 'Helps improve softness and workability.' },
+        { title: 'Commercial consistency', subTitle: 'Suitable for recurring plant demand.' },
+      ],
+      specificationsLeft: [
+        { title: 'Purity', subTitle: '99.0% min' },
+        { title: 'Specific gravity', subTitle: '1.043-1.048 at 20°C' },
+        { title: 'Flash point', subTitle: '157°C min' },
+        { title: 'Moisture', subTitle: '0.1% max' },
+      ],
+      specificationsRight: [
+        { title: 'Color', subTitle: '50 APHA max' },
+        { title: 'Acidity', subTitle: '0.01% max' },
+        { title: 'Appearance', subTitle: 'Clear oily liquid' },
+        { title: 'Packaging', subTitle: 'Drums, IBCs' },
+      ],
+    }),
+    withAssets('esters-derivatives', {
+      slug: 'dioctyl-phthalate',
+      title: 'Dioctyl Phthalate (DOP)',
+      description:
+        'Widely used ester plasticizer for PVC and industrial formulation applications.',
+      mainContent:
+        'DOP provides reliable plasticizing characteristics for industries requiring flexibility, durability, and commercial-scale supply.',
+      longDescriptionTitle: 'Widely used ester plasticizer',
+      longDescriptionSubTitle:
+        'A practical choice for manufacturers looking for dependable ester performance in industrial formulations.',
+      ctaTitle: 'Request Product Information',
+      ctaURL: '/contact',
+      descriptionList: [
+        { title: 'Good plasticizing efficiency', subTitle: 'Supports flexible formulation design.' },
+        { title: 'Broad industrial use', subTitle: 'Selected across multiple manufacturing sectors.' },
+        { title: 'Stable quality', subTitle: 'Suitable for repeat commercial supply.' },
+      ],
+      specificationsLeft: [
+        { title: 'Purity', subTitle: '99.5% min' },
+        { title: 'Specific gravity', subTitle: '0.982-0.988 at 20°C' },
+        { title: 'Flash point', subTitle: '190°C min' },
+        { title: 'Moisture', subTitle: '0.1% max' },
+      ],
+      specificationsRight: [
+        { title: 'Color', subTitle: '40 APHA max' },
+        { title: 'Acidity', subTitle: '0.01% max' },
+        { title: 'Appearance', subTitle: 'Clear oily liquid' },
+        { title: 'Packaging', subTitle: 'Drums, IBCs' },
+      ],
+    }),
+  ],
+  'acid-corrosion-inhibitors': [
+    withAssets('acid-corrosion-inhibitors', {
+      slug: 'acid-inhibitor-ci-101',
+      title: 'Acid Inhibitor CI-101',
+      description:
+        'Corrosion control additive for acidizing and drilling-related industrial applications.',
+      mainContent:
+        'CI-101 is formulated to help protect metal surfaces in acid service and drilling-related systems where corrosion risk must be controlled.',
+      longDescriptionTitle: 'Targeted corrosion protection support',
+      longDescriptionSubTitle:
+        'Built for industrial users requiring dependable acid-system protection and practical field application.',
+      ctaTitle: 'Request Product Information',
+      ctaURL: '/contact',
+      descriptionList: [
+        { title: 'Corrosion control', subTitle: 'Helps protect metal equipment in acid conditions.' },
+        { title: 'Operational support', subTitle: 'Suitable for field and plant use.' },
+        { title: 'Application flexibility', subTitle: 'Can be matched to project requirements.' },
+      ],
+      specificationsLeft: [
+        { title: 'Appearance', subTitle: 'Amber liquid' },
+        { title: 'Solubility', subTitle: 'Dispersible in acid systems' },
+        { title: 'Specific gravity', subTitle: '0.95-1.05 at 25°C' },
+        { title: 'pH', subTitle: 'Product specific' },
+      ],
+      specificationsRight: [
+        { title: 'Recommended dosage', subTitle: 'As per system requirement' },
+        { title: 'Application', subTitle: 'Drilling and acid treatment' },
+        { title: 'Storage', subTitle: 'Cool, dry place' },
+        { title: 'Packaging', subTitle: 'Canes, drums' },
+      ],
+    }),
+    withAssets('acid-corrosion-inhibitors', {
+      slug: 'corrosion-inhibitor-ci-205',
+      title: 'Corrosion Inhibitor CI-205',
+      description:
+        'Industrial inhibitor designed for harsher corrosion environments in drilling operations.',
+      mainContent:
+        'CI-205 supports equipment protection in more demanding corrosion environments and is supplied for project-based industrial needs.',
+      longDescriptionTitle: 'Stronger support for challenging conditions',
+      longDescriptionSubTitle:
+        'Useful where process severity requires more robust corrosion-management support.',
+      ctaTitle: 'Request Product Information',
+      ctaURL: '/contact',
+      descriptionList: [
+        { title: 'Enhanced protection', subTitle: 'Designed for tougher operating conditions.' },
+        { title: 'Field suitability', subTitle: 'Supports drilling and treatment operations.' },
+        { title: 'Project supply', subTitle: 'Available for industrial procurement cycles.' },
+      ],
+      specificationsLeft: [
+        { title: 'Appearance', subTitle: 'Dark amber liquid' },
+        { title: 'Solubility', subTitle: 'Process compatible' },
+        { title: 'Specific gravity', subTitle: '0.98-1.08 at 25°C' },
+        { title: 'pH', subTitle: 'Product specific' },
+      ],
+      specificationsRight: [
+        { title: 'Recommended dosage', subTitle: 'As per system requirement' },
+        { title: 'Application', subTitle: 'Acid service and drilling' },
+        { title: 'Storage', subTitle: 'Cool, dry place' },
+        { title: 'Packaging', subTitle: 'Canes, drums' },
+      ],
+    }),
+  ],
+  'trading-solvents': [
+    withAssets('trading-solvents', {
+      slug: 'solvent-blend-1425',
+      title: 'Solvent Blend 1425',
+      description:
+        'Commercial solvent blend supplied for broad industrial cleaning and process use.',
+      mainContent:
+        'Solvent Blend 1425 is supplied as a practical trading solvent option for customers needing flexible industrial-use material.',
+      longDescriptionTitle: 'Flexible commercial solvent blend',
+      longDescriptionSubTitle:
+        'A useful option for customers looking for dependable trading-grade solvent support across multiple applications.',
+      ctaTitle: 'Request Product Information',
+      ctaURL: '/contact',
+      descriptionList: [
+        { title: 'Broad usability', subTitle: 'Suitable for many routine industrial tasks.' },
+        { title: 'Commercial value', subTitle: 'Practical for trading and repeat purchase.' },
+        { title: 'Supply support', subTitle: 'Built around customer procurement needs.' },
+      ],
+      specificationsLeft: [
+        { title: 'Blend type', subTitle: 'Custom commercial grade' },
+        { title: 'Boiling range', subTitle: 'Application dependent' },
+        { title: 'Specific gravity', subTitle: 'Product dependent' },
+        { title: 'Flash point', subTitle: 'As per grade' },
+      ],
+      specificationsRight: [
+        { title: 'Appearance', subTitle: 'Clear liquid' },
+        { title: 'Odor', subTitle: 'Grade dependent' },
+        { title: 'Use case', subTitle: 'Cleaning and process support' },
+        { title: 'Packaging', subTitle: 'Bulk, drums' },
+      ],
+    }),
+    withAssets('trading-solvents', {
+      slug: 'cleaning-solvent-blend',
+      title: 'Cleaning Solvent Blend',
+      description:
+        'Trading solvent blend for industrial equipment cleaning and maintenance tasks.',
+      mainContent:
+        'Cleaning Solvent Blend is offered for plant cleaning, maintenance operations, and general industrial handling requirements.',
+      longDescriptionTitle: 'Practical maintenance solvent blend',
+      longDescriptionSubTitle:
+        'Developed for industrial buyers who need routine cleaning support with dependable commercial availability.',
+      ctaTitle: 'Request Product Information',
+      ctaURL: '/contact',
+      descriptionList: [
+        { title: 'Maintenance use', subTitle: 'Supports routine plant cleaning activity.' },
+        { title: 'Process practical', subTitle: 'Simple and reliable for industrial use.' },
+        { title: 'B2B availability', subTitle: 'Suitable for regular procurement demand.' },
+      ],
+      specificationsLeft: [
+        { title: 'Blend type', subTitle: 'Commercial solvent blend' },
+        { title: 'Evaporation', subTitle: 'Balanced' },
+        { title: 'Flash point', subTitle: 'As per grade' },
+        { title: 'Residue', subTitle: 'Low' },
+      ],
+      specificationsRight: [
+        { title: 'Appearance', subTitle: 'Clear liquid' },
+        { title: 'Odor', subTitle: 'Mild to moderate' },
+        { title: 'Primary use', subTitle: 'Cleaning and maintenance' },
+        { title: 'Packaging', subTitle: 'Bulk, drums' },
       ],
     }),
   ],
 };
 
-const frCatalog: Record<string, ProductCatalogItem[]> = {
-  'item-t845': [
-    withAssets('item-t845', {
-      slug: 'vis-a-machine-standard',
-      title: 'Vis à machine standard',
-      description: 'Vis à machine polyvalentes pour les assemblages industriels courants.',
-      mainContent:
-        'Cette gamme de vis à machine standard est conçue pour offrir une fixation répétable et fiable dans les équipements, panneaux et ensembles fabriqués.',
-      longDescriptionTitle: 'Une fixation fiable pour les besoins industriels quotidiens',
-      longDescriptionSubTitle:
-        'Les vis à machine standard conviennent aux opérations de maintenance, de fabrication et d’assemblage OEM où la régularité et la facilité de remplacement sont essentielles.',
-      ctaTitle: 'Contacter les ventes',
-      ctaURL: '/fr/contact',
-      descriptionList: [
-        { title: 'Filetage régulier', subTitle: 'Un filetage propre aide à réduire les problèmes d’installation lors des assemblages répétitifs.' },
-        { title: 'Durabilité équilibrée', subTitle: 'Convient aux environnements industriels courants nécessitant une fixation durable.' },
-        { title: 'Usage étendu', subTitle: 'Adapté aux carters, capots, supports et panneaux de commande.' },
-      ],
-      specificationsLeft: [
-        { title: 'Options de matériau', subTitle: 'Disponible en acier de qualité industrielle pour des performances fiables.' },
-        { title: 'Finition', subTitle: 'Une finition protectrice favorise une durée de service prolongée.' },
-        { title: 'Plage dimensionnelle', subTitle: 'Proposé en plusieurs diamètres et longueurs selon les besoins d’assemblage.' },
-        { title: 'Applications', subTitle: 'Convient aux machines, panneaux électriques, pièces fabriquées et réparations.' },
-      ],
-      specificationsRight: [
-        { title: 'Compatibilité d’entraînement', subTitle: 'Peut être spécifié avec des têtes et empreintes adaptées au procédé de pose.' },
-        { title: 'Efficacité d’assemblage', subTitle: 'Aide les équipes à standardiser les tâches de fixation courantes.' },
-        { title: 'Remplacement facile', subTitle: 'Simple à stocker et à remplacer en maintenance.' },
-        { title: 'Conditionnement', subTitle: 'Disponible en boîtes adaptées à la consommation industrielle courante.' },
-      ],
-    }),
-    withAssets('item-t845', {
-      slug: 'vis-a-machine-filetage-fin',
-      title: 'Vis à machine à filetage fin',
-      description: 'Vis de précision pour des montages plus fins et mieux contrôlés.',
-      mainContent:
-        'Cette gamme à filetage fin est destinée aux applications où l’ajustement, l’alignement et la qualité de serrage répétable sont critiques.',
-      longDescriptionTitle: 'Davantage de précision pour les assemblages maîtrisés',
-      longDescriptionSubTitle:
-        'Les vis à machine à filetage fin conviennent aux ensembles nécessitant un serrage plus contrôlé et un engagement plus fluide.',
-      ctaTitle: 'Demander une assistance technique',
-      ctaURL: '/fr/contact',
-      descriptionList: [
-        { title: 'Engagement précis', subTitle: 'Le filetage fin favorise un serrage plus maîtrisé et un meilleur alignement.' },
-        { title: 'Finition plus nette', subTitle: 'Utile pour les équipements où l’aspect visuel et la précision comptent.' },
-        { title: 'Performance stable', subTitle: 'Conçue pour une qualité de fixation répétable en environnement contrôlé.' },
-      ],
-      specificationsLeft: [
-        { title: 'Profil de filetage', subTitle: 'Une géométrie fine pour un engagement plus doux et un ajustement précis.' },
-        { title: 'Usage recommandé', subTitle: 'Idéal pour instruments, panneaux fabriqués et ensembles mécaniques légers.' },
-        { title: 'Orientation tolérance', subTitle: 'Pensé pour les applications exigeant une plus grande régularité.' },
-        { title: 'Résistance matière', subTitle: 'Fabriqué à partir de matériaux industriels fiables.' },
-      ],
-      specificationsRight: [
-        { title: 'Contrôle du serrage', subTitle: 'Permet un serrage plus progressif dans les applications sensibles.' },
-        { title: 'Plage dimensionnelle', subTitle: 'Peut être fourni dans plusieurs tailles selon les besoins.' },
-        { title: 'Secteurs typiques', subTitle: 'Convient à la fabrication de précision, aux boîtiers électroniques et à l’ingénierie légère.' },
-        { title: 'Conditionnement', subTitle: 'Préparé pour faciliter la manipulation en atelier et en production.' },
-      ],
-    }),
-    withAssets('item-t845', {
-      slug: 'vis-a-machine-pour-panneaux',
-      title: 'Vis à machine pour panneaux',
-      description: 'Solution de fixation pour coffrets, panneaux et ensembles d’accès.',
-      mainContent:
-        'Les vis à machine pour panneaux sont adaptées aux coffrets, capots, trappes et ensembles modulaires nécessitant une fermeture nette et répétable.',
-      longDescriptionTitle: 'Conçues pour les flux de fabrication de panneaux et coffrets',
-      longDescriptionSubTitle:
-        'Cette ligne de produits facilite l’accès, la maintenance et la qualité de fixation constante dans les applications de panneaux et d’armoires.',
-      ctaTitle: 'Parler à notre équipe produit',
-      ctaURL: '/fr/contact',
-      descriptionList: [
-        { title: 'Adaptées aux panneaux', subTitle: 'Conçues pour les coffrets, armoires, panneaux d’accès et capots.' },
-        { title: 'Maintenance facilitée', subTitle: 'Convient aux ensembles nécessitant des ouvertures répétées.' },
-        { title: 'Présentation soignée', subTitle: 'Aide à conserver une finition ordonnée sur les équipements visibles.' },
-      ],
-      specificationsLeft: [
-        { title: 'Cas d’usage', subTitle: 'Efficace pour armoires de commande, panneaux de process et capots fabriqués.' },
-        { title: 'Options de tête', subTitle: 'Peuvent être adaptées à l’esthétique et à l’accès outil recherchés.' },
-        { title: 'Qualité de finition', subTitle: 'Une finition protectrice soutient la durabilité en environnement intérieur.' },
-        { title: 'Conditionnement', subTitle: 'Fourni dans des emballages adaptés à l’assemblage en série.' },
-      ],
-      specificationsRight: [
-        { title: 'Avantage maintenance', subTitle: 'Permet un démontage et remontage ordonnés lors des interventions.' },
-        { title: 'Aspect d’ensemble', subTitle: 'Convient lorsque la fixation et la présentation visuelle comptent toutes deux.' },
-        { title: 'Compatibilité', subTitle: 'S’adapte à divers matériaux de panneaux et sous-ensembles fabriqués.' },
-        { title: 'Secteurs', subTitle: 'Utilisé dans les systèmes électriques, les machines et les ensembles industriels.' },
-      ],
-    }),
-  ],
-  'item-a765': [
-    withAssets('item-a765', {
-      slug: 'vis-assorties-polyvalentes',
-      title: 'Vis assorties polyvalentes',
-      description: 'Ensemble polyvalent pour atelier, maintenance et installation.',
-      mainContent:
-        'Cet assortiment polyvalent fournit immédiatement un mélange pratique de tailles et de profils, réduisant les temps d’arrêt et accélérant les travaux de fixation.',
-      longDescriptionTitle: 'Un assortiment pratique pour la fixation quotidienne',
-      longDescriptionSubTitle:
-        'Cet assortiment est conçu pour les équipes de maintenance, les ateliers et les travaux de fabrication multi-usages où disposer de la bonne vis fait gagner du temps.',
-      ctaTitle: 'Contacter les ventes',
-      ctaURL: '/fr/contact',
-      descriptionList: [
-        { title: 'Variété utile', subTitle: 'Comprend un équilibre de tailles et types pour les tâches courantes.' },
-        { title: 'Gain de temps', subTitle: 'Réduit le besoin de chercher des vis individuelles pour les besoins quotidiens.' },
-        { title: 'Prêt pour l’atelier', subTitle: 'Convient aux établis de maintenance et aux opérations industrielles générales.' },
-      ],
-      specificationsLeft: [
-        { title: 'Type d’assortiment', subTitle: 'Formats de vis mixtes choisis pour une grande utilité industrielle.' },
-        { title: 'Sélection matière', subTitle: 'Fabriqué avec des matériaux fiables adaptés aux besoins de fixation courants.' },
-        { title: 'Rangement pratique', subTitle: 'Conditionné pour une identification simple et un accès rapide.' },
-        { title: 'Applications principales', subTitle: 'Utile en maintenance, assemblage léger et réparations sur site.' },
-      ],
-      tableData: [
-        {
-          feature: ['Spécification', 'Valeur'],
-          description: [
-            ['Type d’assortiment', 'Mélange atelier général'],
-            ['Usage typique', 'Maintenance et réparation'],
-            ['Conditionnement', 'Set mixte'],
-            ['Orientation', 'Fixation quotidienne'],
-          ],
-        },
-      ],
-    }),
-    withAssets('item-a765', {
-      slug: 'vis-assorties-de-precision',
-      title: 'Vis assorties de précision',
-      description: 'Assortiment sélectionné pour des montages plus fins.',
-      mainContent:
-        'Les vis assorties de précision sont destinées aux travaux où l’ajustement, la régularité et un résultat plus propre sont particulièrement importants.',
-      longDescriptionTitle: 'Un assortiment adapté aux besoins d’assemblage plus précis',
-      longDescriptionSubTitle:
-        'Cet assortiment aide les équipes travaillant sur des montages plus fins avec des besoins de fixation mieux calibrés.',
-      ctaTitle: 'Demander une assistance technique',
-      ctaURL: '/fr/contact',
-      descriptionList: [
-        { title: 'Mélange affiné', subTitle: 'Ciblé sur les tailles et types utilisés dans des contextes plus contrôlés.' },
-        { title: 'Montages plus propres', subTitle: 'Favorise une meilleure finition dans les ensembles fabriqués.' },
-        { title: 'Moins d’hésitation', subTitle: 'Offre un ensemble organisé d’options pour les travaux répétitifs de précision.' },
-      ],
-      specificationsLeft: [
-        { title: 'Orientation assortiment', subTitle: 'Configuré pour la mécanique fine, les panneaux et l’ingénierie légère.' },
-        { title: 'Manipulation', subTitle: 'Regroupé pour une sélection plus facile pendant l’assemblage.' },
-        { title: 'Régularité qualité', subTitle: 'Soutient des résultats répétables sur les petites séries.' },
-        { title: 'Environnement d’usage', subTitle: 'Convient aux ateliers de fabrication et aux zones d’assemblage précis.' },
-      ],
-      tableData: [
-        {
-          feature: ['Spécification', 'Valeur'],
-          description: [
-            ['Type d’assortiment', 'Mélange précision'],
-            ['Usage typique', 'Assemblage fin'],
-            ['Conditionnement', 'Set trié'],
-            ['Orientation', 'Pose contrôlée'],
-          ],
-        },
-      ],
-    }),
-    withAssets('item-a765', {
-      slug: 'vis-assorties-usage-intensif',
-      title: 'Vis assorties usage intensif',
-      description: 'Set mixte conçu pour des besoins de fixation plus exigeants.',
-      mainContent:
-        'Les vis assorties usage intensif combinent une gamme pratique d’options plus robustes pour les équipes intervenant sur des travaux de maintenance et d’installation plus sévères.',
-      longDescriptionTitle: 'Un assortiment conçu pour des travaux plus exigeants',
-      longDescriptionSubTitle:
-        'Ce set mixte est utile lorsque les équipes ont besoin de vis plus robustes pour des applications industrielles ou de terrain.',
-      ctaTitle: 'Parler à notre équipe produit',
-      ctaURL: '/fr/contact',
-      descriptionList: [
-        { title: 'Sélection robuste', subTitle: 'Basée sur des types de vis courants dans des contextes atelier ou chantier plus exigeants.' },
-        { title: 'Souplesse opérationnelle', subTitle: 'Permet de gérer des tâches mixtes sans multiplier les kits séparés.' },
-        { title: 'Utilité terrain', subTitle: 'Pratique pour les équipes mobiles, les mainteneurs et les travaux techniques.' },
-      ],
-      specificationsLeft: [
-        { title: 'Plage d’application', subTitle: 'Adapté à des tâches plus rudes en atelier, utilités et maintenance de terrain.' },
-        { title: 'Style de conditionnement', subTitle: 'Préparé pour un rangement fiable et une récupération rapide.' },
-        { title: 'Approche matière', subTitle: 'Sélectionnée pour de meilleures attentes de service et de durabilité.' },
-        { title: 'Valeur chantier', subTitle: 'Réduit les retards liés au manque du bon type de vis.' },
-      ],
-      tableData: [
-        {
-          feature: ['Spécification', 'Valeur'],
-          description: [
-            ['Type d’assortiment', 'Mélange usage intensif'],
-            ['Usage typique', 'Atelier et chantier'],
-            ['Conditionnement', 'Set industriel mixte'],
-            ['Orientation', 'Fixation exigeante'],
-          ],
-        },
-      ],
-    }),
-  ],
-  'item-b203': [
-    withAssets('item-b203', {
-      slug: 'boulons-et-ecrous-standard',
-      title: 'Boulons et écrous standard',
-      description: 'Solution polyvalente pour l’assemblage et la construction courante.',
-      mainContent:
-        'Cet ensemble standard de boulons et écrous offre une fixation fiable pour l’assemblage industriel quotidien, les supports et les installations mécaniques.',
-      longDescriptionTitle: 'Une fixation éprouvée pour l’assemblage industriel courant',
-      longDescriptionSubTitle:
-        'Les boulons et écrous standard conviennent à la fabrication, au support de construction et aux opérations d’atelier nécessitant force et régularité.',
-      ctaTitle: 'Contacter les ventes',
-      ctaURL: '/fr/contact',
-      descriptionList: [
-        { title: 'Maintien fiable', subTitle: 'Offre une liaison mécanique sûre pour les applications industrielles et de construction courantes.' },
-        { title: 'Assortiment équilibré', subTitle: 'Dimensionné pour répondre aux besoins quotidiens de fixation boulon-écrou.' },
-        { title: 'Souplesse atelier', subTitle: 'Utile en fabrication, maintenance et assemblage.' },
-      ],
-      specificationsLeft: [
-        { title: 'Composition matière', subTitle: 'Fabriqué à partir de nuances d’acier fiables pour un service mécanique courant.' },
-        { title: 'Protection de finition', subTitle: 'Le traitement de surface soutient une résistance pratique à la corrosion.' },
-        { title: 'Format du set', subTitle: 'Livré avec quantités assorties de boulons et écrous.' },
-        { title: 'Applications', subTitle: 'Convient aux supports, équerres, cadres et assemblages d’atelier.' },
-      ],
-      specificationsRight: [
-        { title: 'Précision du filetage', subTitle: 'Un filetage constant favorise une pose facile et un assemblage sûr.' },
-        { title: 'Usage assemblage', subTitle: 'Aide à standardiser les travaux de fixation sur plusieurs projets.' },
-        { title: 'Valeur maintenance', subTitle: 'Simple à conserver en stock pour les besoins de service.' },
-        { title: 'Conditionnement', subTitle: 'Préparé pour une manipulation pratique en magasin industriel.' },
-      ],
-    }),
-    withAssets('item-b203', {
-      slug: 'boulons-et-ecrous-structurels',
-      title: 'Boulons et écrous structurels',
-      description: 'Version renforcée pour supports structurels et assemblages exigeants.',
-      mainContent:
-        'Les boulons et écrous structurels sont destinés aux applications plus exigeantes où l’intégrité de la fixation et la confiance dans le joint sont prioritaires.',
-      longDescriptionTitle: 'Conçus pour des assemblages plus robustes et plus exigeants',
-      longDescriptionSubTitle:
-        'Ce set convient aux équipes travaillant sur des cadres, supports lourds et ensembles industriels nécessitant un profil de fixation renforcé.',
-      ctaTitle: 'Demander une assistance technique',
-      ctaURL: '/fr/contact',
-      descriptionList: [
-        { title: 'Confiance renforcée', subTitle: 'Conçu pour les ensembles où les performances structurelles sont essentielles.' },
-        { title: 'Orientation industrielle', subTitle: 'Utile pour cadres, supports et composants fabriqués plus lourds.' },
-        { title: 'Prêt pour projet', subTitle: 'Aide à garder les fixations renforcées disponibles pour les travaux exigeants.' },
-      ],
-      specificationsLeft: [
-        { title: 'Accent sur la résistance', subTitle: 'Les choix de matière et de taille visent des applications structurelles plus sévères.' },
-        { title: 'Finition protectrice', subTitle: 'La protection de surface favorise une durée de vie accrue.' },
-        { title: 'Cas d’usage', subTitle: 'Applicable aux structures, cadres, supports d’équipement et assemblages lourds.' },
-        { title: 'Utilité du kit', subTitle: 'Les boulons et écrous assortis accélèrent la sélection à la pose.' },
-      ],
-      specificationsRight: [
-        { title: 'Performance mécanique', subTitle: 'Convient aux applications nécessitant un comportement fiable sous charge.' },
-        { title: 'Qualité du filetage', subTitle: 'Fabriqué pour un filetage fiable et une pose pratique sur site.' },
-        { title: 'Régularité assemblage', subTitle: 'Favorise une qualité de fixation répétable dans les conditions plus sévères.' },
-        { title: 'Secteurs', subTitle: 'Pertinent pour les structures, utilités et la fabrication industrielle.' },
-      ],
-    }),
-    withAssets('item-b203', {
-      slug: 'boulons-et-ecrous-anticorrosion',
-      title: 'Boulons et écrous anticorrosion',
-      description: 'Jeu protégé en surface pour environnements plus exposés.',
-      mainContent:
-        'Cet ensemble anticorrosion est prévu pour les installations où une meilleure protection de surface et une fiabilité durable sont recherchées.',
-      longDescriptionTitle: 'Pensés pour des conditions de service plus exposées',
-      longDescriptionSubTitle:
-        'Les boulons et écrous anticorrosion aident les équipes à mieux gérer les assemblages exposés à l’humidité et aux conditions industrielles plus sévères.',
-      ctaTitle: 'Parler à notre équipe produit',
-      ctaURL: '/fr/contact',
-      descriptionList: [
-        { title: 'Protection améliorée', subTitle: 'Une finition renforcée ralentit les effets de la corrosion.' },
-        { title: 'Service prolongé', subTitle: 'Utile lorsque la réduction de la fréquence de remplacement apporte de la valeur.' },
-        { title: 'Déploiement flexible', subTitle: 'Peut être utilisé sur site, en maintenance et en installations exposées.' },
-      ],
-      specificationsLeft: [
-        { title: 'Traitement de surface', subTitle: 'Une finition axée protection aide à préserver le fastener dans le temps.' },
-        { title: 'Champ d’application', subTitle: 'Convient aux zones industrielles exposées, utilités et supports critiques.' },
-        { title: 'Approvisionnement assorti', subTitle: 'Fournit des quantités coordonnées de boulons et écrous.' },
-        { title: 'Bénéfice opérationnel', subTitle: 'Favorise des résultats plus durables là où l’environnement compte.' },
-      ],
-      specificationsRight: [
-        { title: 'Avantage maintenance', subTitle: 'Peut aider à réduire les remplacements prématurés en milieu exposé.' },
-        { title: 'Qualité d’installation', subTitle: 'Conserve une bonne facilité d’usage au quotidien.' },
-        { title: 'Fiabilité mécanique', subTitle: 'Équilibre résistance à la corrosion et performance de fixation.' },
-        { title: 'Secteurs ciblés', subTitle: 'Utile dans les utilités, chantiers, extérieurs industriels et maintenance.' },
-      ],
-    }),
-  ],
-  'item-f303': [
-    withAssets('item-f303', {
-      slug: 'boulons-hexagonaux-industriels',
-      title: 'Boulons hexagonaux industriels',
-      description: 'Boulons hexagonaux fiables pour la fabrication et la fixation industrielle courante.',
-      mainContent:
-        'Les boulons hexagonaux industriels sont conçus pour la fixation de service courant dans la fabrication, le support de machines et les assemblages d’atelier.',
-      longDescriptionTitle: 'Une gamme fiable pour de larges usages industriels',
-      longDescriptionSubTitle:
-        'Cette ligne de produits convient aux équipes qui ont besoin de boulons hexagonaux faciles à spécifier pour la production, les supports machines et l’installation.',
-      ctaTitle: 'Contacter les ventes',
-      ctaURL: '/fr/contact',
-      descriptionList: [
-        { title: 'Maintien mécanique sûr', subTitle: 'Offre une force de serrage fiable pour les connexions industrielles courantes.' },
-        { title: 'Grande valeur d’usage', subTitle: 'Utile pour les cadres, supports d’équipement et structures mécaniques.' },
-        { title: 'Spécification pratique', subTitle: 'Simple à intégrer aux besoins d’atelier et de projet.' },
-      ],
-      specificationsLeft: [
-        { title: 'Matériau', subTitle: 'Fabriqué avec des choix de matières industrielles fiables.' },
-        { title: 'Conception du filetage', subTitle: 'Conçue pour une fixation sûre et une pose pratique.' },
-        { title: 'Couverture dimensionnelle', subTitle: 'Disponible dans plusieurs dimensions pour divers besoins structurels.' },
-        { title: 'Applications', subTitle: 'Utile dans la fabrication, les machines, les structures et les utilités.' },
-      ],
-      specificationsRight: [
-        { title: 'Aptitude au service', subTitle: 'Approprié pour les environnements industriels et projets de service courant.' },
-        { title: 'Facilité de pose', subTitle: 'La tête hexagonale permet un outillage familier et une manipulation efficace.' },
-        { title: 'Valeur achat', subTitle: 'Simple à stocker pour les besoins réguliers des projets et ateliers.' },
-        { title: 'Adaptation opérationnelle', subTitle: 'Équilibre résistance de fixation et praticité d’usage.' },
-      ],
-    }),
-    withAssets('item-f303', {
-      slug: 'boulons-hexagonaux-haute-resistance',
-      title: 'Boulons hexagonaux haute résistance',
-      description: 'Boulons renforcés pour assemblages structurels et mécaniques exigeants.',
-      mainContent:
-        'Les boulons hexagonaux haute résistance sont destinés aux applications plus exigeantes où de meilleures performances mécaniques sont attendues.',
-      longDescriptionTitle: 'Une fixation renforcée pour les applications critiques',
-      longDescriptionSubTitle:
-        'Cette gamme s’adresse aux utilisateurs qui ont besoin d’une solution plus robuste pour les structures, ensembles lourds et installations mécaniques exigeantes.',
-      ctaTitle: 'Demander une assistance technique',
-      ctaURL: '/fr/contact',
-      descriptionList: [
-        { title: 'Performance renforcée', subTitle: 'Développé pour les applications nécessitant davantage de confiance sous charge.' },
-        { title: 'Adaptation structurelle', subTitle: 'Utile pour supports, cadres et ensembles mécaniques à fortes attentes.' },
-        { title: 'Prêt pour l’ingénierie', subTitle: 'Soutient les projets où la spécification de fixation compte davantage.' },
-      ],
-      specificationsLeft: [
-        { title: 'Orientation résistance', subTitle: 'Pensé pour des attentes de résistance plus élevées.' },
-        { title: 'Environnement d’usage', subTitle: 'Convient aux structures industrielles, assemblages lourds et travaux mécaniques.' },
-        { title: 'Intégrité du filetage', subTitle: 'Fabriqué pour soutenir un engagement sûr et constant.' },
-        { title: 'Options de gamme', subTitle: 'Peut être adapté à plusieurs tailles et besoins d’assemblage.' },
-      ],
-      specificationsRight: [
-        { title: 'Confiance sous charge', subTitle: 'Mieux adapté aux ensembles demandant un comportement plus robuste.' },
-        { title: 'Adéquation projet', subTitle: 'Pertinent pour les supports d’infrastructure et la fabrication lourde.' },
-        { title: 'Utilité de spécification', subTitle: 'Pratique lorsque le choix matière et performance est plus étudié.' },
-        { title: 'Approvisionnement', subTitle: 'Peut être fourni selon les besoins récurrents de projet ou d’usine.' },
-      ],
-    }),
-    withAssets('item-f303', {
-      slug: 'boulons-hexagonaux-anticorrosion',
-      title: 'Boulons hexagonaux anticorrosion',
-      description: 'Boulons à finition protectrice pour applications exposées.',
-      mainContent:
-        'Les boulons hexagonaux anticorrosion conviennent aux installations où l’exposition à l’environnement rend la protection de surface plus importante.',
-      longDescriptionTitle: 'Une gamme protégée en surface pour services exposés',
-      longDescriptionSubTitle:
-        'Cette gamme aide les équipes projet et maintenance à améliorer la durabilité des fixations dans les applications exposées à l’humidité ou à l’extérieur.',
-      ctaTitle: 'Parler à notre équipe produit',
-      ctaURL: '/fr/contact',
-      descriptionList: [
-        { title: 'Protection renforcée', subTitle: 'La finition protectrice aide à préserver l’état du fastener en environnement exposé.' },
-        { title: 'Durée de service', subTitle: 'Soutient les installations où la durabilité et une maintenance réduite sont importantes.' },
-        { title: 'Utilité terrain', subTitle: 'Utile pour supports extérieurs, utilités et maintenance industrielle.' },
-      ],
-      specificationsLeft: [
-        { title: 'Type de finition', subTitle: 'Une protection de surface choisie pour améliorer la résistance à la corrosion.' },
-        { title: 'Plage d’application', subTitle: 'Convient aux supports extérieurs, structures industrielles et installations de chantier.' },
-        { title: 'Valeur mécanique', subTitle: 'Combine une bonne performance de fixation et une meilleure tenue de surface.' },
-        { title: 'Format de fourniture', subTitle: 'Disponible en quantités adaptées à la planification projet ou maintenance.' },
-      ],
-      specificationsRight: [
-        { title: 'Bénéfice maintenance', subTitle: 'Peut allonger l’intervalle entre remplacements en environnement plus sévère.' },
-        { title: 'Pose familière', subTitle: 'Conserve l’usage standard de la tête hexagonale avec l’outillage habituel.' },
-        { title: 'Secteurs', subTitle: 'Approprié pour les utilités, chantiers, zones de process et systèmes exposés.' },
-        { title: 'Fiabilité opérationnelle', subTitle: 'Soutient une meilleure valeur dans le temps en conditions d’exposition.' },
-      ],
-    }),
-  ],
-};
+const frCatalog: Record<string, ProductCatalogItem[]> = {};
 
 export function getProductCatalog(locale: 'en' | 'fr', categoryId: string) {
-  return (locale === 'fr' ? frCatalog : enCatalog)[categoryId] || [];
+  const catalog = locale === 'fr' ? frCatalog : enCatalog;
+  return catalog[categoryId] ?? [];
 }
 
 export function getCatalogItem(
@@ -836,5 +954,7 @@ export function getCatalogItem(
   categoryId: string,
   productSlug: string
 ) {
-  return getProductCatalog(locale, categoryId).find(item => item.slug === productSlug);
+  return getProductCatalog(locale, categoryId).find(
+    item => item.slug === productSlug
+  );
 }

@@ -17,17 +17,17 @@ interface Props {
 <header
   class:list={[
     'inset-x-0 z-50 flex w-full flex-wrap text-sm md:flex-nowrap md:justify-start',
-    overlay ? 'fixed top-0 pt-3 sm:pt-4' : 'sticky top-4 mb-6 md:mb-8',
+    overlay ? 'fixed top-0 pt-3 sm:pt-4' : 'sticky top-3 mb-5 md:top-4 md:mb-8',
   ]}
 >
-  <div class="mx-auto w-full max-w-(--breakpoint-2xl) px-4 sm:px-6 lg:px-8">
+  <div class="mx-auto w-full max-w-[85rem] px-4 sm:px-6 lg:px-8">
     {/* Navigation container */}
     <nav
       class:list={[
-        'relative w-full rounded-[36px] px-4 py-3 md:flex md:items-center md:justify-between md:px-6 md:py-0 lg:px-8',
+        'relative w-full rounded-2xl px-4 py-3 md:flex md:items-center md:justify-between md:px-5 md:py-2 lg:px-6',
         overlay
-          ? 'border border-white/35 bg-white/72 shadow-[0_28px_80px_-48px_rgba(8,17,38,0.95)] backdrop-blur-xl'
-          : 'border border-[#C7D9FF]/70 bg-white/78 shadow-[0_20px_50px_-35px_rgba(30,58,255,0.65)] backdrop-blur-md',
+          ? 'border border-white/30 bg-white/78 shadow-[0_24px_70px_-44px_rgba(8,17,38,0.9)] backdrop-blur-xl'
+          : 'border border-[#C0D6FF]/80 bg-white/88 shadow-[0_18px_45px_-34px_rgba(0,57,230,0.35)] backdrop-blur-md',
       ]}
       aria-label="Global"
     >
@@ -38,18 +38,18 @@ interface Props {
           href={homeUrl}
           aria-label="Mehta Petro Refineries Limited"
         >
-          <BrandLogo class="h-11 w-auto object-contain md:h-12" />
+          <BrandLogo class="h-10 w-auto object-contain md:h-11" />
           <span
-            class="hidden max-w-[18rem] text-base leading-[1.15] font-bold text-[#10245F] md:block lg:text-lg"
+            class="hidden max-w-[17rem] text-sm leading-[1.15] font-bold text-[#0A1F4D] md:block lg:text-base"
           >
             Mehta Petro-Refineries Limited
           </span>
         </a>
         {/* Collapse toggle for smaller screens */}
-        <div class="mr-5 ml-auto md:hidden">
+        <div class="ml-auto md:hidden">
           <button
             type="button"
-            class="hs-collapse-toggle flex h-8 w-8 items-center justify-center rounded-full text-sm font-bold text-neutral-600 transition duration-300 hover:bg-[#E7EFFF] hover:text-[#1E3AFF] disabled:pointer-events-none disabled:opacity-50"
+            class="hs-collapse-toggle flex h-10 w-10 items-center justify-center rounded-xl border border-[#D4E4FF] bg-white/80 text-[#0A1F4D] transition-colors duration-300 hover:border-[#0039E6] hover:text-[#0039E6] disabled:pointer-events-none disabled:opacity-50"
             data-hs-collapse="#navbar-collapse-with-animation"
             aria-controls="navbar-collapse-with-animation"
             aria-label="Toggle navigation"
@@ -93,7 +93,7 @@ interface Props {
       >
         {/* Navigation links container */}
         <div
-          class="mt-5 flex flex-col gap-x-0 gap-y-4 md:mt-0 md:flex-row md:items-center md:justify-end md:gap-x-4 md:gap-y-0 md:ps-7 lg:gap-x-7"
+          class="mt-4 flex flex-col gap-2 border-t border-[#E3EBFF] pt-4 md:mt-0 md:flex-row md:items-center md:justify-end md:gap-2 md:border-t-0 md:pt-0 md:ps-5 lg:gap-3"
         >
           {/* Navigation links */}
           {

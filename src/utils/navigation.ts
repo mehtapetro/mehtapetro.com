@@ -15,16 +15,9 @@ const footerLinks = [
       { name: 'Home', url: '/' },
       { name: 'About Us', url: '/about-us' },
       { name: 'Products', url: '/products' },
-      { name: 'Capabilities', url: '/capabilities' },
       { name: 'Contact', url: '/contact' },
-    ],
-  },
-  {
-    section: 'Capabilities',
-    links: [
-      { name: 'Manufacturing', url: '/capabilities/manufacturing' },
-      { name: 'Services', url: '/services' },
-      { name: 'Blog', url: '/blog' },
+      { name: 'Career', url: '/career' },
+      { name: 'News', url: '/blog' },
     ],
   },
 ];
@@ -33,6 +26,7 @@ const socialLinks = {
   facebook: 'https://www.facebook.com/mehtapetro',
   youtube: 'https://www.youtube.com/@mehtapetro',
   linkedin: 'https://www.linkedin.com/company/mehtapetro/',
+  instagram: 'https://www.instagram.com/mprlindia',
 };
 
 export default {

@@ -99,9 +99,9 @@ const inquiryOptions = lang === 'fr'
   <div>
     <a
       href={categoryHref}
-      class="inline-flex rounded-lg text-sm font-semibold text-[#1E3AFF] transition duration-300 hover:text-[#1632E0]"
+      class="inline-flex rounded-lg text-sm font-semibold text-[#0039E6] transition duration-300 hover:text-[#0033CC]"
     >
-      ← {copy.back}
+      {copy.back}
     </a>
     <p
       id="fadeText"
@@ -114,7 +114,7 @@ const inquiryOptions = lang === 'fr'
     class="flex flex-col items-center justify-between space-y-4 sm:flex-row sm:space-y-0"
   >
     <div id="fadeInUp">
-      <p class="mb-3 text-sm font-semibold tracking-[0.14em] text-[#1E3AFF] uppercase">
+      <p class="mb-3 text-sm font-semibold tracking-[0.14em] text-[#0039E6] uppercase">
         {categoryTitle}
       </p>
       <h1
@@ -170,7 +170,7 @@ const inquiryOptions = lang === 'fr'
               <button
                 type="button"
                 data-product-inquiry-open
-                class="group inline-flex items-center justify-center gap-x-2 rounded-xl border border-transparent bg-[#1E3AFF] px-5 py-3 text-sm font-bold text-neutral-50 shadow-[0_20px_45px_-25px_rgba(30,58,255,0.95)] ring-[#AFC2FF] transition duration-300 outline-hidden hover:bg-[#1632E0] focus-visible:ring-3 active:bg-[#122AB8] disabled:pointer-events-none disabled:opacity-50 2xl:text-base"
+                class="group inline-flex items-center justify-center gap-x-2 rounded-xl border border-transparent bg-[#0039E6] px-5 py-3 text-sm font-bold text-neutral-50 shadow-[0_20px_45px_-25px_rgba(0,57,230,0.95)] ring-[#8FA7FF] transition duration-300 outline-hidden hover:bg-[#0033CC] focus-visible:ring-3 active:bg-[#0028A3] disabled:pointer-events-none disabled:opacity-50 2xl:text-base"
               >
                 {copy.openInquiry}
               </button>
@@ -314,19 +314,19 @@ const inquiryOptions = lang === 'fr'
   <button
     type="button"
     data-product-inquiry-close
-    class="absolute inset-0 bg-[#10245F]/55 backdrop-blur-[1px]"
+    class="absolute inset-0 bg-[#0A1F4D]/55 backdrop-blur-[1px]"
     aria-label={copy.close}
   ></button>
-  <div class="relative z-10 w-full max-w-2xl rounded-2xl border border-[#DCE8FF] bg-white p-6 shadow-[0_30px_80px_-40px_rgba(16,36,95,0.45)] sm:p-8">
+  <div class="relative z-10 w-full max-w-2xl rounded-2xl border border-[#D4E4FF] bg-white p-6 shadow-[0_30px_80px_-40px_rgba(10,31,77,0.45)] sm:p-8">
     <div class="flex items-start justify-between gap-4">
       <div>
-        <h2 class="text-2xl font-bold text-[#10245F]">{copy.inquiryTitle}</h2>
-        <p class="mt-2 text-sm leading-6 text-[#5B6785]">{copy.inquirySubTitle}</p>
+        <h2 class="text-2xl font-bold text-[#0A1F4D]">{copy.inquiryTitle}</h2>
+        <p class="mt-2 text-sm leading-6 text-[#4A5F8C]">{copy.inquirySubTitle}</p>
       </div>
       <button
         type="button"
         data-product-inquiry-close
-        class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-[#DCE8FF] text-[#5B6785] transition duration-300 hover:border-[#BDD1FF] hover:text-[#1E3AFF]"
+        class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-[#D4E4FF] text-[#4A5F8C] transition duration-300 hover:border-[#B8CEFF] hover:text-[#0039E6]"
         aria-label={copy.close}
       >
         ✕
@@ -424,7 +424,7 @@ const inquiryOptions = lang === 'fr'
       <div class="pt-1">
         <button
           type="submit"
-          class="inline-flex items-center justify-center rounded-xl bg-[#1E3AFF] px-5 py-3 text-sm font-bold text-white shadow-[0_20px_45px_-25px_rgba(30,58,255,0.95)] transition duration-300 hover:bg-[#1632E0] active:bg-[#122AB8]"
+          class="inline-flex items-center justify-center rounded-xl bg-[#0039E6] px-5 py-3 text-sm font-bold text-white shadow-[0_20px_45px_-25px_rgba(0,57,230,0.95)] transition duration-300 hover:bg-[#0033CC] active:bg-[#0028A3]"
         >
           {copy.send}
         </button>
@@ -535,15 +535,15 @@ const inquiryOptions = lang === 'fr'
   function setButtonInactive(btn: Element, activeButton: Element) {
     if (btn === activeButton) return;
 
-    btn.classList.remove('active', 'bg-[#EEF4FF]', 'hover:border-transparent');
+    btn.classList.remove('active', 'bg-[#E8F0FF]', 'hover:border-transparent');
 
-    changeHeadingStyle(btn, ['text-neutral-800'], ['text-[#1E3AFF]']);
+    changeHeadingStyle(btn, ['text-neutral-800'], ['text-[#0039E6]']);
   }
 
   function setButtonActive(button: Element) {
-    button.classList.add('active', 'bg-[#EEF4FF]', 'hover:border-transparent');
+    button.classList.add('active', 'bg-[#E8F0FF]', 'hover:border-transparent');
 
-    changeHeadingStyle(button, ['text-[#1E3AFF]'], ['text-neutral-800']);
+    changeHeadingStyle(button, ['text-[#0039E6]'], ['text-neutral-800']);
   }
 
   let activePanel = document.querySelector(
