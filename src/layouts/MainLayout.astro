@@ -16,6 +16,7 @@ const {
   meta,
   structuredData,
   post = null,
+  preloadImage = null,
   lang = 'en',
   customDescription = null,
   customOgTitle = null,
@@ -30,6 +31,7 @@ interface Props {
   meta?: string;
   structuredData?: object;
   post?: any;
+  preloadImage?: string | null;
   lang?: string;
   customDescription?: string | null;
   customOgTitle?: string | null;
@@ -48,6 +50,7 @@ interface Props {
       customDescription={customDescription}
       customOgTitle={customOgTitle}
       post={post}
+      preloadImage={preloadImage}
     />
     {/* Google Analytics 4 (optional) - inject when PUBLIC_GA_MEASUREMENT_ID is set */}
     {GA_MEASUREMENT_ID && (

@@ -18,20 +18,35 @@ import { clientLogos } from '@/data_files/clientLogos';
 const pageTitle = `${SITE.title}`;
 const metaDescription = SITE.description_short;
 
-<MainLayout title={pageTitle} customDescription={metaDescription} fullWidth overlayNav>
+<MainLayout title={pageTitle} customDescription={metaDescription} preloadImage={introPoster.src} fullWidth overlayNav>
   <!-- Hero Section -->
   <section class="relative h-screen min-h-[720px] overflow-hidden bg-[#07142F]">
     <video
       class="absolute inset-0 h-full w-full object-cover"
       src={introVideo}
       poster={introPoster.src}
-      autoplay
       muted
       loop
       playsinline
       preload="metadata"
       disablepictureinpicture
       aria-label="Mehta Petro-Refineries Limited facility"></video>
+
+    <script>
+      // Defer video playback until user interaction to reduce initial payload and LCP impact
+      (function () {
+        const vid = document.querySelector('video[aria-label="Mehta Petro-Refineries Limited facility"]');
+        if (!vid) return;
+        function tryPlay() {
+          // Attempt to play; browsers may block autoplay with sound, but video is muted
+          vid.play().catch(() => {});
+          window.removeEventListener('scroll', tryPlay);
+          window.removeEventListener('pointerdown', tryPlay);
+        }
+        window.addEventListener('scroll', tryPlay, { once: true });
+        window.addEventListener('pointerdown', tryPlay, { once: true });
+      })();
+    </script>
 
     <div
       class="absolute inset-0 bg-linear-to-br from-[#061022]/45 via-[#091126]/28 to-[#0C1C4C]/38"

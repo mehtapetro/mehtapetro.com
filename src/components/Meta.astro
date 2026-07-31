@@ -24,6 +24,8 @@ const {
   customOgTitle = defaultProps.customOgTitle,
 } = Astro.props;
 
+const preloadImage = Astro.props.preloadImage ?? null;
+
 let structuredData = Astro.props.structuredData ?? defaultProps.structuredData;
 
 // Use custom description if provided, otherwise use default meta
@@ -128,6 +130,7 @@ if (post) {
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 <link rel="canonical" href={canonical} />
+{preloadImage && <link rel="preload" as="image" href={preloadImage} />}
 {
   Object.entries(languages).map(([lang, prefix]) => {
     const cleanPath = fullPath.replace(/^\/(fr|en)\//, '/');
