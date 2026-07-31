@@ -5,7 +5,7 @@
  * when applicable.
  */
 
-export type MarketingLocale = 'en';
+export type MarketingLocale = 'en' | 'fr';
 
 export function getMarketingLocale(
   _pathname: string,

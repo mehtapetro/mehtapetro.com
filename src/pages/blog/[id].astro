@@ -1,57 +1,31 @@
 ---
-// Import necessary components and utilities
+// Simple redirect page for legacy /blog/[id] routes to the new /news routes
 import MainLayout from '@/layouts/MainLayout.astro';
-import AvatarBlogLarge from '@components/ui/avatars/AvatarBlogLarge.astro';
-import CardRelated from '@components/ui/cards/CardRelated.astro';
-import Bookmark from '@components/ui/buttons/Bookmark.astro';
-import SocialShare from '@components/ui/buttons/SocialShare.astro';
-import PostFeedback from '@components/ui/feedback/PostFeedback.astro';
-import { Image } from 'astro:assets';
-import { capitalize, formatDate } from '@utils/utils';
-import { getCollection, render } from 'astro:content';
-import type { CollectionEntry } from 'astro:content';
+import { getCollection } from 'astro:content';
 import { SITE } from '@data/constants';
 
-// Update getStaticPaths for English posts
 export async function getStaticPaths() {
-  const blogPosts = await getCollection('blog', ({ id }) =>
-    id.startsWith('en/')
-  );
-  return blogPosts.map(post => {
-    const idWithoutLang = post.id.replace(/^en\//, ''); // Remove the "en/" prefix
-    return {
-      params: { id: idWithoutLang },
-      props: { post },
-    };
-  });
+  const blogPosts = await getCollection('blog', ({ id }) => id.startsWith('en/'));
+  return blogPosts.map(post => ({
+    params: { id: post.id.replace(/^en\//, '') },
+    props: { post },
+  }));
 }
 
-// Get the current post's data
 const { post } = Astro.props;
-const pageTitle: string = `${post.data.title} | ${SITE.title}`;
+const pageTitle = `${post.data.title} | ${SITE.title}`;
 const metaDescription = post.data.description;
 const ogTitle = `${post.data.title} | News | ${SITE.title}`;
+
+---
+
 <head>
-  <meta http-equiv="refresh" content="0;url=/news/" />
-  <link rel="canonical" href="/news/">
+  <meta http-equiv="refresh" content={`0;url=/news/${post.id.replace(/^en\//, '')}`} />
+  <link rel="canonical" href={`/news/${post.id.replace(/^en\//, '')}`} />
 </head>
+
 <MainLayout title={pageTitle} customDescription={metaDescription} customOgTitle={ogTitle}>
   <section class="mx-auto max-w-3xl px-4 pt-16">
     <p class="text-center">This article has moved to <a href={`/news/${post.id.replace(/^en\//, '')}`}>News</a>. Redirecting...</p>
-  </section>
-</MainLayout>
-  {/* Related articles section */}
-  <section class="mx-auto max-w-3xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
-    <div class="mb-10 max-w-2xl">
-      <h2
-        class="text-2xl font-bold text-balance text-neutral-800 md:text-4xl md:leading-tight dark:text-neutral-200"
-      >
-        Related articles
-      </h2>
-    </div>
-
-    <div class="grid grid-cols-2 gap-6">
-      {relatedPosts.map(entry => <CardRelated blogEntry={entry} />)}
-    </div>
   </section>
 </MainLayout>

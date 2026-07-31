@@ -132,7 +132,7 @@ const inquiryOptions = lang === 'fr'
     </div>
 
     <div class="mt-10 grid gap-6 lg:grid-cols-3">
-      {items.map(item => <SubProductCard item={item} categorySlug={category.id.replace(/^(en|fr)\//, '')} locale={lang} />)}
+      {items.map(item => <SubProductCard item={item} categorySlug={category.id.replace(/^(en|fr)\//, '')} />)}
     </div>
   </div>
 </section>
