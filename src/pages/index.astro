@@ -13,10 +13,10 @@ import dashboard from '@images/solvemntshome.jpg';
 import isoLogo from '@images/iso/ISO.svg';
 import mprlLogo from '@images/mprl_logo.png';
 import { clientLogos } from '@/data_files/clientLogos';
----
 
 const pageTitle = `${SITE.title}`;
 const metaDescription = SITE.description_short;
+---
 
 <MainLayout title={pageTitle} customDescription={metaDescription} preloadImage={introPoster.src} fullWidth overlayNav>
   <!-- Hero Section -->
@@ -35,11 +35,14 @@ const metaDescription = SITE.description_short;
     <script>
       // Defer video playback until user interaction to reduce initial payload and LCP impact
       (function () {
-        const vid = /** @type {HTMLVideoElement | null} */ (document.querySelector('video[aria-label="Mehta Petro-Refineries Limited facility"]'));
-        if (!vid) return;
+        const vid = document.querySelector('video[aria-label="Mehta Petro-Refineries Limited facility"]');
+        if (!vid || !(vid instanceof HTMLVideoElement)) return;
         function tryPlay() {
-          // Attempt to play; browsers may block autoplay with sound, but video is muted
-          vid.play().catch(() => {});
+          try {
+            vid.play();
+          } catch (e) {
+            // ignore play errors
+          }
           window.removeEventListener('scroll', tryPlay);
           window.removeEventListener('pointerdown', tryPlay);
         }
