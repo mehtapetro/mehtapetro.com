@@ -121,7 +121,8 @@ function withAssets(
   >
 ): ProductCatalogItem {
   const assets =
-    categoryAssets[categoryId] || categoryAssets['aromatic-hydrocarbon-solvents'];
+    categoryAssets[categoryId] ||
+    categoryAssets['aromatic-hydrocarbon-solvents'];
 
   return {
     ...item,
@@ -148,9 +149,18 @@ const enCatalog: Record<string, ProductCatalogItem[]> = {
       ctaTitle: 'Request Product Information',
       ctaURL: '/contact',
       descriptionList: [
-        { title: 'High solvency', subTitle: 'Supports paint, resin, and adhesive systems.' },
-        { title: 'Consistent quality', subTitle: 'Supplied with dependable batch control.' },
-        { title: 'Industrial ready', subTitle: 'Suitable for large-scale commercial use.' },
+        {
+          title: 'High solvency',
+          subTitle: 'Supports paint, resin, and adhesive systems.',
+        },
+        {
+          title: 'Consistent quality',
+          subTitle: 'Supplied with dependable batch control.',
+        },
+        {
+          title: 'Industrial ready',
+          subTitle: 'Suitable for large-scale commercial use.',
+        },
       ],
       specificationsLeft: [
         { title: 'Purity', subTitle: '99.5% min' },
@@ -178,9 +188,18 @@ const enCatalog: Record<string, ProductCatalogItem[]> = {
       ctaTitle: 'Request Product Information',
       ctaURL: '/contact',
       descriptionList: [
-        { title: 'Balanced evaporation', subTitle: 'Supports controlled drying and workability.' },
-        { title: 'Good resin compatibility', subTitle: 'Works across many industrial systems.' },
-        { title: 'B2B supply support', subTitle: 'Available for recurring industrial demand.' },
+        {
+          title: 'Balanced evaporation',
+          subTitle: 'Supports controlled drying and workability.',
+        },
+        {
+          title: 'Good resin compatibility',
+          subTitle: 'Works across many industrial systems.',
+        },
+        {
+          title: 'B2B supply support',
+          subTitle: 'Available for recurring industrial demand.',
+        },
       ],
       specificationsLeft: [
         { title: 'Purity', subTitle: '98.5% min' },
@@ -210,9 +229,18 @@ const enCatalog: Record<string, ProductCatalogItem[]> = {
       ctaTitle: 'Request Product Information',
       ctaURL: '/contact',
       descriptionList: [
-        { title: 'Low aromatic content', subTitle: 'Suitable for sensitive applications.' },
-        { title: 'Quick evaporation', subTitle: 'Helps speed up process cycles.' },
-        { title: 'Consistent supply', subTitle: 'Built for regular industrial requirements.' },
+        {
+          title: 'Low aromatic content',
+          subTitle: 'Suitable for sensitive applications.',
+        },
+        {
+          title: 'Quick evaporation',
+          subTitle: 'Helps speed up process cycles.',
+        },
+        {
+          title: 'Consistent supply',
+          subTitle: 'Built for regular industrial requirements.',
+        },
       ],
       specificationsLeft: [
         { title: 'Purity', subTitle: '97% min' },
@@ -240,9 +268,18 @@ const enCatalog: Record<string, ProductCatalogItem[]> = {
       ctaTitle: 'Request Product Information',
       ctaURL: '/contact',
       descriptionList: [
-        { title: 'Multi-purpose use', subTitle: 'Supports cleaning, thinning, and degreasing.' },
-        { title: 'Controlled drying', subTitle: 'Balanced evaporation supports usability.' },
-        { title: 'Commercially practical', subTitle: 'Suitable for routine plant consumption.' },
+        {
+          title: 'Multi-purpose use',
+          subTitle: 'Supports cleaning, thinning, and degreasing.',
+        },
+        {
+          title: 'Controlled drying',
+          subTitle: 'Balanced evaporation supports usability.',
+        },
+        {
+          title: 'Commercially practical',
+          subTitle: 'Suitable for routine plant consumption.',
+        },
       ],
       specificationsLeft: [
         { title: 'Distillation range', subTitle: '140-200°C' },
@@ -272,9 +309,18 @@ const enCatalog: Record<string, ProductCatalogItem[]> = {
       ctaTitle: 'Request Product Information',
       ctaURL: '/contact',
       descriptionList: [
-        { title: 'Low odor', subTitle: 'Helps create a more comfortable handling environment.' },
-        { title: 'Reduced aromatics', subTitle: 'Supports cleaner process selection.' },
-        { title: 'Good stability', subTitle: 'Dependable in routine plant use.' },
+        {
+          title: 'Low odor',
+          subTitle: 'Helps create a more comfortable handling environment.',
+        },
+        {
+          title: 'Reduced aromatics',
+          subTitle: 'Supports cleaner process selection.',
+        },
+        {
+          title: 'Good stability',
+          subTitle: 'Dependable in routine plant use.',
+        },
       ],
       specificationsLeft: [
         { title: 'Flash point', subTitle: '60°C min' },
@@ -302,9 +348,18 @@ const enCatalog: Record<string, ProductCatalogItem[]> = {
       ctaTitle: 'Request Product Information',
       ctaURL: '/contact',
       descriptionList: [
-        { title: 'Safer handling profile', subTitle: 'Higher flash point supports operational safety.' },
-        { title: 'Low odor profile', subTitle: 'Suitable for indoor and enclosed work areas.' },
-        { title: 'Industrial consistency', subTitle: 'Supplied for repeat commercial use.' },
+        {
+          title: 'Safer handling profile',
+          subTitle: 'Higher flash point supports operational safety.',
+        },
+        {
+          title: 'Low odor profile',
+          subTitle: 'Suitable for indoor and enclosed work areas.',
+        },
+        {
+          title: 'Industrial consistency',
+          subTitle: 'Supplied for repeat commercial use.',
+        },
       ],
       specificationsLeft: [
         { title: 'Flash point', subTitle: '80°C min' },
@@ -334,8 +389,14 @@ const enCatalog: Record<string, ProductCatalogItem[]> = {
       ctaTitle: 'Request Product Information',
       ctaURL: '/contact',
       descriptionList: [
-        { title: 'Narrow boiling range', subTitle: 'Supports predictable solvent behavior.' },
-        { title: 'Fast evaporation', subTitle: 'Suitable for quick turnaround processes.' },
+        {
+          title: 'Narrow boiling range',
+          subTitle: 'Supports predictable solvent behavior.',
+        },
+        {
+          title: 'Fast evaporation',
+          subTitle: 'Suitable for quick turnaround processes.',
+        },
         { title: 'Clean finish', subTitle: 'Low residue after use.' },
       ],
       specificationsLeft: [
@@ -364,9 +425,18 @@ const enCatalog: Record<string, ProductCatalogItem[]> = {
       ctaTitle: 'Request Product Information',
       ctaURL: '/contact',
       descriptionList: [
-        { title: 'Process flexibility', subTitle: 'Works across multiple industrial uses.' },
-        { title: 'Stable range', subTitle: 'Controlled volatility supports consistency.' },
-        { title: 'Low residue', subTitle: 'Leaves cleaner surfaces after evaporation.' },
+        {
+          title: 'Process flexibility',
+          subTitle: 'Works across multiple industrial uses.',
+        },
+        {
+          title: 'Stable range',
+          subTitle: 'Controlled volatility supports consistency.',
+        },
+        {
+          title: 'Low residue',
+          subTitle: 'Leaves cleaner surfaces after evaporation.',
+        },
       ],
       specificationsLeft: [
         { title: 'Boiling range', subTitle: '60-80°C' },
@@ -396,9 +466,18 @@ const enCatalog: Record<string, ProductCatalogItem[]> = {
       ctaTitle: 'Request Product Information',
       ctaURL: '/contact',
       descriptionList: [
-        { title: 'Good polymer compatibility', subTitle: 'Suitable for rubber compounding lines.' },
-        { title: 'Process support', subTitle: 'Helps improve workability and handling.' },
-        { title: 'Industrial consistency', subTitle: 'Supports repeatable manufacturing output.' },
+        {
+          title: 'Good polymer compatibility',
+          subTitle: 'Suitable for rubber compounding lines.',
+        },
+        {
+          title: 'Process support',
+          subTitle: 'Helps improve workability and handling.',
+        },
+        {
+          title: 'Industrial consistency',
+          subTitle: 'Supports repeatable manufacturing output.',
+        },
       ],
       specificationsLeft: [
         { title: 'Viscosity at 100°C', subTitle: '15-25 cSt' },
@@ -426,9 +505,18 @@ const enCatalog: Record<string, ProductCatalogItem[]> = {
       ctaTitle: 'Request Product Information',
       ctaURL: '/contact',
       descriptionList: [
-        { title: 'Cleaner profile', subTitle: 'Suitable where lower aromatic character is preferred.' },
-        { title: 'Stable handling', subTitle: 'Supports smooth production use.' },
-        { title: 'Consistent quality', subTitle: 'Designed for commercial processing needs.' },
+        {
+          title: 'Cleaner profile',
+          subTitle: 'Suitable where lower aromatic character is preferred.',
+        },
+        {
+          title: 'Stable handling',
+          subTitle: 'Supports smooth production use.',
+        },
+        {
+          title: 'Consistent quality',
+          subTitle: 'Designed for commercial processing needs.',
+        },
       ],
       specificationsLeft: [
         { title: 'Viscosity at 100°C', subTitle: '10-18 cSt' },
@@ -458,9 +546,18 @@ const enCatalog: Record<string, ProductCatalogItem[]> = {
       ctaTitle: 'Request Product Information',
       ctaURL: '/contact',
       descriptionList: [
-        { title: 'High purity', subTitle: 'Suitable for demanding industrial use.' },
-        { title: 'System support', subTitle: 'Common choice for coolant formulations.' },
-        { title: 'Multi-industry use', subTitle: 'Used across manufacturing segments.' },
+        {
+          title: 'High purity',
+          subTitle: 'Suitable for demanding industrial use.',
+        },
+        {
+          title: 'System support',
+          subTitle: 'Common choice for coolant formulations.',
+        },
+        {
+          title: 'Multi-industry use',
+          subTitle: 'Used across manufacturing segments.',
+        },
       ],
       specificationsLeft: [
         { title: 'Purity', subTitle: '99.8% min' },
@@ -488,9 +585,18 @@ const enCatalog: Record<string, ProductCatalogItem[]> = {
       ctaTitle: 'Request Product Information',
       ctaURL: '/contact',
       descriptionList: [
-        { title: 'Useful solvency', subTitle: 'Works well in multiple industrial systems.' },
-        { title: 'Hygroscopic behavior', subTitle: 'Suitable for moisture-sensitive uses.' },
-        { title: 'Consistent supply', subTitle: 'Available for routine B2B demand.' },
+        {
+          title: 'Useful solvency',
+          subTitle: 'Works well in multiple industrial systems.',
+        },
+        {
+          title: 'Hygroscopic behavior',
+          subTitle: 'Suitable for moisture-sensitive uses.',
+        },
+        {
+          title: 'Consistent supply',
+          subTitle: 'Available for routine B2B demand.',
+        },
       ],
       specificationsLeft: [
         { title: 'Purity', subTitle: '99.0% min' },
@@ -520,9 +626,18 @@ const enCatalog: Record<string, ProductCatalogItem[]> = {
       ctaTitle: 'Request Product Information',
       ctaURL: '/contact',
       descriptionList: [
-        { title: 'Blending friendly', subTitle: 'Works well in industrial lubricant manufacture.' },
-        { title: 'Stable quality', subTitle: 'Dependable for recurring production needs.' },
-        { title: 'Broad use case', subTitle: 'Suitable for multiple fluid systems.' },
+        {
+          title: 'Blending friendly',
+          subTitle: 'Works well in industrial lubricant manufacture.',
+        },
+        {
+          title: 'Stable quality',
+          subTitle: 'Dependable for recurring production needs.',
+        },
+        {
+          title: 'Broad use case',
+          subTitle: 'Suitable for multiple fluid systems.',
+        },
       ],
       specificationsLeft: [
         { title: 'Viscosity at 40°C', subTitle: '28-32 cSt' },
@@ -550,9 +665,18 @@ const enCatalog: Record<string, ProductCatalogItem[]> = {
       ctaTitle: 'Request Product Information',
       ctaURL: '/contact',
       descriptionList: [
-        { title: 'Higher viscosity', subTitle: 'Suitable for heavier lubrication needs.' },
-        { title: 'Strong film strength', subTitle: 'Supports equipment protection.' },
-        { title: 'Industrial suitability', subTitle: 'Used in demanding lubricant systems.' },
+        {
+          title: 'Higher viscosity',
+          subTitle: 'Suitable for heavier lubrication needs.',
+        },
+        {
+          title: 'Strong film strength',
+          subTitle: 'Supports equipment protection.',
+        },
+        {
+          title: 'Industrial suitability',
+          subTitle: 'Used in demanding lubricant systems.',
+        },
       ],
       specificationsLeft: [
         { title: 'Viscosity at 40°C', subTitle: '90-110 cSt' },
@@ -582,9 +706,18 @@ const enCatalog: Record<string, ProductCatalogItem[]> = {
       ctaTitle: 'Request Product Information',
       ctaURL: '/contact',
       descriptionList: [
-        { title: 'Ink formulation support', subTitle: 'Assists flow and processing behavior.' },
-        { title: 'Stable quality', subTitle: 'Built for recurring manufacturing cycles.' },
-        { title: 'Commercial supply', subTitle: 'Suitable for industrial production environments.' },
+        {
+          title: 'Ink formulation support',
+          subTitle: 'Assists flow and processing behavior.',
+        },
+        {
+          title: 'Stable quality',
+          subTitle: 'Built for recurring manufacturing cycles.',
+        },
+        {
+          title: 'Commercial supply',
+          subTitle: 'Suitable for industrial production environments.',
+        },
       ],
       specificationsLeft: [
         { title: 'Viscosity at 40°C', subTitle: '30-40 cSt' },
@@ -612,9 +745,18 @@ const enCatalog: Record<string, ProductCatalogItem[]> = {
       ctaTitle: 'Request Product Information',
       ctaURL: '/contact',
       descriptionList: [
-        { title: 'Consistent flow', subTitle: 'Supports blending and manufacturing stability.' },
-        { title: 'Industrial fit', subTitle: 'Suitable for coating process lines.' },
-        { title: 'Supply reliability', subTitle: 'Built around B2B repeat demand.' },
+        {
+          title: 'Consistent flow',
+          subTitle: 'Supports blending and manufacturing stability.',
+        },
+        {
+          title: 'Industrial fit',
+          subTitle: 'Suitable for coating process lines.',
+        },
+        {
+          title: 'Supply reliability',
+          subTitle: 'Built around B2B repeat demand.',
+        },
       ],
       specificationsLeft: [
         { title: 'Viscosity at 40°C', subTitle: '35-50 cSt' },
@@ -644,9 +786,18 @@ const enCatalog: Record<string, ProductCatalogItem[]> = {
       ctaTitle: 'Request Product Information',
       ctaURL: '/contact',
       descriptionList: [
-        { title: 'Enhanced lubricity', subTitle: 'Supports smoother operating conditions.' },
-        { title: 'Thermal stability', subTitle: 'Suitable for high-temperature service.' },
-        { title: 'Formulation value', subTitle: 'Improves premium product performance.' },
+        {
+          title: 'Enhanced lubricity',
+          subTitle: 'Supports smoother operating conditions.',
+        },
+        {
+          title: 'Thermal stability',
+          subTitle: 'Suitable for high-temperature service.',
+        },
+        {
+          title: 'Formulation value',
+          subTitle: 'Improves premium product performance.',
+        },
       ],
       specificationsLeft: [
         { title: 'Viscosity at 40°C', subTitle: '30-50 cSt' },
@@ -674,9 +825,18 @@ const enCatalog: Record<string, ProductCatalogItem[]> = {
       ctaTitle: 'Request Product Information',
       ctaURL: '/contact',
       descriptionList: [
-        { title: 'Formulation stability', subTitle: 'Supports repeatable grease manufacturing.' },
-        { title: 'Good base characteristics', subTitle: 'Suitable for various grease chemistries.' },
-        { title: 'Commercial grade', subTitle: 'Designed for ongoing B2B production.' },
+        {
+          title: 'Formulation stability',
+          subTitle: 'Supports repeatable grease manufacturing.',
+        },
+        {
+          title: 'Good base characteristics',
+          subTitle: 'Suitable for various grease chemistries.',
+        },
+        {
+          title: 'Commercial grade',
+          subTitle: 'Designed for ongoing B2B production.',
+        },
       ],
       specificationsLeft: [
         { title: 'Viscosity at 40°C', subTitle: '80-120 cSt' },
@@ -706,9 +866,18 @@ const enCatalog: Record<string, ProductCatalogItem[]> = {
       ctaTitle: 'Request Product Information',
       ctaURL: '/contact',
       descriptionList: [
-        { title: 'Improved lubricity', subTitle: 'Helps reduce torque and drag.' },
-        { title: 'Operational stability', subTitle: 'Supports difficult drilling conditions.' },
-        { title: 'Field-ready performance', subTitle: 'Suitable for industrial project requirements.' },
+        {
+          title: 'Improved lubricity',
+          subTitle: 'Helps reduce torque and drag.',
+        },
+        {
+          title: 'Operational stability',
+          subTitle: 'Supports difficult drilling conditions.',
+        },
+        {
+          title: 'Field-ready performance',
+          subTitle: 'Suitable for industrial project requirements.',
+        },
       ],
       specificationsLeft: [
         { title: 'Density range', subTitle: 'Customizable' },
@@ -736,9 +905,18 @@ const enCatalog: Record<string, ProductCatalogItem[]> = {
       ctaTitle: 'Request Product Information',
       ctaURL: '/contact',
       descriptionList: [
-        { title: 'Project suitability', subTitle: 'Supports oilfield fluid preparation.' },
-        { title: 'Stable quality', subTitle: 'Helps maintain process consistency.' },
-        { title: 'Commercial supply', subTitle: 'Available for large-volume requirements.' },
+        {
+          title: 'Project suitability',
+          subTitle: 'Supports oilfield fluid preparation.',
+        },
+        {
+          title: 'Stable quality',
+          subTitle: 'Helps maintain process consistency.',
+        },
+        {
+          title: 'Commercial supply',
+          subTitle: 'Available for large-volume requirements.',
+        },
       ],
       specificationsLeft: [
         { title: 'Flash point', subTitle: '160°C min' },
@@ -768,9 +946,18 @@ const enCatalog: Record<string, ProductCatalogItem[]> = {
       ctaTitle: 'Request Product Information',
       ctaURL: '/contact',
       descriptionList: [
-        { title: 'Formulation flexibility', subTitle: 'Supports multiple industrial uses.' },
-        { title: 'Plasticizing action', subTitle: 'Helps improve softness and workability.' },
-        { title: 'Commercial consistency', subTitle: 'Suitable for recurring plant demand.' },
+        {
+          title: 'Formulation flexibility',
+          subTitle: 'Supports multiple industrial uses.',
+        },
+        {
+          title: 'Plasticizing action',
+          subTitle: 'Helps improve softness and workability.',
+        },
+        {
+          title: 'Commercial consistency',
+          subTitle: 'Suitable for recurring plant demand.',
+        },
       ],
       specificationsLeft: [
         { title: 'Purity', subTitle: '99.0% min' },
@@ -798,9 +985,18 @@ const enCatalog: Record<string, ProductCatalogItem[]> = {
       ctaTitle: 'Request Product Information',
       ctaURL: '/contact',
       descriptionList: [
-        { title: 'Good plasticizing efficiency', subTitle: 'Supports flexible formulation design.' },
-        { title: 'Broad industrial use', subTitle: 'Selected across multiple manufacturing sectors.' },
-        { title: 'Stable quality', subTitle: 'Suitable for repeat commercial supply.' },
+        {
+          title: 'Good plasticizing efficiency',
+          subTitle: 'Supports flexible formulation design.',
+        },
+        {
+          title: 'Broad industrial use',
+          subTitle: 'Selected across multiple manufacturing sectors.',
+        },
+        {
+          title: 'Stable quality',
+          subTitle: 'Suitable for repeat commercial supply.',
+        },
       ],
       specificationsLeft: [
         { title: 'Purity', subTitle: '99.5% min' },
@@ -830,9 +1026,18 @@ const enCatalog: Record<string, ProductCatalogItem[]> = {
       ctaTitle: 'Request Product Information',
       ctaURL: '/contact',
       descriptionList: [
-        { title: 'Corrosion control', subTitle: 'Helps protect metal equipment in acid conditions.' },
-        { title: 'Operational support', subTitle: 'Suitable for field and plant use.' },
-        { title: 'Application flexibility', subTitle: 'Can be matched to project requirements.' },
+        {
+          title: 'Corrosion control',
+          subTitle: 'Helps protect metal equipment in acid conditions.',
+        },
+        {
+          title: 'Operational support',
+          subTitle: 'Suitable for field and plant use.',
+        },
+        {
+          title: 'Application flexibility',
+          subTitle: 'Can be matched to project requirements.',
+        },
       ],
       specificationsLeft: [
         { title: 'Appearance', subTitle: 'Amber liquid' },
@@ -860,9 +1065,18 @@ const enCatalog: Record<string, ProductCatalogItem[]> = {
       ctaTitle: 'Request Product Information',
       ctaURL: '/contact',
       descriptionList: [
-        { title: 'Enhanced protection', subTitle: 'Designed for tougher operating conditions.' },
-        { title: 'Field suitability', subTitle: 'Supports drilling and treatment operations.' },
-        { title: 'Project supply', subTitle: 'Available for industrial procurement cycles.' },
+        {
+          title: 'Enhanced protection',
+          subTitle: 'Designed for tougher operating conditions.',
+        },
+        {
+          title: 'Field suitability',
+          subTitle: 'Supports drilling and treatment operations.',
+        },
+        {
+          title: 'Project supply',
+          subTitle: 'Available for industrial procurement cycles.',
+        },
       ],
       specificationsLeft: [
         { title: 'Appearance', subTitle: 'Dark amber liquid' },
@@ -892,9 +1106,18 @@ const enCatalog: Record<string, ProductCatalogItem[]> = {
       ctaTitle: 'Request Product Information',
       ctaURL: '/contact',
       descriptionList: [
-        { title: 'Broad usability', subTitle: 'Suitable for many routine industrial tasks.' },
-        { title: 'Commercial value', subTitle: 'Practical for trading and repeat purchase.' },
-        { title: 'Supply support', subTitle: 'Built around customer procurement needs.' },
+        {
+          title: 'Broad usability',
+          subTitle: 'Suitable for many routine industrial tasks.',
+        },
+        {
+          title: 'Commercial value',
+          subTitle: 'Practical for trading and repeat purchase.',
+        },
+        {
+          title: 'Supply support',
+          subTitle: 'Built around customer procurement needs.',
+        },
       ],
       specificationsLeft: [
         { title: 'Blend type', subTitle: 'Custom commercial grade' },
@@ -922,9 +1145,18 @@ const enCatalog: Record<string, ProductCatalogItem[]> = {
       ctaTitle: 'Request Product Information',
       ctaURL: '/contact',
       descriptionList: [
-        { title: 'Maintenance use', subTitle: 'Supports routine plant cleaning activity.' },
-        { title: 'Process practical', subTitle: 'Simple and reliable for industrial use.' },
-        { title: 'B2B availability', subTitle: 'Suitable for regular procurement demand.' },
+        {
+          title: 'Maintenance use',
+          subTitle: 'Supports routine plant cleaning activity.',
+        },
+        {
+          title: 'Process practical',
+          subTitle: 'Simple and reliable for industrial use.',
+        },
+        {
+          title: 'B2B availability',
+          subTitle: 'Suitable for regular procurement demand.',
+        },
       ],
       specificationsLeft: [
         { title: 'Blend type', subTitle: 'Commercial solvent blend' },

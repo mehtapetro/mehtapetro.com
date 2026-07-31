@@ -33,14 +33,21 @@
         }
       ]
     }
-  ]
-  ,
+  ],
   "redirects": [
     { "source": "/fr/:path*", "destination": "/:path*", "permanent": true },
     { "source": "/fr", "destination": "/", "permanent": true },
-    { "source": "/blog/:path*", "destination": "/news/:path*", "permanent": true },
+    {
+      "source": "/blog/:path*",
+      "destination": "/news/:path*",
+      "permanent": true
+    },
     { "source": "/blog", "destination": "/news", "permanent": true },
-    { "source": "/fr/blog/:path*", "destination": "/news/:path*", "permanent": true },
+    {
+      "source": "/fr/blog/:path*",
+      "destination": "/news/:path*",
+      "permanent": true
+    },
     { "source": "/fr/blog", "destination": "/news", "permanent": true }
   ]
 }

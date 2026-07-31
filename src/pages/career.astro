@@ -8,7 +8,8 @@ import TextAreaInput from '@components/ui/forms/input/TextAreaInput.astro';
 import AuthBtn from '@components/ui/buttons/AuthBtn.astro';
 
 const pageTitle = `Career | ${SITE.title}`;
-const metaDescription = 'Join our team at Mehta Petro-Refineries Limited. Explore career opportunities and become part of our growing family.';
+const metaDescription =
+  'Join our team at Mehta Petro-Refineries Limited. Explore career opportunities and become part of our growing family.';
 const ogTitle = 'Career | Mehta Petro';
 ---
 
@@ -30,26 +31,38 @@ const ogTitle = 'Career | Mehta Petro';
     <div class="mx-auto max-w-5xl">
       <!-- Header -->
       <div class="text-center">
-        <span class="inline-flex rounded-full border border-[#C0D6FF] bg-white px-4 py-1 text-xs font-semibold tracking-wider text-[#0039E6] uppercase">
+        <span
+          class="inline-flex rounded-full border border-[#C0D6FF] bg-white px-4 py-1 text-xs font-semibold tracking-wider text-[#0039E6] uppercase"
+        >
           Career
         </span>
-        <h1 class="mt-5 text-4xl font-extrabold tracking-tight text-balance text-[#0A1F4D] md:text-5xl">
+        <h1
+          class="mt-5 text-4xl font-extrabold tracking-tight text-balance text-[#0A1F4D] md:text-5xl"
+        >
           Join Our Team
         </h1>
-        <p class="mx-auto mt-4 max-w-2xl text-base sm:text-lg leading-relaxed text-[#4A5F8C]">
-          Build your career with a trusted name in the petrochemical industry. We're always looking for talented individuals who share our commitment to quality and innovation.
+        <p
+          class="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-[#4A5F8C] sm:text-lg"
+        >
+          Build your career with a trusted name in the petrochemical industry.
+          We're always looking for talented individuals who share our commitment
+          to quality and innovation.
         </p>
       </div>
 
       <!-- Main Content (redesigned) -->
       <div class="mt-12">
         <div class="grid gap-8 lg:grid-cols-3 lg:items-start">
-
           <!-- Apply form (full-row, centered) -->
-          <div class="lg:col-span-3 flex justify-center">
-            <div class="w-full max-w-3xl rounded-2xl border border-[#D4E4FF] bg-white p-8 shadow-lg sm:p-10">
+          <div class="flex justify-center lg:col-span-3">
+            <div
+              class="w-full max-w-3xl rounded-2xl border border-[#D4E4FF] bg-white p-8 shadow-lg sm:p-10"
+            >
               <h2 class="text-2xl font-bold text-[#0A1F4D]">Apply Online</h2>
-              <p class="mt-3 text-sm text-[#4A5F8C]">Use the form below to submit your application. You can attach multiple files and include a cover letter.</p>
+              <p class="mt-3 text-sm text-[#4A5F8C]">
+                Use the form below to submit your application. You can attach
+                multiple files and include a cover letter.
+              </p>
 
               <form
                 id="career-form"
@@ -66,16 +79,42 @@ const ogTitle = 'Career | Mehta Petro';
                 </div>
 
                 <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                  <PhoneInput id="career-phone" countryId="career-phone-country" label="Phone Number" countryLabel="Country Code" defaultCountryCode="IN" />
-                  <TextInput id="career-position" name="position" label="Position applied for" required={false} />
+                  <PhoneInput
+                    id="career-phone"
+                    countryId="career-phone-country"
+                    label="Phone Number"
+                    countryLabel="Country Code"
+                    defaultCountryCode="IN"
+                  />
+                  <TextInput
+                    id="career-position"
+                    name="position"
+                    label="Position applied for"
+                    required={false}
+                  />
                 </div>
 
-                <TextAreaInput id="career-message" label="Cover letter / message" name="message" />
+                <TextAreaInput
+                  id="career-message"
+                  label="Cover letter / message"
+                  name="message"
+                />
 
                 <div>
-                  <label for="career-attachments" class="sr-only">Attachments</label>
-                  <input id="career-attachments" name="attachments[]" type="file" multiple accept=".pdf,.doc,.docx,.png,.jpg,.jpeg" class="block w-full rounded-lg border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm text-neutral-700" />
-                  <p class="mt-2 text-xs text-[#4A5F8C]">Accepted: PDF, DOC, DOCX, PNG, JPG.</p>
+                  <label for="career-attachments" class="sr-only"
+                    >Attachments</label
+                  >
+                  <input
+                    id="career-attachments"
+                    name="attachments[]"
+                    type="file"
+                    multiple
+                    accept=".pdf,.doc,.docx,.png,.jpg,.jpeg"
+                    class="block w-full rounded-lg border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm text-neutral-700"
+                  />
+                  <p class="mt-2 text-xs text-[#4A5F8C]">
+                    Accepted: PDF, DOC, DOCX, PNG, JPG.
+                  </p>
                 </div>
 
                 <div class="pt-3">
@@ -86,87 +125,165 @@ const ogTitle = 'Career | Mehta Petro';
           </div>
 
           <!-- Content: Intro + Openings (full-width below form) -->
-          <div class="lg:col-span-3 space-y-6">
-            <div class="rounded-2xl border border-[#D4E4FF] bg-white p-6 shadow-lg sm:p-8">
-              <h2 class="text-2xl font-bold text-[#0A1F4D]">Why Work With Us</h2>
-              <p class="mt-3 text-sm text-[#4A5F8C]">At Mehta Petro we value safety, growth, and teamwork. Below are some reasons to join and our current openings.</p>
+          <div class="space-y-6 lg:col-span-3">
+            <div
+              class="rounded-2xl border border-[#D4E4FF] bg-white p-6 shadow-lg sm:p-8"
+            >
+              <h2 class="text-2xl font-bold text-[#0A1F4D]">
+                Why Work With Us
+              </h2>
+              <p class="mt-3 text-sm text-[#4A5F8C]">
+                At Mehta Petro we value safety, growth, and teamwork. Below are
+                some reasons to join and our current openings.
+              </p>
 
               <div class="mt-6 grid gap-4 sm:grid-cols-2">
                 <div class="flex gap-4">
-                  <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#E8F0FF]">
-                    <svg class="h-5 w-5 text-[#0039E6]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                  <div
+                    class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#E8F0FF]"
+                  >
+                    <svg
+                      class="h-5 w-5 text-[#0039E6]"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M13 10V3L4 14h7v7l9-11h-7z"></path>
                     </svg>
                   </div>
                   <div>
-                    <h3 class="font-semibold text-[#0A1F4D]">Growth Opportunities</h3>
-                    <p class="mt-1 text-sm text-[#4A5F8C]">Learning programs and internal mobility.</p>
+                    <h3 class="font-semibold text-[#0A1F4D]">
+                      Growth Opportunities
+                    </h3>
+                    <p class="mt-1 text-sm text-[#4A5F8C]">
+                      Learning programs and internal mobility.
+                    </p>
                   </div>
                 </div>
 
                 <div class="flex gap-4">
-                  <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#E8F0FF]">
-                    <svg class="h-5 w-5 text-[#0039E6]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
+                  <div
+                    class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#E8F0FF]"
+                  >
+                    <svg
+                      class="h-5 w-5 text-[#0039E6]"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"
+                      ></path>
                     </svg>
                   </div>
                   <div>
-                    <h3 class="font-semibold text-[#0A1F4D]">Experienced Team</h3>
-                    <p class="mt-1 text-sm text-[#4A5F8C]">Collaborate with industry experts.</p>
+                    <h3 class="font-semibold text-[#0A1F4D]">
+                      Experienced Team
+                    </h3>
+                    <p class="mt-1 text-sm text-[#4A5F8C]">
+                      Collaborate with industry experts.
+                    </p>
                   </div>
                 </div>
 
                 <div class="flex gap-4">
-                  <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#E8F0FF]">
-                    <svg class="h-5 w-5 text-[#0039E6]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4" />
+                  <div
+                    class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#E8F0FF]"
+                  >
+                    <svg
+                      class="h-5 w-5 text-[#0039E6]"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M9 12l2 2 4-4"></path>
                     </svg>
                   </div>
                   <div>
                     <h3 class="font-semibold text-[#0A1F4D]">Safety First</h3>
-                    <p class="mt-1 text-sm text-[#4A5F8C]">Robust safety protocols and training.</p>
+                    <p class="mt-1 text-sm text-[#4A5F8C]">
+                      Robust safety protocols and training.
+                    </p>
                   </div>
                 </div>
 
                 <div class="flex gap-4">
-                  <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#E8F0FF]">
-                    <svg class="h-5 w-5 text-[#0039E6]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2" />
+                  <div
+                    class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#E8F0FF]"
+                  >
+                    <svg
+                      class="h-5 w-5 text-[#0039E6]"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2"></path>
                     </svg>
                   </div>
                   <div>
-                    <h3 class="font-semibold text-[#0A1F4D]">Competitive Benefits</h3>
-                    <p class="mt-1 text-sm text-[#4A5F8C]">Competitive pay and benefits.</p>
+                    <h3 class="font-semibold text-[#0A1F4D]">
+                      Competitive Benefits
+                    </h3>
+                    <p class="mt-1 text-sm text-[#4A5F8C]">
+                      Competitive pay and benefits.
+                    </p>
                   </div>
                 </div>
               </div>
             </div>
-
-            
 
             <!-- Openings list -->
             <div class="space-y-4">
               <h2 class="text-xl font-bold text-[#0A1F4D]">Current Openings</h2>
 
               <div class="grid gap-4 sm:grid-cols-2">
-                <article class="rounded-lg border border-[#E6EEFF] bg-white p-4 shadow-sm">
-                  <h3 class="font-semibold text-[#0A1F4D]">Production Engineer</h3>
+                <article
+                  class="rounded-lg border border-[#E6EEFF] bg-white p-4 shadow-sm"
+                >
+                  <h3 class="font-semibold text-[#0A1F4D]">
+                    Production Engineer
+                  </h3>
                   <p class="mt-1 text-sm text-[#4A5F8C]">Full-time • Palghar</p>
-                  <p class="mt-2 text-sm text-[#4A5F8C]">Responsible for overseeing production processes and ensuring quality standards.</p>
+                  <p class="mt-2 text-sm text-[#4A5F8C]">
+                    Responsible for overseeing production processes and ensuring
+                    quality standards.
+                  </p>
                 </article>
 
-                <article class="rounded-lg border border-[#E6EEFF] bg-white p-4 shadow-sm">
-                  <h3 class="font-semibold text-[#0A1F4D]">Maintenance Technician</h3>
+                <article
+                  class="rounded-lg border border-[#E6EEFF] bg-white p-4 shadow-sm"
+                >
+                  <h3 class="font-semibold text-[#0A1F4D]">
+                    Maintenance Technician
+                  </h3>
                   <p class="mt-1 text-sm text-[#4A5F8C]">Full-time • Dahej</p>
-                  <p class="mt-2 text-sm text-[#4A5F8C]">Perform routine maintenance and respond to equipment issues.</p>
+                  <p class="mt-2 text-sm text-[#4A5F8C]">
+                    Perform routine maintenance and respond to equipment issues.
+                  </p>
                 </article>
               </div>
 
-              <p class="mt-4 text-sm text-[#4A5F8C]">Don't see a match? Use the form to submit a general application and we'll keep your details on file.</p>
+              <p class="mt-4 text-sm text-[#4A5F8C]">
+                Don't see a match? Use the form to submit a general application
+                and we'll keep your details on file.
+              </p>
             </div>
           </div>
-
-          
         </div>
       </div>
     </div>

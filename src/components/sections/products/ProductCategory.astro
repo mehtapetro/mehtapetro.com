@@ -18,7 +18,8 @@ const copy =
     ? {
         eyebrow: 'Catégorie de produits',
         title: 'Découvrez la gamme',
-        subTitle: 'Choisissez un produit ci-dessous pour explorer les détails, les spécifications, et les applications.',
+        subTitle:
+          'Choisissez un produit ci-dessous pour explorer les détails, les spécifications, et les applications.',
         cta: 'Contacter notre équipe',
         inquiryTitle: 'Contacter notre équipe',
         inquirySubTitle: `Envoyez-nous votre demande pour ${category.data.description}.`,
@@ -40,7 +41,8 @@ const copy =
     : {
         eyebrow: 'Product category',
         title: 'Explore the range',
-        subTitle: 'Choose a product below to explore details, specifications, and application fit.',
+        subTitle:
+          'Choose a product below to explore details, specifications, and application fit.',
         cta: 'Contact our team',
         inquiryTitle: 'Contact our team',
         inquirySubTitle: `Send us your enquiry for ${category.data.description}.`,
@@ -61,32 +63,39 @@ const copy =
       };
 
 const web3FormsAccessKey = '0e6f5e46-f620-429a-ab06-a8e61f81c419';
-const inquiryOptions = lang === 'fr'
-  ? [
-      { value: 'product', label: 'Produit' },
-      { value: 'career', label: 'Carrière' },
-      { value: 'general', label: 'Général' },
-      { value: 'sales', label: 'Ventes' },
-      { value: 'support', label: 'Support' },
-      { value: 'other', label: 'Autre' },
-    ]
-  : [
-      { value: 'product', label: 'Product' },
-      { value: 'career', label: 'Career' },
-      { value: 'general', label: 'General' },
-      { value: 'sales', label: 'Sales' },
-      { value: 'support', label: 'Support' },
-      { value: 'other', label: 'Other' },
-    ];
+const inquiryOptions =
+  lang === 'fr'
+    ? [
+        { value: 'product', label: 'Produit' },
+        { value: 'career', label: 'Carrière' },
+        { value: 'general', label: 'Général' },
+        { value: 'sales', label: 'Ventes' },
+        { value: 'support', label: 'Support' },
+        { value: 'other', label: 'Autre' },
+      ]
+    : [
+        { value: 'product', label: 'Product' },
+        { value: 'career', label: 'Career' },
+        { value: 'general', label: 'General' },
+        { value: 'sales', label: 'Sales' },
+        { value: 'support', label: 'Support' },
+        { value: 'other', label: 'Other' },
+      ];
 ---
 
 <section class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
-  <div class="grid items-center gap-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-14">
+  <div
+    class="grid items-center gap-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-14"
+  >
     <div>
-      <span class="inline-flex rounded-full border border-[#C0D6FF] bg-white px-4 py-1 text-xs font-semibold tracking-[0.18em] text-[#0039E6] uppercase">
+      <span
+        class="inline-flex rounded-full border border-[#C0D6FF] bg-white px-4 py-1 text-xs font-semibold tracking-[0.18em] text-[#0039E6] uppercase"
+      >
         {copy.eyebrow}
       </span>
-      <h1 class="mt-5 text-4xl font-extrabold tracking-tight text-balance text-[#0A1F4D] md:text-5xl">
+      <h1
+        class="mt-5 text-4xl font-extrabold tracking-tight text-balance text-[#0A1F4D] md:text-5xl"
+      >
         {category.data.description}
       </h1>
       <p class="mt-3 text-lg font-semibold text-[#0039E6]">
@@ -99,14 +108,16 @@ const inquiryOptions = lang === 'fr'
         <button
           type="button"
           data-category-inquiry-open
-          class="group inline-flex items-center justify-center gap-x-2 rounded-xl border border-transparent bg-[#0039E6] px-5 py-3 text-sm font-bold text-neutral-50 shadow-[0_20px_45px_-25px_rgba(0,57,230,0.95)] ring-[#8FA7FF] transition duration-300 outline-hidden hover:bg-[#0033CC] focus-visible:ring-3 active:bg-[#0028A3] disabled:pointer-events-none disabled:opacity-50 2xl:text-base"
+          class="group inline-flex items-center justify-center gap-x-2 rounded-xl border border-transparent bg-[#0039E6] px-5 py-3 text-sm font-bold text-neutral-50 shadow-[0_20px_45px_-25px_rgba(0,57,230,0.95)] ring-[#8FA7FF] outline-hidden transition duration-300 hover:bg-[#0033CC] focus-visible:ring-3 active:bg-[#0028A3] disabled:pointer-events-none disabled:opacity-50 2xl:text-base"
         >
           {copy.cta}
         </button>
       </div>
     </div>
 
-    <div class="overflow-hidden rounded-[2rem] border border-[#D4E4FF] bg-white p-3 shadow-[0_28px_70px_-48px_rgba(10,31,77,0.35)]">
+    <div
+      class="overflow-hidden rounded-[2rem] border border-[#D4E4FF] bg-white p-3 shadow-[0_28px_70px_-48px_rgba(10,31,77,0.35)]"
+    >
       <Image
         src={category.data.main.imgMain}
         alt={category.data.main.imgAlt}
@@ -118,9 +129,13 @@ const inquiryOptions = lang === 'fr'
 </section>
 
 <section class="mx-auto max-w-[85rem] px-4 pb-10 sm:px-6 lg:px-8 lg:pb-14">
-  <div class="rounded-[2rem] border border-[#D4E4FF] bg-white p-6 shadow-[0_24px_60px_-46px_rgba(10,31,77,0.22)] sm:p-8 lg:p-10">
+  <div
+    class="rounded-[2rem] border border-[#D4E4FF] bg-white p-6 shadow-[0_24px_60px_-46px_rgba(10,31,77,0.22)] sm:p-8 lg:p-10"
+  >
     <div class="max-w-3xl">
-      <p class="text-sm font-semibold tracking-[0.18em] text-[#0039E6] uppercase">
+      <p
+        class="text-sm font-semibold tracking-[0.18em] text-[#0039E6] uppercase"
+      >
         {copy.eyebrow}
       </p>
       <h2 class="mt-3 text-3xl font-bold text-[#0A1F4D] md:text-4xl">
@@ -132,7 +147,14 @@ const inquiryOptions = lang === 'fr'
     </div>
 
     <div class="mt-10 grid gap-6 lg:grid-cols-3">
-      {items.map(item => <SubProductCard item={item} categorySlug={category.id.replace(/^(en|fr)\//, '')} />)}
+      {
+        items.map(item => (
+          <SubProductCard
+            item={item}
+            categorySlug={category.id.replace(/^(en|fr)\//, '')}
+          />
+        ))
+      }
     </div>
   </div>
 </section>
@@ -146,13 +168,16 @@ const inquiryOptions = lang === 'fr'
     type="button"
     data-category-inquiry-close
     class="absolute inset-0 bg-[#0A1F4D]/55 backdrop-blur-[1px]"
-    aria-label={copy.close}
-  ></button>
-  <div class="relative z-10 w-full max-w-2xl rounded-2xl border border-[#D4E4FF] bg-white p-6 shadow-[0_30px_80px_-40px_rgba(10,31,77,0.45)] sm:p-8">
+    aria-label={copy.close}></button>
+  <div
+    class="relative z-10 w-full max-w-2xl rounded-2xl border border-[#D4E4FF] bg-white p-6 shadow-[0_30px_80px_-40px_rgba(10,31,77,0.45)] sm:p-8"
+  >
     <div class="flex items-start justify-between gap-4">
       <div>
         <h2 class="text-2xl font-bold text-[#0A1F4D]">{copy.inquiryTitle}</h2>
-        <p class="mt-2 text-sm leading-6 text-[#4A5F8C]">{copy.inquirySubTitle}</p>
+        <p class="mt-2 text-sm leading-6 text-[#4A5F8C]">
+          {copy.inquirySubTitle}
+        </p>
       </div>
       <button
         type="button"
@@ -174,11 +199,30 @@ const inquiryOptions = lang === 'fr'
       data-sending-message={copy.sendingMessage}
     >
       <input type="hidden" name="access_key" value={web3FormsAccessKey} />
-      <input type="hidden" name="subject" value="New product category enquiry from Mehta Petro website" />
-      <input type="hidden" name="from_name" value="Mehta Petro Product Category Inquiry" />
+      <input
+        type="hidden"
+        name="subject"
+        value="New product category enquiry from Mehta Petro website"
+      />
+      <input
+        type="hidden"
+        name="from_name"
+        value="Mehta Petro Product Category Inquiry"
+      />
       <input type="hidden" name="source" value={Astro.url.pathname} />
-      <input type="hidden" name="category_name" value={category.data.description} />
-      <input type="checkbox" name="botcheck" class="hidden" style="display: none;" tabindex="-1" autocomplete="off" />
+      <input
+        type="hidden"
+        name="category_name"
+        value={category.data.description}
+      />
+      <input
+        type="checkbox"
+        name="botcheck"
+        class="hidden"
+        style="display: none;"
+        tabindex="-1"
+        autocomplete="off"
+      />
 
       <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <input
@@ -219,9 +263,11 @@ const inquiryOptions = lang === 'fr'
         class="block w-full rounded-lg border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm text-neutral-700 focus:border-neutral-200 focus:ring-3 focus:ring-neutral-400 focus:outline-hidden"
       >
         <option value="" disabled selected>{copy.inquiryType}</option>
-        {inquiryOptions.map(option => (
-          <option value={option.value}>{option.label}</option>
-        ))}
+        {
+          inquiryOptions.map(option => (
+            <option value={option.value}>{option.label}</option>
+          ))
+        }
       </select>
 
       <textarea
@@ -229,8 +275,7 @@ const inquiryOptions = lang === 'fr'
         rows="4"
         required
         class="block w-full rounded-lg border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm text-neutral-700 placeholder:text-neutral-500 focus:border-neutral-200 focus:ring-3 focus:ring-neutral-400 focus:outline-hidden"
-        placeholder={copy.message}
-      ></textarea>
+        placeholder={copy.message}></textarea>
 
       <button
         type="submit"
@@ -239,15 +284,24 @@ const inquiryOptions = lang === 'fr'
         {copy.send}
       </button>
 
-      <p class="hidden min-h-[1.5rem] text-sm leading-6" data-form-status aria-live="polite"></p>
+      <p
+        class="hidden min-h-[1.5rem] text-sm leading-6"
+        data-form-status
+        aria-live="polite"
+      >
+      </p>
     </form>
   </div>
 </div>
 
 <script>
   const categoryModal = document.getElementById('category-inquiry-modal');
-  const categoryOpenButtons = document.querySelectorAll('[data-category-inquiry-open]');
-  const categoryCloseButtons = document.querySelectorAll('[data-category-inquiry-close]');
+  const categoryOpenButtons = document.querySelectorAll(
+    '[data-category-inquiry-open]'
+  );
+  const categoryCloseButtons = document.querySelectorAll(
+    '[data-category-inquiry-close]'
+  );
 
   const closeCategoryModal = () => {
     if (!(categoryModal instanceof HTMLElement)) return;
