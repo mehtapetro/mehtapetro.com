@@ -18,11 +18,13 @@ const defaultProps = {
 // For example:
 // <MainLayout title="Custom Title" meta="Custom description." />
 const {
+  title = SITE.title,
   meta = defaultProps.meta,
-  structuredData = defaultProps.structuredData,
   customDescription = defaultProps.customDescription,
   customOgTitle = defaultProps.customOgTitle,
 } = Astro.props;
+
+let structuredData = Astro.props.structuredData ?? defaultProps.structuredData;
 
 // Use custom description if provided, otherwise use default meta
 const description = customDescription || meta;
@@ -72,6 +74,39 @@ const appleTouchIcon = await getImage({
   height: 180,
   format: 'png',
 });
+
+// If this page provides a `post` prop (used by blog/news pages), construct Article JSON-LD
+const post = Astro.props.post ?? null;
+if (post) {
+  const postUrl = new URL(post.slug || fullPath, siteURL).href;
+  const imageUrl = post.image ? new URL(post.image, siteURL).href : socialImage;
+  structuredData = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': postUrl,
+    },
+    headline: post.title || ogTitle,
+    description: post.description || description,
+    image: [imageUrl],
+    author: {
+      '@type': 'Organization',
+      name: SITE.author || author,
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: SITE.title,
+      logo: {
+        '@type': 'ImageObject',
+        url: siteURL + '/favicon.ico',
+      },
+    },
+    datePublished: post.pubDate || post.date || undefined,
+    dateModified: post.modified || post.updated || undefined,
+    url: postUrl,
+  };
+}
 ---
 
 {
@@ -85,6 +120,7 @@ const appleTouchIcon = await getImage({
     />
   )
 }
+<title>{title}</title>
 {/* Define the character set, description, author, and viewport settings */}
 <meta charset="utf-8" />
 <meta content={description} name="description" />
