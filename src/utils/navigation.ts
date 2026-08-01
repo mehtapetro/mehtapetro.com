@@ -26,6 +26,7 @@ const socialLinks = {
   facebook: 'https://www.facebook.com/mehtapetro',
   youtube: 'https://www.youtube.com/@mehtapetro',
   linkedin: 'https://www.linkedin.com/company/mehtapetro/',
+  x: 'https://x.com/mehtapetro',
   instagram: 'https://www.instagram.com/mprlindia',
 };
 

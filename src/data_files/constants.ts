@@ -2,11 +2,11 @@ import ogImageSrc from '@images/social.png';
 
 export const SITE = {
   title: 'Mehta Petro',
-  tagline: 'Solvent & Petrochemical Solutions',
+  tagline: 'Performance Through Quality',
   description:
-    'Mehta Petro provides dependable solvent and petrochemical solutions built to support your operations with quality and reliability.',
+    'Mehta Petro-Refineries Limited delivers Performance Through Quality with petrochemicals and specialty base oils since 1993.',
   description_short:
-    'Mehta Petro provides dependable solvent and petrochemical solutions built to support your operations.',
+    'Mehta Petro-Refineries Limited delivers Performance Through Quality with petrochemicals and specialty base oils since 1993.',
   url: 'https://mehtapetro.com',
   author: 'Mehta Petro',
 };
@@ -35,9 +35,9 @@ export const OG = {
   locale: 'en_US',
   type: 'website',
   url: SITE.url,
-  title: `${SITE.title}: Solvent & Petrochemical Solutions`,
+  title: `${SITE.title}: Performance Through Quality`,
   description:
-    'Equip your operations with Mehta Petro’s dependable solvent and petrochemical solutions. Built for reliability, safety, and long-term performance.',
+    'Mehta Petro-Refineries Limited delivers Performance Through Quality with petrochemicals and specialty base oils since 1993.',
   image: ogImageSrc,
 };
 

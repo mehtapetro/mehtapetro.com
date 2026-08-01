@@ -16,7 +16,7 @@ interface Props {
 {/* Main header component */}
 <header
   class:list={[
-    'inset-x-0 z-50 flex w-full flex-wrap text-sm md:flex-nowrap md:justify-start',
+    'inset-x-0 z-50 flex w-full flex-wrap text-sm md:flex-nowrap md:justify-start isolate transform-gpu [backface-visibility:hidden]',
     overlay ? 'fixed top-0 pt-3 sm:pt-4' : 'sticky top-3 mb-5 md:top-4 md:mb-8',
   ]}
 >
@@ -24,10 +24,10 @@ interface Props {
     {/* Navigation container */}
     <nav
       class:list={[
-        'relative w-full rounded-2xl px-4 py-3 md:flex md:items-center md:justify-between md:px-5 md:py-2 lg:px-6',
+        'relative w-full rounded-2xl px-4 py-3 md:flex md:items-center md:justify-between md:px-5 md:py-2 lg:px-6 transform-gpu [backface-visibility:hidden]',
         overlay
-          ? 'border border-white/30 bg-white/78 shadow-[0_24px_70px_-44px_rgba(8,17,38,0.9)] backdrop-blur-xl'
-          : 'border border-[#C0D6FF]/80 bg-white/88 shadow-[0_18px_45px_-34px_rgba(0,57,230,0.35)] backdrop-blur-md',
+          ? 'border border-white/30 bg-white/90 shadow-[0_24px_70px_-44px_rgba(8,17,38,0.88)] backdrop-blur-md'
+          : 'border border-[#C0D6FF]/80 bg-white/92 shadow-[0_18px_45px_-34px_rgba(0,57,230,0.3)] backdrop-blur-sm',
       ]}
       aria-label="Global"
     >
