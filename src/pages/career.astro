@@ -70,6 +70,9 @@ const ogTitle = 'Career | Mehta Petro';
                 method="post"
                 enctype="multipart/form-data"
                 class="mt-6 space-y-6"
+                data-success-message="Thank you — your application has been submitted."
+                data-error-message="Sorry, we could not submit your application. Please try again."
+                data-sending-message="Sending your application…"
               >
                 <input type="hidden" name="source" value="website-career" />
 
@@ -120,6 +123,12 @@ const ogTitle = 'Career | Mehta Petro';
                 <div class="pt-3">
                   <AuthBtn title="Submit Application" />
                 </div>
+
+                <p
+                  class="hidden min-h-[1.5rem] text-sm leading-6 opacity-0 translate-y-2 scale-95"
+                  data-form-status
+                  aria-live="polite"
+                ></p>
               </form>
             </div>
           </div>

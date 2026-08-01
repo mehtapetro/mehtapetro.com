@@ -7,9 +7,21 @@ function setStatus(statusElement, message, variant) {
     'text-red-600',
     'text-emerald-700',
     'text-[#0039E6]',
-    'opacity-0'
+    'opacity-0',
+    'translate-y-2',
+    'scale-95'
   );
-  statusElement.classList.add('transition-opacity', 'duration-500');
+  statusElement.classList.add(
+    'transition-all',
+    'duration-500',
+    'ease-out',
+    'will-change-transform'
+  );
+
+  statusElement.classList.add('opacity-0', 'translate-y-2', 'scale-95');
+  statusElement.getBoundingClientRect();
+  statusElement.classList.remove('opacity-0', 'translate-y-2', 'scale-95');
+  statusElement.classList.add('opacity-100', 'translate-y-0', 'scale-100');
 
   if (variant === 'success') {
     statusElement.classList.add('text-emerald-700');
@@ -26,11 +38,18 @@ function setStatus(statusElement, message, variant) {
 
 function hideStatus(statusElement) {
   if (!(statusElement instanceof HTMLElement)) return;
-  statusElement.classList.add('opacity-0');
+  statusElement.classList.add('opacity-0', 'translate-y-2', 'scale-95');
   window.setTimeout(() => {
     statusElement.textContent = '';
     statusElement.classList.add('hidden');
-    statusElement.classList.remove('opacity-0');
+    statusElement.classList.remove(
+      'opacity-0',
+      'opacity-100',
+      'translate-y-0',
+      'translate-y-2',
+      'scale-100',
+      'scale-95'
+    );
   }, 350);
 }
 
@@ -59,25 +78,14 @@ function initCareerForm() {
   if (!form || !(form instanceof HTMLFormElement)) return;
   if (form.dataset.careerBound === 'true') return;
 
-  let actionUrl;
-  try {
-    actionUrl = new URL(form.action, window.location.href);
-  } catch {
-    actionUrl = null;
-  }
-
-  if (actionUrl?.hostname === 'usebasin.com') {
-    return;
-  }
-
   form.dataset.careerBound = 'true';
 
-  // ensure a status element exists
   let status = form.querySelector('[data-form-status]');
   if (!status) {
     status = document.createElement('p');
     status.setAttribute('data-form-status', '');
-    status.className = 'hidden min-h-[1.5rem] text-sm leading-6';
+    status.className =
+      'hidden min-h-[1.5rem] text-sm leading-6 opacity-0 translate-y-2 scale-95';
     form.appendChild(status);
   }
 
@@ -120,24 +128,14 @@ function initCareerForm() {
       });
 
       if (!response.ok) {
-        // try parse json error
         let msg = errorMessage;
         try {
-          const data = await response.json();
-          if (data && data.message) msg = data.message;
+          const text = await response.text();
+          if (text) msg = text;
         } catch (e) {
-          // ignore JSON parse errors
+          // ignore body parsing errors
         }
         throw new Error(msg);
-      }
-
-      // Try parse JSON success response, but treat any ok response as success
-      try {
-        const data = await response.json();
-        if (data && data.success === false)
-          throw new Error(data.message || errorMessage);
-      } catch (e) {
-        // if parsing failed, still consider response.ok as success
       }
 
       form.reset();
