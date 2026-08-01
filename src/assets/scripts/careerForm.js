@@ -58,6 +58,18 @@ function initCareerForm() {
   const form = document.getElementById('career-form');
   if (!form || !(form instanceof HTMLFormElement)) return;
   if (form.dataset.careerBound === 'true') return;
+
+  let actionUrl;
+  try {
+    actionUrl = new URL(form.action, window.location.href);
+  } catch {
+    actionUrl = null;
+  }
+
+  if (actionUrl?.hostname === 'usebasin.com') {
+    return;
+  }
+
   form.dataset.careerBound = 'true';
 
   // ensure a status element exists
