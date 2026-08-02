@@ -152,7 +152,6 @@ function initCareerForm() {
       // If a reCAPTCHA site key is provided on the form, ensure we get a token
       const siteKey = form.dataset.recaptchaSitekey;
       if (siteKey) {
-        // load the recaptcha script if needed and execute to get token
         await loadRecaptcha(siteKey);
         const token = await new Promise((resolve, reject) => {
           try {
@@ -168,7 +167,6 @@ function initCareerForm() {
         });
 
         if (token) {
-          // remove existing token input if any
           const existing = form.querySelector('input[name="g-recaptcha-response"]');
           if (existing) existing.remove();
           const input = document.createElement('input');
@@ -179,32 +177,49 @@ function initCareerForm() {
         }
       }
 
-      const response = await fetch(form.action || '/', {
-        method: 'POST',
-        body: new FormData(form),
-        headers: {
-          Accept: 'application/json',
-        },
-      });
+      // Attempt XHR/fetch submission first
+      try {
+        const response = await fetch(form.action || '/', {
+          method: 'POST',
+          body: new FormData(form),
+          headers: {
+            Accept: 'application/json',
+          },
+        });
 
-      if (!response.ok) {
-        let msg = errorMessage;
-        try {
-          const text = await response.text();
-          if (text) msg = text;
-        } catch (e) {
-          // ignore body parsing errors
+        if (!response.ok) {
+          let msg = errorMessage;
+          try {
+            const text = await response.text();
+            if (text) msg = text;
+          } catch (e) {
+            // ignore body parsing errors
+          }
+          throw new Error(msg);
         }
-        throw new Error(msg);
-      }
 
-      form.reset();
-      setStatus(status, successMessage, 'success');
-      setButtonLabel(submitButton, originalButtonText);
-      successTimeoutId = window.setTimeout(() => {
-        hideStatus(status);
-        successTimeoutId = 0;
-      }, 5000);
+        form.reset();
+        setStatus(status, successMessage, 'success');
+        setButtonLabel(submitButton, originalButtonText);
+        successTimeoutId = window.setTimeout(() => {
+          hideStatus(status);
+          successTimeoutId = 0;
+        }, 5000);
+      } catch (xhrError) {
+        // Likely a CORS or network error. Fall back to an iframe-based form submit (bypasses CORS).
+        try {
+          await fallbackIframeSubmit(form);
+          form.reset();
+          setStatus(status, successMessage, 'success');
+          setButtonLabel(submitButton, originalButtonText);
+          successTimeoutId = window.setTimeout(() => {
+            hideStatus(status);
+            successTimeoutId = 0;
+          }, 5000);
+        } catch (fbErr) {
+          throw fbErr || xhrError;
+        }
+      }
     } catch (error) {
       const message =
         error instanceof Error && error.message ? error.message : errorMessage;
@@ -212,6 +227,70 @@ function initCareerForm() {
       setButtonLabel(submitButton, originalButtonText);
     } finally {
       form.removeAttribute('aria-busy');
+    }
+  });
+}
+
+/**
+ * Submit the form using a hidden iframe to avoid CORS issues with fetch.
+ * Resolves when the iframe fires a load event, or rejects on timeout.
+ */
+function fallbackIframeSubmit(form) {
+  return new Promise((resolve, reject) => {
+    try {
+      const iframeName = 'career-form-iframe-' + Date.now();
+      const iframe = document.createElement('iframe');
+      iframe.name = iframeName;
+      iframe.style.display = 'none';
+
+      let settled = false;
+
+      const cleanup = () => {
+        if (iframe.parentNode) iframe.parentNode.removeChild(iframe);
+        form.removeAttribute('target');
+      };
+
+      const onLoad = () => {
+        if (settled) return;
+        settled = true;
+        cleanup();
+        resolve();
+      };
+
+      iframe.addEventListener('load', onLoad);
+      document.body.appendChild(iframe);
+
+      // Save old target and set to iframe
+      const oldTarget = form.target;
+      form.target = iframeName;
+
+      // Submit the form normally (will post into the iframe)
+      form.submit();
+
+      // Timeout if nothing happens
+      const timeoutId = window.setTimeout(() => {
+        if (settled) return;
+        settled = true;
+        cleanup();
+        form.target = oldTarget || '';
+        reject(new Error('Submission timed out'));
+      }, 15000);
+
+      // Ensure we restore target on resolve/reject
+      const originalResolve = resolve;
+      const originalReject = reject;
+      resolve = (...args) => {
+        clearTimeout(timeoutId);
+        form.target = oldTarget || '';
+        originalResolve(...args);
+      };
+      reject = (...args) => {
+        clearTimeout(timeoutId);
+        form.target = oldTarget || '';
+        originalReject(...args);
+      };
+    } catch (e) {
+      reject(e);
     }
   });
 }
