@@ -26,31 +26,14 @@ const metaDescription =
       class="absolute inset-0 h-full w-full object-cover"
       src={introVideo}
       poster={introPoster.src}
+      autoplay
       muted
       loop
       playsinline
-      preload="metadata"
+      preload="auto"
       disablepictureinpicture
-      aria-label="Mehta Petro-Refineries Limited facility"></video>
-
-    <script is:inline>
-      // Defer video playback until user interaction to reduce initial payload and LCP impact
-      (function () {
-        const vid = document.querySelector('video[aria-label="Mehta Petro-Refineries Limited facility"]');
-        if (!vid || !(vid instanceof HTMLVideoElement)) return;
-        function tryPlay() {
-          try {
-            vid.play();
-          } catch (e) {
-            // ignore play errors
-          }
-          window.removeEventListener('scroll', tryPlay);
-          window.removeEventListener('pointerdown', tryPlay);
-        }
-        window.addEventListener('scroll', tryPlay, { once: true });
-        window.addEventListener('pointerdown', tryPlay, { once: true });
-      })();
-    </script>
+      aria-label="Mehta Petro-Refineries Limited facility"
+      data-hero-video></video>
 
     <div
       class="absolute inset-0 bg-linear-to-br from-[#061022]/45 via-[#091126]/28 to-[#0C1C4C]/38"
@@ -182,171 +165,6 @@ const metaDescription =
     subTitle="We're proud to partner with manufacturers and processors who demand reliability."
     partners={clientLogos}
   />
-
-  <!-- Core Message -->
-  <section class="mx-auto max-w-[85rem] px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
-    <div class="grid gap-12 lg:grid-cols-2 lg:gap-16">
-      <!-- Left Content -->
-      <div>
-        <div
-          class="inline-flex items-center gap-2 rounded-full bg-[#E8F0FF] px-4 py-2"
-        >
-          <span class="text-sm font-semibold text-[#0039E6]">Our Approach</span>
-        </div>
-
-        <h2
-          class="mt-6 text-3xl font-extrabold tracking-tight text-[#0A1F4D] sm:text-4xl lg:text-5xl"
-        >
-          Built for dependable industrial supply.
-        </h2>
-
-        <p class="mt-6 text-base leading-relaxed text-[#4A5F8C] sm:text-lg">
-          We help industrial buyers source the right material with clear
-          documentation, responsive communication, and supply support that fits
-          day-to-day operations.
-        </p>
-
-        <div class="mt-8 space-y-4">
-          <div class="flex items-start gap-4">
-            <div
-              class="mt-1 flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#E8F0FF]"
-            >
-              <svg
-                class="h-5 w-5 text-[#0039E6]"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M5 13l4 4L19 7"></path>
-              </svg>
-            </div>
-            <div>
-              <h4 class="font-semibold text-[#0A1F4D]">Same-Day Quotes</h4>
-              <p class="mt-1 text-sm text-[#4A5F8C]">
-                Get pricing and availability fast
-              </p>
-            </div>
-          </div>
-
-          <div class="flex items-start gap-4">
-            <div
-              class="mt-1 flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#E8F0FF]"
-            >
-              <svg
-                class="h-5 w-5 text-[#0039E6]"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-                ></path>
-              </svg>
-            </div>
-            <div>
-              <h4 class="font-semibold text-[#0A1F4D]">
-                Complete Documentation
-              </h4>
-              <p class="mt-1 text-sm text-[#4A5F8C]">
-                COAs, MSDSs, and specs upfront
-              </p>
-            </div>
-          </div>
-
-          <div class="flex items-start gap-4">
-            <div
-              class="mt-1 flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#E8F0FF]"
-            >
-              <svg
-                class="h-5 w-5 text-[#0039E6]"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-              </svg>
-            </div>
-            <div>
-              <h4 class="font-semibold text-[#0A1F4D]">On-Time Delivery</h4>
-              <p class="mt-1 text-sm text-[#4A5F8C]">
-                Your schedule is our priority
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <a
-          href="/contact"
-          class="mt-8 inline-flex items-center font-semibold text-[#0039E6] transition-colors hover:text-[#0033CC]"
-        >
-          Talk to our team
-        </a>
-      </div>
-
-      <!-- Right Support Grid -->
-      <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6">
-        <div class="rounded-xl border border-[#D4E4FF] bg-white p-6">
-          <div class="text-sm font-semibold text-[#0039E6]">Since 1993</div>
-          <div class="mt-2 text-base font-bold text-[#0A1F4D]">
-            Long-term manufacturing experience
-          </div>
-        </div>
-
-        <div class="rounded-xl border border-[#D4E4FF] bg-white p-6">
-          <div class="text-sm font-semibold text-[#0039E6]">
-            Product support
-          </div>
-          <div class="mt-2 text-base font-bold text-[#0A1F4D]">
-            Clear specs and documentation
-          </div>
-        </div>
-
-        <div class="rounded-xl border border-[#D4E4FF] bg-white p-6">
-          <div class="text-sm font-semibold text-[#0039E6]">Supply network</div>
-          <div class="mt-2 text-base font-bold text-[#0A1F4D]">
-            Palghar and Dahej facilities
-          </div>
-        </div>
-
-        <div class="rounded-xl border border-[#D4E4FF] bg-white p-6">
-          <div class="text-sm font-semibold text-[#0039E6]">
-            Industrial focus
-          </div>
-          <div class="mt-2 text-base font-bold text-[#0A1F4D]">
-            B2B sourcing with responsive coordination
-          </div>
-        </div>
-
-        <div
-          class="rounded-xl border border-[#D4E4FF] bg-[#0039E6] p-6 text-white sm:col-span-2"
-        >
-          <div class="text-sm font-semibold text-white/85">
-            Need a custom requirement?
-          </div>
-          <div class="mt-2 text-base font-bold">
-            We can help with product selection, packaging, and supply planning.
-          </div>
-          <a
-            href="/contact"
-            class="mt-4 inline-flex items-center rounded-lg bg-white px-5 py-2.5 text-sm font-semibold text-[#0039E6] transition hover:bg-[#F5F9FF]"
-          >
-            Discuss Your Needs
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
 
   <!-- Product Solutions -->
   <FeaturesNavs

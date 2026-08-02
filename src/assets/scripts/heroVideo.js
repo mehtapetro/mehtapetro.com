@@ -2,17 +2,22 @@
 // Smoothly fade hero video in/out and pause on page hide to avoid sudden playback
 
 function initHeroVideo() {
-  const video = document.querySelector(
-    'section.relative h-screen video, video[poster]'
-  );
+  const video = document.querySelector('video[data-hero-video]');
   if (!video) return;
 
   // Use a gentle opacity transition
   video.style.transition = 'opacity 700ms cubic-bezier(.22,.9,.29,1)';
-  // Start slightly transparent if still loading
-  if (video.readyState < 3) {
-    video.style.opacity = '0';
-  }
+  video.style.opacity = '1';
+
+  try {
+    video.load();
+  } catch (e) {}
+
+  const playVideo = () => {
+    try {
+      video.play().catch(() => {});
+    } catch (e) {}
+  };
 
   const fadeIn = () => {
     video.style.opacity = '1';
@@ -23,11 +28,17 @@ function initHeroVideo() {
 
   const onCanPlay = () => {
     // small delay so it doesn't feel abrupt
+    playVideo();
     setTimeout(fadeIn, 120);
   };
 
-  if (video.readyState >= 3) onCanPlay();
-  else video.addEventListener('canplaythrough', onCanPlay, { once: true });
+  if (video.readyState >= 2) {
+    onCanPlay();
+  } else {
+    video.addEventListener('loadeddata', onCanPlay, { once: true });
+    video.addEventListener('canplay', onCanPlay, { once: true });
+    video.addEventListener('canplaythrough', onCanPlay, { once: true });
+  }
 
   // Pause video when page hidden to avoid sudden resume
   function handleVisibility() {
@@ -37,9 +48,7 @@ function initHeroVideo() {
       } catch (e) {}
       fadeOut();
     } else {
-      try {
-        video.play().catch(() => {});
-      } catch (e) {}
+      playVideo();
       // fade in after a small delay to keep it smooth
       setTimeout(fadeIn, 120);
     }
@@ -55,9 +64,7 @@ function initHeroVideo() {
     fadeOut();
   });
   window.addEventListener('pageshow', () => {
-    try {
-      video.play().catch(() => {});
-    } catch (e) {}
+    playVideo();
     setTimeout(fadeIn, 120);
   });
 
@@ -78,8 +85,14 @@ function initHeroVideo() {
   });
 }
 
-if (document.readyState === 'loading')
+if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', initHeroVideo);
-else initHeroVideo();
+} else {
+  initHeroVideo();
+}
+
+document.addEventListener('astro:page-load', () => {
+  window.requestAnimationFrame(initHeroVideo);
+});
 
 export {};

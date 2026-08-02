@@ -18,9 +18,11 @@ const blogPosts: CollectionEntry<'blog'>[] = englishBlogEntries.sort(
     b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
 
-// Separate the most recent post from others
+// Separate the most recent post from the rest of the list.
+// If there is only one article, show it in the "All News" section instead of showing an empty state.
 const mostRecentPost: CollectionEntry<'blog'> | undefined = blogPosts[0];
-const otherPosts: CollectionEntry<'blog'>[] = blogPosts.slice(1);
+const otherPosts: CollectionEntry<'blog'>[] =
+  blogPosts.length > 1 ? blogPosts.slice(1) : blogPosts;
 
 // Define variables for page content
 const title: string = 'Newsroom';
@@ -72,31 +74,123 @@ const ogTitle = 'Company News | Mehta Petro';
         {subTitle}
       </p>
     </div>
-  </section>
 
-  <section
-    class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 2xl:max-w-full"
-  >
-    {
-      blogPosts.length === 0 ? (
-        <p class="text-center text-neutral-600 dark:text-neutral-400">
-          No news yet. Check back soon.
-        </p>
-      ) : (
-        <div class="grid gap-6 lg:grid-cols-2">
-          {otherPosts.map(blogEntry => (
-            <CardBlog blogEntry={blogEntry} />
-          ))}
+    {/* Featured + Sidebar */}
+    <div
+      class="mx-auto max-w-[85rem] px-4 sm:px-6 lg:px-8 lg:py-8 2xl:max-w-full"
+    >
+      <div class="grid items-start gap-8 lg:grid-cols-3">
+        <div class="lg:col-span-2">
+          {
+            mostRecentPost ? (
+              <CardBlogRecent blogEntry={mostRecentPost} />
+            ) : (
+              <p class="text-neutral-600">No featured article available.</p>
+            )
+          }
         </div>
-      )
-    }
+
+        <aside class="space-y-6 lg:col-span-1">
+          <div
+            class="rounded-lg border border-[#E6EEFF] bg-white p-4 shadow-sm"
+          >
+            <h3 class="mb-3 font-semibold">Follow us</h3>
+            <div id="fb-root"></div>
+            <script
+              async
+              defer
+              crossorigin="anonymous"
+              src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v24.0"
+            ></script>
+            <div
+              class="fb-page"
+              data-href="https://www.facebook.com/mehtapetro"
+              data-tabs="timeline"
+              data-width="340"
+              data-height="400"
+              data-small-header="false"
+              data-adapt-container-width="true"
+              data-hide-cover="false"
+              data-show-facepile="false"
+              data-hide-cta="false"
+              data-lazy="true"
+            >
+              <blockquote
+                cite="https://www.facebook.com/mehtapetro"
+                class="fb-xfbml-parse-ignore"
+              >
+                <a href="https://www.facebook.com/mehtapetro"
+                  >Mehta Petro-Refineries Limited</a>
+              </blockquote>
+            </div>
+          </div>
+
+          <div
+            class="rounded-lg border border-[#E6EEFF] bg-white p-4 shadow-sm"
+          >
+            <h3 class="mb-3 font-semibold">Follow us on X</h3>
+            <div class="rounded-xl border border-[#E6EEFF] bg-[#F7FAFF] p-4">
+              <p class="mb-3 text-sm text-neutral-600">
+                Stay updated with Mehta Petro on X for company news, product
+                updates, and industry highlights.
+              </p>
+              <a
+                href="https://x.com/mehtapetro"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center gap-2 rounded-full bg-[#000000] px-4 py-2 text-sm font-medium text-white transition hover:bg-[#1D9BF0]"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  class="h-4 w-4"
+                  aria-hidden="true"
+                >
+                  <path d="M18.244 2H21l-6.6 7.55L22 22h-5.8l-4.5-5.9L6.6 22H4l7.1-8.1L2 2h5.9l4.1 5.4L18.244 2Zm-1.02 18h1.13L7.02 4H5.86l11.36 16Z" />
+                </svg>
+                Follow @mehtapetro
+              </a>
+            </div>
+          </div>
+
+          <div
+            class="rounded-lg border border-[#E6EEFF] bg-white p-4 shadow-sm"
+          >
+            <h3 class="mb-3 font-semibold">Recent posts</h3>
+            <div class="space-y-2">
+              {
+                blogPosts.slice(0, 6).map(p => (
+                  <a
+                    href={`/news/${p.id.replace(/^en\//, '')}`}
+                    class="block text-sm text-[#0039E6]"
+                  >
+                    {p.data.title}
+                  </a>
+                ))
+              }
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+
+    {/* All articles grid */}
+    <div
+      class="mx-auto max-w-[85rem] px-4 sm:px-6 lg:px-8 lg:py-8 2xl:max-w-full"
+    >
+      <h2 class="mb-6 text-2xl font-bold">All News</h2>
+      {
+        otherPosts.length === 0 ? (
+          <p class="text-neutral-600">No other articles available.</p>
+        ) : (
+          <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {otherPosts.map(blogEntry => (
+              <CardBlog blogEntry={blogEntry} />
+            ))}
+          </div>
+        )
+      }
+    </div>
   </section>
-  {/* Most recent news post */}
-  {
-    mostRecentPost && (
-      <section class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 2xl:max-w-full">
-        <CardBlogRecent blogEntry={mostRecentPost} />
-      </section>
-    )
-  }
 </MainLayout>

@@ -1,32 +1,54 @@
 ---
 import MainLayout from '@/layouts/MainLayout.astro';
-import ProductDetail from '@components/sections/products/ProductDetail.astro';
-import { getCollection } from 'astro:content';
 import { SITE } from '@data/constants';
-import { getCatalogItem, getProductCatalog } from '@data/productCatalog';
+import {
+  getAllCategories,
+  getProductsForCategory,
+  getProduct,
+} from '@/lib/productFs';
+
+import ProductCard from '@components/ui/cards/ProductCard.astro';
 
 export async function getStaticPaths() {
-  const categories = await getCollection('products', ({ id }) =>
-    id.startsWith('en/')
-  );
-
-  return categories.flatMap(category => {
-    const categoryId = category.id.replace(/^en\//, '');
-    return getProductCatalog('en', categoryId).map(product => ({
-      params: { category: categoryId, product: product.slug },
-      props: { category, product },
-    }));
-  });
+  const categories = getAllCategories();
+  const paths = [];
+  for (const c of categories) {
+    const products = getProductsForCategory(c.slug);
+    for (const p of products) {
+      paths.push({
+        params: { category: c.slug, product: p.slug },
+        props: { category: c, product: p },
+      });
+    }
+  }
+  return paths;
 }
-
 const { category, product } = Astro.props;
-const categoryId = category.id.replace(/^en\//, '');
-const resolvedProduct =
-  getCatalogItem('en', categoryId, product.slug) || product;
+const categoryId = category.slug;
+const resolvedProduct = getProduct(categoryId, product.slug) || product;
+const productsInCategory = getProductsForCategory(categoryId);
+const relatedProducts = productsInCategory
+  .filter(p => p.slug !== resolvedProduct.slug)
+  .slice(0, 3);
+const datasheets = resolvedProduct.datasheetUrls?.length
+  ? resolvedProduct.datasheetUrls
+  : resolvedProduct.datasheetUrl
+    ? [resolvedProduct.datasheetUrl]
+    : [];
+const datasheetCount = datasheets.length;
+const heroImage = resolvedProduct.imageUrl || category.coverUrl || null;
+const productLead =
+  resolvedProduct.description ||
+    `Product information for ${resolvedProduct.name} in the ${category.name.toLowerCase()} range.`;
+const breadcrumbItems = [
+  { label: 'Products', href: '/products/' },
+  { label: category.name, href: `/products/${categoryId}/` },
+  { label: resolvedProduct.name, href: null },
+];
 
-const pageTitle: string = `${resolvedProduct.title} | ${SITE.title}`;
+const pageTitle: string = `${resolvedProduct.name} | ${SITE.title}`;
 const metaDescription = resolvedProduct.description;
-const ogTitle = `${resolvedProduct.title} | Products | Mehta Petro`;
+const ogTitle = `${resolvedProduct.name} | Products | Mehta Petro`;
 ---
 
 <MainLayout
@@ -37,18 +59,229 @@ const ogTitle = `${resolvedProduct.title} | Products | Mehta Petro`;
     '@context': 'https://schema.org',
     '@type': 'Product',
     '@id': `${SITE.url}/products/${categoryId}/${resolvedProduct.slug}`,
-    name: resolvedProduct.title,
+    name: resolvedProduct.name,
     description: resolvedProduct.description,
     brand: {
       '@type': 'Brand',
       name: 'Mehta Petro',
     },
-    category: category.data.description,
+    category: category.description || '',
   }}
 >
-  <ProductDetail
-    categoryTitle={category.data.description}
-    categorySlug={categoryId}
-    product={resolvedProduct}
-  />
+  <div class="text-[#0A1F4D]">
+    <section class="mx-auto max-w-[85rem] px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
+      <nav class="mb-4 flex flex-wrap items-center gap-2 text-sm text-[#4A5F8C]">
+        {breadcrumbItems.map((item, index) => (
+          <>
+            {item.href ? (
+              <a href={item.href} class="font-semibold text-[#0039E6] transition hover:text-[#0033CC]">
+                {item.label}
+              </a>
+            ) : (
+              <span>{item.label}</span>
+            )}
+            {index < breadcrumbItems.length - 1 && <span aria-hidden="true">/</span>}
+          </>
+        ))}
+      </nav>
+
+      <div class="grid gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:gap-16">
+        <div class="space-y-8">
+          <div class="space-y-5">
+            <span class="inline-flex rounded-full border border-[#C0D6FF] bg-white px-4 py-1 text-xs font-semibold tracking-[0.18em] text-[#0039E6] uppercase">
+              Product detail
+            </span>
+            <h1 class="max-w-3xl text-4xl font-extrabold tracking-tight text-[#0A1F4D] md:text-5xl">
+              {resolvedProduct.name}
+            </h1>
+            <p class="max-w-2xl text-lg leading-8 text-[#4A5F8C]">
+              {productLead}
+            </p>
+          </div>
+
+          <div class="flex flex-wrap items-center gap-4 text-sm text-[#4A5F8C]">
+            <span class="font-semibold text-[#0A1F4D]">{category.name}</span>
+            <span aria-hidden="true">•</span>
+            <span>{datasheetCount ? `${datasheetCount} datasheet${datasheetCount === 1 ? '' : 's'}` : 'No datasheets yet'}</span>
+            <span aria-hidden="true">•</span>
+            <span>{productsInCategory.length} products in range</span>
+          </div>
+
+          <div class="flex flex-wrap gap-3">
+            <a href="/contact" class="inline-flex items-center justify-center rounded-xl bg-[#0039E6] px-6 py-3 text-sm font-semibold text-white transition duration-300 hover:bg-[#0033CC]">
+              Request Product Information
+            </a>
+          </div>
+        </div>
+
+        <div class="relative overflow-hidden rounded-[2rem] shadow-[0_24px_80px_rgba(10,31,77,0.12)]">
+          {heroImage ? (
+            <button
+              type="button"
+              class="group relative z-10 block h-full w-full cursor-zoom-in"
+              data-product-image-open
+              aria-label={`Open large image for ${resolvedProduct.name}`}
+            >
+              <img
+                src={heroImage}
+                alt={resolvedProduct.name}
+                class="h-[26rem] w-full object-cover transition duration-300 group-hover:scale-[1.02]"
+              />
+            </button>
+          ) : (
+            <div class="flex h-[26rem] w-full items-center justify-center bg-[#F5F9FF] text-center text-[#0A1F4D]">
+              <div>
+                <p class="text-xs font-semibold tracking-[0.18em] text-[#0039E6] uppercase">Product image</p>
+                <p class="mt-3 text-2xl font-bold">{resolvedProduct.name}</p>
+              </div>
+            </div>
+          )}
+          <div class="pointer-events-none absolute inset-0 bg-linear-to-t from-[#0A1F4D]/45 via-transparent to-transparent"></div>
+        </div>
+      </div>
+
+      <div class="mt-14 grid gap-10 lg:grid-cols-[1fr_0.8fr] lg:items-start">
+        <section>
+          <div class="flex flex-wrap items-end justify-between gap-3">
+            <div>
+              <p class="text-sm font-semibold tracking-[0.18em] text-[#0039E6] uppercase">Overview</p>
+              <h2 class="mt-2 text-3xl font-bold text-[#0A1F4D]">Short technical summary</h2>
+            </div>
+          </div>
+          <p class="mt-4 max-w-2xl text-base leading-8 text-[#4A5F8C]">
+            {productLead}
+          </p>
+
+          <div class="mt-8">
+            <p class="text-sm font-semibold tracking-[0.18em] text-[#0039E6] uppercase">Datasheets</p>
+            <div class="mt-4">
+              {
+                datasheets.length ? (
+                  <ul class="space-y-3">
+                    {datasheets.map(url => {
+                      const fileName = url.split('/').pop();
+                      const label = fileName ? decodeURIComponent(fileName) : 'Datasheet';
+
+                      return (
+                        <li>
+                          <a
+                            href={url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="flex items-center justify-between border-b border-[#D4E4FF] py-3 text-sm font-semibold text-[#0039E6] transition hover:text-[#0033CC]"
+                          >
+                            <span>{label}</span>
+                            <span aria-hidden="true">↗</span>
+                          </a>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                ) : (
+                  <div class="border-b border-[#D4E4FF] py-3 text-sm text-[#4A5F8C]">
+                    No datasheets are available for this product yet.
+                  </div>
+                )
+              }
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <div class="flex items-end justify-between gap-3">
+            <div>
+              <p class="text-sm font-semibold tracking-[0.18em] text-[#0039E6] uppercase">Need help?</p>
+              <h3 class="mt-2 text-2xl font-bold text-[#0A1F4D]">Talk to our team</h3>
+            </div>
+          </div>
+          <p class="mt-4 text-sm leading-7 text-[#4A5F8C]">
+            Share the application, destination, or volume and we will help narrow the product selection.
+          </p>
+          <a href="/contact" class="mt-6 inline-flex items-center justify-center rounded-xl bg-[#0039E6] px-5 py-3 text-sm font-semibold text-white transition duration-300 hover:bg-[#0033CC]">
+            Contact our team
+          </a>
+        </section>
+      </div>
+
+      <section class="mt-14">
+        <div class="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <p class="text-sm font-semibold tracking-[0.18em] text-[#0039E6] uppercase">Related products</p>
+            <h2 class="mt-2 text-3xl font-bold text-[#0A1F4D] md:text-4xl">Other products in this range</h2>
+          </div>
+        </div>
+
+        <div class="mt-8 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+          {
+            relatedProducts.length ? (
+              relatedProducts.map(p => <ProductCard product={p} categorySlug={categoryId} />)
+            ) : (
+              <div class="sm:col-span-2 xl:col-span-3 border-t border-[#D4E4FF] pt-6 text-sm text-[#4A5F8C]">
+                No related products available in this category.
+              </div>
+            )
+          }
+        </div>
+      </section>
+
+      {heroImage && (
+        <div
+          class="fixed inset-0 z-50 hidden items-center justify-center bg-[#E8F0FF]/70 p-4 backdrop-blur-2xl"
+          data-product-image-modal
+          aria-hidden="true"
+        >
+          <button
+            type="button"
+            class="absolute inset-0 cursor-default"
+            data-product-image-close
+            aria-label="Close image preview"
+          ></button>
+          <div class="relative z-10 w-full max-w-3xl overflow-hidden rounded-[1.75rem] border border-[#D4E4FF]/70 bg-[#F8FBFF]/45 shadow-[0_24px_80px_rgba(34,83,171,0.14)] backdrop-blur-2xl">
+            <button
+              type="button"
+              class="absolute top-4 right-4 z-20 inline-flex h-10 w-10 items-center justify-center rounded-full border border-[#D4E4FF]/80 bg-white/40 text-[#0A1F4D] shadow-sm backdrop-blur-md transition hover:bg-white/60"
+              data-product-image-close
+              aria-label="Close image preview"
+            >
+              <span aria-hidden="true" class="text-2xl leading-none">×</span>
+            </button>
+            <div class="bg-[#F8FBFF]/30 p-3 sm:p-4">
+              <img src={heroImage} alt={resolvedProduct.name} class="max-h-[72vh] w-full rounded-[1.25rem] object-contain" />
+            </div>
+          </div>
+        </div>
+      )}
+
+      {heroImage && (
+        <script>
+          const modal = document.querySelector('[data-product-image-modal]');
+          const openButton = document.querySelector('[data-product-image-open]');
+          const closeButtons = document.querySelectorAll('[data-product-image-close]');
+
+          const openModal = () => {
+            if (!modal) return;
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            modal.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden';
+          };
+
+          const closeModal = () => {
+            if (!modal) return;
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            modal.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = '';
+          };
+
+          openButton?.addEventListener('click', openModal);
+          closeButtons.forEach(button => button.addEventListener('click', closeModal));
+
+          window.addEventListener('keydown', event => {
+            if (event.key === 'Escape') closeModal();
+          });
+        </script>
+      )}
+    </section>
+  </div>
 </MainLayout>

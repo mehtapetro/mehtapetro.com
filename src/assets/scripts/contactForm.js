@@ -73,6 +73,7 @@ function initContactForms() {
       'Sorry, we could not send your message right now. Please try again.';
     const sendingMessage =
       form.dataset.sendingMessage || 'Sending your message…';
+    const successStorageKey = form.dataset.successStorageKey?.trim();
     let successTimeoutId = 0;
 
     form.addEventListener('submit', async event => {
@@ -123,8 +124,21 @@ function initContactForms() {
         }
 
         form.reset();
+        if (successStorageKey) {
+          try {
+            window.localStorage.setItem(successStorageKey, 'true');
+          } catch {
+            // Ignore storage failures and keep the form functional.
+          }
+        }
         setStatus(status, successMessage, 'success');
         setButtonLabel(submitButton, originalButtonText);
+        form.dispatchEvent(
+          new CustomEvent('contact-form:success', {
+            bubbles: true,
+            detail: { message: successMessage },
+          })
+        );
         successTimeoutId = window.setTimeout(() => {
           hideStatus(status);
           successTimeoutId = 0;
@@ -136,6 +150,12 @@ function initContactForms() {
             : errorMessage;
         setStatus(status, message, 'error');
         setButtonLabel(submitButton, originalButtonText);
+        form.dispatchEvent(
+          new CustomEvent('contact-form:error', {
+            bubbles: true,
+            detail: { message },
+          })
+        );
       } finally {
         form.removeAttribute('aria-busy');
       }

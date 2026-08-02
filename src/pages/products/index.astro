@@ -1,9 +1,9 @@
 ---
 import MainLayout from '@/layouts/MainLayout.astro';
-import { Image } from 'astro:assets';
-import { getCollection } from 'astro:content';
 import { SITE } from '@data/constants';
-import { getProductCatalog } from '@data/productCatalog';
+import { getAllCategories, getProductsForCategory } from '@/lib/productFs';
+import CategoryCard from '@components/ui/cards/CategoryCard.astro';
+import PhoneInput from '@components/ui/forms/input/PhoneInput.astro';
 
 const iconMap: Record<string, string> = {
   'aromatic-hydrocarbon-solvents':
@@ -32,31 +32,27 @@ const iconMap: Record<string, string> = {
   'trading-solvents': 'M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4',
 };
 
-const productEntries = (
-  await getCollection('products', ({ id }) => id.startsWith('en/'))
-).sort((a, b) => a.data.main.id - b.data.main.id);
+const categories = getAllCategories();
 
-const categoryCards = productEntries.map(entry => {
-  const categoryId = entry.id.replace(/^en\//, '');
-
-  return {
-    id: categoryId,
-    title: entry.data.description,
-    subTitle: entry.data.title,
-    description: entry.data.main.content,
-    image: entry.data.main.imgMain,
-    imageAlt: entry.data.main.imgAlt,
-    href: `/products/${categoryId}/`,
-    productCount: getProductCatalog('en', categoryId).length,
-    icon: iconMap[categoryId] ?? iconMap['trading-solvents'],
-  };
-});
+const categoryCards = categories.map(cat => ({
+  id: cat.slug,
+  title: cat.name,
+  subTitle: cat.name,
+  description: cat.description,
+  image: cat.coverUrl,
+  imageAlt: cat.name,
+  href: `/products/${cat.slug}/`,
+  productCount: getProductsForCategory(cat.slug).length,
+  slug: cat.slug,
+  icon: iconMap[cat.slug] ?? '',
+}));
 
 const totalProducts = categoryCards.reduce(
   (sum, category) => sum + category.productCount,
   0
 );
 const featuredCategory = categoryCards[0];
+const productInquiryGateKey = 'mehta-petro-product-contact-completed';
 
 const pageTitle: string = `Products | ${SITE.title}`;
 const metaDescription =
@@ -79,6 +75,96 @@ const ogTitle = 'Products | Mehta Petro';
   }}
 >
   <section
+    id="products-contact-gate"
+    class="fixed inset-0 z-50 hidden items-center justify-center bg-[#E8F0FF]/70 p-4 backdrop-blur-2xl"
+    aria-hidden="true"
+  >
+    <button
+      type="button"
+      class="absolute inset-0 cursor-not-allowed"
+      aria-label="Complete the form to continue"
+      disabled
+    ></button>
+
+    <div class="relative z-10 w-full max-w-2xl overflow-hidden rounded-[1.75rem] border border-[#D4E4FF]/70 bg-[#F8FBFF]/45 shadow-[0_24px_80px_rgba(34,83,171,0.14)] backdrop-blur-2xl">
+      <div class="border-b border-[#D4E4FF]/50 px-5 py-4 sm:px-6">
+        <div>
+          <p class="text-xs font-semibold tracking-[0.18em] text-[#0039E6] uppercase">Before you continue</p>
+          <h2 class="mt-2 text-2xl font-bold text-[#0A1F4D]">Request product details</h2>
+          <p class="mt-2 text-sm leading-6 text-[#4A5F8C]">
+            Share your contact details once to browse products and receive the right technical follow-up.
+          </p>
+        </div>
+      </div>
+
+      <form
+        class="space-y-4 px-5 py-5 sm:px-6 sm:py-6"
+        data-contact-form
+        data-success-storage-key={productInquiryGateKey}
+        action="https://api.web3forms.com/submit"
+        method="post"
+        data-success-message="Thanks. We have received your request."
+        data-error-message="We could not send your request right now. Please try again."
+        data-sending-message="Sending your request…"
+      >
+        <input type="hidden" name="access_key" value="0e6f5e46-f620-429a-ab06-a8e61f81c419" />
+        <input type="hidden" name="subject" value="New product inquiry from Mehta Petro website" />
+        <input type="hidden" name="from_name" value="Mehta Petro Product Inquiry" />
+        <input type="hidden" name="source" value={Astro.url.pathname} />
+        <input type="hidden" name="product_name" value="Products page" />
+        <input type="checkbox" name="botcheck" class="hidden" style="display: none;" tabindex="-1" autocomplete="off" />
+
+        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+          <div>
+            <label for="products-gate-first-name" class="sr-only">First name</label>
+            <input id="products-gate-first-name" name="firstName" type="text" required class="block w-full rounded-xl border border-[#D4E4FF]/80 bg-white/55 px-4 py-3 text-sm text-[#0A1F4D] placeholder:text-[#6A7DA8] shadow-sm backdrop-blur-md focus:border-[#B8CEFF] focus:ring-3 focus:ring-[#DDE9FF] focus:outline-hidden" placeholder="First name" />
+          </div>
+          <div>
+            <label for="products-gate-last-name" class="sr-only">Last name</label>
+            <input id="products-gate-last-name" name="lastName" type="text" class="block w-full rounded-xl border border-[#D4E4FF]/80 bg-white/55 px-4 py-3 text-sm text-[#0A1F4D] placeholder:text-[#6A7DA8] shadow-sm backdrop-blur-md focus:border-[#B8CEFF] focus:ring-3 focus:ring-[#DDE9FF] focus:outline-hidden" placeholder="Last name" />
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+          <div>
+            <label for="products-gate-email" class="sr-only">Email</label>
+            <input id="products-gate-email" name="email" type="email" required class="block w-full rounded-xl border border-[#D4E4FF]/80 bg-white/55 px-4 py-3 text-sm text-[#0A1F4D] placeholder:text-[#6A7DA8] shadow-sm backdrop-blur-md focus:border-[#B8CEFF] focus:ring-3 focus:ring-[#DDE9FF] focus:outline-hidden" placeholder="Email address" />
+          </div>
+        </div>
+
+        <PhoneInput
+          id="products-gate-phone"
+          countryId="products-gate-country-code"
+          label="Phone number"
+          countryLabel="Country"
+          defaultCountryCode="IN"
+        />
+
+        <div>
+          <label for="products-gate-company" class="sr-only">Company</label>
+          <input id="products-gate-company" name="company" type="text" class="block w-full rounded-xl border border-[#D4E4FF]/80 bg-white/55 px-4 py-3 text-sm text-[#0A1F4D] placeholder:text-[#6A7DA8] shadow-sm backdrop-blur-md focus:border-[#B8CEFF] focus:ring-3 focus:ring-[#DDE9FF] focus:outline-hidden" placeholder="Company name" />
+        </div>
+
+        <div>
+          <label for="products-gate-message" class="sr-only">Message</label>
+          <textarea id="products-gate-message" name="message" rows="4" class="block w-full rounded-xl border border-[#D4E4FF]/80 bg-white/55 px-4 py-3 text-sm text-[#0A1F4D] placeholder:text-[#6A7DA8] shadow-sm backdrop-blur-md focus:border-[#B8CEFF] focus:ring-3 focus:ring-[#DDE9FF] focus:outline-hidden" placeholder="Tell us what product range you need"></textarea>
+        </div>
+
+        <p data-form-status class="hidden text-sm font-medium"></p>
+
+        <div class="flex flex-wrap items-center justify-between gap-3 pt-1">
+          <p class="text-xs leading-5 text-[#4A5F8C]">
+            This appears only once per browser after a successful submission.
+          </p>
+          <button type="submit" class="inline-flex items-center justify-center rounded-xl bg-[#0039E6] px-6 py-3 text-sm font-semibold text-white transition duration-300 hover:bg-[#0033CC]">
+            Continue to products
+          </button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <section
     class="mx-auto mt-10 max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14"
   >
     <div class="grid items-center gap-10 lg:grid-cols-[1fr_0.9fr] lg:gap-14">
@@ -91,16 +177,13 @@ const ogTitle = 'Products | Mehta Petro';
         <h1
           class="mt-6 max-w-4xl text-4xl font-extrabold tracking-tight text-balance text-[#0A1F4D] md:text-5xl"
         >
-          Industrial Products Built for Consistent Supply and Practical
-          Performance
+          Industrial Products for Reliable Supply and Performance
         </h1>
         <p
           class="mt-5 max-w-3xl text-base leading-relaxed text-[#4A5F8C] sm:text-lg"
         >
-          Explore our petrochemical range across solvents, base oils, glycols,
-          drilling fluids, and specialty additives. Each category is organized
-          to help industrial buyers quickly find the right product and request
-          details with confidence.
+          Explore solvents, base oils, glycols, drilling fluids, and specialty
+          additives, organized for quick product selection and enquiries.
         </p>
 
         <div class="mt-8 grid gap-4 sm:grid-cols-3">
@@ -124,78 +207,35 @@ const ogTitle = 'Products | Mehta Petro';
               Products Listed
             </p>
           </div>
-          <div
-            class="rounded-2xl border border-[#D4E4FF] bg-white p-5 shadow-lg"
-          >
-            <div class="text-3xl font-extrabold text-[#0039E6]">B2B</div>
-            <p class="mt-2 text-sm font-semibold text-[#0A1F4D]">
-              Industrial Focus
-            </p>
-          </div>
         </div>
       </div>
 
-      {
-        featuredCategory && (
-          <div class="overflow-hidden rounded-2xl border border-[#D4E4FF] bg-white shadow-lg">
-            <div class="relative">
-              <Image
-                src={featuredCategory.image}
-                alt={featuredCategory.imageAlt}
-                class="h-80 w-full object-cover"
-              />
-              <div class="absolute inset-0 bg-linear-to-t from-[#0A1F4D]/78 via-[#0A1F4D]/30 to-transparent" />
-              <div class="absolute inset-x-0 bottom-0 p-6 sm:p-7">
-                <p class="text-xs font-semibold tracking-wide text-white/80 uppercase">
-                  Featured Category
-                </p>
-                <h2 class="mt-2 text-2xl font-bold text-white">
-                  {featuredCategory.title}
-                </h2>
-                <p class="mt-2 max-w-lg text-sm leading-relaxed text-white/85">
-                  {featuredCategory.subTitle}
-                </p>
-              </div>
-            </div>
-            <div class="flex flex-wrap items-center justify-between gap-4 p-6">
-              <p class="text-sm leading-relaxed text-[#4A5F8C]">
-                {featuredCategory.productCount} products available in this
-                category.
-              </p>
-              <a
-                href={featuredCategory.href}
-                class="inline-flex items-center justify-center rounded-xl bg-[#0039E6] px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#0033CC]"
-              >
-                View Category
-              </a>
+      {featuredCategory && (
+        <div class="overflow-hidden rounded-2xl border border-[#D4E4FF] bg-white shadow-lg">
+          <div class="relative">
+            {featuredCategory.image ? (
+              <img src={featuredCategory.image} alt={featuredCategory.imageAlt} class="h-80 w-full object-cover" />
+            ) : (
+              <div class="h-80 w-full bg-neutral-100" />
+            )}
+            <div class="absolute inset-0 bg-linear-to-t from-[#0A1F4D]/78 via-[#0A1F4D]/30 to-transparent" />
+            <div class="absolute inset-x-0 bottom-0 p-6 sm:p-7">
+              <p class="text-xs font-semibold tracking-wide text-white/80 uppercase">Featured Category</p>
+              <h2 class="mt-2 text-2xl font-bold text-white">{featuredCategory.title}</h2>
+              <p class="mt-2 max-w-lg text-sm leading-relaxed text-white/85">{featuredCategory.subTitle}</p>
             </div>
           </div>
-        )
-      }
+          <div class="flex flex-wrap items-center justify-between gap-4 p-6">
+            <p class="text-sm leading-relaxed text-[#4A5F8C]">{featuredCategory.productCount} products available in this category.</p>
+            <a href={featuredCategory.href} class="inline-flex items-center justify-center rounded-xl bg-[#0039E6] px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#0033CC]">View Category</a>
+          </div>
+        </div>
+      )}
     </div>
   </section>
 
   <section class="mx-auto max-w-[85rem] px-4 py-6 sm:px-6 lg:px-8 lg:py-10">
-    <div
-      class="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between"
-    >
-      <div>
-        <p class="text-sm font-semibold tracking-wide text-[#0039E6] uppercase">
-          Categories
-        </p>
-        <h2 class="mt-2 text-3xl font-bold text-[#0A1F4D] md:text-4xl">
-          Browse by product category
-        </h2>
-      </div>
-      <p
-        class="max-w-2xl text-sm leading-relaxed text-[#4A5F8C] sm:text-right sm:text-base"
-      >
-        Each category leads to a dedicated page with multiple products and
-        individual product detail pages.
-      </p>
-    </div>
-
-    <div class="mt-10 grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
+    <div class="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
       {
         categoryCards.map(category => (
           <a
@@ -203,27 +243,12 @@ const ogTitle = 'Products | Mehta Petro';
             class="group overflow-hidden rounded-2xl border border-[#D4E4FF] bg-white shadow-lg transition-colors hover:border-[#0039E6]"
           >
             <div class="relative overflow-hidden border-b border-[#E5EEFF] bg-[#F5F9FF]">
-              <Image
-                src={category.image}
-                alt={category.imageAlt}
-                class="h-52 w-full object-cover"
-              />
+              {category.image ? (
+                <img src={category.image} alt={category.imageAlt} class="h-52 w-full object-cover" />
+              ) : (
+                <div class="h-52 w-full bg-neutral-100" />
+              )}
               <div class="absolute inset-0 bg-linear-to-t from-[#0A1F4D]/65 via-[#0A1F4D]/20 to-transparent" />
-              <div class="absolute top-4 left-4 flex h-11 w-11 items-center justify-center rounded-xl bg-white/92 text-[#0039E6] backdrop-blur-sm">
-                <svg
-                  class="h-5 w-5"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  stroke-width="2"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d={category.icon}
-                  />
-                </svg>
-              </div>
               <div class="absolute right-4 bottom-4 rounded-full bg-white/92 px-3 py-1 text-xs font-semibold text-[#0A1F4D] backdrop-blur-sm">
                 {category.productCount} products
               </div>
@@ -282,4 +307,62 @@ const ogTitle = 'Products | Mehta Petro';
       </div>
     </div>
   </section>
+
+  <script>
+    const gate = document.querySelector('#products-contact-gate');
+    const gateStorageKey = 'mehta-petro-product-contact-completed';
+
+    const openGate = () => {
+      if (!(gate instanceof HTMLElement)) return;
+      gate.classList.remove('hidden');
+      gate.classList.add('flex');
+      gate.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    };
+
+    const closeGate = () => {
+      if (!(gate instanceof HTMLElement)) return;
+      gate.classList.add('hidden');
+      gate.classList.remove('flex');
+      gate.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    };
+
+    let hasCompletedGate = false;
+    try {
+      hasCompletedGate = window.localStorage.getItem(gateStorageKey) === 'true';
+    } catch {
+      hasCompletedGate = false;
+    }
+
+    if (!hasCompletedGate) {
+      window.setTimeout(openGate, 120);
+    }
+
+    let gateCloseTimeoutId = 0;
+
+    gate?.addEventListener('contact-form:success', () => {
+      if (gateCloseTimeoutId) {
+        window.clearTimeout(gateCloseTimeoutId);
+      }
+
+      try {
+        window.localStorage.setItem(gateStorageKey, 'true');
+      } catch {
+        // Ignore storage failures and keep the gate behavior intact.
+      }
+
+      gateCloseTimeoutId = window.setTimeout(() => {
+        closeGate();
+        gateCloseTimeoutId = 0;
+      }, 3000);
+    });
+
+    window.addEventListener('keydown', event => {
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        event.stopPropagation();
+      }
+    });
+  </script>
 </MainLayout>

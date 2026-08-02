@@ -1,0 +1,40 @@
+---
+const { category } = Astro.props;
+---
+
+<a
+  href={`/products/${category.slug}`}
+  data-astro-prefetch
+  class="group flex h-full flex-col overflow-hidden rounded-[1.25rem] border border-[#D4E4FF] bg-white shadow-sm transition duration-300 hover:border-[#0039E6] hover:shadow-md"
+>
+  <div class="relative overflow-hidden border-b border-[#E5EEFF] bg-[#F5F9FF]">
+    {
+      category.coverUrl ? (
+        <img
+          src={category.coverUrl}
+          alt={category.name}
+          class="h-48 w-full object-cover transition duration-500 group-hover:scale-[1.02]"
+          loading="lazy"
+        />
+      ) : (
+        <div class="h-48 w-full bg-neutral-100" />
+      )
+    }
+  </div>
+
+  <div class="flex flex-1 flex-col p-5 sm:p-6">
+    <p class="text-xs font-semibold tracking-[0.18em] text-[#0039E6] uppercase">
+      Product category
+    </p>
+    <h3 class="mt-2 text-lg font-bold text-[#0A1F4D] transition group-hover:text-[#0039E6]">
+      {category.name}
+    </h3>
+    <p class="mt-2 text-sm leading-relaxed text-[#4A5F8C]">
+      {category.description}
+    </p>
+    <div class="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-[#0039E6] transition group-hover:text-[#0033CC]">
+      Explore products
+      <span aria-hidden="true">→</span>
+    </div>
+  </div>
+</a>
