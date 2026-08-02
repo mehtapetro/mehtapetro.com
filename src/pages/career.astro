@@ -11,6 +11,7 @@ const pageTitle = `Career | ${SITE.title}`;
 const metaDescription =
   'Join our team at Mehta Petro-Refineries Limited. Explore career opportunities and become part of our growing family.';
 const ogTitle = 'Career | Mehta Petro';
+const RECAPTCHA_SITE_KEY = import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY || '';
 ---
 
 <MainLayout
@@ -66,13 +67,14 @@ const ogTitle = 'Career | Mehta Petro';
 
               <form
                 id="career-form"
-                action="https://usebasin.com/f/c2a213efd79a"
+                action="https://usebasin.com/f/6324cbafbb15"
                 method="post"
                 enctype="multipart/form-data"
                 class="mt-6 space-y-6"
                 data-success-message="Thank you — your application has been submitted."
                 data-error-message="Sorry, we could not submit your application. Please try again."
                 data-sending-message="Sending your application…"
+                data-recaptcha-sitekey={RECAPTCHA_SITE_KEY}
               >
                 <input type="hidden" name="source" value="website-career" />
 

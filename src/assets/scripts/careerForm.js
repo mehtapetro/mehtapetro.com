@@ -73,6 +73,36 @@ function setButtonLabel(button, label) {
   button.innerHTML = label;
 }
 
+function loadRecaptcha(siteKey) {
+  return new Promise((resolve, reject) => {
+    try {
+      if (window.grecaptcha && window.grecaptcha.execute) {
+        return resolve();
+      }
+
+      const src = `https://www.google.com/recaptcha/api.js?render=${encodeURIComponent(
+        siteKey
+      )}`;
+      const existing = document.querySelector(`script[src="${src}"]`);
+      if (existing) {
+        existing.addEventListener('load', () => resolve());
+        existing.addEventListener('error', reject);
+        return;
+      }
+
+      const script = document.createElement('script');
+      script.src = src;
+      script.async = true;
+      script.defer = true;
+      script.onload = () => resolve();
+      script.onerror = reject;
+      document.head.appendChild(script);
+    } catch (e) {
+      reject(e);
+    }
+  });
+}
+
 function initCareerForm() {
   const form = document.getElementById('career-form');
   if (!form || !(form instanceof HTMLFormElement)) return;
@@ -119,6 +149,36 @@ function initCareerForm() {
     setButtonLoading(submitButton, sendingMessage);
 
     try {
+      // If a reCAPTCHA site key is provided on the form, ensure we get a token
+      const siteKey = form.dataset.recaptchaSitekey;
+      if (siteKey) {
+        // load the recaptcha script if needed and execute to get token
+        await loadRecaptcha(siteKey);
+        const token = await new Promise((resolve, reject) => {
+          try {
+            window.grecaptcha.ready(() => {
+              window.grecaptcha
+                .execute(siteKey, { action: 'submit' })
+                .then(resolve)
+                .catch(reject);
+            });
+          } catch (e) {
+            reject(e);
+          }
+        });
+
+        if (token) {
+          // remove existing token input if any
+          const existing = form.querySelector('input[name="g-recaptcha-response"]');
+          if (existing) existing.remove();
+          const input = document.createElement('input');
+          input.type = 'hidden';
+          input.name = 'g-recaptcha-response';
+          input.value = token;
+          form.appendChild(input);
+        }
+      }
+
       const response = await fetch(form.action || '/', {
         method: 'POST',
         body: new FormData(form),
