@@ -98,7 +98,9 @@ export function getAllCategories(): CategoryInfo[] {
         slug: slugify(folderName),
         name: displayName,
         description:
-          meta.description || meta.desc || `Browse the ${displayName.toLowerCase()} range.`,
+          meta.description ||
+          meta.desc ||
+          `Browse the ${displayName.toLowerCase()} range.`,
         coverUrl,
       } as CategoryInfo;
     });

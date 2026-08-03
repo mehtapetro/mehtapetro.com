@@ -54,15 +54,22 @@ interface Props {
       post={post}
       preloadImage={preloadImage}
     />
-    {/* Google Analytics 4 (optional) - inject when PUBLIC_GA_MEASUREMENT_ID is set */}
-    {GA_MEASUREMENT_ID && (
-      <>
-        <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`} />
-        <script
-          set:html={`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config','${GA_MEASUREMENT_ID}');`}
-        />
-      </>
-    )}
+    {
+      /* Google Analytics 4 (optional) - inject when PUBLIC_GA_MEASUREMENT_ID is set */
+    }
+    {
+      GA_MEASUREMENT_ID && (
+        <>
+          <script
+            async
+            src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+          />
+          <script
+            set:html={`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config','${GA_MEASUREMENT_ID}');`}
+          />
+        </>
+      )
+    }
     {/* Title is set in Meta component */}
 
     <script>
@@ -75,6 +82,9 @@ interface Props {
       import '@scripts/heroVideo.js';
       import '@scripts/clientMarquee.js';
       import '@scripts/facebookEmbed.js';
+      import '@scripts/phoneInputValidation.js';
+      import '@scripts/textareaCharCount.js';
+      import '@scripts/productImageModal.js';
     </script>
   </head>
   <body

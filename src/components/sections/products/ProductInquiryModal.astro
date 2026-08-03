@@ -80,8 +80,16 @@ const inquiryOptions = [
       <input type="hidden" name="subject" value={subject} />
       <input type="hidden" name="from_name" value={fromName} />
       <input type="hidden" name="source" value={source} />
-      {productName && <input type="hidden" name="product_name" value={productName} />}
-      {categoryName && <input type="hidden" name="category_name" value={categoryName} />}
+      {
+        productName && (
+          <input type="hidden" name="product_name" value={productName} />
+        )
+      }
+      {
+        categoryName && (
+          <input type="hidden" name="category_name" value={categoryName} />
+        )
+      }
       <input
         type="checkbox"
         name="botcheck"

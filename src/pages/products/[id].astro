@@ -44,19 +44,31 @@ const ogTitle = `${category.name} | Products | Mehta Petro`;
 >
   <div class="text-[#0A1F4D]">
     <section class="mx-auto max-w-[85rem] px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
-      <nav class="mb-6 flex flex-wrap items-center gap-2 text-sm text-[#4A5F8C]">
-        <a href="/products/" class="font-semibold text-[#0039E6] transition hover:text-[#0033CC]">Products</a>
+      <nav
+        class="mb-6 flex flex-wrap items-center gap-2 text-sm text-[#4A5F8C]"
+      >
+        <a
+          href="/products/"
+          class="font-semibold text-[#0039E6] transition hover:text-[#0033CC]"
+          >Products</a
+        >
         <span aria-hidden="true">/</span>
         <span>{category.name}</span>
       </nav>
 
-      <div class="grid gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:gap-16">
+      <div
+        class="grid gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:gap-16"
+      >
         <div class="space-y-8">
           <div class="space-y-5">
-            <span class="inline-flex rounded-full border border-[#C0D6FF] bg-white px-4 py-1 text-xs font-semibold tracking-[0.18em] text-[#0039E6] uppercase">
+            <span
+              class="inline-flex rounded-full border border-[#C0D6FF] bg-white px-4 py-1 text-xs font-semibold tracking-[0.18em] text-[#0039E6] uppercase"
+            >
               Product category
             </span>
-            <h1 class="max-w-3xl text-4xl font-extrabold tracking-tight text-[#0A1F4D] md:text-5xl">
+            <h1
+              class="max-w-3xl text-4xl font-extrabold tracking-tight text-[#0A1F4D] md:text-5xl"
+            >
               {category.name}
             </h1>
             <p class="max-w-2xl text-lg leading-8 text-[#4A5F8C]">
@@ -65,7 +77,9 @@ const ogTitle = `${category.name} | Products | Mehta Petro`;
           </div>
 
           <div class="flex flex-wrap items-center gap-4 text-sm text-[#4A5F8C]">
-            <span class="font-semibold text-[#0A1F4D]">{productCount} products</span>
+            <span class="font-semibold text-[#0A1F4D]"
+              >{productCount} products</span
+            >
             <span aria-hidden="true">•</span>
             <span>Industrial supply</span>
             <span aria-hidden="true">•</span>
@@ -81,64 +95,125 @@ const ogTitle = `${category.name} | Products | Mehta Petro`;
             >
               Request Product Information
             </button>
-            <a href="#products" class="inline-flex items-center justify-center rounded-xl border border-[#D4E4FF] bg-white px-6 py-3 text-sm font-semibold text-[#0039E6] transition duration-300 hover:border-[#0039E6] hover:bg-[#F7FAFF]">
+            <a
+              href="#products"
+              class="inline-flex items-center justify-center rounded-xl border border-[#D4E4FF] bg-white px-6 py-3 text-sm font-semibold text-[#0039E6] transition duration-300 hover:border-[#0039E6] hover:bg-[#F7FAFF]"
+            >
               Browse products
             </a>
           </div>
         </div>
 
-        <div class="relative overflow-hidden rounded-[2rem] shadow-[0_24px_80px_rgba(10,31,77,0.12)]">
-          {featuredProduct?.imageUrl ? (
-            <img src={featuredProduct.imageUrl} alt={featuredProduct.name} class="h-[24rem] w-full object-cover" />
-          ) : category.coverUrl ? (
-            <img src={category.coverUrl} alt={category.name} class="h-[24rem] w-full object-cover" />
-          ) : (
-            <div class="flex h-[24rem] w-full items-center justify-center bg-[#F5F9FF] text-center">
-              <div>
-                <p class="text-xs font-semibold tracking-[0.18em] text-[#0039E6] uppercase">Product overview</p>
-                <p class="mt-3 text-2xl font-bold text-[#0A1F4D]">{category.name}</p>
+        <div
+          class="relative overflow-hidden rounded-[2rem] shadow-[0_24px_80px_rgba(10,31,77,0.12)]"
+        >
+          {
+            featuredProduct?.imageUrl ? (
+              <img
+                src={featuredProduct.imageUrl}
+                alt={featuredProduct.name}
+                class="h-[24rem] w-full object-cover"
+              />
+            ) : category.coverUrl ? (
+              <img
+                src={category.coverUrl}
+                alt={category.name}
+                class="h-[24rem] w-full object-cover"
+              />
+            ) : (
+              <div class="flex h-[24rem] w-full items-center justify-center bg-[#F5F9FF] text-center">
+                <div>
+                  <p class="text-xs font-semibold tracking-[0.18em] text-[#0039E6] uppercase">
+                    Product overview
+                  </p>
+                  <p class="mt-3 text-2xl font-bold text-[#0A1F4D]">
+                    {category.name}
+                  </p>
+                </div>
               </div>
-            </div>
-          )}
-          <div class="absolute inset-0 bg-linear-to-t from-[#0A1F4D]/45 via-transparent to-transparent"></div>
-          <div class="absolute right-4 bottom-4 left-4 flex items-end justify-between gap-4 rounded-2xl bg-white/90 p-4 backdrop-blur-sm">
+            )
+          }
+          <div
+            class="absolute inset-0 bg-linear-to-t from-[#0A1F4D]/45 via-transparent to-transparent"
+          >
+          </div>
+          <div
+            class="absolute right-4 bottom-4 left-4 flex items-end justify-between gap-4 rounded-2xl bg-white/90 p-4 backdrop-blur-sm"
+          >
             <div>
-              <p class="text-xs font-semibold tracking-[0.18em] text-[#0039E6] uppercase">Featured range</p>
-              <p class="mt-1 text-base font-semibold text-[#0A1F4D]">{featuredProduct?.name ?? category.name}</p>
+              <p
+                class="text-xs font-semibold tracking-[0.18em] text-[#0039E6] uppercase"
+              >
+                Featured range
+              </p>
+              <p class="mt-1 text-base font-semibold text-[#0A1F4D]">
+                {featuredProduct?.name ?? category.name}
+              </p>
             </div>
-            <span class="rounded-full bg-[#E8F0FF] px-3 py-1 text-xs font-semibold text-[#0A1F4D]">{productCount} products</span>
+            <span
+              class="rounded-full bg-[#E8F0FF] px-3 py-1 text-xs font-semibold text-[#0A1F4D]"
+              >{productCount} products</span
+            >
           </div>
         </div>
       </div>
     </section>
 
-    <section id="products" class="mx-auto max-w-[85rem] px-4 py-8 sm:px-6 lg:px-8 lg:py-12">
-      <div class="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+    <section
+      id="products"
+      class="mx-auto max-w-[85rem] px-4 py-8 sm:px-6 lg:px-8 lg:py-12"
+    >
+      <div
+        class="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between"
+      >
         <div>
-          <p class="text-sm font-semibold tracking-[0.18em] text-[#0039E6] uppercase">Products</p>
-          <h2 class="mt-2 text-3xl font-bold text-[#0A1F4D] md:text-4xl">Choose the right product for your application</h2>
+          <p
+            class="text-sm font-semibold tracking-[0.18em] text-[#0039E6] uppercase"
+          >
+            Products
+          </p>
+          <h2 class="mt-2 text-3xl font-bold text-[#0A1F4D] md:text-4xl">
+            Choose the right product for your application
+          </h2>
         </div>
-        <p class="max-w-2xl text-sm leading-relaxed text-[#4A5F8C] sm:text-right sm:text-base">
-          Open any product for quick technical details, then reach out when you are ready to move forward.
+        <p
+          class="max-w-2xl text-sm leading-relaxed text-[#4A5F8C] sm:text-right sm:text-base"
+        >
+          Open any product for quick technical details, then reach out when you
+          are ready to move forward.
         </p>
       </div>
 
       <div class="mt-10 grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
-        {items.map(item => <ProductCard product={item} categorySlug={categoryId} />)}
+        {
+          items.map(item => (
+            <ProductCard product={item} categorySlug={categoryId} />
+          ))
+        }
       </div>
 
-      {items.length === 0 && (
-        <div class="mt-10 border-t border-[#D4E4FF] pt-8 text-center text-[#4A5F8C]">
-          No products are currently listed in this category.
-        </div>
-      )}
+      {
+        items.length === 0 && (
+          <div class="mt-10 border-t border-[#D4E4FF] pt-8 text-center text-[#4A5F8C]">
+            No products are currently listed in this category.
+          </div>
+        )
+      }
     </section>
 
     <section class="mx-auto max-w-[85rem] px-4 py-8 sm:px-6 lg:px-8 lg:py-12">
-      <div class="flex flex-col gap-4 rounded-[2rem] bg-white/65 px-6 py-8 backdrop-blur-sm sm:px-8 lg:flex-row lg:items-center lg:justify-between">
+      <div
+        class="flex flex-col gap-4 rounded-[2rem] bg-white/65 px-6 py-8 backdrop-blur-sm sm:px-8 lg:flex-row lg:items-center lg:justify-between"
+      >
         <div>
-          <p class="text-sm font-semibold tracking-[0.18em] text-[#0039E6] uppercase">Need guidance?</p>
-          <h3 class="mt-2 text-2xl font-bold text-[#0A1F4D]">Tell us your target use and we will narrow the range quickly.</h3>
+          <p
+            class="text-sm font-semibold tracking-[0.18em] text-[#0039E6] uppercase"
+          >
+            Need guidance?
+          </p>
+          <h3 class="mt-2 text-2xl font-bold text-[#0A1F4D]">
+            Tell us your target use and we will narrow the range quickly.
+          </h3>
         </div>
         <button
           type="button"

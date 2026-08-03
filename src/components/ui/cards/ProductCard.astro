@@ -27,7 +27,9 @@ const { product, categorySlug } = Astro.props;
     <p class="text-xs font-semibold tracking-[0.18em] text-[#0039E6] uppercase">
       Product
     </p>
-    <h3 class="mt-2 text-lg font-bold text-[#0A1F4D] transition group-hover:text-[#0039E6]">
+    <h3
+      class="mt-2 text-lg font-bold text-[#0A1F4D] transition group-hover:text-[#0039E6]"
+    >
       {product.name}
     </h3>
     {
@@ -37,7 +39,9 @@ const { product, categorySlug } = Astro.props;
         </p>
       )
     }
-    <div class="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-[#0039E6] transition group-hover:text-[#0033CC]">
+    <div
+      class="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-[#0039E6] transition group-hover:text-[#0033CC]"
+    >
       View details
       <span aria-hidden="true">→</span>
     </div>

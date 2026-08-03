@@ -18,7 +18,8 @@ function initClientMarquees() {
     const track = marquee.querySelector('[data-client-marquee-track]');
     const group = marquee.querySelector('[data-client-marquee-group]');
 
-    if (!(track instanceof HTMLElement) || !(group instanceof HTMLElement)) return;
+    if (!(track instanceof HTMLElement) || !(group instanceof HTMLElement))
+      return;
 
     let animationFrame = 0;
     let lastTime = 0;

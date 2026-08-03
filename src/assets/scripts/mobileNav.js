@@ -67,7 +67,8 @@ function bindMobileNav() {
       const elements = getElements();
       if (!elements) return;
       const { menu, toggle } = elements;
-      if (toggle.getAttribute('aria-expanded') === 'true') closeMenu(menu, toggle);
+      if (toggle.getAttribute('aria-expanded') === 'true')
+        closeMenu(menu, toggle);
       else openMenu(menu, toggle);
       return;
     }
@@ -76,7 +77,8 @@ function bindMobileNav() {
       const elements = getElements();
       if (!elements) return;
       const { menu, toggle } = elements;
-      if (toggle.getAttribute('aria-expanded') === 'true') closeMenu(menu, toggle);
+      if (toggle.getAttribute('aria-expanded') === 'true')
+        closeMenu(menu, toggle);
       return;
     }
 
@@ -84,7 +86,8 @@ function bindMobileNav() {
       const elements = getElements();
       if (!elements) return;
       const { menu, toggle } = elements;
-      if (toggle.getAttribute('aria-expanded') === 'true') closeMenu(menu, toggle);
+      if (toggle.getAttribute('aria-expanded') === 'true')
+        closeMenu(menu, toggle);
     }
   });
 
@@ -93,7 +96,8 @@ function bindMobileNav() {
     const elements = getElements();
     if (!elements) return;
     const { menu, toggle } = elements;
-    if (toggle.getAttribute('aria-expanded') === 'true') closeMenu(menu, toggle);
+    if (toggle.getAttribute('aria-expanded') === 'true')
+      closeMenu(menu, toggle);
   });
 
   window.matchMedia('(min-width: 768px)').addEventListener('change', e => {
@@ -101,7 +105,8 @@ function bindMobileNav() {
     const elements = getElements();
     if (!elements) return;
     const { menu, toggle } = elements;
-    if (toggle.getAttribute('aria-expanded') === 'true') closeMenu(menu, toggle);
+    if (toggle.getAttribute('aria-expanded') === 'true')
+      closeMenu(menu, toggle);
   });
 
   document.addEventListener('astro:page-load', resetMenuState);

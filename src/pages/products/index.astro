@@ -83,16 +83,24 @@ const ogTitle = 'Products | Mehta Petro';
       type="button"
       class="absolute inset-0 cursor-not-allowed"
       aria-label="Complete the form to continue"
-      disabled
-    ></button>
+      disabled></button>
 
-    <div class="relative z-10 w-full max-w-2xl overflow-hidden rounded-[1.75rem] border border-[#D4E4FF]/70 bg-[#F8FBFF]/45 shadow-[0_24px_80px_rgba(34,83,171,0.14)] backdrop-blur-2xl">
+    <div
+      class="relative z-10 w-full max-w-2xl overflow-hidden rounded-[1.75rem] border border-[#D4E4FF]/70 bg-[#F8FBFF]/45 shadow-[0_24px_80px_rgba(34,83,171,0.14)] backdrop-blur-2xl"
+    >
       <div class="border-b border-[#D4E4FF]/50 px-5 py-4 sm:px-6">
         <div>
-          <p class="text-xs font-semibold tracking-[0.18em] text-[#0039E6] uppercase">Before you continue</p>
-          <h2 class="mt-2 text-2xl font-bold text-[#0A1F4D]">Request product details</h2>
+          <p
+            class="text-xs font-semibold tracking-[0.18em] text-[#0039E6] uppercase"
+          >
+            Before you continue
+          </p>
+          <h2 class="mt-2 text-2xl font-bold text-[#0A1F4D]">
+            Request product details
+          </h2>
           <p class="mt-2 text-sm leading-6 text-[#4A5F8C]">
-            Share your contact details once to browse products and receive the right technical follow-up.
+            Share your contact details once to browse products and receive the
+            right technical follow-up.
           </p>
         </div>
       </div>
@@ -107,28 +115,71 @@ const ogTitle = 'Products | Mehta Petro';
         data-error-message="We could not send your request right now. Please try again."
         data-sending-message="Sending your request…"
       >
-        <input type="hidden" name="access_key" value="0e6f5e46-f620-429a-ab06-a8e61f81c419" />
-        <input type="hidden" name="subject" value="New product inquiry from Mehta Petro website" />
-        <input type="hidden" name="from_name" value="Mehta Petro Product Inquiry" />
+        <input
+          type="hidden"
+          name="access_key"
+          value="0e6f5e46-f620-429a-ab06-a8e61f81c419"
+        />
+        <input
+          type="hidden"
+          name="subject"
+          value="New product inquiry from Mehta Petro website"
+        />
+        <input
+          type="hidden"
+          name="from_name"
+          value="Mehta Petro Product Inquiry"
+        />
         <input type="hidden" name="source" value={Astro.url.pathname} />
         <input type="hidden" name="product_name" value="Products page" />
-        <input type="checkbox" name="botcheck" class="hidden" style="display: none;" tabindex="-1" autocomplete="off" />
+        <input
+          type="checkbox"
+          name="botcheck"
+          class="hidden"
+          style="display: none;"
+          tabindex="-1"
+          autocomplete="off"
+        />
 
         <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <div>
-            <label for="products-gate-first-name" class="sr-only">First name</label>
-            <input id="products-gate-first-name" name="firstName" type="text" required class="block w-full rounded-xl border border-[#D4E4FF]/80 bg-white/55 px-4 py-3 text-sm text-[#0A1F4D] placeholder:text-[#6A7DA8] shadow-sm backdrop-blur-md focus:border-[#B8CEFF] focus:ring-3 focus:ring-[#DDE9FF] focus:outline-hidden" placeholder="First name" />
+            <label for="products-gate-first-name" class="sr-only"
+              >First name</label
+            >
+            <input
+              id="products-gate-first-name"
+              name="firstName"
+              type="text"
+              required
+              class="block w-full rounded-xl border border-[#D4E4FF]/80 bg-white/55 px-4 py-3 text-sm text-[#0A1F4D] shadow-sm backdrop-blur-md placeholder:text-[#6A7DA8] focus:border-[#B8CEFF] focus:ring-3 focus:ring-[#DDE9FF] focus:outline-hidden"
+              placeholder="First name"
+            />
           </div>
           <div>
-            <label for="products-gate-last-name" class="sr-only">Last name</label>
-            <input id="products-gate-last-name" name="lastName" type="text" class="block w-full rounded-xl border border-[#D4E4FF]/80 bg-white/55 px-4 py-3 text-sm text-[#0A1F4D] placeholder:text-[#6A7DA8] shadow-sm backdrop-blur-md focus:border-[#B8CEFF] focus:ring-3 focus:ring-[#DDE9FF] focus:outline-hidden" placeholder="Last name" />
+            <label for="products-gate-last-name" class="sr-only"
+              >Last name</label
+            >
+            <input
+              id="products-gate-last-name"
+              name="lastName"
+              type="text"
+              class="block w-full rounded-xl border border-[#D4E4FF]/80 bg-white/55 px-4 py-3 text-sm text-[#0A1F4D] shadow-sm backdrop-blur-md placeholder:text-[#6A7DA8] focus:border-[#B8CEFF] focus:ring-3 focus:ring-[#DDE9FF] focus:outline-hidden"
+              placeholder="Last name"
+            />
           </div>
         </div>
 
         <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <div>
             <label for="products-gate-email" class="sr-only">Email</label>
-            <input id="products-gate-email" name="email" type="email" required class="block w-full rounded-xl border border-[#D4E4FF]/80 bg-white/55 px-4 py-3 text-sm text-[#0A1F4D] placeholder:text-[#6A7DA8] shadow-sm backdrop-blur-md focus:border-[#B8CEFF] focus:ring-3 focus:ring-[#DDE9FF] focus:outline-hidden" placeholder="Email address" />
+            <input
+              id="products-gate-email"
+              name="email"
+              type="email"
+              required
+              class="block w-full rounded-xl border border-[#D4E4FF]/80 bg-white/55 px-4 py-3 text-sm text-[#0A1F4D] shadow-sm backdrop-blur-md placeholder:text-[#6A7DA8] focus:border-[#B8CEFF] focus:ring-3 focus:ring-[#DDE9FF] focus:outline-hidden"
+              placeholder="Email address"
+            />
           </div>
         </div>
 
@@ -142,12 +193,23 @@ const ogTitle = 'Products | Mehta Petro';
 
         <div>
           <label for="products-gate-company" class="sr-only">Company</label>
-          <input id="products-gate-company" name="company" type="text" class="block w-full rounded-xl border border-[#D4E4FF]/80 bg-white/55 px-4 py-3 text-sm text-[#0A1F4D] placeholder:text-[#6A7DA8] shadow-sm backdrop-blur-md focus:border-[#B8CEFF] focus:ring-3 focus:ring-[#DDE9FF] focus:outline-hidden" placeholder="Company name" />
+          <input
+            id="products-gate-company"
+            name="company"
+            type="text"
+            class="block w-full rounded-xl border border-[#D4E4FF]/80 bg-white/55 px-4 py-3 text-sm text-[#0A1F4D] shadow-sm backdrop-blur-md placeholder:text-[#6A7DA8] focus:border-[#B8CEFF] focus:ring-3 focus:ring-[#DDE9FF] focus:outline-hidden"
+            placeholder="Company name"
+          />
         </div>
 
         <div>
           <label for="products-gate-message" class="sr-only">Message</label>
-          <textarea id="products-gate-message" name="message" rows="4" class="block w-full rounded-xl border border-[#D4E4FF]/80 bg-white/55 px-4 py-3 text-sm text-[#0A1F4D] placeholder:text-[#6A7DA8] shadow-sm backdrop-blur-md focus:border-[#B8CEFF] focus:ring-3 focus:ring-[#DDE9FF] focus:outline-hidden" placeholder="Tell us what product range you need"></textarea>
+          <textarea
+            id="products-gate-message"
+            name="message"
+            rows="4"
+            class="block w-full rounded-xl border border-[#D4E4FF]/80 bg-white/55 px-4 py-3 text-sm text-[#0A1F4D] shadow-sm backdrop-blur-md placeholder:text-[#6A7DA8] focus:border-[#B8CEFF] focus:ring-3 focus:ring-[#DDE9FF] focus:outline-hidden"
+            placeholder="Tell us what product range you need"></textarea>
         </div>
 
         <p data-form-status class="hidden text-sm font-medium"></p>
@@ -156,7 +218,10 @@ const ogTitle = 'Products | Mehta Petro';
           <p class="text-xs leading-5 text-[#4A5F8C]">
             This appears only once per browser after a successful submission.
           </p>
-          <button type="submit" class="inline-flex items-center justify-center rounded-xl bg-[#0039E6] px-6 py-3 text-sm font-semibold text-white transition duration-300 hover:bg-[#0033CC]">
+          <button
+            type="submit"
+            class="inline-flex items-center justify-center rounded-xl bg-[#0039E6] px-6 py-3 text-sm font-semibold text-white transition duration-300 hover:bg-[#0033CC]"
+          >
             Continue to products
           </button>
         </div>
@@ -210,27 +275,47 @@ const ogTitle = 'Products | Mehta Petro';
         </div>
       </div>
 
-      {featuredCategory && (
-        <div class="overflow-hidden rounded-2xl border border-[#D4E4FF] bg-white shadow-lg">
-          <div class="relative">
-            {featuredCategory.image ? (
-              <img src={featuredCategory.image} alt={featuredCategory.imageAlt} class="h-80 w-full object-cover" />
-            ) : (
-              <div class="h-80 w-full bg-neutral-100" />
-            )}
-            <div class="absolute inset-0 bg-linear-to-t from-[#0A1F4D]/78 via-[#0A1F4D]/30 to-transparent" />
-            <div class="absolute inset-x-0 bottom-0 p-6 sm:p-7">
-              <p class="text-xs font-semibold tracking-wide text-white/80 uppercase">Featured Category</p>
-              <h2 class="mt-2 text-2xl font-bold text-white">{featuredCategory.title}</h2>
-              <p class="mt-2 max-w-lg text-sm leading-relaxed text-white/85">{featuredCategory.subTitle}</p>
+      {
+        featuredCategory && (
+          <div class="overflow-hidden rounded-2xl border border-[#D4E4FF] bg-white shadow-lg">
+            <div class="relative">
+              {featuredCategory.image ? (
+                <img
+                  src={featuredCategory.image}
+                  alt={featuredCategory.imageAlt}
+                  class="h-80 w-full object-cover"
+                />
+              ) : (
+                <div class="h-80 w-full bg-neutral-100" />
+              )}
+              <div class="absolute inset-0 bg-linear-to-t from-[#0A1F4D]/78 via-[#0A1F4D]/30 to-transparent" />
+              <div class="absolute inset-x-0 bottom-0 p-6 sm:p-7">
+                <p class="text-xs font-semibold tracking-wide text-white/80 uppercase">
+                  Featured Category
+                </p>
+                <h2 class="mt-2 text-2xl font-bold text-white">
+                  {featuredCategory.title}
+                </h2>
+                <p class="mt-2 max-w-lg text-sm leading-relaxed text-white/85">
+                  {featuredCategory.subTitle}
+                </p>
+              </div>
+            </div>
+            <div class="flex flex-wrap items-center justify-between gap-4 p-6">
+              <p class="text-sm leading-relaxed text-[#4A5F8C]">
+                {featuredCategory.productCount} products available in this
+                category.
+              </p>
+              <a
+                href={featuredCategory.href}
+                class="inline-flex items-center justify-center rounded-xl bg-[#0039E6] px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#0033CC]"
+              >
+                View Category
+              </a>
             </div>
           </div>
-          <div class="flex flex-wrap items-center justify-between gap-4 p-6">
-            <p class="text-sm leading-relaxed text-[#4A5F8C]">{featuredCategory.productCount} products available in this category.</p>
-            <a href={featuredCategory.href} class="inline-flex items-center justify-center rounded-xl bg-[#0039E6] px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#0033CC]">View Category</a>
-          </div>
-        </div>
-      )}
+        )
+      }
     </div>
   </section>
 
@@ -244,7 +329,11 @@ const ogTitle = 'Products | Mehta Petro';
           >
             <div class="relative overflow-hidden border-b border-[#E5EEFF] bg-[#F5F9FF]">
               {category.image ? (
-                <img src={category.image} alt={category.imageAlt} class="h-52 w-full object-cover" />
+                <img
+                  src={category.image}
+                  alt={category.imageAlt}
+                  class="h-52 w-full object-cover"
+                />
               ) : (
                 <div class="h-52 w-full bg-neutral-100" />
               )}
@@ -334,7 +423,8 @@ const ogTitle = 'Products | Mehta Petro';
 
       let hasCompletedGate = false;
       try {
-        hasCompletedGate = window.localStorage.getItem(gateStorageKey) === 'true';
+        hasCompletedGate =
+          window.localStorage.getItem(gateStorageKey) === 'true';
       } catch {
         hasCompletedGate = false;
       }

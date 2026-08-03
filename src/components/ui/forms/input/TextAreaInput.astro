@@ -28,6 +28,9 @@ interface Props {
     rows={rows}
     maxlength={maxlength}
     required
+    data-char-count-for={showCharCount && maxlength
+      ? `${id}-char-count`
+      : undefined}
     class:list={[
       'block w-full rounded-lg border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm text-neutral-700 placeholder:text-neutral-500 focus:border-neutral-200 focus:ring-3 focus:ring-neutral-400 focus:outline-hidden disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-600 dark:bg-neutral-700/30 dark:text-neutral-300 dark:placeholder:text-neutral-400 dark:focus:ring-1',
       className,
@@ -41,32 +44,3 @@ interface Props {
     ) : null
   }
 </div>
-
-{
-  showCharCount && maxlength ? (
-    <script define:vars={{ id }}>
-      function initCharCount() {
-        const textarea = document.getElementById(id);
-        const counter = document.getElementById(`${id}-char-count`);
-        if (!(textarea instanceof HTMLTextAreaElement) || !counter) return;
-
-        const update = () => {
-          counter.textContent = String(textarea.value.length);
-        };
-
-        if (textarea.dataset.charCountBound !== 'true') {
-          textarea.dataset.charCountBound = 'true';
-          textarea.addEventListener('input', update);
-          textarea.form?.addEventListener('reset', () => {
-            requestAnimationFrame(update);
-          });
-        }
-
-        update();
-      }
-
-      initCharCount();
-      document.addEventListener('astro:page-load', initCharCount);
-    </script>
-  ) : null
-}

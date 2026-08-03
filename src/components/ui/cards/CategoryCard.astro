@@ -26,13 +26,17 @@ const { category } = Astro.props;
     <p class="text-xs font-semibold tracking-[0.18em] text-[#0039E6] uppercase">
       Product category
     </p>
-    <h3 class="mt-2 text-lg font-bold text-[#0A1F4D] transition group-hover:text-[#0039E6]">
+    <h3
+      class="mt-2 text-lg font-bold text-[#0A1F4D] transition group-hover:text-[#0039E6]"
+    >
       {category.name}
     </h3>
     <p class="mt-2 text-sm leading-relaxed text-[#4A5F8C]">
       {category.description}
     </p>
-    <div class="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-[#0039E6] transition group-hover:text-[#0033CC]">
+    <div
+      class="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-[#0039E6] transition group-hover:text-[#0033CC]"
+    >
       Explore products
       <span aria-hidden="true">→</span>
     </div>

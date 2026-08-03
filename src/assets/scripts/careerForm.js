@@ -89,7 +89,10 @@ async function attachRecaptchaToken(form, siteKey) {
   const token = await new Promise((resolve, reject) => {
     try {
       window.grecaptcha.ready(() => {
-        window.grecaptcha.execute(siteKey, { action: 'submit' }).then(resolve).catch(reject);
+        window.grecaptcha
+          .execute(siteKey, { action: 'submit' })
+          .then(resolve)
+          .catch(reject);
       });
     } catch (error) {
       reject(error);
@@ -128,7 +131,10 @@ function fallbackIframeSubmit(form) {
 
     iframe.addEventListener('load', () => finish(resolve), { once: true });
     const timeoutId = window.setTimeout(
-      () => finish(() => reject(new Error('Submission timed out. Please try again.'))),
+      () =>
+        finish(() =>
+          reject(new Error('Submission timed out. Please try again.'))
+        ),
       15000
     );
 

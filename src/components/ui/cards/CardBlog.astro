@@ -17,7 +17,7 @@ const href =
 ---
 
 <a
-  class="group flex gap-4 overflow-hidden rounded-xl border border-[#D4E4FF] bg-white p-4 shadow-sm transition duration-300 active:scale-[0.995] hover:border-[#0039E6] hover:shadow-md sm:items-center sm:gap-5 sm:p-5"
+  class="group flex gap-4 overflow-hidden rounded-xl border border-[#D4E4FF] bg-white p-4 shadow-sm transition duration-300 hover:border-[#0039E6] hover:shadow-md active:scale-[0.995] sm:items-center sm:gap-5 sm:p-5"
   href={href}
   data-astro-prefetch
 >
@@ -46,7 +46,9 @@ const href =
       {blogEntry.data.title}
     </h3>
 
-    <p class="line-clamp-2 text-xs leading-5 text-[#4A5F8C] sm:text-sm sm:leading-6">
+    <p
+      class="line-clamp-2 text-xs leading-5 text-[#4A5F8C] sm:text-sm sm:leading-6"
+    >
       {blogEntry.data.description}
     </p>
   </div>

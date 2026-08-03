@@ -60,7 +60,9 @@ const ogTitle = `${post.data.title} | News | ${SITE.title}`;
   }}
   post={post}
 >
-  <section class="mx-auto max-w-3xl px-4 pt-8 pb-10 sm:px-6 sm:pt-10 sm:pb-12 lg:px-8 lg:pt-14">
+  <section
+    class="mx-auto max-w-3xl px-4 pt-8 pb-10 sm:px-6 sm:pt-10 sm:pb-12 lg:px-8 lg:pt-14"
+  >
     <a
       href="/news"
       class="mb-6 inline-flex min-h-10 items-center gap-2 text-sm font-semibold text-[#0039E6] transition hover:text-[#0033CC]"
@@ -113,11 +115,13 @@ const ogTitle = `${post.data.title} | News | ${SITE.title}`;
         format={'avif'}
       />
       <article
-        class="prose prose-base prose-neutral mb-6 max-w-none text-pretty prose-headings:text-[#0A1F4D] prose-a:text-[#0039E6] sm:prose-lg sm:mb-8"
+        class="prose prose-base prose-neutral prose-headings:text-[#0A1F4D] prose-a:text-[#0039E6] sm:prose-lg mb-6 max-w-none text-pretty sm:mb-8"
       >
         <Content />
       </article>
-      <div class="flex flex-col gap-4 border-t border-[#E3EBFF] pt-5 sm:flex-row sm:items-center sm:justify-between sm:pt-6">
+      <div
+        class="flex flex-col gap-4 border-t border-[#E3EBFF] pt-5 sm:flex-row sm:items-center sm:justify-between sm:pt-6"
+      >
         <div class="flex flex-wrap gap-2">
           {
             post.data.tags?.map((tag: string) => (
@@ -129,7 +133,9 @@ const ogTitle = `${post.data.title} | News | ${SITE.title}`;
         </div>
         <div class="flex items-center gap-2 sm:justify-end">
           <Bookmark />
-          <div class="mx-1 hidden h-4 border-e border-[#D4E4FF] sm:mx-3 sm:block">
+          <div
+            class="mx-1 hidden h-4 border-e border-[#D4E4FF] sm:mx-3 sm:block"
+          >
           </div>
           <div class="inline-flex">
             <SocialShare pageTitle={post.data.title} />
