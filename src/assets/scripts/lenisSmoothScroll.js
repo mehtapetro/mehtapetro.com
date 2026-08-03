@@ -9,9 +9,10 @@ const prefersReducedMotion = window.matchMedia(
 
 if (!prefersReducedMotion) {
   // https://github.com/darkroomengineering/lenis
-  new Lenis({
+  const lenis = new Lenis({
     autoRaf: true,
   });
+  window.__lenis = lenis;
 } else {
   document.documentElement.classList.remove('lenis', 'lenis-smooth');
 }

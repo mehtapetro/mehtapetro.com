@@ -3,6 +3,7 @@ import MainLayout from '@/layouts/MainLayout.astro';
 import { SITE } from '@data/constants';
 import { getAllCategories, getProductsForCategory } from '@/lib/productFs';
 import ProductCard from '@components/ui/cards/ProductCard.astro';
+import ProductInquiryModal from '@components/sections/products/ProductInquiryModal.astro';
 
 export async function getStaticPaths() {
   const categories = getAllCategories();
@@ -72,9 +73,14 @@ const ogTitle = `${category.name} | Products | Mehta Petro`;
           </div>
 
           <div class="flex flex-wrap gap-3">
-            <a href="/contact" class="inline-flex items-center justify-center rounded-xl bg-[#0039E6] px-6 py-3 text-sm font-semibold text-white transition duration-300 hover:bg-[#0033CC]">
+            <button
+              type="button"
+              data-product-inquiry-open
+              aria-controls="category-inquiry-modal"
+              class="inline-flex items-center justify-center rounded-xl bg-[#0039E6] px-6 py-3 text-sm font-semibold text-white transition duration-300 hover:bg-[#0033CC]"
+            >
               Request Product Information
-            </a>
+            </button>
             <a href="#products" class="inline-flex items-center justify-center rounded-xl border border-[#D4E4FF] bg-white px-6 py-3 text-sm font-semibold text-[#0039E6] transition duration-300 hover:border-[#0039E6] hover:bg-[#F7FAFF]">
               Browse products
             </a>
@@ -134,10 +140,24 @@ const ogTitle = `${category.name} | Products | Mehta Petro`;
           <p class="text-sm font-semibold tracking-[0.18em] text-[#0039E6] uppercase">Need guidance?</p>
           <h3 class="mt-2 text-2xl font-bold text-[#0A1F4D]">Tell us your target use and we will narrow the range quickly.</h3>
         </div>
-        <a href="/contact" class="inline-flex items-center justify-center rounded-xl bg-[#0039E6] px-6 py-3 text-sm font-semibold text-white transition duration-300 hover:bg-[#0033CC]">
+        <button
+          type="button"
+          data-product-inquiry-open
+          aria-controls="category-inquiry-modal"
+          class="inline-flex items-center justify-center rounded-xl bg-[#0039E6] px-6 py-3 text-sm font-semibold text-white transition duration-300 hover:bg-[#0033CC]"
+        >
           Contact our team
-        </a>
+        </button>
       </div>
     </section>
   </div>
+
+  <ProductInquiryModal
+    modalId="category-inquiry-modal"
+    subtitle={`Send us your enquiry for ${category.name}.`}
+    subject="New product category enquiry from Mehta Petro website"
+    fromName="Mehta Petro Product Category Inquiry"
+    source={Astro.url.pathname}
+    categoryName={category.name}
+  />
 </MainLayout>

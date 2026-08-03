@@ -7,21 +7,9 @@ function setStatus(statusElement, message, variant) {
     'text-red-600',
     'text-emerald-700',
     'text-[#0039E6]',
-    'opacity-0',
-    'translate-y-2',
-    'scale-95'
+    'opacity-0'
   );
-  statusElement.classList.add(
-    'transition-all',
-    'duration-500',
-    'ease-out',
-    'will-change-transform'
-  );
-
-  statusElement.classList.add('opacity-0', 'translate-y-2', 'scale-95');
-  statusElement.getBoundingClientRect();
-  statusElement.classList.remove('opacity-0', 'translate-y-2', 'scale-95');
-  statusElement.classList.add('opacity-100', 'translate-y-0', 'scale-100');
+  statusElement.classList.add('transition-opacity', 'duration-500');
 
   if (variant === 'success') {
     statusElement.classList.add('text-emerald-700');
@@ -38,18 +26,11 @@ function setStatus(statusElement, message, variant) {
 
 function hideStatus(statusElement) {
   if (!(statusElement instanceof HTMLElement)) return;
-  statusElement.classList.add('opacity-0', 'translate-y-2', 'scale-95');
+  statusElement.classList.add('opacity-0');
   window.setTimeout(() => {
     statusElement.textContent = '';
     statusElement.classList.add('hidden');
-    statusElement.classList.remove(
-      'opacity-0',
-      'opacity-100',
-      'translate-y-0',
-      'translate-y-2',
-      'scale-100',
-      'scale-95'
-    );
+    statusElement.classList.remove('opacity-0');
   }, 350);
 }
 
@@ -76,17 +57,16 @@ function setButtonLabel(button, label) {
 function loadRecaptcha(siteKey) {
   return new Promise((resolve, reject) => {
     try {
-      if (window.grecaptcha && window.grecaptcha.execute) {
-        return resolve();
+      if (window.grecaptcha?.execute) {
+        resolve();
+        return;
       }
 
-      const src = `https://www.google.com/recaptcha/api.js?render=${encodeURIComponent(
-        siteKey
-      )}`;
+      const src = `https://www.google.com/recaptcha/api.js?render=${encodeURIComponent(siteKey)}`;
       const existing = document.querySelector(`script[src="${src}"]`);
       if (existing) {
-        existing.addEventListener('load', () => resolve());
-        existing.addEventListener('error', reject);
+        existing.addEventListener('load', () => resolve(), { once: true });
+        existing.addEventListener('error', reject, { once: true });
         return;
       }
 
@@ -97,10 +77,104 @@ function loadRecaptcha(siteKey) {
       script.onload = () => resolve();
       script.onerror = reject;
       document.head.appendChild(script);
-    } catch (e) {
-      reject(e);
+    } catch (error) {
+      reject(error);
     }
   });
+}
+
+async function attachRecaptchaToken(form, siteKey) {
+  await loadRecaptcha(siteKey);
+
+  const token = await new Promise((resolve, reject) => {
+    try {
+      window.grecaptcha.ready(() => {
+        window.grecaptcha.execute(siteKey, { action: 'submit' }).then(resolve).catch(reject);
+      });
+    } catch (error) {
+      reject(error);
+    }
+  });
+
+  if (!token) return;
+
+  form.querySelector('input[name="g-recaptcha-response"]')?.remove();
+  const input = document.createElement('input');
+  input.type = 'hidden';
+  input.name = 'g-recaptcha-response';
+  input.value = token;
+  form.appendChild(input);
+}
+
+function fallbackIframeSubmit(form) {
+  return new Promise((resolve, reject) => {
+    const iframeName = `career-form-iframe-${Date.now()}`;
+    const iframe = document.createElement('iframe');
+    iframe.name = iframeName;
+    iframe.style.display = 'none';
+
+    const oldTarget = form.target;
+    form.target = iframeName;
+
+    let settled = false;
+    const finish = callback => {
+      if (settled) return;
+      settled = true;
+      window.clearTimeout(timeoutId);
+      form.target = oldTarget || '';
+      iframe.remove();
+      callback();
+    };
+
+    iframe.addEventListener('load', () => finish(resolve), { once: true });
+    const timeoutId = window.setTimeout(
+      () => finish(() => reject(new Error('Submission timed out. Please try again.'))),
+      15000
+    );
+
+    document.body.appendChild(iframe);
+    form.submit();
+  });
+}
+
+async function submitCareerForm(form, errorMessage) {
+  const siteKey = form.dataset.recaptchaSitekey?.trim();
+  if (siteKey) {
+    await attachRecaptchaToken(form, siteKey);
+  }
+
+  try {
+    const response = await fetch(form.action || '/', {
+      method: 'POST',
+      body: new FormData(form),
+      headers: {
+        Accept: 'application/json, text/plain, */*',
+      },
+    });
+
+    if (!response.ok) {
+      let message = errorMessage;
+      try {
+        const data = await response.json();
+        if (data?.error || data?.message) {
+          message = data.error || data.message;
+        }
+      } catch {
+        const text = await response.text().catch(() => '');
+        if (text) message = text;
+      }
+      throw new Error(message);
+    }
+
+    return;
+  } catch (fetchError) {
+    try {
+      await fallbackIframeSubmit(form);
+      return;
+    } catch (iframeError) {
+      throw iframeError instanceof Error ? iframeError : fetchError;
+    }
+  }
 }
 
 function initCareerForm() {
@@ -110,17 +184,10 @@ function initCareerForm() {
 
   form.dataset.careerBound = 'true';
 
-  let status = form.querySelector('[data-form-status]');
-  if (!status) {
-    status = document.createElement('p');
-    status.setAttribute('data-form-status', '');
-    status.className =
-      'hidden min-h-[1.5rem] text-sm leading-6 opacity-0 translate-y-2 scale-95';
-    form.appendChild(status);
-  }
-
+  const status = form.querySelector('[data-form-status]');
   const submitButton = form.querySelector('button[type="submit"]');
-  const originalButtonText = submitButton?.textContent?.trim() || 'Submit';
+  const originalButtonText =
+    submitButton?.textContent?.trim() || 'Submit Application';
   const successMessage =
     form.dataset.successMessage ||
     'Thank you — your application has been submitted.';
@@ -149,77 +216,15 @@ function initCareerForm() {
     setButtonLoading(submitButton, sendingMessage);
 
     try {
-      // If a reCAPTCHA site key is provided on the form, ensure we get a token
-      const siteKey = form.dataset.recaptchaSitekey;
-      if (siteKey) {
-        await loadRecaptcha(siteKey);
-        const token = await new Promise((resolve, reject) => {
-          try {
-            window.grecaptcha.ready(() => {
-              window.grecaptcha
-                .execute(siteKey, { action: 'submit' })
-                .then(resolve)
-                .catch(reject);
-            });
-          } catch (e) {
-            reject(e);
-          }
-        });
+      await submitCareerForm(form, errorMessage);
 
-        if (token) {
-          const existing = form.querySelector('input[name="g-recaptcha-response"]');
-          if (existing) existing.remove();
-          const input = document.createElement('input');
-          input.type = 'hidden';
-          input.name = 'g-recaptcha-response';
-          input.value = token;
-          form.appendChild(input);
-        }
-      }
-
-      // Attempt XHR/fetch submission first
-      try {
-        const response = await fetch(form.action || '/', {
-          method: 'POST',
-          body: new FormData(form),
-          headers: {
-            Accept: 'application/json',
-          },
-        });
-
-        if (!response.ok) {
-          let msg = errorMessage;
-          try {
-            const text = await response.text();
-            if (text) msg = text;
-          } catch (e) {
-            // ignore body parsing errors
-          }
-          throw new Error(msg);
-        }
-
-        form.reset();
-        setStatus(status, successMessage, 'success');
-        setButtonLabel(submitButton, originalButtonText);
-        successTimeoutId = window.setTimeout(() => {
-          hideStatus(status);
-          successTimeoutId = 0;
-        }, 5000);
-      } catch (xhrError) {
-        // Likely a CORS or network error. Fall back to an iframe-based form submit (bypasses CORS).
-        try {
-          await fallbackIframeSubmit(form);
-          form.reset();
-          setStatus(status, successMessage, 'success');
-          setButtonLabel(submitButton, originalButtonText);
-          successTimeoutId = window.setTimeout(() => {
-            hideStatus(status);
-            successTimeoutId = 0;
-          }, 5000);
-        } catch (fbErr) {
-          throw fbErr || xhrError;
-        }
-      }
+      form.reset();
+      setStatus(status, successMessage, 'success');
+      setButtonLabel(submitButton, originalButtonText);
+      successTimeoutId = window.setTimeout(() => {
+        hideStatus(status);
+        successTimeoutId = 0;
+      }, 5000);
     } catch (error) {
       const message =
         error instanceof Error && error.message ? error.message : errorMessage;
@@ -231,74 +236,12 @@ function initCareerForm() {
   });
 }
 
-/**
- * Submit the form using a hidden iframe to avoid CORS issues with fetch.
- * Resolves when the iframe fires a load event, or rejects on timeout.
- */
-function fallbackIframeSubmit(form) {
-  return new Promise((resolve, reject) => {
-    try {
-      const iframeName = 'career-form-iframe-' + Date.now();
-      const iframe = document.createElement('iframe');
-      iframe.name = iframeName;
-      iframe.style.display = 'none';
-
-      let settled = false;
-
-      const cleanup = () => {
-        if (iframe.parentNode) iframe.parentNode.removeChild(iframe);
-        form.removeAttribute('target');
-      };
-
-      const onLoad = () => {
-        if (settled) return;
-        settled = true;
-        cleanup();
-        resolve();
-      };
-
-      iframe.addEventListener('load', onLoad);
-      document.body.appendChild(iframe);
-
-      // Save old target and set to iframe
-      const oldTarget = form.target;
-      form.target = iframeName;
-
-      // Submit the form normally (will post into the iframe)
-      form.submit();
-
-      // Timeout if nothing happens
-      const timeoutId = window.setTimeout(() => {
-        if (settled) return;
-        settled = true;
-        cleanup();
-        form.target = oldTarget || '';
-        reject(new Error('Submission timed out'));
-      }, 15000);
-
-      // Ensure we restore target on resolve/reject
-      const originalResolve = resolve;
-      const originalReject = reject;
-      resolve = (...args) => {
-        clearTimeout(timeoutId);
-        form.target = oldTarget || '';
-        originalResolve(...args);
-      };
-      reject = (...args) => {
-        clearTimeout(timeoutId);
-        form.target = oldTarget || '';
-        originalReject(...args);
-      };
-    } catch (e) {
-      reject(e);
-    }
-  });
-}
-
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', initCareerForm);
 } else {
   initCareerForm();
 }
+
+document.addEventListener('astro:page-load', initCareerForm);
 
 export {};

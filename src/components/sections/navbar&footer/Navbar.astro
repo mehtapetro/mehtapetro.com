@@ -16,15 +16,16 @@ interface Props {
 {/* Main header component */}
 <header
   class:list={[
-    'inset-x-0 z-50 flex w-full flex-wrap text-sm md:flex-nowrap md:justify-start isolate transform-gpu [backface-visibility:hidden]',
+    'inset-x-0 z-50 w-full text-sm',
     overlay ? 'fixed top-0 pt-3 sm:pt-4' : 'sticky top-3 mb-5 md:top-4 md:mb-8',
   ]}
+  data-lenis-prevent
 >
   <div class="mx-auto w-full max-w-[85rem] px-4 sm:px-6 lg:px-8">
     {/* Navigation container */}
     <nav
       class:list={[
-        'relative w-full rounded-2xl px-4 py-3 md:flex md:items-center md:justify-between md:px-5 md:py-2 lg:px-6 transform-gpu [backface-visibility:hidden]',
+        'relative w-full rounded-2xl px-4 py-3 md:flex md:items-center md:justify-between md:px-5 md:py-2 lg:px-6',
         overlay
           ? 'border border-white/30 bg-white/90 shadow-[0_24px_70px_-44px_rgba(8,17,38,0.88)] backdrop-blur-md'
           : 'border border-[#C0D6FF]/80 bg-white/92 shadow-[0_18px_45px_-34px_rgba(0,57,230,0.3)] backdrop-blur-sm',
@@ -40,17 +41,19 @@ interface Props {
         >
           <BrandLogo class="h-10 w-auto object-contain md:h-11" />
         </a>
-        {/* Collapse toggle for smaller screens */}
+        {/* Mobile menu toggle */}
         <div class="ml-auto md:hidden">
           <button
             type="button"
-            class="hs-collapse-toggle flex h-10 w-10 items-center justify-center rounded-xl border border-[#D4E4FF] bg-white/80 text-[#0A1F4D] transition-colors duration-300 hover:border-[#0039E6] hover:text-[#0039E6] disabled:pointer-events-none disabled:opacity-50"
-            data-hs-collapse="#navbar-collapse-with-animation"
-            aria-controls="navbar-collapse-with-animation"
+            id="mobile-nav-toggle"
+            class="group flex h-10 w-10 items-center justify-center rounded-xl border border-[#D4E4FF] bg-white/80 text-[#0A1F4D] transition-colors duration-300 hover:border-[#0039E6] hover:text-[#0039E6] disabled:pointer-events-none disabled:opacity-50"
+            aria-controls="mobile-nav-menu"
+            aria-expanded="false"
             aria-label="Toggle navigation"
           >
             <svg
-              class="hs-collapse-open:hidden h-[1.25rem] w-[1.25rem] shrink-0"
+              data-mobile-nav-icon="menu"
+              class="h-[1.25rem] w-[1.25rem] shrink-0 group-aria-expanded:hidden"
               width="24"
               height="24"
               viewBox="0 0 24 24"
@@ -65,7 +68,8 @@ interface Props {
               <line x1="3" x2="21" y1="18" y2="18"></line>
             </svg>
             <svg
-              class="hs-collapse-open:block hidden h-[1.25rem] w-[1.25rem] shrink-0"
+              data-mobile-nav-icon="close"
+              class="hidden h-[1.25rem] w-[1.25rem] shrink-0 group-aria-expanded:block"
               width="24"
               height="24"
               viewBox="0 0 24 24"
@@ -81,23 +85,67 @@ interface Props {
           </button>
         </div>
       </div>
-      {/* Contains navigation links */}
-      <div
-        id="navbar-collapse-with-animation"
-        class="hs-collapse hidden grow basis-full overflow-hidden transition-all duration-300 md:block"
-      >
-        {/* Navigation links container */}
-        <div
-          class="mt-4 flex flex-col items-center gap-2 border-t border-[#E3EBFF] pt-4 text-center md:mt-0 md:flex-row md:items-center md:justify-end md:gap-2 md:border-t-0 md:ps-5 md:pt-0 lg:gap-3"
-        >
-          {/* Navigation links */}
-          {
-            strings.navBarLinks.map(link => (
-              <NavLink url={link.url} name={link.name} />
-            ))
-          }
-        </div>
+
+      {/* Desktop navigation links */}
+      <div class="hidden md:flex md:items-center md:justify-end md:gap-2 lg:gap-3">
+        {
+          strings.navBarLinks.map(link => (
+            <NavLink url={link.url} name={link.name} />
+          ))
+        }
       </div>
     </nav>
+  </div>
+
+  {/* Full-screen mobile navigation overlay */}
+  <div
+    id="mobile-nav-menu"
+    class="invisible fixed inset-0 z-[100] flex flex-col bg-[#E8F0FF]/98 opacity-0 backdrop-blur-xl transition-opacity duration-300 ease-out pointer-events-none md:hidden"
+    aria-hidden="true"
+    inert
+    data-lenis-prevent
+  >
+    <div class="mx-auto flex w-full max-w-[85rem] items-center justify-between px-4 pt-3 sm:px-6 sm:pt-4">
+      <a
+        class="flex flex-none items-center gap-3 rounded-lg text-xl font-bold outline-hidden focus-visible:ring-3"
+        href={homeUrl}
+        aria-label="Mehta Petro Refineries Limited"
+      >
+        <BrandLogo class="h-10 w-auto object-contain" />
+      </a>
+      <button
+        type="button"
+        id="mobile-nav-close"
+        class="flex h-10 w-10 items-center justify-center rounded-xl border border-[#D4E4FF] bg-white/80 text-[#0A1F4D] transition-colors duration-300 hover:border-[#0039E6] hover:text-[#0039E6]"
+        aria-label="Close navigation"
+      >
+        <svg
+          class="h-[1.25rem] w-[1.25rem] shrink-0"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M18 6 6 18"></path>
+          <path d="m6 6 12 12"></path>
+        </svg>
+      </button>
+    </div>
+
+    <div class="flex flex-1 flex-col items-center justify-center gap-1 px-6 pb-16">
+      {
+        strings.navBarLinks.map(link => (
+          <NavLink
+            url={link.url}
+            name={link.name}
+            class="w-full max-w-xs justify-center py-4 text-xl font-semibold text-[#0A1F4D] hover:bg-white/60 hover:text-[#0039E6] md:text-sm"
+          />
+        ))
+      }
+    </div>
   </div>
 </header>

@@ -1,0 +1,161 @@
+---
+import PhoneInput from '@components/ui/forms/input/PhoneInput.astro';
+
+const web3FormsAccessKey = '0e6f5e46-f620-429a-ab06-a8e61f81c419';
+
+const {
+  modalId,
+  title = 'Contact our team',
+  subtitle,
+  subject,
+  fromName,
+  source,
+  productName,
+  categoryName,
+  phoneInputId,
+} = Astro.props;
+
+interface Props {
+  modalId: string;
+  title?: string;
+  subtitle: string;
+  subject: string;
+  fromName: string;
+  source: string;
+  productName?: string;
+  categoryName?: string;
+  phoneInputId?: string;
+}
+
+const resolvedPhoneInputId = phoneInputId || `${modalId}-phone`;
+const inquiryOptions = [
+  { value: 'product', label: 'Product' },
+  { value: 'career', label: 'Career' },
+  { value: 'general', label: 'General' },
+  { value: 'sales', label: 'Sales' },
+  { value: 'support', label: 'Support' },
+  { value: 'other', label: 'Other' },
+];
+---
+
+<div
+  id={modalId}
+  data-product-inquiry-modal
+  class="fixed inset-0 z-120 hidden items-center justify-center p-4"
+  aria-hidden="true"
+>
+  <button
+    type="button"
+    data-product-inquiry-close
+    class="absolute inset-0 bg-[#0A1F4D]/55 backdrop-blur-[1px]"
+    aria-label="Close inquiry form"></button>
+  <div
+    class="relative z-10 max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-2xl border border-[#D4E4FF] bg-white p-6 shadow-[0_30px_80px_-40px_rgba(10,31,77,0.45)] sm:p-8"
+  >
+    <div class="flex items-start justify-between gap-4">
+      <div>
+        <h2 class="text-2xl font-bold text-[#0A1F4D]">{title}</h2>
+        <p class="mt-2 text-sm leading-6 text-[#4A5F8C]">{subtitle}</p>
+      </div>
+      <button
+        type="button"
+        data-product-inquiry-close
+        class="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[#D4E4FF] text-[#4A5F8C] transition duration-300 hover:border-[#B8CEFF] hover:text-[#0039E6]"
+        aria-label="Close inquiry form"
+      >
+        ✕
+      </button>
+    </div>
+
+    <form
+      class="mt-6 space-y-4"
+      data-contact-form
+      action="https://api.web3forms.com/submit"
+      method="post"
+      data-success-message="Thank you for contacting us. Our team shall get in touch with you shortly."
+      data-error-message="Sorry, we could not send your message right now. Please try again."
+      data-sending-message="Sending your message…"
+    >
+      <input type="hidden" name="access_key" value={web3FormsAccessKey} />
+      <input type="hidden" name="subject" value={subject} />
+      <input type="hidden" name="from_name" value={fromName} />
+      <input type="hidden" name="source" value={source} />
+      {productName && <input type="hidden" name="product_name" value={productName} />}
+      {categoryName && <input type="hidden" name="category_name" value={categoryName} />}
+      <input
+        type="checkbox"
+        name="botcheck"
+        class="hidden"
+        style="display: none;"
+        tabindex="-1"
+        autocomplete="off"
+      />
+
+      <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+        <input
+          name="firstName"
+          type="text"
+          required
+          class="block w-full rounded-lg border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm text-neutral-700 placeholder:text-neutral-500 focus:border-neutral-200 focus:ring-3 focus:ring-neutral-400 focus:outline-hidden"
+          placeholder="First name"
+        />
+        <input
+          name="lastName"
+          type="text"
+          class="block w-full rounded-lg border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm text-neutral-700 placeholder:text-neutral-500 focus:border-neutral-200 focus:ring-3 focus:ring-neutral-400 focus:outline-hidden"
+          placeholder="Last name"
+        />
+      </div>
+
+      <input
+        name="email"
+        type="email"
+        required
+        class="block w-full rounded-lg border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm text-neutral-700 placeholder:text-neutral-500 focus:border-neutral-200 focus:ring-3 focus:ring-neutral-400 focus:outline-hidden"
+        placeholder="Email"
+      />
+
+      <PhoneInput
+        id={resolvedPhoneInputId}
+        countryId={`${resolvedPhoneInputId}-country-code`}
+        label="Phone number"
+        countryLabel="Country code"
+        defaultCountryCode="IN"
+      />
+
+      <select
+        name="inquiryType"
+        required
+        class="block w-full rounded-lg border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm text-neutral-700 focus:border-neutral-200 focus:ring-3 focus:ring-neutral-400 focus:outline-hidden"
+      >
+        <option value="" disabled selected>Inquiry type</option>
+        {
+          inquiryOptions.map(option => (
+            <option value={option.value}>{option.label}</option>
+          ))
+        }
+      </select>
+
+      <textarea
+        name="message"
+        rows="4"
+        required
+        class="block w-full rounded-lg border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm text-neutral-700 placeholder:text-neutral-500 focus:border-neutral-200 focus:ring-3 focus:ring-neutral-400 focus:outline-hidden"
+        placeholder="Message"></textarea>
+
+      <button
+        type="submit"
+        class="inline-flex items-center justify-center rounded-xl bg-[#0039E6] px-5 py-3 text-sm font-bold text-white shadow-[0_20px_45px_-25px_rgba(0,57,230,0.95)] transition duration-300 hover:bg-[#0033CC] active:bg-[#0028A3]"
+      >
+        Send message
+      </button>
+
+      <p
+        class="hidden min-h-[1.5rem] text-sm leading-6"
+        data-form-status
+        aria-live="polite"
+      >
+      </p>
+    </form>
+  </div>
+</div>

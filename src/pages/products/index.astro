@@ -309,60 +309,68 @@ const ogTitle = 'Products | Mehta Petro';
   </section>
 
   <script>
-    const gate = document.querySelector('#products-contact-gate');
-    const gateStorageKey = 'mehta-petro-product-contact-completed';
-
-    const openGate = () => {
-      if (!(gate instanceof HTMLElement)) return;
-      gate.classList.remove('hidden');
-      gate.classList.add('flex');
-      gate.setAttribute('aria-hidden', 'false');
-      document.body.style.overflow = 'hidden';
-    };
-
-    const closeGate = () => {
-      if (!(gate instanceof HTMLElement)) return;
-      gate.classList.add('hidden');
-      gate.classList.remove('flex');
-      gate.setAttribute('aria-hidden', 'true');
-      document.body.style.overflow = '';
-    };
-
-    let hasCompletedGate = false;
-    try {
-      hasCompletedGate = window.localStorage.getItem(gateStorageKey) === 'true';
-    } catch {
-      hasCompletedGate = false;
-    }
-
-    if (!hasCompletedGate) {
-      window.setTimeout(openGate, 120);
-    }
-
-    let gateCloseTimeoutId = 0;
-
-    gate?.addEventListener('contact-form:success', () => {
-      if (gateCloseTimeoutId) {
-        window.clearTimeout(gateCloseTimeoutId);
+    function initProductsContactGate() {
+      const gate = document.querySelector('#products-contact-gate');
+      if (!(gate instanceof HTMLElement) || gate.dataset.gateBound === 'true') {
+        return;
       }
 
+      gate.dataset.gateBound = 'true';
+      const gateStorageKey = 'mehta-petro-product-contact-completed';
+
+      const openGate = () => {
+        gate.classList.remove('hidden');
+        gate.classList.add('flex');
+        gate.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+      };
+
+      const closeGate = () => {
+        gate.classList.add('hidden');
+        gate.classList.remove('flex');
+        gate.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      };
+
+      let hasCompletedGate = false;
       try {
-        window.localStorage.setItem(gateStorageKey, 'true');
+        hasCompletedGate = window.localStorage.getItem(gateStorageKey) === 'true';
       } catch {
-        // Ignore storage failures and keep the gate behavior intact.
+        hasCompletedGate = false;
       }
 
-      gateCloseTimeoutId = window.setTimeout(() => {
-        closeGate();
-        gateCloseTimeoutId = 0;
-      }, 3000);
-    });
-
-    window.addEventListener('keydown', event => {
-      if (event.key === 'Escape') {
-        event.preventDefault();
-        event.stopPropagation();
+      if (!hasCompletedGate) {
+        window.setTimeout(openGate, 120);
       }
-    });
+
+      let gateCloseTimeoutId = 0;
+
+      gate.addEventListener('contact-form:success', () => {
+        if (gateCloseTimeoutId) {
+          window.clearTimeout(gateCloseTimeoutId);
+        }
+
+        try {
+          window.localStorage.setItem(gateStorageKey, 'true');
+        } catch {
+          // Ignore storage failures and keep the gate behavior intact.
+        }
+
+        gateCloseTimeoutId = window.setTimeout(() => {
+          closeGate();
+          gateCloseTimeoutId = 0;
+        }, 3000);
+      });
+
+      window.addEventListener('keydown', event => {
+        if (event.key === 'Escape' && !gate.classList.contains('hidden')) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+      });
+    }
+
+    initProductsContactGate();
+    document.addEventListener('astro:page-load', initProductsContactGate);
   </script>
 </MainLayout>

@@ -1,11 +1,12 @@
 ---
 // Destructure the properties from Astro.props
-const { url, name } = Astro.props;
+const { url, name, class: className } = Astro.props;
 
 // Define TypeScript interface for the properties
 interface Props {
   url: string;
   name: string;
+  class?: string;
 }
 ---
 
@@ -21,7 +22,10 @@ If URL is '/' (home page), assign ID as 'home'
   href={url}
   data-nav-url={url}
   data-astro-prefetch
-  class="inline-flex rounded-xl px-3 py-2 text-sm font-semibold text-[#4A5F8C] outline-hidden transition-colors duration-300 hover:bg-[#F5F9FF] hover:text-[#0039E6] focus-visible:outline-none md:px-4 md:py-2.5"
+  class:list={[
+    'inline-flex rounded-xl px-3 py-2 text-sm font-semibold text-[#4A5F8C] outline-hidden transition-colors duration-300 hover:bg-[#F5F9FF] hover:text-[#0039E6] focus-visible:outline-none md:px-4 md:py-2.5',
+    className,
+  ]}
 >
   {name}
 </a>

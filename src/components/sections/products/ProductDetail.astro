@@ -148,6 +148,7 @@ const inquiryOptions = [
               <button
                 type="button"
                 data-product-inquiry-open
+                aria-controls="product-inquiry-modal"
                 class="group inline-flex items-center justify-center gap-x-2 rounded-xl border border-transparent bg-[#0039E6] px-5 py-3 text-sm font-bold text-neutral-50 shadow-[0_20px_45px_-25px_rgba(0,57,230,0.95)] ring-[#8FA7FF] outline-hidden transition duration-300 hover:bg-[#0033CC] focus-visible:ring-3 active:bg-[#0028A3] disabled:pointer-events-none disabled:opacity-50 2xl:text-base"
               >
                 {copy.openInquiry}
@@ -286,6 +287,7 @@ const inquiryOptions = [
 
 <div
   id="product-inquiry-modal"
+  data-product-inquiry-modal
   class="fixed inset-0 z-120 hidden items-center justify-center p-4"
   aria-hidden="true"
 >
@@ -629,39 +631,4 @@ const inquiryOptions = [
     });
   });
 
-  const inquiryModal = document.getElementById('product-inquiry-modal');
-  const inquiryOpenButtons = document.querySelectorAll(
-    '[data-product-inquiry-open]'
-  );
-  const inquiryCloseButtons = document.querySelectorAll(
-    '[data-product-inquiry-close]'
-  );
-
-  const closeInquiryModal = () => {
-    if (!(inquiryModal instanceof HTMLElement)) return;
-    inquiryModal.classList.add('hidden');
-    inquiryModal.classList.remove('flex');
-    inquiryModal.setAttribute('aria-hidden', 'true');
-    document.body.classList.remove('overflow-hidden');
-  };
-
-  const openInquiryModal = () => {
-    if (!(inquiryModal instanceof HTMLElement)) return;
-    inquiryModal.classList.remove('hidden');
-    inquiryModal.classList.add('flex');
-    inquiryModal.setAttribute('aria-hidden', 'false');
-    document.body.classList.add('overflow-hidden');
-  };
-
-  inquiryOpenButtons.forEach(button => {
-    button.addEventListener('click', openInquiryModal);
-  });
-
-  inquiryCloseButtons.forEach(button => {
-    button.addEventListener('click', closeInquiryModal);
-  });
-
-  document.addEventListener('keydown', event => {
-    if (event.key === 'Escape') closeInquiryModal();
-  });
 </script>

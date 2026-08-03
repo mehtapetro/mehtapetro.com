@@ -1,5 +1,4 @@
 ---
-// Import necessary modules and utilities
 import { Image } from 'astro:assets';
 import { formatDate } from '@utils/utils';
 import type { CollectionEntry } from 'astro:content';
@@ -10,32 +9,33 @@ interface Props {
   blogEntry: CollectionEntry<'blog'>;
   recentBlogLocale?: string;
 }
+
+const href =
+  recentBlogLocale && recentBlogLocale !== 'en'
+    ? `/${recentBlogLocale}/news/${blogEntry.id.replace(/^fr\//, '')}/`
+    : `/news/${blogEntry.id.replace(/^en\//, '')}/`;
 ---
 
 <a
-  class="group block rounded-xl ring-zinc-500 outline-hidden transition duration-300 focus-visible:ring-3 dark:ring-zinc-200 dark:focus:outline-hidden"
-  href={recentBlogLocale && recentBlogLocale !== 'en'
-    ? `/${recentBlogLocale}/news/${blogEntry.id.replace(/^fr\//, '')}/`
-    : `/news/${blogEntry.id.replace(/^en\//, '')}/`}
+  class="group flex h-full flex-col overflow-hidden rounded-2xl border border-[#D4E4FF] bg-white shadow-lg transition duration-300 active:scale-[0.995] hover:border-[#0039E6]"
+  href={href}
   data-astro-prefetch
 >
-  <div>
-    <Image
-      class="aspect-video rounded-xl"
-      src={blogEntry.data.cardImage}
-      alt={blogEntry.data.cardImageAlt}
-      draggable={'false'}
-      format={'avif'}
-    />
-    {/* The title of the blog post */}
+  <Image
+    class="aspect-[16/10] w-full object-cover transition duration-500 group-hover:scale-[1.02]"
+    src={blogEntry.data.cardImage}
+    alt={blogEntry.data.cardImageAlt}
+    draggable={false}
+    format="avif"
+  />
+  <div class="flex flex-1 flex-col gap-2 p-4 sm:p-5">
     <h3
-      class="mt-2 text-lg font-medium text-balance text-neutral-800 transition duration-300 group-hover:text-[#1E3AFF]"
+      class="text-base font-bold text-balance text-[#0A1F4D] transition-colors group-hover:text-[#0039E6] sm:text-lg"
     >
       {blogEntry.data.title}
     </h3>
-    {/* The formatted publication date of the blog post */}
-    <p class="mt-2 text-sm text-neutral-600 dark:text-neutral-400">
+    <p class="mt-auto text-sm text-[#4A5F8C]">
       {formatDate(blogEntry.data.pubDate)}
     </p>
-  </div></a
->
+  </div>
+</a>

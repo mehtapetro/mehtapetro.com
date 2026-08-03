@@ -106,14 +106,18 @@ function initContactForms() {
       setButtonLoading(submitButton, sendingMessage);
 
       try {
+        const formData = new FormData(form);
+        const payload = Object.fromEntries(formData.entries());
+
         const response = await fetch(
           form.action || 'https://api.web3forms.com/submit',
           {
             method: 'POST',
-            body: new FormData(form),
             headers: {
+              'Content-Type': 'application/json',
               Accept: 'application/json',
             },
+            body: JSON.stringify(payload),
           }
         );
 
@@ -168,3 +172,5 @@ if (document.readyState === 'loading') {
 } else {
   initContactForms();
 }
+
+document.addEventListener('astro:page-load', initContactForms);

@@ -1,13 +1,9 @@
 ---
-// Import necessary components, modules and types
 import MainLayout from '@/layouts/MainLayout.astro';
 import CardBlog from '@components/ui/cards/CardBlog.astro';
-import CardBlogRecent from '@components/ui/cards/CardBlogRecent.astro';
 import { getCollection } from 'astro:content';
 import type { CollectionEntry } from 'astro:content';
 import { SITE } from '@data/constants';
-
-// Get all blog posts in English and sort them based on publish date
 
 const englishBlogEntries = await getCollection('blog', ({ id }) => {
   return id.startsWith('en/');
@@ -18,20 +14,13 @@ const blogPosts: CollectionEntry<'blog'>[] = englishBlogEntries.sort(
     b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
 
-// Separate the most recent post from the rest of the list.
-// If there is only one article, show it in the "All News" section instead of showing an empty state.
-const mostRecentPost: CollectionEntry<'blog'> | undefined = blogPosts[0];
-const otherPosts: CollectionEntry<'blog'>[] =
-  blogPosts.length > 1 ? blogPosts.slice(1) : blogPosts;
-
-// Define variables for page content
-const title: string = 'Newsroom';
-const subTitle: string =
+const title = 'Newsroom';
+const subTitle =
   'Explore the latest news, updates, and insights from Mehta Petro to keep up with our company developments and industry presence.';
 
-const pageTitle: string = `News | ${SITE.title}`;
+const pageTitle = `News | ${SITE.title}`;
 const metaDescription =
-  "Stay up-to-date with the latest trends and developments in the construction industry with insights from Mehta Petro's team of industry experts.";
+  'Stay up to date with the latest news, product updates, and company developments from Mehta Petro-Refineries Limited.';
 const ogTitle = 'Company News | Mehta Petro';
 ---
 
@@ -45,152 +34,183 @@ const ogTitle = 'Company News | Mehta Petro';
     '@id': 'https://mehtapetro.com/news',
     url: 'https://mehtapetro.com/news',
     name: 'News | Mehta Petro',
-    description:
-      "Stay up-to-date with the latest trends and developments in the construction industry with insights from Mehta Petro's team of industry experts.",
+    description: metaDescription,
     isPartOf: {
       '@type': 'WebSite',
       url: 'https://mehtapetro.com',
       name: 'Mehta Petro',
-      description:
-        'Mehta Petro offers top-tier hardware tools and expert construction services to meet all your project needs.',
     },
     inLanguage: 'en-US',
   }}
 >
-  <section
-    class="mx-auto max-w-[85rem] space-y-8 px-4 pt-16 sm:px-6 lg:px-8 2xl:max-w-full"
-  >
-    {/* Page header */}
-    <div class="mx-auto max-w-3xl text-left sm:text-center">
+  <section class="mx-auto max-w-[85rem] px-4 py-8 sm:px-6 sm:py-10 lg:px-8 lg:py-14">
+    <div class="mx-auto max-w-3xl text-center">
+      <span
+        class="inline-flex rounded-full border border-[#C0D6FF] bg-white px-3 py-1 text-[0.7rem] font-semibold tracking-[0.16em] text-[#0039E6] uppercase sm:px-4 sm:text-xs"
+      >
+        Company news
+      </span>
       <h1
-        class="block text-4xl font-bold tracking-tight text-balance text-neutral-800 md:text-5xl lg:text-6xl dark:text-neutral-200"
+        class="mt-4 text-3xl font-extrabold tracking-tight text-balance text-[#0A1F4D] sm:mt-5 sm:text-4xl md:text-5xl"
       >
         {title}
       </h1>
-
       <p
-        class="mt-4 text-lg text-pretty text-neutral-600 dark:text-neutral-400"
+        class="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-[#4A5F8C] sm:mt-4 sm:text-base md:text-lg"
       >
         {subTitle}
       </p>
     </div>
 
-    {/* Featured + Sidebar */}
     <div
-      class="mx-auto max-w-[85rem] px-4 sm:px-6 lg:px-8 lg:py-8 2xl:max-w-full"
+      class="mt-8 grid grid-cols-1 gap-6 sm:mt-10 lg:grid-cols-12 lg:gap-8 lg:items-start"
     >
-      <div class="grid items-start gap-8 lg:grid-cols-3">
-        <div class="lg:col-span-2">
-          {
-            mostRecentPost ? (
-              <CardBlogRecent blogEntry={mostRecentPost} />
-            ) : (
-              <p class="text-neutral-600">No featured article available.</p>
-            )
-          }
-        </div>
-
-        <aside class="space-y-6 lg:col-span-1">
-          <div
-            class="rounded-lg border border-[#E6EEFF] bg-white p-4 shadow-sm"
-          >
-            <h3 class="mb-3 font-semibold">Follow us</h3>
-            <div id="fb-root"></div>
-            <script
-              async
-              defer
-              crossorigin="anonymous"
-              src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v24.0"
-            ></script>
-            <div
-              class="fb-page"
-              data-href="https://www.facebook.com/mehtapetro"
-              data-tabs="timeline"
-              data-width="340"
-              data-height="400"
-              data-small-header="false"
-              data-adapt-container-width="true"
-              data-hide-cover="false"
-              data-show-facepile="false"
-              data-hide-cta="false"
-              data-lazy="true"
-            >
-              <blockquote
-                cite="https://www.facebook.com/mehtapetro"
-                class="fb-xfbml-parse-ignore"
-              >
-                <a href="https://www.facebook.com/mehtapetro"
-                  >Mehta Petro-Refineries Limited</a>
-              </blockquote>
+      <div class="lg:col-span-7">
+        {
+          blogPosts.length === 0 ? (
+            <div class="rounded-2xl border border-[#D4E4FF] bg-white p-6 text-center shadow-lg sm:p-8">
+              <p class="text-sm text-[#4A5F8C] sm:text-base">
+                No articles are available yet.
+              </p>
             </div>
+          ) : (
+            <div class="flex flex-col gap-4">
+              {blogPosts.map(blogEntry => (
+                <CardBlog blogEntry={blogEntry} />
+              ))}
+            </div>
+          )
+        }
+      </div>
+
+      <aside class="lg:col-span-5 lg:sticky lg:top-24">
+        <div
+          class="overflow-hidden rounded-2xl border border-[#D4E4FF] bg-white shadow-lg"
+        >
+          <div class="border-b border-[#E3EBFF] px-4 py-4 sm:px-6 sm:py-5">
+            <p
+              class="text-xs font-semibold tracking-[0.16em] text-[#0039E6] uppercase sm:text-sm"
+            >
+              Stay connected
+            </p>
+            <h2 class="mt-1.5 text-lg font-bold text-[#0A1F4D] sm:mt-2 sm:text-xl">
+              Follow Mehta Petro
+            </h2>
           </div>
 
-          <div
-            class="rounded-lg border border-[#E6EEFF] bg-white p-4 shadow-sm"
-          >
-            <h3 class="mb-3 font-semibold">Follow us on X</h3>
-            <div class="rounded-xl border border-[#E6EEFF] bg-[#F7FAFF] p-4">
-              <p class="mb-3 text-sm text-neutral-600">
-                Stay updated with Mehta Petro on X for company news, product
-                updates, and industry highlights.
-              </p>
+          <div class="flex flex-col gap-4 px-4 py-4 sm:gap-5 sm:px-6 sm:py-5">
+            <div class="flex flex-col gap-3 md:hidden">
+              <a
+                href="https://www.facebook.com/mehtapetro"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="flex min-h-12 items-center gap-3 rounded-xl border border-[#D4E4FF] bg-[#F7FAFF] px-4 py-3 transition active:bg-white"
+              >
+                <span
+                  class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#1877F2] text-sm font-bold text-white"
+                  >f</span
+                >
+                <span class="min-w-0">
+                  <span class="block text-sm font-semibold text-[#0A1F4D]"
+                    >Facebook</span
+                  >
+                  <span class="block truncate text-xs text-[#4A5F8C]"
+                    >Mehta Petro-Refineries</span
+                  >
+                </span>
+              </a>
               <a
                 href="https://x.com/mehtapetro"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="inline-flex items-center gap-2 rounded-full bg-[#000000] px-4 py-2 text-sm font-medium text-white transition hover:bg-[#1D9BF0]"
+                class="flex min-h-12 items-center gap-3 rounded-xl border border-[#D4E4FF] bg-[#F7FAFF] px-4 py-3 transition active:bg-white"
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  class="h-4 w-4"
-                  aria-hidden="true"
+                <span
+                  class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#0A1F4D] text-white"
                 >
-                  <path d="M18.244 2H21l-6.6 7.55L22 22h-5.8l-4.5-5.9L6.6 22H4l7.1-8.1L2 2h5.9l4.1 5.4L18.244 2Zm-1.02 18h1.13L7.02 4H5.86l11.36 16Z" />
-                </svg>
-                Follow @mehtapetro
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    class="h-4 w-4"
+                    aria-hidden="true"
+                  >
+                    <path d="M18.244 2H21l-6.6 7.55L22 22h-5.8l-4.5-5.9L6.6 22H4l7.1-8.1L2 2h5.9l4.1 5.4L18.244 2Zm-1.02 18h1.13L7.02 4H5.86l11.36 16Z" />
+                  </svg>
+                </span>
+                <span class="min-w-0">
+                  <span class="block text-sm font-semibold text-[#0A1F4D]"
+                    >X (Twitter)</span
+                  >
+                  <span class="block text-xs text-[#4A5F8C]">@mehtapetro</span>
+                </span>
               </a>
             </div>
-          </div>
 
-          <div
-            class="rounded-lg border border-[#E6EEFF] bg-white p-4 shadow-sm"
-          >
-            <h3 class="mb-3 font-semibold">Recent posts</h3>
-            <div class="space-y-2">
-              {
-                blogPosts.slice(0, 6).map(p => (
-                  <a
-                    href={`/news/${p.id.replace(/^en\//, '')}`}
-                    class="block text-sm text-[#0039E6]"
+            <div class="hidden md:block">
+              <h3 class="text-sm font-bold text-[#0A1F4D]">Facebook</h3>
+              <div
+                class="mt-3 flex min-h-[580px] w-full justify-center overflow-hidden rounded-xl border border-[#D4E4FF] bg-[#F7FAFF]"
+                data-facebook-embed
+              >
+                <div
+                  class="fb-page w-full max-w-[500px]"
+                  data-href="https://www.facebook.com/mehtapetro"
+                  data-tabs="timeline"
+                  data-width="500"
+                  data-height="580"
+                  data-small-header="false"
+                  data-adapt-container-width="true"
+                  data-hide-cover="false"
+                  data-show-facepile="false"
+                  data-hide-cta="false"
+                >
+                  <blockquote
+                    cite="https://www.facebook.com/mehtapetro"
+                    class="fb-xfbml-parse-ignore"
                   >
-                    {p.data.title}
-                  </a>
-                ))
-              }
+                    <a href="https://www.facebook.com/mehtapetro"
+                      >Mehta Petro-Refineries Limited</a>
+                  </blockquote>
+                </div>
+              </div>
+            </div>
+
+            <div class="hidden border-t border-[#E3EBFF] pt-4 md:block md:pt-5">
+              <h3 class="text-sm font-bold text-[#0A1F4D]">X (Twitter)</h3>
+              <div
+                class="mt-3 rounded-xl border border-[#D4E4FF] bg-[#F7FAFF] p-4"
+              >
+                <p class="text-sm leading-6 text-[#4A5F8C]">
+                  Stay updated with company news, product updates, and industry
+                  highlights.
+                </p>
+                <a
+                  href="https://x.com/mehtapetro"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="mt-4 inline-flex min-h-11 items-center gap-2 rounded-xl bg-[#0A1F4D] px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-[#0039E6]"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    class="h-4 w-4"
+                    aria-hidden="true"
+                  >
+                    <path d="M18.244 2H21l-6.6 7.55L22 22h-5.8l-4.5-5.9L6.6 22H4l7.1-8.1L2 2h5.9l4.1 5.4L18.244 2Zm-1.02 18h1.13L7.02 4H5.86l11.36 16Z" />
+                  </svg>
+                  Follow @mehtapetro
+                </a>
+              </div>
             </div>
           </div>
-        </aside>
-      </div>
-    </div>
-
-    {/* All articles grid */}
-    <div
-      class="mx-auto max-w-[85rem] px-4 sm:px-6 lg:px-8 lg:py-8 2xl:max-w-full"
-    >
-      <h2 class="mb-6 text-2xl font-bold">All News</h2>
-      {
-        otherPosts.length === 0 ? (
-          <p class="text-neutral-600">No other articles available.</p>
-        ) : (
-          <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {otherPosts.map(blogEntry => (
-              <CardBlog blogEntry={blogEntry} />
-            ))}
-          </div>
-        )
-      }
+        </div>
+      </aside>
     </div>
   </section>
+
+  <script>
+    import '@scripts/facebookEmbed.js';
+  </script>
 </MainLayout>

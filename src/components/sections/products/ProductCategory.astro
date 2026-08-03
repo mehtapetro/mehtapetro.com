@@ -107,7 +107,8 @@ const inquiryOptions =
       <div class="mt-7 inline-flex">
         <button
           type="button"
-          data-category-inquiry-open
+          data-product-inquiry-open
+          aria-controls="category-inquiry-modal"
           class="group inline-flex items-center justify-center gap-x-2 rounded-xl border border-transparent bg-[#0039E6] px-5 py-3 text-sm font-bold text-neutral-50 shadow-[0_20px_45px_-25px_rgba(0,57,230,0.95)] ring-[#8FA7FF] outline-hidden transition duration-300 hover:bg-[#0033CC] focus-visible:ring-3 active:bg-[#0028A3] disabled:pointer-events-none disabled:opacity-50 2xl:text-base"
         >
           {copy.cta}
@@ -161,12 +162,13 @@ const inquiryOptions =
 
 <div
   id="category-inquiry-modal"
+  data-product-inquiry-modal
   class="fixed inset-0 z-120 hidden items-center justify-center p-4"
   aria-hidden="true"
 >
   <button
     type="button"
-    data-category-inquiry-close
+    data-product-inquiry-close
     class="absolute inset-0 bg-[#0A1F4D]/55 backdrop-blur-[1px]"
     aria-label={copy.close}></button>
   <div
@@ -181,7 +183,7 @@ const inquiryOptions =
       </div>
       <button
         type="button"
-        data-category-inquiry-close
+        data-product-inquiry-close
         class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-[#D4E4FF] text-[#4A5F8C] transition duration-300 hover:border-[#B8CEFF] hover:text-[#0039E6]"
         aria-label={copy.close}
       >
@@ -293,41 +295,3 @@ const inquiryOptions =
     </form>
   </div>
 </div>
-
-<script>
-  const categoryModal = document.getElementById('category-inquiry-modal');
-  const categoryOpenButtons = document.querySelectorAll(
-    '[data-category-inquiry-open]'
-  );
-  const categoryCloseButtons = document.querySelectorAll(
-    '[data-category-inquiry-close]'
-  );
-
-  const closeCategoryModal = () => {
-    if (!(categoryModal instanceof HTMLElement)) return;
-    categoryModal.classList.add('hidden');
-    categoryModal.classList.remove('flex');
-    categoryModal.setAttribute('aria-hidden', 'true');
-    document.body.classList.remove('overflow-hidden');
-  };
-
-  const openCategoryModal = () => {
-    if (!(categoryModal instanceof HTMLElement)) return;
-    categoryModal.classList.remove('hidden');
-    categoryModal.classList.add('flex');
-    categoryModal.setAttribute('aria-hidden', 'false');
-    document.body.classList.add('overflow-hidden');
-  };
-
-  categoryOpenButtons.forEach(button => {
-    button.addEventListener('click', openCategoryModal);
-  });
-
-  categoryCloseButtons.forEach(button => {
-    button.addEventListener('click', closeCategoryModal);
-  });
-
-  document.addEventListener('keydown', event => {
-    if (event.key === 'Escape') closeCategoryModal();
-  });
-</script>

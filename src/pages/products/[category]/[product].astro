@@ -8,6 +8,7 @@ import {
 } from '@/lib/productFs';
 
 import ProductCard from '@components/ui/cards/ProductCard.astro';
+import ProductInquiryModal from '@components/sections/products/ProductInquiryModal.astro';
 
 export async function getStaticPaths() {
   const categories = getAllCategories();
@@ -108,9 +109,14 @@ const ogTitle = `${resolvedProduct.name} | Products | Mehta Petro`;
           </div>
 
           <div class="flex flex-wrap gap-3">
-            <a href="/contact" class="inline-flex items-center justify-center rounded-xl bg-[#0039E6] px-6 py-3 text-sm font-semibold text-white transition duration-300 hover:bg-[#0033CC]">
+            <button
+              type="button"
+              data-product-inquiry-open
+              aria-controls="product-inquiry-modal"
+              class="inline-flex items-center justify-center rounded-xl bg-[#0039E6] px-6 py-3 text-sm font-semibold text-white transition duration-300 hover:bg-[#0033CC]"
+            >
               Request Product Information
-            </a>
+            </button>
           </div>
         </div>
 
@@ -197,9 +203,14 @@ const ogTitle = `${resolvedProduct.name} | Products | Mehta Petro`;
           <p class="mt-4 text-sm leading-7 text-[#4A5F8C]">
             Share the application, destination, or volume and we will help narrow the product selection.
           </p>
-          <a href="/contact" class="mt-6 inline-flex items-center justify-center rounded-xl bg-[#0039E6] px-5 py-3 text-sm font-semibold text-white transition duration-300 hover:bg-[#0033CC]">
+          <button
+            type="button"
+            data-product-inquiry-open
+            aria-controls="product-inquiry-modal"
+            class="mt-6 inline-flex items-center justify-center rounded-xl bg-[#0039E6] px-5 py-3 text-sm font-semibold text-white transition duration-300 hover:bg-[#0033CC]"
+          >
             Contact our team
-          </a>
+          </button>
         </section>
       </div>
 
@@ -284,4 +295,15 @@ const ogTitle = `${resolvedProduct.name} | Products | Mehta Petro`;
       )}
     </section>
   </div>
+
+  <ProductInquiryModal
+    modalId="product-inquiry-modal"
+    title="Send inquiry"
+    subtitle={`Get a quick response from our team about ${resolvedProduct.name}.`}
+    subject="New product enquiry from Mehta Petro website"
+    fromName="Mehta Petro Product Inquiry"
+    source={Astro.url.pathname}
+    productName={resolvedProduct.name}
+    categoryName={category.name}
+  />
 </MainLayout>
