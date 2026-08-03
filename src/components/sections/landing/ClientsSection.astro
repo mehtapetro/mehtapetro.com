@@ -72,67 +72,6 @@ interface Props {
   </div>
 </section>
 
-<script>
-  function initClientMarquees() {
-    document.querySelectorAll('[data-client-marquee]').forEach(marquee => {
-      if (!(marquee instanceof HTMLElement)) return;
-      if (marquee.dataset.bound === 'true') return;
-      marquee.dataset.bound = 'true';
-
-      const track = marquee.querySelector('[data-client-marquee-track]');
-      const group = marquee.querySelector('[data-client-marquee-group]');
-
-      if (!(track instanceof HTMLElement) || !(group instanceof HTMLElement))
-        return;
-
-      let animationFrame = 0;
-      let lastTime = 0;
-      let offset = 0;
-      let groupWidth = 0;
-      const pixelsPerSecond = 28;
-
-      const measure = () => {
-        groupWidth = group.getBoundingClientRect().width;
-        track.style.transform = 'translate3d(0, 0, 0)';
-        offset = 0;
-      };
-
-      const tick = (time: number) => {
-        if (!lastTime) lastTime = time;
-        const delta = time - lastTime;
-        lastTime = time;
-
-        if (groupWidth > 0) {
-          offset += (pixelsPerSecond * delta) / 1000;
-
-          if (offset >= groupWidth) {
-            offset = 0;
-          }
-
-          track.style.transform = `translate3d(-${offset}px, 0, 0)`;
-        }
-
-        animationFrame = window.requestAnimationFrame(tick);
-      };
-
-      window.addEventListener('resize', measure);
-
-      measure();
-      animationFrame = window.requestAnimationFrame(tick);
-
-      marquee.addEventListener('remove', () => {
-        window.cancelAnimationFrame(animationFrame);
-      });
-    });
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initClientMarquees);
-  } else {
-    initClientMarquees();
-  }
-</script>
-
 <style is:global>
   .logo-marquee-wrap {
     position: relative;

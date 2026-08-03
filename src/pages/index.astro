@@ -21,7 +21,7 @@ const metaDescription =
 
 <MainLayout title={pageTitle} customDescription={metaDescription} preloadImage={introPoster.src} fullWidth overlayNav>
   <!-- Hero Section -->
-  <section class="relative min-h-dvh min-h-[720px] overflow-hidden bg-[#07142F]">
+  <section class="relative flex min-h-dvh min-h-[720px] flex-col overflow-hidden bg-[#07142F]">
     <video
       class="pointer-events-none absolute inset-0 h-full w-full object-cover"
       src={introVideo}
@@ -45,15 +45,14 @@ const metaDescription =
     </div>
 
     <div
-      class="relative z-10 mx-auto flex h-full w-full max-w-[85rem] items-center px-4 sm:px-6 lg:px-8"
+      class="relative z-10 mx-auto flex min-h-dvh w-full max-w-[85rem] flex-1 flex-col justify-center px-4 pb-20 pt-24 sm:px-6 sm:pb-24 sm:pt-28 lg:px-8"
     >
-      <div class="w-full pt-28 pb-16 sm:pt-32 sm:pb-20 lg:pt-24 lg:pb-16">
-        <div class="w-full max-w-6xl">
-          <div class="mb-8 sm:mb-10">
+      <div class="w-full max-w-6xl -translate-y-2 sm:-translate-y-4">
+          <div class="mb-6 sm:mb-8">
             <img
               src={mprlLogo.src}
               alt="Mehta Petro-Refineries Limited"
-              class="h-18 w-auto sm:h-20 md:h-24"
+              class="h-16 w-auto sm:h-20 md:h-24"
             />
           </div>
 
@@ -104,7 +103,6 @@ const metaDescription =
               >Drilling fluids & additives</span
             >
           </div>
-        </div>
       </div>
     </div>
 

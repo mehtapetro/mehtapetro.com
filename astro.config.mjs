@@ -3,6 +3,7 @@ import tailwindcss from '@tailwindcss/vite';
 import sitemap from '@astrojs/sitemap';
 import starlight from '@astrojs/starlight';
 import vercel from '@astrojs/vercel';
+import { isIndexablePage } from './src/data/sitemapPages.ts';
 
 import mdx from '@astrojs/mdx';
 
@@ -27,12 +28,27 @@ export default defineConfig({
   prefetch: true,
   integrations: [
     sitemap({
-      i18n: {
-        defaultLocale: 'en', // All urls that don't contain language prefix will be treated as default locale
-        locales: {
-          en: 'en', // The `defaultLocale` value must present in `locales` keys
-          fr: 'fr',
-        },
+      filter: isIndexablePage,
+      changefreq: 'weekly',
+      priority: 0.8,
+      serialize(item) {
+        const url = new URL(item.url);
+        const path = url.pathname.replace(/\/$/, '') || '/';
+
+        const priorities = {
+          '/': 1,
+          '/products': 0.9,
+          '/about-us': 0.8,
+          '/capabilities': 0.8,
+          '/news': 0.7,
+          '/contact': 0.7,
+          '/career': 0.7,
+        };
+
+        return {
+          ...item,
+          priority: priorities[path] ?? 0.8,
+        };
       },
     }),
     starlight({

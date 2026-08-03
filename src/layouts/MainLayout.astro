@@ -73,6 +73,8 @@ interface Props {
       import '@scripts/contactForm.js';
       import '@scripts/productInquiryModal.js';
       import '@scripts/heroVideo.js';
+      import '@scripts/clientMarquee.js';
+      import '@scripts/facebookEmbed.js';
     </script>
   </head>
   <body
@@ -107,13 +109,14 @@ interface Props {
     <script>
       // https://preline.co
       import 'preline';
-      const init = () =>
+      const initPreline = () =>
         (
           window as Window & { HSStaticMethods?: { autoInit?: () => void } }
         ).HSStaticMethods?.autoInit?.();
       if (document.readyState === 'loading')
-        document.addEventListener('DOMContentLoaded', init);
-      else init();
+        document.addEventListener('DOMContentLoaded', initPreline);
+      else initPreline();
+      document.addEventListener('astro:page-load', initPreline);
     </script>
     <style>
       /* CSS rules for the page scrollbar */

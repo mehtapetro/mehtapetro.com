@@ -1,21 +1,13 @@
 // https://docs.astro.build/en/guides/integrations-guide/sitemap/#usage
 import type { APIRoute } from 'astro';
+import { getRobotsAllowRules } from '@/data/sitemapPages';
+
+const allowRules = getRobotsAllowRules().join('\n');
 
 const robotsTxt = `
-User-agent: Googlebot
-Allow: /
-Crawl-delay: 10
-
-User-agent: Yandex
-Allow: /
-Crawl-delay: 2
-
-User-agent: archive.org_bot
-Allow: /
-Crawl-delay: 2
-
 User-agent: *
-Allow: /
+Disallow: /
+${allowRules}
 
 Sitemap: ${new URL('sitemap-index.xml', import.meta.env.SITE).href}
 `.trim();
