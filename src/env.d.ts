@@ -8,6 +8,8 @@ declare global {
     __lenis?: Lenis;
     __lenisAnchorsBound?: boolean;
     __mobileNavBound?: boolean;
+    __contactFormBound?: boolean;
+    __productInquiryModalBound?: boolean;
   }
 }
 

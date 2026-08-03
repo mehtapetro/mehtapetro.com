@@ -5,9 +5,10 @@ import EmailContactInput from '@components/ui/forms/input/EmailContactInput.astr
 import PhoneInput from '@components/ui/forms/input/PhoneInput.astro';
 import TextAreaInput from '@components/ui/forms/input/TextAreaInput.astro';
 import Icon from '@components/ui/icons/Icon.astro';
+import { WEB3FORMS_ACCESS_KEY } from '@/data/web3forms';
 
 const locale: string = 'en';
-const web3FormsAccessKey = 'e138342b-b691-410c-a7fb-3b3ce5a49ea6';
+const web3FormsAccessKey = WEB3FORMS_ACCESS_KEY;
 const siteOrigin = 'https://mehtapetro.vercel.app';
 const contactPath = '/contact';
 const contactSource = `${siteOrigin}${contactPath}`;
@@ -180,6 +181,7 @@ const inquiryOptions = [
             <select
               id="hs-inquiry-type"
               name="inquiryType"
+              required
               class="block w-full rounded-lg border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm text-neutral-700 placeholder:text-neutral-500 focus:border-neutral-200 focus:ring-3 focus:ring-neutral-400 focus:outline-hidden disabled:pointer-events-none disabled:opacity-50"
             >
               <option value="" disabled selected>Inquiry type</option>

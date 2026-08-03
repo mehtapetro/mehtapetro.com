@@ -1,9 +1,7 @@
 import type { APIRoute } from 'astro';
+import { WEB3FORMS_ACCESS_KEY, WEB3FORMS_ENDPOINT } from '@/data/web3forms';
 
 export const prerender = false;
-
-const web3FormsEndpoint = 'https://api.web3forms.com/submit';
-const web3FormsAccessKey = 'e138342b-b691-410c-a7fb-3b3ce5a49ea6';
 
 function jsonResponse(body: unknown, status = 200) {
   return new Response(JSON.stringify(body), {
@@ -18,7 +16,7 @@ export const POST: APIRoute = async ({ request }) => {
   const formData = await request.formData();
   const accessKey = String(formData.get('access_key') ?? '').trim();
 
-  if (accessKey !== web3FormsAccessKey) {
+  if (accessKey !== WEB3FORMS_ACCESS_KEY) {
     return jsonResponse(
       {
         success: false,
@@ -47,7 +45,7 @@ export const POST: APIRoute = async ({ request }) => {
     payload.set('replyto', email);
   }
 
-  const response = await fetch(web3FormsEndpoint, {
+  const response = await fetch(WEB3FORMS_ENDPOINT, {
     method: 'POST',
     body: payload,
     headers: {

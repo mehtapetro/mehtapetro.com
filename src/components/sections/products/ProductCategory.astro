@@ -4,6 +4,7 @@ import SubProductCard from '@components/ui/cards/SubProductCard.astro';
 import type { CollectionEntry } from 'astro:content';
 import type { ProductCatalogItem } from '@data/productCatalog';
 import PhoneInput from '@components/ui/forms/input/PhoneInput.astro';
+import { WEB3FORMS_ACCESS_KEY } from '@/data/web3forms';
 
 const { category, items, lang = 'en' } = Astro.props;
 
@@ -62,7 +63,7 @@ const copy =
         sendingMessage: 'Sending your message…',
       };
 
-const web3FormsAccessKey = '0e6f5e46-f620-429a-ab06-a8e61f81c419';
+const web3FormsAccessKey = WEB3FORMS_ACCESS_KEY;
 const inquiryOptions =
   lang === 'fr'
     ? [

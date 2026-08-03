@@ -3,6 +3,7 @@ import ProductTabBtn from '@components/ui/buttons/ProductTabBtn.astro';
 import { Image } from 'astro:assets';
 import type { ProductCatalogItem } from '@data/productCatalog';
 import PhoneInput from '@components/ui/forms/input/PhoneInput.astro';
+import { WEB3FORMS_ACCESS_KEY } from '@/data/web3forms';
 
 interface Props {
   categoryTitle: string;
@@ -38,7 +39,7 @@ const copy = {
 };
 
 const categoryHref = `/products/${categorySlug}/`;
-const web3FormsAccessKey = '0e6f5e46-f620-429a-ab06-a8e61f81c419';
+const web3FormsAccessKey = WEB3FORMS_ACCESS_KEY;
 const formSource = Astro.url.pathname;
 const inquiryOptions = [
   { value: 'product', label: 'Product' },

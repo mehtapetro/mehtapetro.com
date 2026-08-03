@@ -4,6 +4,7 @@ import { SITE } from '@data/constants';
 import { getAllCategories, getProductsForCategory } from '@/lib/productFs';
 import CategoryCard from '@components/ui/cards/CategoryCard.astro';
 import PhoneInput from '@components/ui/forms/input/PhoneInput.astro';
+import { WEB3FORMS_ACCESS_KEY } from '@/data/web3forms';
 
 const iconMap: Record<string, string> = {
   'aromatic-hydrocarbon-solvents':
@@ -76,9 +77,17 @@ const ogTitle = 'Products | Mehta Petro';
 >
   <section
     id="products-contact-gate"
-    class="fixed inset-0 z-50 hidden items-center justify-center bg-[#E8F0FF]/70 p-4 backdrop-blur-2xl"
+    class="fixed inset-0 z-50 hidden items-center justify-center p-4 sm:p-6"
     aria-hidden="true"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="products-gate-title"
   >
+    <div
+      class="absolute inset-0 bg-[#0A1F4D]/60 backdrop-blur-sm"
+      aria-hidden="true"
+    >
+    </div>
     <button
       type="button"
       class="absolute inset-0 cursor-not-allowed"
@@ -86,27 +95,30 @@ const ogTitle = 'Products | Mehta Petro';
       disabled></button>
 
     <div
-      class="relative z-10 w-full max-w-2xl overflow-hidden rounded-[1.75rem] border border-[#D4E4FF]/70 bg-[#F8FBFF]/45 shadow-[0_24px_80px_rgba(34,83,171,0.14)] backdrop-blur-2xl"
+      class="relative z-10 flex max-h-[92vh] w-full max-w-2xl flex-col overflow-hidden rounded-2xl border border-[#D4E4FF] bg-white shadow-[0_30px_80px_-40px_rgba(10,31,77,0.45)]"
     >
-      <div class="border-b border-[#D4E4FF]/50 px-5 py-4 sm:px-6">
-        <div>
-          <p
-            class="text-xs font-semibold tracking-[0.18em] text-[#0039E6] uppercase"
-          >
-            Before you continue
-          </p>
-          <h2 class="mt-2 text-2xl font-bold text-[#0A1F4D]">
-            Request product details
-          </h2>
-          <p class="mt-2 text-sm leading-6 text-[#4A5F8C]">
-            Share your contact details once to browse products and receive the
-            right technical follow-up.
-          </p>
-        </div>
+      <div
+        class="shrink-0 border-b border-[#E3EBFF] bg-linear-to-br from-[#F7FAFF] via-white to-white px-5 py-5 sm:px-8 sm:py-6"
+      >
+        <span
+          class="inline-flex rounded-full border border-[#C0D6FF] bg-white px-3 py-1 text-[0.7rem] font-semibold tracking-[0.16em] text-[#0039E6] uppercase sm:text-xs"
+        >
+          Before you continue
+        </span>
+        <h2
+          id="products-gate-title"
+          class="mt-4 text-2xl font-bold text-[#0A1F4D] sm:text-[1.65rem]"
+        >
+          Request product details
+        </h2>
+        <p class="mt-2 text-sm leading-6 text-[#4A5F8C] sm:text-[0.95rem]">
+          Share your contact details once to browse products and receive the
+          right technical follow-up.
+        </p>
       </div>
 
       <form
-        class="space-y-4 px-5 py-5 sm:px-6 sm:py-6"
+        class="flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto px-5 py-5 sm:px-8 sm:py-6"
         data-contact-form
         data-success-storage-key={productInquiryGateKey}
         action="https://api.web3forms.com/submit"
@@ -115,11 +127,7 @@ const ogTitle = 'Products | Mehta Petro';
         data-error-message="We could not send your request right now. Please try again."
         data-sending-message="Sending your request…"
       >
-        <input
-          type="hidden"
-          name="access_key"
-          value="0e6f5e46-f620-429a-ab06-a8e61f81c419"
-        />
+        <input type="hidden" name="access_key" value={WEB3FORMS_ACCESS_KEY} />
         <input
           type="hidden"
           name="subject"
@@ -151,7 +159,7 @@ const ogTitle = 'Products | Mehta Petro';
               name="firstName"
               type="text"
               required
-              class="block w-full rounded-xl border border-[#D4E4FF]/80 bg-white/55 px-4 py-3 text-sm text-[#0A1F4D] shadow-sm backdrop-blur-md placeholder:text-[#6A7DA8] focus:border-[#B8CEFF] focus:ring-3 focus:ring-[#DDE9FF] focus:outline-hidden"
+              class="block w-full rounded-lg border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm text-neutral-700 placeholder:text-neutral-500 focus:border-[#B8CEFF] focus:ring-3 focus:ring-[#DDE9FF] focus:outline-hidden"
               placeholder="First name"
             />
           </div>
@@ -163,7 +171,7 @@ const ogTitle = 'Products | Mehta Petro';
               id="products-gate-last-name"
               name="lastName"
               type="text"
-              class="block w-full rounded-xl border border-[#D4E4FF]/80 bg-white/55 px-4 py-3 text-sm text-[#0A1F4D] shadow-sm backdrop-blur-md placeholder:text-[#6A7DA8] focus:border-[#B8CEFF] focus:ring-3 focus:ring-[#DDE9FF] focus:outline-hidden"
+              class="block w-full rounded-lg border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm text-neutral-700 placeholder:text-neutral-500 focus:border-[#B8CEFF] focus:ring-3 focus:ring-[#DDE9FF] focus:outline-hidden"
               placeholder="Last name"
             />
           </div>
@@ -177,7 +185,7 @@ const ogTitle = 'Products | Mehta Petro';
               name="email"
               type="email"
               required
-              class="block w-full rounded-xl border border-[#D4E4FF]/80 bg-white/55 px-4 py-3 text-sm text-[#0A1F4D] shadow-sm backdrop-blur-md placeholder:text-[#6A7DA8] focus:border-[#B8CEFF] focus:ring-3 focus:ring-[#DDE9FF] focus:outline-hidden"
+              class="block w-full rounded-lg border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm text-neutral-700 placeholder:text-neutral-500 focus:border-[#B8CEFF] focus:ring-3 focus:ring-[#DDE9FF] focus:outline-hidden"
               placeholder="Email address"
             />
           </div>
@@ -197,7 +205,7 @@ const ogTitle = 'Products | Mehta Petro';
             id="products-gate-company"
             name="company"
             type="text"
-            class="block w-full rounded-xl border border-[#D4E4FF]/80 bg-white/55 px-4 py-3 text-sm text-[#0A1F4D] shadow-sm backdrop-blur-md placeholder:text-[#6A7DA8] focus:border-[#B8CEFF] focus:ring-3 focus:ring-[#DDE9FF] focus:outline-hidden"
+            class="block w-full rounded-lg border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm text-neutral-700 placeholder:text-neutral-500 focus:border-[#B8CEFF] focus:ring-3 focus:ring-[#DDE9FF] focus:outline-hidden"
             placeholder="Company name"
           />
         </div>
@@ -208,19 +216,26 @@ const ogTitle = 'Products | Mehta Petro';
             id="products-gate-message"
             name="message"
             rows="4"
-            class="block w-full rounded-xl border border-[#D4E4FF]/80 bg-white/55 px-4 py-3 text-sm text-[#0A1F4D] shadow-sm backdrop-blur-md placeholder:text-[#6A7DA8] focus:border-[#B8CEFF] focus:ring-3 focus:ring-[#DDE9FF] focus:outline-hidden"
+            class="block w-full resize-y rounded-lg border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm text-neutral-700 placeholder:text-neutral-500 focus:border-[#B8CEFF] focus:ring-3 focus:ring-[#DDE9FF] focus:outline-hidden"
             placeholder="Tell us what product range you need"></textarea>
         </div>
 
-        <p data-form-status class="hidden text-sm font-medium"></p>
+        <p
+          data-form-status
+          class="hidden min-h-[1.25rem] text-sm leading-6"
+          aria-live="polite"
+        >
+        </p>
 
-        <div class="flex flex-wrap items-center justify-between gap-3 pt-1">
+        <div
+          class="mt-auto flex flex-col gap-3 border-t border-[#E3EBFF] pt-4 sm:flex-row sm:items-center sm:justify-between"
+        >
           <p class="text-xs leading-5 text-[#4A5F8C]">
             This appears only once per browser after a successful submission.
           </p>
           <button
             type="submit"
-            class="inline-flex items-center justify-center rounded-xl bg-[#0039E6] px-6 py-3 text-sm font-semibold text-white transition duration-300 hover:bg-[#0033CC]"
+            class="inline-flex w-full shrink-0 items-center justify-center rounded-xl bg-[#0039E6] px-6 py-3 text-sm font-semibold text-white shadow-[0_20px_45px_-25px_rgba(0,57,230,0.95)] transition duration-300 hover:bg-[#0033CC] sm:w-auto"
           >
             Continue to products
           </button>
