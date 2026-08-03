@@ -5,9 +5,9 @@ pubDate: 2026-07-31
 author: 'Mehta Petro Research'
 readTime: 4
 tags: ['chemicals', 'rubber', 'process-oil', 'materials']
-authorImage: '@/images/blog/brad.avif'
+authorImage: '@/images/blog/mprl_lab.png'
 authorImageAlt: 'Mehta Petro Research'
-cardImage: '@/images/blog/post-2.avif'
+cardImage: '@/images/blog/rubber.jpg'
 cardImageAlt: 'Laboratory sample of rubber process oil'
 ---
 
