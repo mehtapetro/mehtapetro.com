@@ -2,7 +2,7 @@
 import MainLayout from '@/layouts/MainLayout.astro';
 import AvatarBlogLarge from '@components/ui/avatars/AvatarBlogLarge.astro';
 import SocialShare from '@components/ui/buttons/SocialShare.astro';
-import { Image } from 'astro:assets';
+import { Image, getImage } from 'astro:assets';
 import { capitalize, formatDate } from '@utils/utils';
 import { getCollection, render } from 'astro:content';
 import { SITE } from '@data/constants';
@@ -29,7 +29,17 @@ const newsSlug = post.id.replace(/^en\//, '');
 const pageTitle: string = `${post.data.title} | ${SITE.title}`;
 const metaDescription = post.data.description;
 const ogTitle = pageTitle;
-const articleUrl = `${SITE.url}/news/${newsSlug}`;
+const articleUrl = `${SITE.url}/news/${newsSlug}/`;
+
+// Build a dedicated 1200x630 JPEG for WhatsApp / Facebook / LinkedIn link previews
+const shareImage = await getImage({
+  src: post.data.cardImage,
+  width: 1200,
+  height: 630,
+  format: 'jpg',
+  fit: 'contain',
+});
+const ogImageUrl = new URL(shareImage.src, SITE.url).href;
 ---
 
 <MainLayout
@@ -38,12 +48,14 @@ const articleUrl = `${SITE.url}/news/${newsSlug}`;
   customOgTitle={ogTitle}
   post={post}
   ogImage={post.data.cardImage}
+  ogImageUrl={ogImageUrl}
   ogImageAlt={post.data.cardImageAlt}
   structuredData={{
     '@context': 'https://schema.org',
     '@type': 'NewsArticle',
     headline: post.data.title,
     description: metaDescription,
+    image: ogImageUrl,
     datePublished: post.data.pubDate.toISOString(),
     author: {
       '@type': 'Organization',
@@ -136,7 +148,7 @@ const articleUrl = `${SITE.url}/news/${newsSlug}`;
           }
         </div>
         <div class="flex items-center sm:justify-end">
-          <SocialShare pageTitle={post.data.title} />
+          <SocialShare pageTitle={post.data.title} shareUrl={articleUrl} />
         </div>
       </div>
     </div>

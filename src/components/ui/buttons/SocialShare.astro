@@ -1,11 +1,14 @@
 ---
 import Icon from '@components/ui/icons/Icon.astro';
+import { SITE } from '@data/constants';
 
-const { pageTitle, title = 'Share' } = Astro.props;
+const { pageTitle, title = 'Share', shareUrl } = Astro.props;
 
 interface Props {
   pageTitle: string;
   title?: string;
+  /** Absolute article URL for share links (falls back to current page) */
+  shareUrl?: string;
 }
 
 type SocialPlatform = {
@@ -14,7 +17,9 @@ type SocialPlatform = {
   svg: string;
 };
 
-const encoded_url = encodeURIComponent(Astro.url.href);
+const absoluteShareUrl =
+  shareUrl || new URL(Astro.url.pathname + Astro.url.search, SITE.url).href;
+const encoded_url = encodeURIComponent(absoluteShareUrl);
 
 const socialPlatforms: SocialPlatform[] = [
   {
@@ -24,12 +29,12 @@ const socialPlatforms: SocialPlatform[] = [
   },
   {
     name: 'X',
-    url: `https://twitter.com/intent/tweet?url=${encoded_url}&text=${pageTitle}`,
+    url: `https://twitter.com/intent/tweet?url=${encoded_url}&text=${encodeURIComponent(pageTitle)}`,
     svg: 'x',
   },
   {
     name: 'LinkedIn',
-    url: `https://www.linkedin.com/sharing/share-offsite/?url=${encoded_url}&title=${pageTitle}`,
+    url: `https://www.linkedin.com/sharing/share-offsite/?url=${encoded_url}`,
     svg: 'linkedIn',
   },
 ];
@@ -72,6 +77,7 @@ const socialPlatforms: SocialPlatform[] = [
         type="button"
         class="js-clipboard group inline-flex w-full items-center gap-x-3.5 rounded-lg px-3 py-2 text-sm text-[#0A1F4D] hover:bg-[#F5F9FF] focus:bg-[#F5F9FF] focus:outline-hidden focus-visible:ring-1 focus-visible:ring-[#0039E6] focus-visible:outline-hidden"
         data-clipboard-success-text="Copied"
+        data-share-url={absoluteShareUrl}
       >
         <svg
           class="js-clipboard-default h-4 w-4 transition group-hover:rotate-6"
@@ -122,7 +128,7 @@ const socialPlatforms: SocialPlatform[] = [
       if (clipboardInstances.has(el)) return;
 
       const clipboard = new ClipboardJS(el, {
-        text: () => window.location.href,
+        text: () => el.dataset.shareUrl || window.location.href,
       });
 
       clipboard.on('success', () => {

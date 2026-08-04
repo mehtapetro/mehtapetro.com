@@ -74,30 +74,49 @@ const appleTouchIcon = await getImage({
   format: 'png',
 });
 
-// News/blog posts: every article's cardImage becomes the social share preview
+// News/blog posts: every article's cardImage becomes the social share preview.
+// Prefer an absolute URL string when provided (most reliable for WhatsApp / Facebook).
 const post = Astro.props.post ?? null;
+const absoluteOgImageUrl =
+  typeof Astro.props.ogImageUrl === 'string' &&
+  Astro.props.ogImageUrl.length > 0
+    ? Astro.props.ogImageUrl
+    : null;
 const articleImage =
-  Astro.props.ogImage ?? post?.data?.cardImage ?? post?.image ?? null;
+  absoluteOgImageUrl ||
+  Astro.props.ogImage ||
+  post?.data?.cardImage ||
+  post?.image ||
+  null;
 
-const socialImageRes = articleImage
-  ? await getImage({
-      src: articleImage,
-      width: 1200,
-      height: 630,
-      // JPEG is the most reliable format for WhatsApp / Facebook / LinkedIn previews
-      format: 'jpg',
-    })
-  : await getImage({
-      src: OG.image,
-      width: 1200,
-      height: 600,
-      format: 'jpg',
-    });
+const socialImageRes =
+  absoluteOgImageUrl || typeof articleImage === 'string'
+    ? null
+    : articleImage
+      ? await getImage({
+          src: articleImage,
+          width: 1200,
+          height: 630,
+          format: 'jpg',
+          fit: 'contain',
+        })
+      : await getImage({
+          src: OG.image,
+          width: 1200,
+          height: 600,
+          format: 'jpg',
+        });
 
-const socialImage = new URL(socialImageRes.src, Astro.site || Astro.url.origin)
-  .href;
+const socialImage =
+  absoluteOgImageUrl ||
+  (typeof articleImage === 'string'
+    ? articleImage.startsWith('http')
+      ? articleImage
+      : new URL(articleImage, SITE.url).href
+    : new URL(socialImageRes!.src, SITE.url).href);
+
 const socialImageWidth = 1200;
-const socialImageHeight = articleImage ? 630 : 600;
+const socialImageHeight = absoluteOgImageUrl || articleImage ? 630 : 600;
 const socialImageType = 'image/jpeg';
 const socialImageAlt =
   Astro.props.ogImageAlt ??
@@ -105,6 +124,13 @@ const socialImageAlt =
   post?.data?.title ??
   ogTitle;
 const ogType = post ? 'article' : OG.type;
+
+const hasArticleShareImage = Boolean(
+  absoluteOgImageUrl ||
+  Astro.props.ogImage ||
+  post?.data?.cardImage ||
+  post?.image
+);
 
 // Build Article JSON-LD only when the page did not already supply structured data
 if (post && !providedStructuredData) {
@@ -143,7 +169,7 @@ if (post && !providedStructuredData) {
     dateModified: post.modified || post.updated || undefined,
     url: postUrl,
   };
-} else if (providedStructuredData && articleImage) {
+} else if (providedStructuredData && hasArticleShareImage) {
   // News pages: keep page JSON-LD and set the absolute article image URL
   structuredData = {
     ...providedStructuredData,
