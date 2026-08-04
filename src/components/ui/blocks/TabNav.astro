@@ -25,17 +25,17 @@ const BUTTON_CLASS =
 >
   <span class="flex gap-3 sm:gap-4">
     <span
-      class="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[#E8F0FF] text-[#0039E6] transition-colors hs-tab-active:bg-[#0039E6] hs-tab-active:text-white sm:h-10 sm:w-10"
+      class="hs-tab-active:bg-[#0039E6] hs-tab-active:text-white mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[#E8F0FF] text-[#0039E6] transition-colors sm:h-10 sm:w-10"
     >
       <slot />
     </span>
     <span class="min-w-0 grow">
       <span
-        class="block text-base font-bold text-[#0A1F4D] hs-tab-active:text-[#0039E6] sm:text-lg"
+        class="hs-tab-active:text-[#0039E6] block text-base font-bold text-[#0A1F4D] sm:text-lg"
         >{heading}</span
       >
       <span
-        class="mt-1 hidden text-sm leading-relaxed text-[#4A5F8C] hs-tab-active:block sm:mt-1.5 sm:block sm:text-base"
+        class="hs-tab-active:block mt-1 hidden text-sm leading-relaxed text-[#4A5F8C] sm:mt-1.5 sm:block sm:text-base"
         >{content}</span
       >
     </span>

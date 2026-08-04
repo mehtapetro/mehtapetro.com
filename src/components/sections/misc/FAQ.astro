@@ -42,7 +42,9 @@ const makeId = (base: string, index: number) => `${base}${index + 1}`;
       </div>
 
       <div class="md:col-span-3">
-        <div class="hs-accordion-group divide-y divide-[#D4E4FF] border-y border-[#D4E4FF]">
+        <div
+          class="hs-accordion-group divide-y divide-[#D4E4FF] border-y border-[#D4E4FF]"
+        >
           {
             faqs.faqs.map((question, i) => {
               const id = makeId(

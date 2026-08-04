@@ -45,7 +45,9 @@ interface Props {
     class="relative z-10 mt-8 grid items-center gap-6 sm:mt-12 sm:gap-10 lg:grid-cols-12 lg:gap-16"
   >
     <!-- Image first on mobile so tabs control something visible -->
-    <div class="order-1 lg:order-none lg:col-span-6 lg:col-start-1 lg:row-start-1">
+    <div
+      class="order-1 lg:order-none lg:col-span-6 lg:col-start-1 lg:row-start-1"
+    >
       {
         tabs.map((tab, index) => (
           <TabContent
@@ -61,7 +63,9 @@ interface Props {
       }
     </div>
 
-    <div class="order-2 lg:order-none lg:col-span-6 lg:col-start-7 lg:row-start-1">
+    <div
+      class="order-2 lg:order-none lg:col-span-6 lg:col-start-7 lg:row-start-1"
+    >
       <nav class="grid gap-0" aria-label="Product categories" role="tablist">
         {
           tabs.map((tab, index) => (

@@ -1,10 +1,7 @@
 ---
 import Icon from '@components/ui/icons/Icon.astro';
 
-const {
-  pageTitle,
-  title = 'Share',
-} = Astro.props;
+const { pageTitle, title = 'Share' } = Astro.props;
 
 interface Props {
   pageTitle: string;
@@ -131,7 +128,9 @@ const socialPlatforms: SocialPlatform[] = [
       clipboard.on('success', () => {
         const defaultElement = el.querySelector('.js-clipboard-default');
         const successElement = el.querySelector('.js-clipboard-success');
-        const successTextElement = el.querySelector('.js-clipboard-success-text');
+        const successTextElement = el.querySelector(
+          '.js-clipboard-success-text'
+        );
         const successText = el.dataset.clipboardSuccessText || 'Copied';
         const oldSuccessText = successTextElement?.textContent || 'Copy link';
 

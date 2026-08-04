@@ -37,7 +37,9 @@ function getAccordionClass(first: boolean = false) {
     aria-labelledby={id}
     class={`${first ? ACCORDION_CONTENT_CLASS : 'hidden ' + ACCORDION_CONTENT_CLASS}`}
   >
-    <p class="pt-2 text-pretty text-sm leading-relaxed text-[#4A5F8C] sm:text-base">
+    <p
+      class="pt-2 text-sm leading-relaxed text-pretty text-[#4A5F8C] sm:text-base"
+    >
       {answer}
     </p>
   </div>

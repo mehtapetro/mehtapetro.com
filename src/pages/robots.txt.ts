@@ -1,6 +1,9 @@
 // https://docs.astro.build/en/guides/integrations-guide/sitemap/#usage
 import type { APIRoute } from 'astro';
-import { getRobotsAllowRules, getRobotsInfrastructureAllowRules } from '@/data/sitemapPages';
+import {
+  getRobotsAllowRules,
+  getRobotsInfrastructureAllowRules,
+} from '@/data/sitemapPages';
 
 const allowRules = [
   ...getRobotsInfrastructureAllowRules(),

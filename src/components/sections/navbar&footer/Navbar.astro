@@ -20,7 +20,7 @@ const menuLinks = strings.navBarLinks.filter(link => link.url !== '/contact');
     'inset-x-0 z-50 w-full text-sm',
     overlay
       ? 'fixed top-0 pt-[max(0.75rem,env(safe-area-inset-top))] sm:pt-4'
-      : 'sticky top-0 pt-[max(0.75rem,env(safe-area-inset-top))] mb-4 md:top-4 md:mb-8 md:pt-0',
+      : 'sticky top-0 mb-4 pt-[max(0.75rem,env(safe-area-inset-top))] md:top-4 md:mb-8 md:pt-0',
   ]}
   data-lenis-prevent
 >
@@ -245,11 +245,19 @@ const menuLinks = strings.navBarLinks.filter(link => link.url !== '/contact');
           ? currentPath === '/'
           : currentPath === href || currentPath.startsWith(`${href}/`);
 
-      link.classList.remove('bg-[#E8F0FF]', 'text-[#0039E6]', 'border-[#C0D6FF]');
+      link.classList.remove(
+        'bg-[#E8F0FF]',
+        'text-[#0039E6]',
+        'border-[#C0D6FF]'
+      );
 
       if (link.classList.contains('mobile-nav-link')) {
         if (isActive) {
-          link.classList.add('bg-[#E8F0FF]', 'text-[#0039E6]', 'border-[#C0D6FF]');
+          link.classList.add(
+            'bg-[#E8F0FF]',
+            'text-[#0039E6]',
+            'border-[#C0D6FF]'
+          );
           link.setAttribute('aria-current', 'page');
         } else {
           link.removeAttribute('aria-current');

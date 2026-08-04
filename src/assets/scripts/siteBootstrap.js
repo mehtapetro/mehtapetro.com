@@ -17,18 +17,22 @@ async function loadWhenPresent(selector, importer) {
 
 async function loadPageScripts() {
   await Promise.all([
-    loadWhenPresent('video[data-hero-video]', () =>
-      import('@scripts/heroVideo.js')
+    loadWhenPresent(
+      'video[data-hero-video]',
+      () => import('@scripts/heroVideo.js')
     ),
-    loadWhenPresent('.client-marquee', () =>
-      import('@scripts/clientMarquee.js')
+    loadWhenPresent(
+      '.client-marquee',
+      () => import('@scripts/clientMarquee.js')
     ),
-    loadWhenPresent('[data-facebook-embed]', () =>
-      import('@scripts/facebookEmbed.js')
+    loadWhenPresent(
+      '[data-facebook-embed]',
+      () => import('@scripts/facebookEmbed.js')
     ),
     loadWhenPresent('#career-form', () => import('@scripts/careerForm.js')),
-    loadWhenPresent('[data-product-image-modal], [data-product-image-open]', () =>
-      import('@scripts/productImageModal.js')
+    loadWhenPresent(
+      '[data-product-image-modal], [data-product-image-open]',
+      () => import('@scripts/productImageModal.js')
     ),
   ]);
 }

@@ -17,7 +17,10 @@ function startMarquee(root) {
 
   const viewport = root.querySelector('.client-marquee__viewport');
   const sequence = root.querySelector('.client-marquee__sequence');
-  if (!(viewport instanceof HTMLElement) || !(sequence instanceof HTMLElement)) {
+  if (
+    !(viewport instanceof HTMLElement) ||
+    !(sequence instanceof HTMLElement)
+  ) {
     return;
   }
 

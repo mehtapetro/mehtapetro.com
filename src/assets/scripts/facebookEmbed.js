@@ -19,7 +19,8 @@ function ensureFbRoot() {
 }
 
 function showError(root) {
-  const href = root.dataset.facebookHref || 'https://www.facebook.com/mehtapetro';
+  const href =
+    root.dataset.facebookHref || 'https://www.facebook.com/mehtapetro';
   root.dataset.facebookState = 'error';
   root.innerHTML = `
     <div class="flex min-h-[240px] w-full flex-col items-center justify-center gap-3 px-4 text-center">
@@ -35,7 +36,8 @@ function showError(root) {
 }
 
 function renderPagePlugin(root) {
-  const href = root.dataset.facebookHref || 'https://www.facebook.com/mehtapetro';
+  const href =
+    root.dataset.facebookHref || 'https://www.facebook.com/mehtapetro';
   const height = root.dataset.facebookHeight || '580';
   const width = Math.min(Math.floor(root.clientWidth) || 340, 500);
 
