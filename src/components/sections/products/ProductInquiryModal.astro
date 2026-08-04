@@ -42,7 +42,7 @@ const inquiryOptions = [
 <div
   id={modalId}
   data-product-inquiry-modal
-  class="fixed inset-0 z-120 hidden items-center justify-center p-4"
+  class="fixed inset-0 z-120 hidden items-end justify-center p-0 sm:items-center sm:p-4"
   aria-hidden="true"
 >
   <button
@@ -51,12 +51,12 @@ const inquiryOptions = [
     class="absolute inset-0 bg-[#0A1F4D]/55 backdrop-blur-[1px]"
     aria-label="Close inquiry form"></button>
   <div
-    class="relative z-10 max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-2xl border border-[#D4E4FF] bg-white p-6 shadow-[0_30px_80px_-40px_rgba(10,31,77,0.45)] sm:p-8"
+    class="relative z-10 max-h-[92dvh] w-full max-w-2xl overflow-y-auto overscroll-contain rounded-t-2xl border border-[#D4E4FF] bg-white p-4 pb-[max(1rem,env(safe-area-inset-bottom))] shadow-[0_30px_80px_-40px_rgba(10,31,77,0.45)] sm:max-h-[90vh] sm:rounded-2xl sm:p-6 md:p-8"
   >
-    <div class="flex items-start justify-between gap-4">
+    <div class="flex items-start justify-between gap-3 sm:gap-4">
       <div>
-        <h2 class="text-2xl font-bold text-[#0A1F4D]">{title}</h2>
-        <p class="mt-2 text-sm leading-6 text-[#4A5F8C]">{subtitle}</p>
+        <h2 class="text-xl font-bold text-[#0A1F4D] sm:text-2xl">{title}</h2>
+        <p class="mt-1 text-sm leading-6 text-[#4A5F8C] sm:mt-2">{subtitle}</p>
       </div>
       <button
         type="button"
@@ -69,7 +69,7 @@ const inquiryOptions = [
     </div>
 
     <form
-      class="mt-6 space-y-4"
+      class="mt-4 space-y-3 sm:mt-6 sm:space-y-4"
       data-contact-form
       action="https://api.web3forms.com/submit"
       method="post"
@@ -105,13 +105,13 @@ const inquiryOptions = [
           name="firstName"
           type="text"
           required
-          class="block w-full rounded-lg border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm text-neutral-700 placeholder:text-neutral-500 focus:border-neutral-200 focus:ring-3 focus:ring-neutral-400 focus:outline-hidden"
+          class="block min-h-11 w-full rounded-lg border border-neutral-200 bg-neutral-50 px-4 py-3 text-base text-neutral-700 placeholder:text-neutral-500 focus:border-neutral-200 focus:ring-3 focus:ring-neutral-400 focus:outline-hidden sm:text-sm"
           placeholder="First name"
         />
         <input
           name="lastName"
           type="text"
-          class="block w-full rounded-lg border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm text-neutral-700 placeholder:text-neutral-500 focus:border-neutral-200 focus:ring-3 focus:ring-neutral-400 focus:outline-hidden"
+          class="block min-h-11 w-full rounded-lg border border-neutral-200 bg-neutral-50 px-4 py-3 text-base text-neutral-700 placeholder:text-neutral-500 focus:border-neutral-200 focus:ring-3 focus:ring-neutral-400 focus:outline-hidden sm:text-sm"
           placeholder="Last name"
         />
       </div>
@@ -120,7 +120,7 @@ const inquiryOptions = [
         name="email"
         type="email"
         required
-        class="block w-full rounded-lg border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm text-neutral-700 placeholder:text-neutral-500 focus:border-neutral-200 focus:ring-3 focus:ring-neutral-400 focus:outline-hidden"
+        class="block min-h-11 w-full rounded-lg border border-neutral-200 bg-neutral-50 px-4 py-3 text-base text-neutral-700 placeholder:text-neutral-500 focus:border-neutral-200 focus:ring-3 focus:ring-neutral-400 focus:outline-hidden sm:text-sm"
         placeholder="Email"
       />
 
@@ -135,7 +135,7 @@ const inquiryOptions = [
       <select
         name="inquiryType"
         required
-        class="block w-full rounded-lg border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm text-neutral-700 focus:border-neutral-200 focus:ring-3 focus:ring-neutral-400 focus:outline-hidden"
+        class="block min-h-11 w-full rounded-lg border border-neutral-200 bg-neutral-50 px-4 py-3 text-base text-neutral-700 focus:border-neutral-200 focus:ring-3 focus:ring-neutral-400 focus:outline-hidden sm:text-sm"
       >
         <option value="" disabled selected>Inquiry type</option>
         {
@@ -149,7 +149,7 @@ const inquiryOptions = [
         name="message"
         rows="4"
         required
-        class="block w-full rounded-lg border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm text-neutral-700 placeholder:text-neutral-500 focus:border-neutral-200 focus:ring-3 focus:ring-neutral-400 focus:outline-hidden"
+        class="block w-full rounded-lg border border-neutral-200 bg-neutral-50 px-4 py-3 text-base text-neutral-700 placeholder:text-neutral-500 focus:border-neutral-200 focus:ring-3 focus:ring-neutral-400 focus:outline-hidden sm:text-sm"
         placeholder="Message"></textarea>
 
       <p
@@ -161,7 +161,7 @@ const inquiryOptions = [
 
       <button
         type="submit"
-        class="inline-flex items-center justify-center rounded-xl bg-[#0039E6] px-5 py-3 text-sm font-bold text-white shadow-[0_20px_45px_-25px_rgba(0,57,230,0.95)] transition duration-300 hover:bg-[#0033CC] active:bg-[#0028A3]"
+        class="inline-flex min-h-11 w-full items-center justify-center rounded-xl bg-[#0039E6] px-5 py-3 text-sm font-bold text-white shadow-[0_20px_45px_-25px_rgba(0,57,230,0.95)] transition duration-300 hover:bg-[#0033CC] active:bg-[#0028A3] sm:w-auto"
       >
         Send message
       </button>

@@ -10,7 +10,7 @@ import mdx from '@astrojs/mdx';
 // https://astro.build/config
 export default defineConfig({
   // https://docs.astro.build/en/guides/images/#authorizing-remote-images
-  site: 'https://mehtapetro.com',
+  site: 'https://www.mehtapetro.com',
   adapter: vercel(),
   image: {
     domains: ['images.unsplash.com'],

@@ -7,7 +7,7 @@ export const SITE = {
     'Mehta Petro-Refineries Limited delivers Performance Through Quality with petrochemicals and specialty base oils since 1993.',
   description_short:
     'Mehta Petro-Refineries Limited delivers Performance Through Quality with petrochemicals and specialty base oils since 1993.',
-  url: 'https://mehtapetro.com',
+  url: 'https://www.mehtapetro.com',
   author: 'Mehta Petro',
 };
 

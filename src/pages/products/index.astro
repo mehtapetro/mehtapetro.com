@@ -2,7 +2,6 @@
 import MainLayout from '@/layouts/MainLayout.astro';
 import { SITE } from '@data/constants';
 import { getAllCategories, getProductsForCategory } from '@/lib/productFs';
-import CategoryCard from '@components/ui/cards/CategoryCard.astro';
 import PhoneInput from '@components/ui/forms/input/PhoneInput.astro';
 import { WEB3FORMS_ACCESS_KEY } from '@/data/web3forms';
 
@@ -77,7 +76,7 @@ const ogTitle = 'Products | Mehta Petro';
 >
   <section
     id="products-contact-gate"
-    class="fixed inset-0 z-50 hidden items-center justify-center p-4 sm:p-6"
+    class="fixed inset-0 z-50 hidden items-end justify-center p-0 sm:items-center sm:p-4 sm:p-6"
     aria-hidden="true"
     role="dialog"
     aria-modal="true"
@@ -95,30 +94,30 @@ const ogTitle = 'Products | Mehta Petro';
       disabled></button>
 
     <div
-      class="relative z-10 flex max-h-[92vh] w-full max-w-2xl flex-col overflow-hidden rounded-2xl border border-[#D4E4FF] bg-white shadow-[0_30px_80px_-40px_rgba(10,31,77,0.45)]"
+      class="relative z-10 flex max-h-[92dvh] w-full max-w-2xl flex-col overflow-hidden rounded-t-2xl border border-[#D4E4FF] bg-white shadow-[0_30px_80px_-40px_rgba(10,31,77,0.45)] sm:max-h-[92vh] sm:rounded-2xl"
     >
       <div
-        class="shrink-0 border-b border-[#E3EBFF] bg-linear-to-br from-[#F7FAFF] via-white to-white px-5 py-5 sm:px-8 sm:py-6"
+        class="shrink-0 border-b border-[#E3EBFF] bg-linear-to-br from-[#F7FAFF] via-white to-white px-4 py-4 sm:px-8 sm:py-6"
       >
         <span
-          class="inline-flex rounded-full border border-[#C0D6FF] bg-white px-3 py-1 text-[0.7rem] font-semibold tracking-[0.16em] text-[#0039E6] uppercase sm:text-xs"
+          class="inline-flex rounded-full border border-[#C0D6FF] bg-white px-3 py-1 text-[0.65rem] font-semibold tracking-[0.14em] text-[#0039E6] uppercase sm:text-xs"
         >
           Before you continue
         </span>
         <h2
           id="products-gate-title"
-          class="mt-4 text-2xl font-bold text-[#0A1F4D] sm:text-[1.65rem]"
+          class="mt-3 text-xl font-bold text-[#0A1F4D] sm:mt-4 sm:text-2xl"
         >
           Request product details
         </h2>
-        <p class="mt-2 text-sm leading-6 text-[#4A5F8C] sm:text-[0.95rem]">
+        <p class="mt-2 text-sm leading-6 text-[#4A5F8C]">
           Share your contact details once to browse products and receive the
           right technical follow-up.
         </p>
       </div>
 
       <form
-        class="flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto px-5 py-5 sm:px-8 sm:py-6"
+        class="flex min-h-0 flex-1 flex-col gap-3 overflow-y-auto overscroll-contain px-4 py-4 pb-[max(1rem,env(safe-area-inset-bottom))] sm:gap-4 sm:px-8 sm:py-6"
         data-contact-form
         data-success-storage-key={productInquiryGateKey}
         action="https://api.web3forms.com/submit"
@@ -159,7 +158,7 @@ const ogTitle = 'Products | Mehta Petro';
               name="firstName"
               type="text"
               required
-              class="block w-full rounded-lg border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm text-neutral-700 placeholder:text-neutral-500 focus:border-[#B8CEFF] focus:ring-3 focus:ring-[#DDE9FF] focus:outline-hidden"
+              class="block min-h-11 w-full rounded-lg border border-neutral-200 bg-neutral-50 px-4 py-3 text-base text-neutral-700 placeholder:text-neutral-500 focus:border-[#B8CEFF] focus:ring-3 focus:ring-[#DDE9FF] focus:outline-hidden sm:text-sm"
               placeholder="First name"
             />
           </div>
@@ -171,13 +170,13 @@ const ogTitle = 'Products | Mehta Petro';
               id="products-gate-last-name"
               name="lastName"
               type="text"
-              class="block w-full rounded-lg border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm text-neutral-700 placeholder:text-neutral-500 focus:border-[#B8CEFF] focus:ring-3 focus:ring-[#DDE9FF] focus:outline-hidden"
+              class="block min-h-11 w-full rounded-lg border border-neutral-200 bg-neutral-50 px-4 py-3 text-base text-neutral-700 placeholder:text-neutral-500 focus:border-[#B8CEFF] focus:ring-3 focus:ring-[#DDE9FF] focus:outline-hidden sm:text-sm"
               placeholder="Last name"
             />
           </div>
         </div>
 
-        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+        <div class="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
           <div>
             <label for="products-gate-email" class="sr-only">Email</label>
             <input
@@ -185,7 +184,7 @@ const ogTitle = 'Products | Mehta Petro';
               name="email"
               type="email"
               required
-              class="block w-full rounded-lg border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm text-neutral-700 placeholder:text-neutral-500 focus:border-[#B8CEFF] focus:ring-3 focus:ring-[#DDE9FF] focus:outline-hidden"
+              class="block min-h-11 w-full rounded-lg border border-neutral-200 bg-neutral-50 px-4 py-3 text-base text-neutral-700 placeholder:text-neutral-500 focus:border-[#B8CEFF] focus:ring-3 focus:ring-[#DDE9FF] focus:outline-hidden sm:text-sm"
               placeholder="Email address"
             />
           </div>
@@ -205,7 +204,7 @@ const ogTitle = 'Products | Mehta Petro';
             id="products-gate-company"
             name="company"
             type="text"
-            class="block w-full rounded-lg border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm text-neutral-700 placeholder:text-neutral-500 focus:border-[#B8CEFF] focus:ring-3 focus:ring-[#DDE9FF] focus:outline-hidden"
+            class="block min-h-11 w-full rounded-lg border border-neutral-200 bg-neutral-50 px-4 py-3 text-base text-neutral-700 placeholder:text-neutral-500 focus:border-[#B8CEFF] focus:ring-3 focus:ring-[#DDE9FF] focus:outline-hidden sm:text-sm"
             placeholder="Company name"
           />
         </div>
@@ -215,8 +214,8 @@ const ogTitle = 'Products | Mehta Petro';
           <textarea
             id="products-gate-message"
             name="message"
-            rows="4"
-            class="block w-full resize-y rounded-lg border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm text-neutral-700 placeholder:text-neutral-500 focus:border-[#B8CEFF] focus:ring-3 focus:ring-[#DDE9FF] focus:outline-hidden"
+            rows="3"
+            class="block min-h-[5.5rem] w-full resize-y rounded-lg border border-neutral-200 bg-neutral-50 px-4 py-3 text-base text-neutral-700 placeholder:text-neutral-500 focus:border-[#B8CEFF] focus:ring-3 focus:ring-[#DDE9FF] focus:outline-hidden sm:min-h-[6rem] sm:text-sm"
             placeholder="Tell us what product range you need"></textarea>
         </div>
 
@@ -235,7 +234,7 @@ const ogTitle = 'Products | Mehta Petro';
           </p>
           <button
             type="submit"
-            class="inline-flex w-full shrink-0 items-center justify-center rounded-xl bg-[#0039E6] px-6 py-3 text-sm font-semibold text-white shadow-[0_20px_45px_-25px_rgba(0,57,230,0.95)] transition duration-300 hover:bg-[#0033CC] sm:w-auto"
+            class="inline-flex min-h-11 w-full shrink-0 items-center justify-center rounded-xl bg-[#0039E6] px-6 py-3 text-sm font-semibold text-white shadow-[0_20px_45px_-25px_rgba(0,57,230,0.95)] transition duration-300 hover:bg-[#0033CC] sm:w-auto"
           >
             Continue to products
           </button>
@@ -245,45 +244,45 @@ const ogTitle = 'Products | Mehta Petro';
   </section>
 
   <section
-    class="mx-auto mt-10 max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14"
+    class="mx-auto mt-6 max-w-[85rem] px-4 py-8 sm:mt-10 sm:px-6 sm:py-10 lg:px-8 lg:py-14"
   >
-    <div class="grid items-center gap-10 lg:grid-cols-[1fr_0.9fr] lg:gap-14">
+    <div class="grid items-center gap-8 lg:grid-cols-[1fr_0.9fr] lg:gap-14">
       <div>
         <span
-          class="inline-flex rounded-full border border-[#C0D6FF] bg-white px-4 py-1 text-xs font-semibold tracking-wider text-[#0039E6] uppercase"
+          class="inline-flex rounded-full border border-[#C0D6FF] bg-white px-3 py-1 text-[11px] font-semibold tracking-wider text-[#0039E6] uppercase sm:px-4 sm:text-xs"
         >
           Our Products
         </span>
         <h1
-          class="mt-6 max-w-4xl text-4xl font-extrabold tracking-tight text-balance text-[#0A1F4D] md:text-5xl"
+          class="mt-4 max-w-4xl text-3xl font-extrabold tracking-tight text-balance text-[#0A1F4D] sm:mt-6 sm:text-4xl md:text-5xl"
         >
           Industrial Products for Reliable Supply and Performance
         </h1>
         <p
-          class="mt-5 max-w-3xl text-base leading-relaxed text-[#4A5F8C] sm:text-lg"
+          class="mt-4 max-w-3xl text-sm leading-relaxed text-[#4A5F8C] sm:mt-5 sm:text-base md:text-lg"
         >
           Explore solvents, base oils, glycols, drilling fluids, and specialty
           additives, organized for quick product selection and enquiries.
         </p>
 
-        <div class="mt-8 grid gap-4 sm:grid-cols-3">
+        <div class="mt-6 grid grid-cols-2 gap-3 sm:mt-8 sm:gap-4 lg:grid-cols-3">
           <div
-            class="rounded-2xl border border-[#D4E4FF] bg-white p-5 shadow-lg"
+            class="rounded-2xl border border-[#D4E4FF] bg-white p-4 shadow-lg sm:p-5"
           >
-            <div class="text-3xl font-extrabold text-[#0039E6]">
+            <div class="text-2xl font-extrabold text-[#0039E6] sm:text-3xl">
               {categoryCards.length}
             </div>
-            <p class="mt-2 text-sm font-semibold text-[#0A1F4D]">
+            <p class="mt-1 text-xs font-semibold text-[#0A1F4D] sm:mt-2 sm:text-sm">
               Product Categories
             </p>
           </div>
           <div
-            class="rounded-2xl border border-[#D4E4FF] bg-white p-5 shadow-lg"
+            class="rounded-2xl border border-[#D4E4FF] bg-white p-4 shadow-lg sm:p-5"
           >
-            <div class="text-3xl font-extrabold text-[#0039E6]">
+            <div class="text-2xl font-extrabold text-[#0039E6] sm:text-3xl">
               {totalProducts}
             </div>
-            <p class="mt-2 text-sm font-semibold text-[#0A1F4D]">
+            <p class="mt-1 text-xs font-semibold text-[#0A1F4D] sm:mt-2 sm:text-sm">
               Products Listed
             </p>
           </div>
@@ -292,38 +291,39 @@ const ogTitle = 'Products | Mehta Petro';
 
       {
         featuredCategory && (
-          <div class="overflow-hidden rounded-2xl border border-[#D4E4FF] bg-white shadow-lg">
+          <div class="order-first overflow-hidden rounded-2xl border border-[#D4E4FF] bg-white shadow-lg lg:order-none">
             <div class="relative">
               {featuredCategory.image ? (
                 <img
                   src={featuredCategory.image}
                   alt={featuredCategory.imageAlt}
-                  class="h-80 w-full object-cover"
+                  class="h-44 w-full object-cover sm:h-64 lg:h-80"
+                  loading="lazy"
                 />
               ) : (
-                <div class="h-80 w-full bg-neutral-100" />
+                <div class="h-44 w-full bg-neutral-100 sm:h-64 lg:h-80" />
               )}
               <div class="absolute inset-0 bg-linear-to-t from-[#0A1F4D]/78 via-[#0A1F4D]/30 to-transparent" />
-              <div class="absolute inset-x-0 bottom-0 p-6 sm:p-7">
-                <p class="text-xs font-semibold tracking-wide text-white/80 uppercase">
+              <div class="absolute inset-x-0 bottom-0 p-4 sm:p-6 lg:p-7">
+                <p class="text-[11px] font-semibold tracking-wide text-white/80 uppercase sm:text-xs">
                   Featured Category
                 </p>
-                <h2 class="mt-2 text-2xl font-bold text-white">
+                <h2 class="mt-1 text-xl font-bold text-white sm:mt-2 sm:text-2xl">
                   {featuredCategory.title}
                 </h2>
-                <p class="mt-2 max-w-lg text-sm leading-relaxed text-white/85">
+                <p class="mt-1 max-w-lg text-xs leading-relaxed text-white/85 sm:mt-2 sm:text-sm">
                   {featuredCategory.subTitle}
                 </p>
               </div>
             </div>
-            <div class="flex flex-wrap items-center justify-between gap-4 p-6">
+            <div class="flex flex-col gap-4 p-4 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between sm:p-6">
               <p class="text-sm leading-relaxed text-[#4A5F8C]">
                 {featuredCategory.productCount} products available in this
                 category.
               </p>
               <a
                 href={featuredCategory.href}
-                class="inline-flex items-center justify-center rounded-xl bg-[#0039E6] px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#0033CC]"
+                class="inline-flex min-h-11 w-full items-center justify-center rounded-xl bg-[#0039E6] px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#0033CC] sm:w-auto"
               >
                 View Category
               </a>
@@ -334,8 +334,11 @@ const ogTitle = 'Products | Mehta Petro';
     </div>
   </section>
 
-  <section class="mx-auto max-w-[85rem] px-4 py-6 sm:px-6 lg:px-8 lg:py-10">
-    <div class="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
+  <section class="mx-auto max-w-[85rem] px-4 py-4 sm:px-6 sm:py-6 lg:px-8 lg:py-10">
+    <h2 class="mb-4 text-xl font-bold text-[#0A1F4D] sm:mb-6 sm:text-2xl">
+      Browse by category
+    </h2>
+    <div class="grid gap-4 sm:grid-cols-2 sm:gap-6 xl:grid-cols-3">
       {
         categoryCards.map(category => (
           <a
@@ -347,10 +350,11 @@ const ogTitle = 'Products | Mehta Petro';
                 <img
                   src={category.image}
                   alt={category.imageAlt}
-                  class="h-52 w-full object-cover"
+                  class="h-40 w-full object-cover sm:h-52"
+                  loading="lazy"
                 />
               ) : (
-                <div class="h-52 w-full bg-neutral-100" />
+                <div class="h-40 w-full bg-neutral-100 sm:h-52" />
               )}
               <div class="absolute inset-0 bg-linear-to-t from-[#0A1F4D]/65 via-[#0A1F4D]/20 to-transparent" />
               <div class="absolute right-4 bottom-4 rounded-full bg-white/92 px-3 py-1 text-xs font-semibold text-[#0A1F4D] backdrop-blur-sm">
@@ -358,17 +362,17 @@ const ogTitle = 'Products | Mehta Petro';
               </div>
             </div>
 
-            <div class="p-6">
-              <p class="text-xs font-semibold tracking-wide text-[#0039E6] uppercase">
+            <div class="p-4 sm:p-6">
+              <p class="text-[11px] font-semibold tracking-wide text-[#0039E6] uppercase sm:text-xs">
                 {category.subTitle}
               </p>
-              <h3 class="mt-2 text-xl font-bold text-[#0A1F4D] group-hover:text-[#0039E6]">
+              <h3 class="mt-1 text-lg font-bold text-[#0A1F4D] group-hover:text-[#0039E6] sm:mt-2 sm:text-xl">
                 {category.title}
               </h3>
-              <p class="mt-3 text-sm leading-relaxed text-[#4A5F8C]">
+              <p class="mt-2 line-clamp-3 text-sm leading-relaxed text-[#4A5F8C] sm:mt-3">
                 {category.description}
               </p>
-              <div class="mt-5 text-sm font-semibold text-[#0039E6] group-hover:text-[#0033CC]">
+              <div class="mt-4 text-sm font-semibold text-[#0039E6] group-hover:text-[#0033CC] sm:mt-5">
                 Explore products
               </div>
             </div>
@@ -378,32 +382,32 @@ const ogTitle = 'Products | Mehta Petro';
     </div>
   </section>
 
-  <section class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
+  <section class="mx-auto max-w-[85rem] px-4 py-8 sm:px-6 sm:py-10 lg:px-8 lg:py-14">
     <div
-      class="rounded-2xl border border-[#D4E4FF] bg-white p-8 shadow-lg sm:p-10"
+      class="rounded-2xl border border-[#D4E4FF] bg-white p-5 shadow-lg sm:p-8 lg:p-10"
     >
-      <div class="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-center">
+      <div class="grid gap-6 lg:grid-cols-[1fr_auto] lg:items-center lg:gap-8">
         <div>
-          <h2 class="text-2xl font-bold text-[#0A1F4D] md:text-3xl">
+          <h2 class="text-xl font-bold text-[#0A1F4D] sm:text-2xl md:text-3xl">
             Need specifications, COA, or product guidance?
           </h2>
-          <p class="mt-4 max-w-3xl text-base leading-relaxed text-[#4A5F8C]">
+          <p class="mt-3 max-w-3xl text-sm leading-relaxed text-[#4A5F8C] sm:mt-4 sm:text-base">
             If you already know the category you need, open it and review the
             available products. If you want help selecting the right material,
             our team can share technical details and respond to your requirement
             directly.
           </p>
         </div>
-        <div class="flex flex-col gap-3 sm:flex-row lg:flex-col">
+        <div class="flex flex-col gap-3">
           <a
             href="/contact"
-            class="inline-flex items-center justify-center rounded-xl bg-[#0039E6] px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#0033CC]"
+            class="inline-flex min-h-11 w-full items-center justify-center rounded-xl bg-[#0039E6] px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#0033CC] sm:w-auto"
           >
             Request Product Information
           </a>
           <a
             href="/capabilities"
-            class="inline-flex items-center justify-center rounded-xl border border-[#D4E4FF] bg-[#F5F9FF] px-6 py-3 text-sm font-semibold text-[#0039E6] transition-colors hover:border-[#0039E6] hover:bg-white"
+            class="inline-flex min-h-11 w-full items-center justify-center rounded-xl border border-[#D4E4FF] bg-[#F5F9FF] px-6 py-3 text-sm font-semibold text-[#0039E6] transition-colors hover:border-[#0039E6] hover:bg-white sm:w-auto"
           >
             View Our Facilities
           </a>

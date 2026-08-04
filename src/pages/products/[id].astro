@@ -43,9 +43,9 @@ const ogTitle = `${category.name} | Products | Mehta Petro`;
   }}
 >
   <div class="text-[#0A1F4D]">
-    <section class="mx-auto max-w-[85rem] px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
+    <section class="mx-auto max-w-[85rem] px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16">
       <nav
-        class="mb-6 flex flex-wrap items-center gap-2 text-sm text-[#4A5F8C]"
+        class="mb-4 flex flex-wrap items-center gap-2 text-xs text-[#4A5F8C] sm:mb-6 sm:text-sm"
       >
         <a
           href="/products/"
@@ -57,21 +57,21 @@ const ogTitle = `${category.name} | Products | Mehta Petro`;
       </nav>
 
       <div
-        class="grid gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:gap-16"
+        class="grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:gap-16"
       >
-        <div class="space-y-8">
-          <div class="space-y-5">
+        <div class="order-2 space-y-6 sm:space-y-8 lg:order-none">
+          <div class="space-y-4 sm:space-y-5">
             <span
-              class="inline-flex rounded-full border border-[#C0D6FF] bg-white px-4 py-1 text-xs font-semibold tracking-[0.18em] text-[#0039E6] uppercase"
+              class="inline-flex rounded-full border border-[#C0D6FF] bg-white px-3 py-1 text-[11px] font-semibold tracking-[0.18em] text-[#0039E6] uppercase sm:px-4 sm:text-xs"
             >
               Product category
             </span>
             <h1
-              class="max-w-3xl text-4xl font-extrabold tracking-tight text-[#0A1F4D] md:text-5xl"
+              class="max-w-3xl text-3xl font-extrabold tracking-tight text-[#0A1F4D] sm:text-4xl md:text-5xl"
             >
               {category.name}
             </h1>
-            <p class="max-w-2xl text-lg leading-8 text-[#4A5F8C]">
+            <p class="max-w-2xl text-sm leading-7 text-[#4A5F8C] sm:text-base sm:leading-8 md:text-lg">
               {category.description}
             </p>
           </div>
@@ -86,18 +86,18 @@ const ogTitle = `${category.name} | Products | Mehta Petro`;
             <span>Datasheets available</span>
           </div>
 
-          <div class="flex flex-wrap gap-3">
+          <div class="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
             <button
               type="button"
               data-product-inquiry-open
               aria-controls="category-inquiry-modal"
-              class="inline-flex items-center justify-center rounded-xl bg-[#0039E6] px-6 py-3 text-sm font-semibold text-white transition duration-300 hover:bg-[#0033CC]"
+              class="inline-flex min-h-11 w-full items-center justify-center rounded-xl bg-[#0039E6] px-6 py-3 text-sm font-semibold text-white transition duration-300 hover:bg-[#0033CC] sm:w-auto"
             >
               Request Product Information
             </button>
             <a
               href="#products"
-              class="inline-flex items-center justify-center rounded-xl border border-[#D4E4FF] bg-white px-6 py-3 text-sm font-semibold text-[#0039E6] transition duration-300 hover:border-[#0039E6] hover:bg-[#F7FAFF]"
+              class="inline-flex min-h-11 w-full items-center justify-center rounded-xl border border-[#D4E4FF] bg-white px-6 py-3 text-sm font-semibold text-[#0039E6] transition duration-300 hover:border-[#0039E6] hover:bg-[#F7FAFF] sm:w-auto"
             >
               Browse products
             </a>
@@ -105,23 +105,25 @@ const ogTitle = `${category.name} | Products | Mehta Petro`;
         </div>
 
         <div
-          class="relative overflow-hidden rounded-[2rem] shadow-[0_24px_80px_rgba(10,31,77,0.12)]"
+          class="relative order-1 overflow-hidden rounded-2xl shadow-[0_24px_80px_rgba(10,31,77,0.12)] sm:rounded-[2rem] lg:order-none"
         >
           {
             featuredProduct?.imageUrl ? (
               <img
                 src={featuredProduct.imageUrl}
                 alt={featuredProduct.name}
-                class="h-[24rem] w-full object-cover"
+                class="h-52 w-full object-cover sm:h-64 lg:h-[24rem]"
+                loading="lazy"
               />
             ) : category.coverUrl ? (
               <img
                 src={category.coverUrl}
                 alt={category.name}
-                class="h-[24rem] w-full object-cover"
+                class="h-52 w-full object-cover sm:h-64 lg:h-[24rem]"
+                loading="lazy"
               />
             ) : (
-              <div class="flex h-[24rem] w-full items-center justify-center bg-[#F5F9FF] text-center">
+              <div class="flex h-52 w-full items-center justify-center bg-[#F5F9FF] text-center sm:h-64 lg:h-[24rem]">
                 <div>
                   <p class="text-xs font-semibold tracking-[0.18em] text-[#0039E6] uppercase">
                     Product overview
@@ -161,18 +163,18 @@ const ogTitle = `${category.name} | Products | Mehta Petro`;
 
     <section
       id="products"
-      class="mx-auto max-w-[85rem] px-4 py-8 sm:px-6 lg:px-8 lg:py-12"
+      class="mx-auto max-w-[85rem] px-4 py-6 sm:px-6 sm:py-8 lg:px-8 lg:py-12"
     >
       <div
-        class="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between"
+        class="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between sm:gap-4"
       >
         <div>
           <p
-            class="text-sm font-semibold tracking-[0.18em] text-[#0039E6] uppercase"
+            class="text-xs font-semibold tracking-[0.18em] text-[#0039E6] uppercase sm:text-sm"
           >
             Products
           </p>
-          <h2 class="mt-2 text-3xl font-bold text-[#0A1F4D] md:text-4xl">
+          <h2 class="mt-1 text-2xl font-bold text-[#0A1F4D] sm:mt-2 sm:text-3xl md:text-4xl">
             Choose the right product for your application
           </h2>
         </div>
@@ -184,7 +186,7 @@ const ogTitle = `${category.name} | Products | Mehta Petro`;
         </p>
       </div>
 
-      <div class="mt-10 grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
+      <div class="mt-6 grid gap-4 sm:mt-10 sm:grid-cols-2 sm:gap-6 xl:grid-cols-3">
         {
           items.map(item => (
             <ProductCard product={item} categorySlug={categoryId} />
@@ -201,17 +203,17 @@ const ogTitle = `${category.name} | Products | Mehta Petro`;
       }
     </section>
 
-    <section class="mx-auto max-w-[85rem] px-4 py-8 sm:px-6 lg:px-8 lg:py-12">
+    <section class="mx-auto max-w-[85rem] px-4 py-6 sm:px-6 sm:py-8 lg:px-8 lg:py-12">
       <div
-        class="flex flex-col gap-4 rounded-[2rem] bg-white/65 px-6 py-8 backdrop-blur-sm sm:px-8 lg:flex-row lg:items-center lg:justify-between"
+        class="flex flex-col gap-4 rounded-2xl bg-white/65 px-5 py-6 backdrop-blur-sm sm:rounded-[2rem] sm:px-8 sm:py-8 lg:flex-row lg:items-center lg:justify-between"
       >
         <div>
           <p
-            class="text-sm font-semibold tracking-[0.18em] text-[#0039E6] uppercase"
+            class="text-xs font-semibold tracking-[0.18em] text-[#0039E6] uppercase sm:text-sm"
           >
             Need guidance?
           </p>
-          <h3 class="mt-2 text-2xl font-bold text-[#0A1F4D]">
+          <h3 class="mt-1 text-xl font-bold text-[#0A1F4D] sm:mt-2 sm:text-2xl">
             Tell us your target use and we will narrow the range quickly.
           </h3>
         </div>
@@ -219,7 +221,7 @@ const ogTitle = `${category.name} | Products | Mehta Petro`;
           type="button"
           data-product-inquiry-open
           aria-controls="category-inquiry-modal"
-          class="inline-flex items-center justify-center rounded-xl bg-[#0039E6] px-6 py-3 text-sm font-semibold text-white transition duration-300 hover:bg-[#0033CC]"
+          class="inline-flex min-h-11 w-full items-center justify-center rounded-xl bg-[#0039E6] px-6 py-3 text-sm font-semibold text-white transition duration-300 hover:bg-[#0033CC] sm:w-auto"
         >
           Contact our team
         </button>

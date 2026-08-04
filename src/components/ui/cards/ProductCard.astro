@@ -23,24 +23,24 @@ const { product, categorySlug } = Astro.props;
     }
   </div>
 
-  <div class="flex flex-1 flex-col p-5 sm:p-6">
-    <p class="text-xs font-semibold tracking-[0.18em] text-[#0039E6] uppercase">
+  <div class="flex flex-1 flex-col p-4 sm:p-5 md:p-6">
+    <p class="text-[11px] font-semibold tracking-[0.18em] text-[#0039E6] uppercase sm:text-xs">
       Product
     </p>
     <h3
-      class="mt-2 text-lg font-bold text-[#0A1F4D] transition group-hover:text-[#0039E6]"
+      class="mt-1 text-base font-bold text-[#0A1F4D] transition group-hover:text-[#0039E6] sm:mt-2 sm:text-lg"
     >
       {product.name}
     </h3>
     {
       product.description && (
-        <p class="mt-2 text-sm leading-relaxed text-[#4A5F8C]">
+        <p class="mt-2 line-clamp-3 text-sm leading-relaxed text-[#4A5F8C]">
           {product.description}
         </p>
       )
     }
     <div
-      class="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-[#0039E6] transition group-hover:text-[#0033CC]"
+      class="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-[#0039E6] transition group-hover:text-[#0033CC] sm:mt-5"
     >
       View details
       <span aria-hidden="true">→</span>

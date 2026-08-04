@@ -25,6 +25,15 @@ export function isIndexablePage(pageUrl: string): boolean {
   return (INDEXABLE_PATHS as readonly string[]).includes(pathname);
 }
 
+/** robots.txt Allow rules for sitemap and other crawler infrastructure. */
+export function getRobotsInfrastructureAllowRules(): string[] {
+  return [
+    'Allow: /robots.txt$',
+    'Allow: /sitemap-index.xml$',
+    'Allow: /sitemap-0.xml$',
+  ];
+}
+
 /** robots.txt Allow rules for each indexable path. */
 export function getRobotsAllowRules(): string[] {
   const rules: string[] = [];
