@@ -63,8 +63,12 @@ function loadRecaptcha(siteKey) {
       }
 
       const src = `https://www.google.com/recaptcha/api.js?render=${encodeURIComponent(siteKey)}`;
-      const existing = document.querySelector(`script[src="${src}"]`);
+      const existing = document.querySelector(`script[src^="https://www.google.com/recaptcha/api.js"]`);
       if (existing) {
+        if (window.grecaptcha?.ready) {
+          window.grecaptcha.ready(() => resolve());
+          return;
+        }
         existing.addEventListener('load', () => resolve(), { once: true });
         existing.addEventListener('error', reject, { once: true });
         return;
@@ -183,6 +187,97 @@ async function submitCareerForm(form, errorMessage) {
   }
 }
 
+function formatFileSize(bytes) {
+  if (!Number.isFinite(bytes) || bytes <= 0) return '';
+  if (bytes < 1024) return `${bytes} B`;
+  if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
+  return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
+}
+
+function escapeHtml(value) {
+  return String(value)
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;')
+    .replaceAll("'", '&#39;');
+}
+
+function initCareerAttachments(form) {
+  const input = form.querySelector('[data-career-attachments]');
+  const feedback = form.querySelector('[data-career-upload-feedback]');
+  const summary = form.querySelector('[data-career-upload-summary]');
+  const list = form.querySelector('[data-career-upload-list]');
+  const clearButton = form.querySelector('[data-career-upload-clear]');
+  const dropzone = form.querySelector('[data-career-upload-dropzone]');
+  const title = form.querySelector('[data-career-upload-title]');
+  const hint = form.querySelector('[data-career-upload-hint]');
+
+  if (
+    !(input instanceof HTMLInputElement) ||
+    !(feedback instanceof HTMLElement) ||
+    !(summary instanceof HTMLElement) ||
+    !(list instanceof HTMLElement)
+  ) {
+    return () => {};
+  }
+
+  const defaultTitle = title?.textContent?.trim() || 'Tap to upload resume';
+  const defaultHint =
+    hint?.textContent?.trim() || 'PDF, DOC, DOCX, PNG, or JPG · Max 10 MB';
+
+  const render = () => {
+    const files = Array.from(input.files || []);
+
+    if (files.length === 0) {
+      feedback.classList.add('hidden');
+      list.innerHTML = '';
+      summary.textContent = '';
+      if (title) title.textContent = defaultTitle;
+      if (hint) hint.textContent = defaultHint;
+      dropzone?.classList.remove('border-[#0039E6]', 'bg-white');
+      return;
+    }
+
+    const totalSize = files.reduce((sum, file) => sum + file.size, 0);
+    summary.textContent =
+      files.length === 1
+        ? '1 file selected'
+        : `${files.length} files selected · ${formatFileSize(totalSize)}`;
+
+    list.innerHTML = files
+      .map(
+        file =>
+          `<li class="flex items-start justify-between gap-3"><span class="min-w-0 break-all font-medium text-[#0A1F4D]">${escapeHtml(file.name)}</span><span class="shrink-0 text-xs text-[#4A5F8C]">${formatFileSize(file.size)}</span></li>`
+      )
+      .join('');
+
+    feedback.classList.remove('hidden');
+    if (title) title.textContent = 'Files ready to submit';
+    if (hint) {
+      hint.textContent =
+        files.length === 1
+          ? files[0].name
+          : `${files.length} files attached — tap to change`;
+    }
+    dropzone?.classList.add('border-[#0039E6]', 'bg-white');
+  };
+
+  const clear = () => {
+    input.value = '';
+    render();
+  };
+
+  input.addEventListener('change', render);
+  clearButton?.addEventListener('click', event => {
+    event.preventDefault();
+    clear();
+  });
+
+  render();
+  return clear;
+}
+
 function initCareerForm() {
   const form = document.getElementById('career-form');
   if (!form || !(form instanceof HTMLFormElement)) return;
@@ -203,6 +298,7 @@ function initCareerForm() {
   const sendingMessage =
     form.dataset.sendingMessage || 'Sending your application…';
   let successTimeoutId = 0;
+  const clearAttachments = initCareerAttachments(form);
 
   form.addEventListener('submit', async event => {
     event.preventDefault();
@@ -225,6 +321,7 @@ function initCareerForm() {
       await submitCareerForm(form, errorMessage);
 
       form.reset();
+      clearAttachments();
       setStatus(status, successMessage, 'success');
       setButtonLabel(submitButton, originalButtonText);
       successTimeoutId = window.setTimeout(() => {
