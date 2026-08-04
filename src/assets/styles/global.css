@@ -190,3 +190,10 @@
     padding: 1rem;
   }
 }
+
+/* reCAPTCHA v3 badge hidden; disclosure shown in the career form */
+.grecaptcha-badge {
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}

@@ -63,7 +63,9 @@ function loadRecaptcha(siteKey) {
       }
 
       const src = `https://www.google.com/recaptcha/api.js?render=${encodeURIComponent(siteKey)}`;
-      const existing = document.querySelector(`script[src^="https://www.google.com/recaptcha/api.js"]`);
+      const existing = document.querySelector(
+        `script[src^="https://www.google.com/recaptcha/api.js"]`
+      );
       if (existing) {
         if (window.grecaptcha?.ready) {
           window.grecaptcha.ready(() => resolve());
