@@ -6,4 +6,14 @@ const { class: className = 'h-14 w-auto object-contain', ...rest } =
   Astro.props;
 ---
 
-<Image src={logo} alt="Mehta Petro" class={className} {...rest} />
+<Image
+  src={logo}
+  alt="Mehta Petro"
+  class={className}
+  widths={[120, 176, 220]}
+  sizes="176px"
+  loading="eager"
+  decoding="async"
+  format="webp"
+  {...rest}
+/>

@@ -4,14 +4,24 @@ import Lenis from 'lenis';
 
 const HEADER_OFFSET = 88;
 
-const LENIS_OPTIONS = {
-  autoRaf: true,
-  lerp: 0.085,
-  smoothWheel: true,
-  wheelMultiplier: 0.92,
-  touchMultiplier: 1.25,
-  syncTouch: true,
-};
+/** Touch devices use native scroll — Lenis syncTouch often feels laggy on phones. */
+function isCoarsePointer() {
+  return window.matchMedia('(pointer: coarse)').matches;
+}
+
+function getLenisOptions() {
+  const touch = isCoarsePointer();
+
+  return {
+    autoRaf: true,
+    lerp: touch ? 0.14 : 0.1,
+    smoothWheel: !touch,
+    wheelMultiplier: 0.95,
+    touchMultiplier: 1,
+    // Keep native touch scrolling for a smoother mobile feel
+    syncTouch: false,
+  };
+}
 
 function prefersReducedMotion() {
   return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -47,7 +57,7 @@ function bindAnchorScroll(lenis) {
 function createLenis() {
   if (window.__lenis) return window.__lenis;
 
-  const lenis = new Lenis(LENIS_OPTIONS);
+  const lenis = new Lenis(getLenisOptions());
   window.__lenis = lenis;
   bindAnchorScroll(lenis);
 
@@ -81,6 +91,12 @@ function refreshLenisScrollPosition(lenis) {
 
 function initLenis() {
   if (prefersReducedMotion()) {
+    disableLenis();
+    return;
+  }
+
+  // On phones, prefer native scrolling for snappier UX
+  if (isCoarsePointer()) {
     disableLenis();
     return;
   }

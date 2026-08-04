@@ -1,13 +1,12 @@
 ---
-// Import the necessary components
 import MainLayout from '@/layouts/MainLayout.astro';
 import ContactSection from '@components/sections/misc/ContactSection.astro';
 import { SITE } from '@data/constants';
 
 const pageTitle: string = `Contact | ${SITE.title}`;
 const metaDescription =
-  "Have questions or want to discuss a project? Reach out, and let's craft the perfect solution with our tools and services.";
-const ogTitle = 'Contact Us | Mehta Petro';
+  'Contact Mehta Petro for product enquiries, specifications, and commercial support. Reach our Mumbai office or manufacturing facilities.';
+const ogTitle = pageTitle;
 ---
 
 <MainLayout
@@ -16,18 +15,16 @@ const ogTitle = 'Contact Us | Mehta Petro';
   customOgTitle={ogTitle}
   structuredData={{
     '@context': 'https://schema.org',
-    '@type': 'WebPage',
-    '@id': 'https://mehtapetro.com/contact',
-    url: 'https://mehtapetro.com/contact',
-    name: 'Contact Us | Mehta Petro',
-    description:
-      "Have questions or want to discuss a project? Reach out, and let's craft the perfect solution with our tools and services.",
+    '@type': 'ContactPage',
+    '@id': `${SITE.url}/contact`,
+    url: `${SITE.url}/contact`,
+    name: pageTitle,
+    description: metaDescription,
     isPartOf: {
       '@type': 'WebSite',
-      url: 'https://mehtapetro.com',
-      name: 'Mehta Petro',
-      description:
-        'Mehta Petro offers top-tier hardware tools and expert construction services to meet all your project needs.',
+      url: SITE.url,
+      name: SITE.legalName,
+      description: SITE.description,
     },
     inLanguage: 'en-US',
   }}

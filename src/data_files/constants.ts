@@ -2,11 +2,12 @@ import ogImageSrc from '@images/social.png';
 
 export const SITE = {
   title: 'Mehta Petro',
+  legalName: 'Mehta Petro-Refineries Limited',
   tagline: 'Performance Through Quality',
   description:
-    'Mehta Petro-Refineries Limited delivers Performance Through Quality with petrochemicals and specialty base oils since 1993.',
+    'Mehta Petro-Refineries Limited manufactures petrochemical solvents, specialty base oils, and industrial chemicals with Performance Through Quality since 1993.',
   description_short:
-    'Mehta Petro-Refineries Limited delivers Performance Through Quality with petrochemicals and specialty base oils since 1993.',
+    'ISO-certified manufacturer of petrochemical solvents and specialty base oils since 1993.',
   url: 'https://www.mehtapetro.com',
   author: 'Mehta Petro',
 };
@@ -25,7 +26,7 @@ export const SEO = {
     isPartOf: {
       '@type': 'WebSite',
       url: SITE.url,
-      name: SITE.title,
+      name: SITE.legalName,
       description: SITE.description,
     },
   },
@@ -35,9 +36,8 @@ export const OG = {
   locale: 'en_US',
   type: 'website',
   url: SITE.url,
-  title: `${SITE.title}: Performance Through Quality`,
-  description:
-    'Mehta Petro-Refineries Limited delivers Performance Through Quality with petrochemicals and specialty base oils since 1993.',
+  title: `${SITE.legalName} | ${SITE.tagline}`,
+  description: SITE.description,
   image: ogImageSrc,
 };
 

@@ -1,73 +1,92 @@
-const marqueeControllers = new WeakMap();
+/**
+ * Continuous client-logo marquee.
+ * Uses rAF + pixel translate so it works even when % CSS transforms fail
+ * under max-content widths / view transitions.
+ */
+const SPEED_PX_PER_SEC = 60;
 
-function destroyMarquee(marquee) {
-  const controller = marqueeControllers.get(marquee);
-  if (!controller) return;
+/** @type {WeakMap<Element, { stop: () => void }>} */
+const running = new WeakMap();
 
-  window.cancelAnimationFrame(controller.animationFrame);
-  window.removeEventListener('resize', controller.measure);
-  marqueeControllers.delete(marquee);
-}
+/**
+ * @param {HTMLElement} root
+ */
+function startMarquee(root) {
+  const existing = running.get(root);
+  if (existing) existing.stop();
 
-function initClientMarquees() {
-  document.querySelectorAll('[data-client-marquee]').forEach(marquee => {
-    if (!(marquee instanceof HTMLElement)) return;
+  const viewport = root.querySelector('.client-marquee__viewport');
+  const sequence = root.querySelector('.client-marquee__sequence');
+  if (!(viewport instanceof HTMLElement) || !(sequence instanceof HTMLElement)) {
+    return;
+  }
 
-    destroyMarquee(marquee);
+  let offset = 0;
+  let frame = 0;
+  let last = performance.now();
+  let paused = false;
 
-    const track = marquee.querySelector('[data-client-marquee-track]');
-    const group = marquee.querySelector('[data-client-marquee-group]');
+  const onEnter = () => {
+    paused = true;
+  };
+  const onLeave = () => {
+    paused = false;
+    last = performance.now();
+  };
 
-    if (!(track instanceof HTMLElement) || !(group instanceof HTMLElement))
+  root.addEventListener('pointerenter', onEnter);
+  root.addEventListener('pointerleave', onLeave);
+
+  const tick = now => {
+    if (!root.isConnected) {
+      cancelAnimationFrame(frame);
+      running.delete(root);
       return;
+    }
 
-    let animationFrame = 0;
-    let lastTime = 0;
-    let offset = 0;
-    let groupWidth = 0;
-    const pixelsPerSecond = 28;
-
-    const measure = () => {
-      groupWidth = group.getBoundingClientRect().width;
-      track.style.transform = 'translate3d(0, 0, 0)';
-      offset = 0;
-    };
-
-    const tick = time => {
-      if (!lastTime) lastTime = time;
-      const delta = time - lastTime;
-      lastTime = time;
-
-      if (groupWidth > 0) {
-        offset += (pixelsPerSecond * delta) / 1000;
-
-        if (offset >= groupWidth) {
-          offset = 0;
-        }
-
-        track.style.transform = `translate3d(-${offset}px, 0, 0)`;
+    const loopWidth = sequence.offsetWidth;
+    if (loopWidth > 0 && !paused) {
+      const dt = Math.min((now - last) / 1000, 0.064);
+      offset -= SPEED_PX_PER_SEC * dt;
+      if (-offset >= loopWidth) {
+        offset += loopWidth;
       }
+      viewport.style.transform = `translate3d(${offset}px,0,0)`;
+    }
+    last = now;
+    frame = requestAnimationFrame(tick);
+  };
 
-      animationFrame = window.requestAnimationFrame(tick);
-      controller.animationFrame = animationFrame;
-    };
+  viewport.style.animation = 'none';
+  viewport.style.willChange = 'transform';
+  frame = requestAnimationFrame(tick);
 
-    const controller = { animationFrame: 0, measure };
-    marqueeControllers.set(marquee, controller);
-
-    window.addEventListener('resize', measure);
-    measure();
-    animationFrame = window.requestAnimationFrame(tick);
-    controller.animationFrame = animationFrame;
+  running.set(root, {
+    stop() {
+      cancelAnimationFrame(frame);
+      root.removeEventListener('pointerenter', onEnter);
+      root.removeEventListener('pointerleave', onLeave);
+      viewport.style.willChange = '';
+    },
   });
 }
 
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initClientMarquees);
-} else {
+function initClientMarquees() {
+  document.querySelectorAll('.client-marquee').forEach(root => {
+    if (root instanceof HTMLElement) startMarquee(root);
+  });
+}
+
+function boot() {
   initClientMarquees();
 }
 
-document.addEventListener('astro:page-load', initClientMarquees);
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', boot);
+} else {
+  boot();
+}
+
+document.addEventListener('astro:page-load', boot);
 
 export {};

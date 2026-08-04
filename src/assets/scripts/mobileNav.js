@@ -22,13 +22,21 @@ function getElements() {
  * @param {HTMLButtonElement} toggle
  */
 function openMenu(menu, toggle) {
+  menu.dataset.open = 'true';
   menu.classList.remove('invisible', 'opacity-0', 'pointer-events-none');
-  menu.classList.add('opacity-100', 'pointer-events-auto', 'touch-none');
+  menu.classList.add('opacity-100', 'pointer-events-auto');
   menu.setAttribute('aria-hidden', 'false');
   menu.removeAttribute('inert');
   toggle.setAttribute('aria-expanded', 'true');
+  toggle.setAttribute('aria-label', 'Close menu');
   document.documentElement.classList.add('overflow-hidden');
+  document.body.classList.add('overflow-hidden');
   getLenis()?.stop();
+
+  const closeBtn = document.getElementById(CLOSE_ID);
+  if (closeBtn instanceof HTMLElement) {
+    window.requestAnimationFrame(() => closeBtn.focus());
+  }
 }
 
 /**
@@ -36,12 +44,15 @@ function openMenu(menu, toggle) {
  * @param {HTMLButtonElement} toggle
  */
 function closeMenu(menu, toggle) {
+  delete menu.dataset.open;
   menu.classList.add('invisible', 'opacity-0', 'pointer-events-none');
-  menu.classList.remove('opacity-100', 'pointer-events-auto', 'touch-none');
+  menu.classList.remove('opacity-100', 'pointer-events-auto');
   menu.setAttribute('aria-hidden', 'true');
   menu.setAttribute('inert', '');
   toggle.setAttribute('aria-expanded', 'false');
+  toggle.setAttribute('aria-label', 'Open menu');
   document.documentElement.classList.remove('overflow-hidden');
+  document.body.classList.remove('overflow-hidden');
   getLenis()?.start();
 }
 
@@ -49,6 +60,7 @@ function resetMenuState() {
   const elements = getElements();
   if (!elements) {
     document.documentElement.classList.remove('overflow-hidden');
+    document.body.classList.remove('overflow-hidden');
     getLenis()?.start();
     return;
   }

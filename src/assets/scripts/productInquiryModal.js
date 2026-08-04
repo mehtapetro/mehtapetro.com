@@ -1,4 +1,10 @@
 // Product inquiry modal open/close — survives Astro view transitions.
+import {
+  focusFirstField,
+  lockPageScroll,
+  trapFocus,
+  unlockPageScroll,
+} from '@scripts/dialogFocus.js';
 
 /**
  * @param {HTMLElement} modal
@@ -7,8 +13,7 @@ function closeInquiryModal(modal) {
   modal.classList.add('hidden');
   modal.classList.remove('flex');
   modal.setAttribute('aria-hidden', 'true');
-  document.body.classList.remove('overflow-hidden');
-  window.__lenis?.start();
+  unlockPageScroll();
 }
 
 /**
@@ -18,8 +23,8 @@ function openInquiryModal(modal) {
   modal.classList.remove('hidden');
   modal.classList.add('flex');
   modal.setAttribute('aria-hidden', 'false');
-  document.body.classList.add('overflow-hidden');
-  window.__lenis?.stop();
+  lockPageScroll();
+  window.requestAnimationFrame(() => focusFirstField(modal));
 }
 
 /**
@@ -32,6 +37,16 @@ function getInquiryModal(modalId) {
   }
 
   const modal = document.querySelector('[data-product-inquiry-modal]');
+  return modal instanceof HTMLElement ? modal : null;
+}
+
+/**
+ * @returns {HTMLElement | null}
+ */
+function getOpenInquiryModal() {
+  const modal = document.querySelector(
+    '[data-product-inquiry-modal][aria-hidden="false"]'
+  );
   return modal instanceof HTMLElement ? modal : null;
 }
 
@@ -60,16 +75,15 @@ function bindProductInquiryModals() {
   });
 
   document.addEventListener('keydown', event => {
-    if (event.key !== 'Escape') return;
+    const openModal = getOpenInquiryModal();
+    if (!openModal) return;
 
-    document.querySelectorAll('[data-product-inquiry-modal]').forEach(modal => {
-      if (
-        modal instanceof HTMLElement &&
-        modal.getAttribute('aria-hidden') === 'false'
-      ) {
-        closeInquiryModal(modal);
-      }
-    });
+    if (event.key === 'Escape') {
+      closeInquiryModal(openModal);
+      return;
+    }
+
+    trapFocus(openModal, event);
   });
 
   document.addEventListener('contact-form:success', event => {
@@ -79,7 +93,7 @@ function bindProductInquiryModals() {
     const modal = form.closest('[data-product-inquiry-modal]');
     if (!(modal instanceof HTMLElement)) return;
 
-    window.setTimeout(() => closeInquiryModal(modal), 2500);
+    window.setTimeout(() => closeInquiryModal(modal), 1800);
   });
 
   document.addEventListener('astro:page-load', () => {
@@ -91,8 +105,7 @@ function bindProductInquiryModals() {
         closeInquiryModal(modal);
       }
     });
-    document.body.classList.remove('overflow-hidden');
-    window.__lenis?.start();
+    unlockPageScroll();
   });
 }
 

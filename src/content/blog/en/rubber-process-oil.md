@@ -1,6 +1,6 @@
 ---
-title: 'Chemical Application: Rubber Process Oil in Industrial Rubber Compounding'
-description: 'Mehta Petro announces a new application of rubber process oil improving performance and processing in rubber compounding.'
+title: 'Rubber Process Oil for Industrial Compounding'
+description: 'Mehta Petro shares rubber process oil applications that improve processing, dispersion, and performance in industrial rubber compounding.'
 pubDate: 2026-07-31
 author: 'Mehta Petro Research'
 readTime: 4
@@ -21,4 +21,4 @@ Key benefits observed:
 
 Mehta Petro is offering technical support and sample evaluation for compounders seeking to test optimized process oils in their formulations. Contact our technical team for detailed specs and trial arrangements.
 
-Learn more about our materials and sample program on the Products page or reach out via the Contact form.
+Learn more about our materials and sample program on the [Products](/products/) page or reach out via the [Contact](/contact/) form.

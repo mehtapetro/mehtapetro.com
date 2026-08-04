@@ -21,8 +21,8 @@ const featuredProduct = items[0];
 const pageTitle: string = `${category.name} | ${SITE.title}`;
 const metaDescription =
   category.description ||
-  `Browse the ${category.name.toLowerCase()} range of industrial products, with product cards, datasheets, and related details.`;
-const ogTitle = `${category.name} | Products | Mehta Petro`;
+  `Explore ${category.name} from Mehta Petro — product grades, specifications, and enquiry support for industrial applications.`;
+const ogTitle = pageTitle;
 ---
 
 <MainLayout
@@ -33,13 +33,15 @@ const ogTitle = `${category.name} | Products | Mehta Petro`;
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',
     '@id': `${SITE.url}/products/${categoryId}`,
-    name: category.name,
-    description: category.description || '',
+    url: `${SITE.url}/products/${categoryId}`,
+    name: pageTitle,
+    description: metaDescription,
     isPartOf: {
       '@type': 'WebSite',
       url: SITE.url,
-      name: 'Mehta Petro',
+      name: SITE.legalName,
     },
+    inLanguage: 'en-US',
   }}
 >
   <div class="text-[#0A1F4D]">

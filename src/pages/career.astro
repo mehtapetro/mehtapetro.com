@@ -7,11 +7,17 @@ import PhoneInput from '@components/ui/forms/input/PhoneInput.astro';
 import TextAreaInput from '@components/ui/forms/input/TextAreaInput.astro';
 import AuthBtn from '@components/ui/buttons/AuthBtn.astro';
 
-const pageTitle = `Career | ${SITE.title}`;
+const pageTitle = `Careers | ${SITE.title}`;
 const metaDescription =
-  'Join our team at Mehta Petro-Refineries Limited. Explore career opportunities and become part of our growing family.';
-const ogTitle = 'Career | Mehta Petro';
+  'Explore career opportunities at Mehta Petro-Refineries Limited. Join a growing team in petrochemical manufacturing and industrial chemicals.';
+const ogTitle = pageTitle;
 const RECAPTCHA_SITE_KEY = import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY || '';
+
+const steps = [
+  'Fill in your contact details',
+  'Attach your resume (PDF or DOC)',
+  'Submit — we’ll get back to you',
+];
 ---
 
 <MainLayout
@@ -21,56 +27,72 @@ const RECAPTCHA_SITE_KEY = import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY || '';
   structuredData={{
     '@context': 'https://schema.org',
     '@type': 'WebPage',
-    '@id': 'https://mehtapetro.com/career',
-    url: 'https://mehtapetro.com/career',
-    name: 'Career | Mehta Petro',
+    '@id': `${SITE.url}/career`,
+    url: `${SITE.url}/career`,
+    name: pageTitle,
     description: metaDescription,
     inLanguage: 'en-US',
   }}
 >
   <section
-    class="mx-auto max-w-[85rem] px-4 py-8 sm:px-6 sm:py-10 lg:px-8 lg:py-14"
+    class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 sm:py-12 lg:px-8 lg:py-16"
   >
     <div class="mx-auto max-w-5xl">
-      <div class="mx-auto max-w-3xl text-center">
-        <span
-          class="inline-flex rounded-full border border-[#C0D6FF] bg-white px-3 py-1 text-[0.7rem] font-semibold tracking-[0.16em] text-[#0039E6] uppercase sm:px-4 sm:text-xs"
-        >
-          Career
-        </span>
-        <h1
-          class="mt-4 text-3xl font-extrabold tracking-tight text-balance text-[#0A1F4D] sm:mt-5 sm:text-4xl md:text-5xl"
-        >
-          Join Our Team
-        </h1>
-        <p
-          class="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-[#4A5F8C] sm:mt-4 sm:text-base md:text-lg"
-        >
-          Build your career with a trusted name in the petrochemical industry.
-          We're always looking for talented individuals who share our commitment
-          to quality and innovation.
-        </p>
-      </div>
+      <div
+        class="grid items-start gap-8 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-12"
+      >
+        <div class="lg:sticky lg:top-28">
+          <p
+            class="text-xs font-semibold tracking-[0.18em] text-[#0039E6] uppercase"
+          >
+            Career
+          </p>
+          <h1
+            class="mt-3 text-3xl font-extrabold tracking-tight text-balance text-[#0A1F4D] sm:text-4xl md:text-5xl"
+          >
+            Join Our Team
+          </h1>
+          <p
+            class="mt-3 max-w-xl text-sm leading-relaxed text-[#4A5F8C] sm:mt-4 sm:text-base md:text-lg"
+          >
+            Build your career with a trusted name in the petrochemical industry.
+            Share your details and resume — we review every application
+            carefully.
+          </p>
 
-      <div class="mt-8 sm:mt-10">
+          <ol
+            class="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-3 lg:grid-cols-1 lg:gap-3"
+          >
+            {
+              steps.map((step, index) => (
+                <li class="flex items-start gap-3 rounded-xl border border-[#D4E4FF] bg-white/70 px-3.5 py-3 lg:border-0 lg:bg-transparent lg:px-0 lg:py-0">
+                  <span
+                    class="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#E8F0FF] text-xs font-bold text-[#0039E6]"
+                    aria-hidden="true"
+                  >
+                    {index + 1}
+                  </span>
+                  <span class="text-sm leading-snug text-[#4A5F8C]">{step}</span>
+                </li>
+              ))
+            }
+          </ol>
+        </div>
+
         <div
-          class="mx-auto w-full max-w-3xl overflow-hidden rounded-2xl border border-[#D4E4FF] bg-white shadow-lg"
+          class="rounded-2xl border border-[#D4E4FF] bg-white shadow-[0_20px_50px_-40px_rgba(10,31,77,0.35)]"
         >
-          <div class="border-b border-[#E3EBFF] px-5 py-5 sm:px-8 sm:py-6">
+          <div
+            class="rounded-t-2xl border-b border-[#E3EBFF] bg-linear-to-br from-[#F7FAFF] via-white to-white px-4 py-4 sm:px-6 sm:py-5"
+          >
             <p
-              class="text-xs font-semibold tracking-[0.16em] text-[#0039E6] uppercase sm:text-sm"
+              class="text-[11px] font-semibold tracking-[0.16em] text-[#0039E6] uppercase sm:text-xs"
             >
               Apply online
             </p>
-            <h2
-              class="mt-1.5 text-xl font-bold text-[#0A1F4D] sm:mt-2 sm:text-2xl"
-            >
+            <h2 class="mt-1.5 text-xl font-bold text-[#0A1F4D] sm:text-2xl">
               Submit your application
             </h2>
-            <p class="mt-2 text-sm leading-6 text-[#4A5F8C]">
-              Attach your resume and include a short cover letter. We review
-              every application carefully.
-            </p>
           </div>
 
           <form
@@ -78,7 +100,7 @@ const RECAPTCHA_SITE_KEY = import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY || '';
             action="https://usebasin.com/f/6324cbafbb15"
             method="post"
             enctype="multipart/form-data"
-            class="flex flex-col gap-4 px-5 py-5 sm:gap-5 sm:px-8 sm:py-6"
+            class="flex flex-col gap-4 px-4 py-5 sm:gap-5 sm:px-6 sm:py-6"
             data-success-message="Thank you — your application has been submitted."
             data-error-message="Sorry, we could not submit your application. Please try again."
             data-sending-message="Sending your application…"
@@ -97,6 +119,7 @@ const RECAPTCHA_SITE_KEY = import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY || '';
               label="Phone number"
               countryLabel="Country code"
               defaultCountryCode="IN"
+              required={true}
               minDigits={10}
               maxDigits={10}
             />
@@ -112,10 +135,10 @@ const RECAPTCHA_SITE_KEY = import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY || '';
               id="career-message"
               label="Cover letter / message"
               name="message"
-              rows={6}
+              rows={4}
               maxlength={500}
               showCharCount={true}
-              class="min-h-[8.5rem] resize-y sm:min-h-[10rem]"
+              class="min-h-[6.5rem] resize-y sm:min-h-[8rem]"
             />
 
             <div>
@@ -123,19 +146,27 @@ const RECAPTCHA_SITE_KEY = import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY || '';
                 for="career-attachments"
                 class="mb-2 block text-sm font-semibold text-[#0A1F4D]"
               >
-                Attachments
+                Resume / attachments
               </label>
-              <input
-                id="career-attachments"
-                name="attachments[]"
-                type="file"
-                multiple
-                accept=".pdf,.doc,.docx,.png,.jpg,.jpeg"
-                class="block w-full rounded-lg border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm text-neutral-700 file:mr-3 file:rounded-md file:border-0 file:bg-[#E8F0FF] file:px-3 file:py-1.5 file:text-sm file:font-semibold file:text-[#0039E6]"
-              />
-              <p class="mt-2 text-xs leading-5 text-[#4A5F8C]">
-                Accepted formats: PDF, DOC, DOCX, PNG, JPG. Max 10 MB per file.
-              </p>
+              <label
+                for="career-attachments"
+                class="flex min-h-[5.5rem] cursor-pointer flex-col items-center justify-center gap-1.5 rounded-xl border border-dashed border-[#C0D6FF] bg-[#F7FAFF] px-4 py-5 text-center transition hover:border-[#0039E6] active:bg-white"
+              >
+                <span class="text-sm font-semibold text-[#0039E6]"
+                  >Tap to upload resume</span
+                >
+                <span class="text-xs leading-5 text-[#4A5F8C]">
+                  PDF, DOC, DOCX, PNG, or JPG · Max 10 MB
+                </span>
+                <input
+                  id="career-attachments"
+                  name="attachments[]"
+                  type="file"
+                  multiple
+                  accept=".pdf,.doc,.docx,.png,.jpg,.jpeg"
+                  class="sr-only"
+                />
+              </label>
             </div>
 
             <p
@@ -145,172 +176,12 @@ const RECAPTCHA_SITE_KEY = import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY || '';
             >
             </p>
 
-            <div>
+            <div
+              class="sticky bottom-0 -mx-4 border-t border-[#E3EBFF] bg-white/95 px-4 pt-4 pb-[max(1rem,env(safe-area-inset-bottom))] backdrop-blur-sm sm:static sm:mx-0 sm:border-t sm:bg-transparent sm:px-0 sm:pt-4 sm:pb-0 sm:backdrop-blur-none"
+            >
               <AuthBtn title="Submit Application" />
             </div>
           </form>
-        </div>
-
-        <div class="mt-8 space-y-6 sm:mt-10">
-          <div
-            class="rounded-2xl border border-[#D4E4FF] bg-white p-5 shadow-lg sm:p-8"
-          >
-            <h2 class="text-xl font-bold text-[#0A1F4D] sm:text-2xl">
-              Why Work With Us
-            </h2>
-            <p class="mt-2 text-sm leading-6 text-[#4A5F8C]">
-              At Mehta Petro we value safety, growth, and teamwork.
-            </p>
-
-            <div class="mt-5 grid gap-4 sm:grid-cols-2">
-              <div class="flex gap-3 sm:gap-4">
-                <div
-                  class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#E8F0FF]"
-                >
-                  <svg
-                    class="h-5 w-5 text-[#0039E6]"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    aria-hidden="true"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-                  </svg>
-                </div>
-                <div>
-                  <h3 class="font-semibold text-[#0A1F4D]">
-                    Growth Opportunities
-                  </h3>
-                  <p class="mt-1 text-sm leading-6 text-[#4A5F8C]">
-                    Learning programs and internal mobility.
-                  </p>
-                </div>
-              </div>
-
-              <div class="flex gap-3 sm:gap-4">
-                <div
-                  class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#E8F0FF]"
-                >
-                  <svg
-                    class="h-5 w-5 text-[#0039E6]"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    aria-hidden="true"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"
-                    ></path>
-                  </svg>
-                </div>
-                <div>
-                  <h3 class="font-semibold text-[#0A1F4D]">Experienced Team</h3>
-                  <p class="mt-1 text-sm leading-6 text-[#4A5F8C]">
-                    Collaborate with industry experts.
-                  </p>
-                </div>
-              </div>
-
-              <div class="flex gap-3 sm:gap-4">
-                <div
-                  class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#E8F0FF]"
-                >
-                  <svg
-                    class="h-5 w-5 text-[#0039E6]"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    aria-hidden="true"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M9 12l2 2 4-4"></path>
-                  </svg>
-                </div>
-                <div>
-                  <h3 class="font-semibold text-[#0A1F4D]">Safety First</h3>
-                  <p class="mt-1 text-sm leading-6 text-[#4A5F8C]">
-                    Robust safety protocols and training.
-                  </p>
-                </div>
-              </div>
-
-              <div class="flex gap-3 sm:gap-4">
-                <div
-                  class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#E8F0FF]"
-                >
-                  <svg
-                    class="h-5 w-5 text-[#0039E6]"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    aria-hidden="true"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2-1.343-2-3-2z"
-                    ></path>
-                  </svg>
-                </div>
-                <div>
-                  <h3 class="font-semibold text-[#0A1F4D]">
-                    Competitive Benefits
-                  </h3>
-                  <p class="mt-1 text-sm leading-6 text-[#4A5F8C]">
-                    Competitive pay and benefits.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div>
-            <h2 class="text-lg font-bold text-[#0A1F4D] sm:text-xl">
-              Current Openings
-            </h2>
-            <div class="mt-4 grid gap-4 sm:grid-cols-2">
-              <article
-                class="rounded-xl border border-[#D4E4FF] bg-white p-4 shadow-sm sm:p-5"
-              >
-                <h3 class="font-semibold text-[#0A1F4D]">
-                  Production Engineer
-                </h3>
-                <p class="mt-1 text-sm text-[#4A5F8C]">Full-time • Palghar</p>
-                <p class="mt-2 text-sm leading-6 text-[#4A5F8C]">
-                  Responsible for overseeing production processes and ensuring
-                  quality standards.
-                </p>
-              </article>
-
-              <article
-                class="rounded-xl border border-[#D4E4FF] bg-white p-4 shadow-sm sm:p-5"
-              >
-                <h3 class="font-semibold text-[#0A1F4D]">
-                  Maintenance Technician
-                </h3>
-                <p class="mt-1 text-sm text-[#4A5F8C]">Full-time • Dahej</p>
-                <p class="mt-2 text-sm leading-6 text-[#4A5F8C]">
-                  Perform routine maintenance and respond to equipment issues.
-                </p>
-              </article>
-            </div>
-
-            <p class="mt-4 text-sm leading-6 text-[#4A5F8C]">
-              Don't see a match? Submit a general application above and we'll
-              keep your details on file.
-            </p>
-          </div>
         </div>
       </div>
     </div>

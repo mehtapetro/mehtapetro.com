@@ -56,8 +56,8 @@ const productInquiryGateKey = 'mehta-petro-product-contact-completed';
 
 const pageTitle: string = `Products | ${SITE.title}`;
 const metaDescription =
-  "Explore Mehta Petro-Refineries Limited's comprehensive range of petrochemical solvents, specialty base oils, n-paraffins, olefins, and specialty chemicals.";
-const ogTitle = 'Products | Mehta Petro';
+  'Browse Mehta Petro petrochemical solvents, specialty base oils, rubber process oils, glycols, and industrial chemicals manufactured since 1993.';
+const ogTitle = pageTitle;
 ---
 
 <MainLayout
@@ -67,9 +67,9 @@ const ogTitle = 'Products | Mehta Petro';
   structuredData={{
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',
-    '@id': 'https://mehtapetro.com/products',
-    url: 'https://mehtapetro.com/products',
-    name: 'Products | Mehta Petro',
+    '@id': `${SITE.url}/products`,
+    url: `${SITE.url}/products`,
+    name: pageTitle,
     description: metaDescription,
     inLanguage: 'en-US',
   }}
@@ -90,10 +90,11 @@ const ogTitle = 'Products | Mehta Petro';
     <button
       type="button"
       class="absolute inset-0 cursor-not-allowed"
-      aria-label="Complete the form to continue"
+      aria-label="Complete the form to continue browsing products"
       disabled></button>
 
     <div
+      data-products-gate-panel
       class="relative z-10 flex max-h-[92dvh] w-full max-w-2xl flex-col overflow-hidden rounded-t-2xl border border-[#D4E4FF] bg-white shadow-[0_30px_80px_-40px_rgba(10,31,77,0.45)] sm:max-h-[92vh] sm:rounded-2xl"
     >
       <div
@@ -158,6 +159,7 @@ const ogTitle = 'Products | Mehta Petro';
               name="firstName"
               type="text"
               required
+              autocomplete="given-name"
               class="block min-h-11 w-full rounded-lg border border-neutral-200 bg-neutral-50 px-4 py-3 text-base text-neutral-700 placeholder:text-neutral-500 focus:border-[#B8CEFF] focus:ring-3 focus:ring-[#DDE9FF] focus:outline-hidden sm:text-sm"
               placeholder="First name"
             />
@@ -170,24 +172,24 @@ const ogTitle = 'Products | Mehta Petro';
               id="products-gate-last-name"
               name="lastName"
               type="text"
+              autocomplete="family-name"
               class="block min-h-11 w-full rounded-lg border border-neutral-200 bg-neutral-50 px-4 py-3 text-base text-neutral-700 placeholder:text-neutral-500 focus:border-[#B8CEFF] focus:ring-3 focus:ring-[#DDE9FF] focus:outline-hidden sm:text-sm"
               placeholder="Last name"
             />
           </div>
         </div>
 
-        <div class="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
-          <div>
-            <label for="products-gate-email" class="sr-only">Email</label>
-            <input
-              id="products-gate-email"
-              name="email"
-              type="email"
-              required
-              class="block min-h-11 w-full rounded-lg border border-neutral-200 bg-neutral-50 px-4 py-3 text-base text-neutral-700 placeholder:text-neutral-500 focus:border-[#B8CEFF] focus:ring-3 focus:ring-[#DDE9FF] focus:outline-hidden sm:text-sm"
-              placeholder="Email address"
-            />
-          </div>
+        <div>
+          <label for="products-gate-email" class="sr-only">Email</label>
+          <input
+            id="products-gate-email"
+            name="email"
+            type="email"
+            required
+            autocomplete="email"
+            class="block min-h-11 w-full rounded-lg border border-neutral-200 bg-neutral-50 px-4 py-3 text-base text-neutral-700 placeholder:text-neutral-500 focus:border-[#B8CEFF] focus:ring-3 focus:ring-[#DDE9FF] focus:outline-hidden sm:text-sm"
+            placeholder="Email address"
+          />
         </div>
 
         <PhoneInput
@@ -196,6 +198,9 @@ const ogTitle = 'Products | Mehta Petro';
           label="Phone number"
           countryLabel="Country"
           defaultCountryCode="IN"
+          required={true}
+          minDigits={10}
+          maxDigits={10}
         />
 
         <div>
@@ -226,18 +231,27 @@ const ogTitle = 'Products | Mehta Petro';
         >
         </p>
 
-        <div
-          class="mt-auto flex flex-col gap-3 border-t border-[#E3EBFF] pt-4 sm:flex-row sm:items-center sm:justify-between"
-        >
-          <p class="text-xs leading-5 text-[#4A5F8C]">
-            This appears only once per browser after a successful submission.
-          </p>
-          <button
-            type="submit"
-            class="inline-flex min-h-11 w-full shrink-0 items-center justify-center rounded-xl bg-[#0039E6] px-6 py-3 text-sm font-semibold text-white shadow-[0_20px_45px_-25px_rgba(0,57,230,0.95)] transition duration-300 hover:bg-[#0033CC] sm:w-auto"
+        <div class="mt-auto flex flex-col gap-3 border-t border-[#E3EBFF] pt-4">
+          <div
+            class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-end"
           >
-            Continue to products
-          </button>
+            <a
+              href="/"
+              class="inline-flex min-h-11 w-full items-center justify-center rounded-xl border border-[#D4E4FF] bg-white px-6 py-3 text-sm font-semibold text-[#0A1F4D] transition hover:border-[#0039E6] hover:bg-[#F5F9FF] sm:w-auto"
+            >
+              Go to home
+            </a>
+            <button
+              type="submit"
+              class="inline-flex min-h-11 w-full shrink-0 items-center justify-center rounded-xl bg-[#0039E6] px-6 py-3 text-sm font-semibold text-white shadow-[0_20px_45px_-25px_rgba(0,57,230,0.95)] transition duration-300 hover:bg-[#0033CC] sm:w-auto"
+            >
+              Submit & continue
+            </button>
+          </div>
+          <p class="text-center text-xs leading-5 text-[#4A5F8C] sm:text-left">
+            Product browsing unlocks after you submit. Or return home without
+            viewing the catalog.
+          </p>
         </div>
       </form>
     </div>
@@ -261,8 +275,8 @@ const ogTitle = 'Products | Mehta Petro';
         <p
           class="mt-4 max-w-3xl text-sm leading-relaxed text-[#4A5F8C] sm:mt-5 sm:text-base md:text-lg"
         >
-          Explore solvents, base oils, glycols, drilling fluids, and specialty
-          additives, organized for quick product selection and enquiries.
+          Explore solvents, base oils, glycols, rubber process oils, and specialty
+          chemicals, organized for quick product selection and enquiries.
         </p>
 
         <div class="mt-6 grid grid-cols-2 gap-3 sm:mt-8 sm:gap-4 lg:grid-cols-3">
@@ -417,6 +431,13 @@ const ogTitle = 'Products | Mehta Petro';
   </section>
 
   <script>
+    import {
+      focusFirstField,
+      lockPageScroll,
+      trapFocus,
+      unlockPageScroll,
+    } from '@scripts/dialogFocus.js';
+
     function initProductsContactGate() {
       const gate = document.querySelector('#products-contact-gate');
       if (!(gate instanceof HTMLElement) || gate.dataset.gateBound === 'true') {
@@ -425,19 +446,23 @@ const ogTitle = 'Products | Mehta Petro';
 
       gate.dataset.gateBound = 'true';
       const gateStorageKey = 'mehta-petro-product-contact-completed';
+      const panel = gate.querySelector('[data-products-gate-panel]');
 
       const openGate = () => {
         gate.classList.remove('hidden');
         gate.classList.add('flex');
         gate.setAttribute('aria-hidden', 'false');
-        document.body.style.overflow = 'hidden';
+        lockPageScroll();
+        window.requestAnimationFrame(() => {
+          if (panel instanceof HTMLElement) focusFirstField(panel);
+        });
       };
 
       const closeGate = () => {
         gate.classList.add('hidden');
         gate.classList.remove('flex');
         gate.setAttribute('aria-hidden', 'true');
-        document.body.style.overflow = '';
+        unlockPageScroll();
       };
 
       let hasCompletedGate = false;
@@ -468,13 +493,21 @@ const ogTitle = 'Products | Mehta Petro';
         gateCloseTimeoutId = window.setTimeout(() => {
           closeGate();
           gateCloseTimeoutId = 0;
-        }, 3000);
+        }, 1800);
       });
 
-      window.addEventListener('keydown', event => {
-        if (event.key === 'Escape' && !gate.classList.contains('hidden')) {
+      gate.addEventListener('keydown', event => {
+        if (gate.classList.contains('hidden')) return;
+
+        // Keep the gate mandatory — Escape cannot unlock the catalog.
+        if (event.key === 'Escape') {
           event.preventDefault();
           event.stopPropagation();
+          return;
+        }
+
+        if (panel instanceof HTMLElement) {
+          trapFocus(panel, event);
         }
       });
     }

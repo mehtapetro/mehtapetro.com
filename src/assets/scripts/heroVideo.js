@@ -1,35 +1,56 @@
-// heroVideo.js
-// Smoothly fade hero video in/out and pause on page hide to avoid sudden playback
+// Hero video: load only on desktop, poster on mobile, avoid listener leaks.
+
+function isMobile() {
+  return window.matchMedia('(max-width: 767px)').matches;
+}
+
+function teardownHeroVideo(video) {
+  const cleanup = video.__heroCleanup;
+  if (typeof cleanup === 'function') {
+    cleanup();
+    video.__heroCleanup = undefined;
+  }
+}
 
 function initHeroVideo() {
   const video = document.querySelector('video[data-hero-video]');
-  if (!video) return;
+  if (!(video instanceof HTMLVideoElement)) return;
 
-  // Use a gentle opacity transition
-  video.style.transition = 'opacity 700ms cubic-bezier(.22,.9,.29,1)';
-  video.style.opacity = '1';
+  teardownHeroVideo(video);
 
-  try {
+  const heroSrc = video.dataset.heroSrc;
+  if (!heroSrc) return;
+
+  // Phones: poster background only — never download the large video
+  if (isMobile()) {
+    video.pause();
+    video.removeAttribute('src');
+    video.removeAttribute('autoplay');
     video.load();
-  } catch (e) {}
+    video.style.opacity = '0';
+    return;
+  }
+
+  video.style.transition = 'opacity 600ms cubic-bezier(.22,.9,.29,1)';
+  video.style.opacity = '0';
+  video.preload = 'metadata';
+
+  if (video.getAttribute('src') !== heroSrc) {
+    video.setAttribute('src', heroSrc);
+    video.load();
+  }
 
   const playVideo = () => {
-    try {
-      video.play().catch(() => {});
-    } catch (e) {}
+    video.play().catch(() => {});
   };
 
   const fadeIn = () => {
     video.style.opacity = '1';
   };
-  const fadeOut = () => {
-    video.style.opacity = '0';
-  };
 
   const onCanPlay = () => {
-    // small delay so it doesn't feel abrupt
     playVideo();
-    setTimeout(fadeIn, 120);
+    fadeIn();
   };
 
   if (video.readyState >= 2) {
@@ -37,62 +58,49 @@ function initHeroVideo() {
   } else {
     video.addEventListener('loadeddata', onCanPlay, { once: true });
     video.addEventListener('canplay', onCanPlay, { once: true });
-    video.addEventListener('canplaythrough', onCanPlay, { once: true });
   }
 
-  // Pause video when page hidden to avoid sudden resume
-  function handleVisibility() {
+  const handleVisibility = () => {
     if (document.hidden) {
-      try {
-        video.pause();
-      } catch (e) {}
-      fadeOut();
+      video.pause();
     } else {
       playVideo();
-      // fade in after a small delay to keep it smooth
-      setTimeout(fadeIn, 120);
+      fadeIn();
     }
-  }
+  };
+
+  const handlePageHide = () => {
+    video.pause();
+  };
+
+  const handlePageShow = () => {
+    playVideo();
+    fadeIn();
+  };
 
   document.addEventListener('visibilitychange', handleVisibility);
+  window.addEventListener('pagehide', handlePageHide);
+  window.addEventListener('pageshow', handlePageShow);
 
-  // Also listen to pagehide/pageshow (navigation away/back)
-  window.addEventListener('pagehide', () => {
-    try {
-      video.pause();
-    } catch (e) {}
-    fadeOut();
-  });
-  window.addEventListener('pageshow', () => {
-    playVideo();
-    setTimeout(fadeIn, 120);
-  });
-
-  // If user clicks navigation links, gently fade out before leaving
-  document.addEventListener('click', e => {
-    const a = e.target.closest && e.target.closest('a');
-    if (!a) return;
-    const href = a.getAttribute('href');
-    if (
-      !href ||
-      href.startsWith('#') ||
-      href.startsWith('mailto:') ||
-      href.startsWith('tel:')
-    )
-      return;
-    // fade out quickly to avoid abrupt stop
-    fadeOut();
-  });
+  video.__heroCleanup = () => {
+    document.removeEventListener('visibilitychange', handleVisibility);
+    window.removeEventListener('pagehide', handlePageHide);
+    window.removeEventListener('pageshow', handlePageShow);
+  };
 }
 
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initHeroVideo);
-} else {
+function boot() {
   initHeroVideo();
 }
 
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', boot);
+} else {
+  boot();
+}
+
 document.addEventListener('astro:page-load', () => {
-  window.requestAnimationFrame(initHeroVideo);
+  window.requestAnimationFrame(boot);
 });
 
 export {};

@@ -48,8 +48,10 @@ const breadcrumbItems = [
 ];
 
 const pageTitle: string = `${resolvedProduct.name} | ${SITE.title}`;
-const metaDescription = resolvedProduct.description;
-const ogTitle = `${resolvedProduct.name} | Products | Mehta Petro`;
+const metaDescription =
+  resolvedProduct.description ||
+  `${resolvedProduct.name} from Mehta Petro in the ${category.name} range. Request specifications and commercial support.`;
+const ogTitle = pageTitle;
 ---
 
 <MainLayout
@@ -61,12 +63,13 @@ const ogTitle = `${resolvedProduct.name} | Products | Mehta Petro`;
     '@type': 'Product',
     '@id': `${SITE.url}/products/${categoryId}/${resolvedProduct.slug}`,
     name: resolvedProduct.name,
-    description: resolvedProduct.description,
+    description: metaDescription,
     brand: {
       '@type': 'Brand',
-      name: 'Mehta Petro',
+      name: SITE.legalName,
     },
-    category: category.description || '',
+    category: category.name,
+    url: `${SITE.url}/products/${categoryId}/${resolvedProduct.slug}`,
   }}
 >
   <div class="text-[#0A1F4D]">

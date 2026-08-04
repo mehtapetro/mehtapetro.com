@@ -1,5 +1,4 @@
 ---
-//Import relevant dependencies
 import NavLink from '@components/ui/links/NavLink.astro';
 import enStrings from '@utils/navigation.ts';
 import BrandLogo from '@components/BrandLogo.astro';
@@ -11,49 +10,51 @@ const { overlay = false } = Astro.props;
 interface Props {
   overlay?: boolean;
 }
+
+const primaryCta = strings.navBarLinks.find(link => link.url === '/contact');
+const menuLinks = strings.navBarLinks.filter(link => link.url !== '/contact');
 ---
 
-{/* Main header component */}
 <header
   class:list={[
     'inset-x-0 z-50 w-full text-sm',
-    overlay ? 'fixed top-0 pt-3 sm:pt-4' : 'sticky top-3 mb-5 md:top-4 md:mb-8',
+    overlay
+      ? 'fixed top-0 pt-[max(0.75rem,env(safe-area-inset-top))] sm:pt-4'
+      : 'sticky top-0 pt-[max(0.75rem,env(safe-area-inset-top))] mb-4 md:top-4 md:mb-8 md:pt-0',
   ]}
   data-lenis-prevent
 >
-  <div class="mx-auto w-full max-w-[85rem] px-4 sm:px-6 lg:px-8">
-    {/* Navigation container */}
+  <div class="mx-auto w-full max-w-[85rem] px-3 sm:px-6 lg:px-8">
     <nav
       class:list={[
-        'relative w-full rounded-2xl px-4 py-3 md:flex md:items-center md:justify-between md:px-5 md:py-2 lg:px-6',
+        'relative w-full rounded-2xl px-3 py-2.5 md:flex md:items-center md:justify-between md:px-5 md:py-2 lg:px-6',
         overlay
           ? 'border border-white/30 bg-white/90 shadow-[0_24px_70px_-44px_rgba(8,17,38,0.88)] backdrop-blur-md'
-          : 'border border-[#C0D6FF]/80 bg-white/92 shadow-[0_18px_45px_-34px_rgba(0,57,230,0.3)] backdrop-blur-sm',
+          : 'border border-[#C0D6FF]/80 bg-white/95 shadow-[0_18px_45px_-34px_rgba(0,57,230,0.3)] backdrop-blur-sm',
       ]}
       aria-label="Global"
     >
-      <div class="flex items-center justify-between">
-        {/* Brand logo */}
+      <div class="flex items-center justify-between gap-3">
         <a
-          class="flex flex-none items-center gap-3 rounded-lg text-xl font-bold ring-zinc-500 outline-hidden focus-visible:ring-3"
+          class="flex min-h-11 flex-none items-center rounded-lg outline-hidden focus-visible:ring-3 focus-visible:ring-zinc-500"
           href={homeUrl}
           aria-label="Mehta Petro Refineries Limited"
         >
-          <BrandLogo class="h-10 w-auto object-contain md:h-11" />
+          <BrandLogo class="h-9 w-auto object-contain sm:h-10 md:h-11" />
         </a>
-        {/* Mobile menu toggle */}
+
         <div class="ml-auto md:hidden">
           <button
             type="button"
             id="mobile-nav-toggle"
-            class="group flex h-10 w-10 items-center justify-center rounded-xl border border-[#D4E4FF] bg-white/80 text-[#0A1F4D] transition-colors duration-300 hover:border-[#0039E6] hover:text-[#0039E6] disabled:pointer-events-none disabled:opacity-50"
+            class="group inline-flex min-h-11 min-w-11 items-center justify-center rounded-xl border border-[#D4E4FF] bg-white text-[#0A1F4D] transition-colors duration-200 active:bg-[#F5F9FF]"
             aria-controls="mobile-nav-menu"
             aria-expanded="false"
-            aria-label="Toggle navigation"
+            aria-label="Open menu"
           >
             <svg
               data-mobile-nav-icon="menu"
-              class="h-[1.25rem] w-[1.25rem] shrink-0 group-aria-expanded:hidden"
+              class="h-5 w-5 shrink-0 group-aria-expanded:hidden"
               width="24"
               height="24"
               viewBox="0 0 24 24"
@@ -62,14 +63,15 @@ interface Props {
               stroke-width="2"
               stroke-linecap="round"
               stroke-linejoin="round"
+              aria-hidden="true"
             >
-              <line x1="3" x2="21" y1="6" y2="6"></line>
-              <line x1="3" x2="21" y1="12" y2="12"></line>
-              <line x1="3" x2="21" y1="18" y2="18"></line>
+              <line x1="4" x2="20" y1="7" y2="7"></line>
+              <line x1="4" x2="20" y1="12" y2="12"></line>
+              <line x1="4" x2="20" y1="17" y2="17"></line>
             </svg>
             <svg
               data-mobile-nav-icon="close"
-              class="hidden h-[1.25rem] w-[1.25rem] shrink-0 group-aria-expanded:block"
+              class="hidden h-5 w-5 shrink-0 group-aria-expanded:block"
               width="24"
               height="24"
               viewBox="0 0 24 24"
@@ -78,6 +80,7 @@ interface Props {
               stroke-width="2"
               stroke-linecap="round"
               stroke-linejoin="round"
+              aria-hidden="true"
             >
               <path d="M18 6 6 18"></path>
               <path d="m6 6 12 12"></path>
@@ -86,9 +89,8 @@ interface Props {
         </div>
       </div>
 
-      {/* Desktop navigation links */}
       <div
-        class="hidden md:flex md:items-center md:justify-end md:gap-2 lg:gap-3"
+        class="hidden md:flex md:items-center md:justify-end md:gap-1.5 lg:gap-2"
       >
         {
           strings.navBarLinks.map(link => (
@@ -99,32 +101,32 @@ interface Props {
     </nav>
   </div>
 
-  {/* Full-screen mobile navigation overlay */}
+  {/* Mobile full-screen menu */}
   <div
     id="mobile-nav-menu"
-    class="pointer-events-none invisible fixed inset-0 z-[100] flex flex-col bg-[#E8F0FF]/98 opacity-0 backdrop-blur-xl transition-opacity duration-300 ease-out md:hidden"
+    class="pointer-events-none invisible fixed inset-0 z-[100] flex flex-col bg-[#F3F7FF] opacity-0 transition-[opacity,visibility] duration-200 ease-out md:hidden"
     aria-hidden="true"
     inert
     data-lenis-prevent
   >
     <div
-      class="mx-auto flex w-full max-w-[85rem] items-center justify-between px-4 pt-3 sm:px-6 sm:pt-4"
+      class="flex shrink-0 items-center justify-between gap-3 border-b border-[#D4E4FF] bg-white/95 px-3 pt-[max(0.75rem,env(safe-area-inset-top))] pb-3 backdrop-blur-md"
     >
       <a
-        class="flex flex-none items-center gap-3 rounded-lg text-xl font-bold outline-hidden focus-visible:ring-3"
+        class="flex min-h-11 flex-none items-center rounded-lg outline-hidden focus-visible:ring-3 focus-visible:ring-zinc-500"
         href={homeUrl}
         aria-label="Mehta Petro Refineries Limited"
       >
-        <BrandLogo class="h-10 w-auto object-contain" />
+        <BrandLogo class="h-9 w-auto object-contain" />
       </a>
       <button
         type="button"
         id="mobile-nav-close"
-        class="flex h-10 w-10 items-center justify-center rounded-xl border border-[#D4E4FF] bg-white/80 text-[#0A1F4D] transition-colors duration-300 hover:border-[#0039E6] hover:text-[#0039E6]"
-        aria-label="Close navigation"
+        class="inline-flex min-h-11 min-w-11 items-center justify-center rounded-xl border border-[#D4E4FF] bg-white text-[#0A1F4D] transition-colors duration-200 active:bg-[#F5F9FF]"
+        aria-label="Close menu"
       >
         <svg
-          class="h-[1.25rem] w-[1.25rem] shrink-0"
+          class="h-5 w-5 shrink-0"
           width="24"
           height="24"
           viewBox="0 0 24 24"
@@ -133,6 +135,7 @@ interface Props {
           stroke-width="2"
           stroke-linecap="round"
           stroke-linejoin="round"
+          aria-hidden="true"
         >
           <path d="M18 6 6 18"></path>
           <path d="m6 6 12 12"></path>
@@ -140,18 +143,133 @@ interface Props {
       </button>
     </div>
 
-    <div
-      class="flex flex-1 flex-col items-center justify-center gap-1 px-6 pb-16"
+    <nav
+      class="flex min-h-0 flex-1 flex-col overflow-y-auto overscroll-contain px-4 py-4"
+      aria-label="Mobile"
     >
+      <ul class="mx-auto flex w-full max-w-md flex-col gap-1.5">
+        {
+          menuLinks.map(link => (
+            <li>
+              <a
+                href={link.url}
+                data-nav-url={link.url}
+                data-astro-prefetch
+                class="mobile-nav-link flex min-h-12 items-center rounded-2xl border border-transparent bg-white/70 px-4 text-base font-semibold text-[#0A1F4D] transition-colors duration-200 active:border-[#C0D6FF] active:bg-white"
+              >
+                {link.name}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+
       {
-        strings.navBarLinks.map(link => (
-          <NavLink
-            url={link.url}
-            name={link.name}
-            class="w-full max-w-xs justify-center py-4 text-xl font-semibold text-[#0A1F4D] hover:bg-white/60 hover:text-[#0039E6] md:text-sm"
-          />
-        ))
+        primaryCta && (
+          <div class="mx-auto mt-auto w-full max-w-md pt-6 pb-[max(1.25rem,env(safe-area-inset-bottom))]">
+            <a
+              href={primaryCta.url}
+              data-nav-url={primaryCta.url}
+              data-astro-prefetch
+              class="inline-flex min-h-12 w-full items-center justify-center rounded-2xl bg-[#0039E6] px-5 text-base font-semibold text-white transition-colors duration-200 active:bg-[#0033CC]"
+            >
+              {primaryCta.name}
+            </a>
+          </div>
+        )
       }
-    </div>
+    </nav>
   </div>
 </header>
+
+<style>
+  #mobile-nav-menu[data-open='true'] {
+    pointer-events: auto;
+    visibility: visible;
+    opacity: 1;
+  }
+
+  #mobile-nav-menu[data-open='true'] .mobile-nav-link {
+    animation: mobile-nav-item 320ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  #mobile-nav-menu[data-open='true'] .mobile-nav-link:nth-child(1),
+  #mobile-nav-menu[data-open='true'] li:nth-child(1) .mobile-nav-link {
+    animation-delay: 40ms;
+  }
+  #mobile-nav-menu[data-open='true'] li:nth-child(2) .mobile-nav-link {
+    animation-delay: 70ms;
+  }
+  #mobile-nav-menu[data-open='true'] li:nth-child(3) .mobile-nav-link {
+    animation-delay: 100ms;
+  }
+  #mobile-nav-menu[data-open='true'] li:nth-child(4) .mobile-nav-link {
+    animation-delay: 130ms;
+  }
+  #mobile-nav-menu[data-open='true'] li:nth-child(5) .mobile-nav-link {
+    animation-delay: 160ms;
+  }
+  #mobile-nav-menu[data-open='true'] li:nth-child(6) .mobile-nav-link {
+    animation-delay: 190ms;
+  }
+
+  @keyframes mobile-nav-item {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #mobile-nav-menu[data-open='true'] .mobile-nav-link {
+      animation: none;
+    }
+  }
+</style>
+
+<script>
+  const updateActiveNavLink = () => {
+    const currentPath = window.location.pathname;
+    const navLinks = document.querySelectorAll('[data-nav-url]');
+
+    navLinks.forEach(link => {
+      const href = link.getAttribute('data-nav-url');
+      if (!href) return;
+
+      const isActive =
+        href === '/'
+          ? currentPath === '/'
+          : currentPath === href || currentPath.startsWith(`${href}/`);
+
+      link.classList.remove('bg-[#E8F0FF]', 'text-[#0039E6]', 'border-[#C0D6FF]');
+
+      if (link.classList.contains('mobile-nav-link')) {
+        if (isActive) {
+          link.classList.add('bg-[#E8F0FF]', 'text-[#0039E6]', 'border-[#C0D6FF]');
+          link.setAttribute('aria-current', 'page');
+        } else {
+          link.removeAttribute('aria-current');
+        }
+        return;
+      }
+
+      link.classList.remove('bg-[#E8F0FF]', 'text-[#0039E6]');
+      link.classList.add('text-[#4A5F8C]');
+
+      if (isActive) {
+        link.classList.remove('text-[#4A5F8C]');
+        link.classList.add('bg-[#E8F0FF]', 'text-[#0039E6]');
+        link.setAttribute('aria-current', 'page');
+      } else {
+        link.removeAttribute('aria-current');
+      }
+    });
+  };
+
+  document.addEventListener('DOMContentLoaded', updateActiveNavLink);
+  document.addEventListener('astro:page-load', updateActiveNavLink);
+</script>

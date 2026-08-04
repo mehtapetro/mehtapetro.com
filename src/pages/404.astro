@@ -7,11 +7,11 @@ import { SITE } from '@data/constants';
 // Define types for translations
 const pageTitle = `Page Not Found | ${SITE.title}`;
 const metaDescription =
-  "The page you requested couldn't be found. Return to the Mehta Petro homepage for products, services, and contact information.";
+  'This page could not be found. Return to Mehta Petro for products, capabilities, news, and contact information.';
 const lang = 'en';
-const subTitle = "Oops, this isn't the tool you were looking for!";
+const subTitle = 'Page not found';
 const content =
-  "Don't let this hiccup slow you down. Let's get you back to building your masterpiece.";
+  'The page you requested is unavailable. Head home to browse products, capabilities, or contact our team.';
 const homeTitle = 'Go Home';
 const backTitle = 'Go Back';
 const homeHref = '/';
@@ -22,6 +22,7 @@ const homeHref = '/';
   lang={lang}
   hideFooter
   customDescription={metaDescription}
+  customOgTitle={pageTitle}
 >
   <section class="min-h-[calc(100svh-5.5rem)]" aria-labelledby="subtitle">
     <div

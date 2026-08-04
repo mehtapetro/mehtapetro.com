@@ -15,37 +15,78 @@ import mprlLogo from '@images/mprl_logo.png';
 import { clientLogos } from '@/data_files/clientLogos';
 
 const pageTitle =
-  'Performance Through Quality | Mehta Petro-Refineries Limited';
-const metaDescription =
-  'Mehta Petro-Refineries Limited delivers Performance Through Quality with petrochemicals and specialty base oils since 1993.';
+  'Mehta Petro-Refineries Limited | Performance Through Quality';
+const metaDescription = SITE.description;
+const ogTitle = pageTitle;
 ---
 
 <MainLayout
   title={pageTitle}
   customDescription={metaDescription}
+  customOgTitle={ogTitle}
+  structuredData={{
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'Organization',
+        '@id': `${SITE.url}/#organization`,
+        name: SITE.legalName,
+        alternateName: SITE.title,
+        url: SITE.url,
+        logo: `${SITE.url}/favicon.ico`,
+        description: SITE.description,
+        foundingDate: '1993',
+        slogan: SITE.tagline,
+      },
+      {
+        '@type': 'WebSite',
+        '@id': `${SITE.url}/#website`,
+        url: SITE.url,
+        name: SITE.legalName,
+        description: SITE.description,
+        publisher: { '@id': `${SITE.url}/#organization` },
+        inLanguage: 'en-US',
+      },
+      {
+        '@type': 'WebPage',
+        '@id': `${SITE.url}/`,
+        url: SITE.url,
+        name: pageTitle,
+        description: metaDescription,
+        isPartOf: { '@id': `${SITE.url}/#website` },
+        about: { '@id': `${SITE.url}/#organization` },
+        inLanguage: 'en-US',
+      },
+    ],
+  }}
   preloadImage={introPoster.src}
   fullWidth
   overlayNav
 >
   <!-- Hero Section -->
   <section
-    class="relative flex min-h-[720px] min-h-dvh flex-col overflow-hidden bg-[#07142F]"
+    class="relative flex min-h-[100svh] flex-col overflow-hidden bg-[#07142F]"
   >
+    <div
+      class="absolute inset-0 bg-cover bg-center"
+      style={`background-image: url(${introPoster.src})`}
+      aria-hidden="true"
+    >
+    </div>
     <video
-      class="pointer-events-none absolute inset-0 h-full w-full object-cover"
-      src={introVideo}
+      class="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-0"
       poster={introPoster.src}
-      autoplay
       muted
       loop
       playsinline
-      preload="auto"
+      preload="none"
       disablepictureinpicture
       aria-label="Mehta Petro-Refineries Limited facility"
-      data-hero-video></video>
+      data-hero-video
+      data-hero-src={introVideo}></video>
 
     <div
-      class="pointer-events-none absolute inset-0 bg-linear-to-br from-[#061022]/45 via-[#091126]/28 to-[#0C1C4C]/38"
+      class="pointer-events-none absolute inset-0 bg-linear-to-br from-[#061022]/50 via-[#091126]/35 to-[#0C1C4C]/42"
     >
     </div>
     <div
@@ -54,25 +95,29 @@ const metaDescription =
     </div>
 
     <div
-      class="relative z-10 mx-auto flex min-h-dvh w-full max-w-[85rem] flex-1 flex-col justify-center px-4 pt-24 pb-20 sm:px-6 sm:pt-28 sm:pb-24 lg:px-8"
+      class="relative z-10 mx-auto flex min-h-[100svh] w-full max-w-[85rem] flex-1 flex-col justify-center px-4 pt-[max(5.5rem,env(safe-area-inset-top))] pb-[max(2rem,env(safe-area-inset-bottom))] sm:px-6 sm:pt-28 sm:pb-24 lg:px-8"
     >
-      <div class="w-full max-w-6xl -translate-y-2 sm:-translate-y-4">
-        <div class="mb-6 sm:mb-8">
+      <div class="w-full max-w-6xl -translate-y-3 sm:-translate-y-4">
+        <div class="mb-5 sm:mb-8">
           <img
             src={mprlLogo.src}
             alt="Mehta Petro-Refineries Limited"
-            class="h-16 w-auto sm:h-20 md:h-24"
+            width={mprlLogo.width}
+            height={mprlLogo.height}
+            class="h-12 w-auto sm:h-20 md:h-24"
+            decoding="async"
+            fetchpriority="high"
           />
         </div>
 
         <h1
-          class="w-full max-w-6xl text-4xl font-extrabold tracking-tight text-balance text-white sm:text-5xl md:text-6xl lg:text-[4.35rem] lg:leading-none lg:whitespace-nowrap"
+          class="w-full max-w-6xl text-[1.85rem] leading-tight font-extrabold tracking-tight text-balance text-white sm:text-5xl sm:leading-tight md:text-6xl lg:text-[4.35rem] lg:leading-none lg:whitespace-nowrap"
         >
           Mehta Petro-Refineries Limited
         </h1>
 
         <h2
-          class="mt-6 text-lg font-semibold tracking-[0.2em] text-[#8EC5FF] uppercase sm:text-xl"
+          class="mt-4 text-sm font-semibold tracking-[0.16em] text-[#8EC5FF] uppercase sm:mt-6 sm:text-xl sm:tracking-[0.2em]"
         >
           Performance Through Quality
         </h2>
@@ -84,27 +129,27 @@ const metaDescription =
         </p>
 
         <p
-          class="mt-2 text-sm font-semibold tracking-[0.2em] text-white/90 uppercase sm:text-base"
+          class="mt-1.5 text-xs font-semibold tracking-[0.18em] text-white/90 uppercase sm:mt-2 sm:text-base sm:tracking-[0.2em]"
         >
           Since 1993
         </p>
 
-        <div class="mt-9 flex flex-col gap-4 sm:flex-row">
+        <div class="mt-7 flex flex-col gap-3 sm:mt-9 sm:flex-row sm:gap-4">
           <a
             href="/contact"
-            class="inline-flex items-center justify-center rounded-xl bg-[#0039E6] px-7 py-4 text-base font-semibold text-white shadow-lg transition-colors hover:bg-[#0033CC]"
+            class="inline-flex min-h-12 items-center justify-center rounded-xl bg-[#0039E6] px-6 py-3.5 text-base font-semibold text-white shadow-lg transition-colors hover:bg-[#0033CC] sm:min-h-0 sm:px-7 sm:py-4"
           >
             Get in Touch
           </a>
           <a
             href="/products"
-            class="inline-flex items-center justify-center rounded-xl border border-white/24 bg-white/12 px-7 py-4 text-base font-semibold text-white backdrop-blur-md transition-colors hover:bg-white/18"
+            class="inline-flex min-h-12 items-center justify-center rounded-xl border border-white/24 bg-white/12 px-6 py-3.5 text-base font-semibold text-white backdrop-blur-md transition-colors hover:bg-white/18 sm:min-h-0 sm:px-7 sm:py-4"
           >
             View Our Products
           </a>
         </div>
 
-        <div class="mt-8 flex flex-wrap gap-3 text-sm text-white/90">
+        <div class="mt-6 hidden flex-wrap gap-3 text-sm text-white/90 sm:mt-8 sm:flex">
           <span
             class="rounded-full border border-white/18 bg-white/10 px-4 py-2 backdrop-blur-sm"
             >Aromatic & aliphatic solvents</span
@@ -122,66 +167,89 @@ const metaDescription =
     </div>
 
     <div
-      class="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-linear-to-t from-[#E8F0FF] to-transparent"
+      class="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-linear-to-t from-[#E8F0FF] to-transparent sm:h-24"
     >
     </div>
   </section>
 
-  <!-- Overview Section -->
-  <section class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
-    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-      <div class="rounded-2xl border border-[#D4E4FF] bg-white p-8 shadow-lg">
-        <div class="text-5xl font-extrabold text-[#0039E6] sm:text-6xl">
+  <!-- Proof points -->
+  <section
+    class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 sm:py-14 lg:px-8 lg:py-20"
+  >
+    <div class="max-w-3xl">
+      <h2
+        class="text-2xl font-bold tracking-tight text-[#0A1F4D] sm:text-3xl md:text-4xl"
+      >
+        Built on Experience & Quality
+      </h2>
+      <p
+        class="mt-3 text-sm leading-relaxed text-[#4A5F8C] sm:mt-5 sm:text-base md:text-lg"
+      >
+        Decades of manufacturing expertise, two modern facilities, and certified
+        quality systems supporting reliable industrial supply.
+      </p>
+    </div>
+
+    <div
+      class="mt-8 divide-y divide-[#C0D6FF]/70 border-y border-[#C0D6FF]/70 sm:mt-12 sm:grid sm:grid-cols-3 sm:gap-0 sm:divide-x sm:divide-y-0 sm:divide-[#C0D6FF]/70 sm:py-10"
+    >
+      <div class="py-6 sm:px-8 sm:py-0 first:sm:pl-0 last:sm:pr-0">
+        <p
+          class="text-4xl font-extrabold tracking-tight text-[#0039E6] sm:text-5xl"
+        >
           33+
-        </div>
-        <h3 class="mt-4 text-lg font-bold text-[#0A1F4D]">
+        </p>
+        <p class="mt-2 text-base font-bold text-[#0A1F4D] sm:mt-3">
           Years of Experience
-        </h3>
-        <p class="mt-2 text-sm leading-relaxed text-[#4A5F8C]">
+        </p>
+        <p class="mt-1 text-sm text-[#4A5F8C]">
           Serving industrial customers since 1993.
         </p>
       </div>
 
-      <div class="rounded-2xl border border-[#D4E4FF] bg-white p-8 shadow-lg">
-        <div class="text-5xl font-extrabold text-[#0039E6] sm:text-6xl">2</div>
-        <h3 class="mt-4 text-lg font-bold text-[#0A1F4D]">
+      <div class="py-6 sm:px-8 sm:py-0 first:sm:pl-0 last:sm:pr-0">
+        <p
+          class="text-4xl font-extrabold tracking-tight text-[#0039E6] sm:text-5xl"
+        >
+          2
+        </p>
+        <p class="mt-2 text-base font-bold text-[#0A1F4D] sm:mt-3">
           Manufacturing Facilities
-        </h3>
-        <p class="mt-2 text-sm leading-relaxed text-[#4A5F8C]">
-          Facilities in Palghar and Dahej supporting reliable production.
+        </p>
+        <p class="mt-1 text-sm text-[#4A5F8C]">
+          Palghar and Dahej supporting reliable production.
         </p>
       </div>
 
-      <div
-        class="rounded-2xl border border-[#D4E4FF] bg-white p-8 shadow-lg sm:col-span-2 lg:col-span-1"
-      >
-        <div class="flex h-16 items-center">
+      <div class="py-6 sm:px-8 sm:py-0 first:sm:pl-0 last:sm:pr-0">
+        <div class="flex h-11 items-center sm:h-14">
           <img
             src={isoLogo.src}
             alt="ISO 9001:2015 Certified"
-            class="h-16 w-auto"
+            class="h-11 w-auto sm:h-14"
           />
         </div>
-        <h3 class="mt-4 text-lg font-bold text-[#0A1F4D]">
+        <p class="mt-2 text-base font-bold text-[#0A1F4D] sm:mt-3">
           ISO 9001:2015 Certified
-        </h3>
-        <p class="mt-2 text-sm leading-relaxed text-[#4A5F8C]">
-          Quality systems aligned with consistent industrial supply.
+        </p>
+        <p class="mt-1 text-sm text-[#4A5F8C]">
+          Quality systems for consistent industrial supply.
         </p>
       </div>
     </div>
   </section>
 
-  <!-- Clients Section -->
+  <!-- Clients -->
   <ClientsSection
     title="Trusted by Industry Leaders"
     subTitle="We're proud to partner with manufacturers and processors who demand reliability."
     partners={clientLogos}
   />
 
-  <!-- Product Solutions -->
+  <!-- Product categories -->
   <FeaturesNavs
-    title=`<span class="text-[#0039E6]">Product Categories</span> We Supply`
+    title="Product Categories We Supply"
+    subTitle="Specialty solvents, base oils, n-paraffins, olefins, and tailored supply for industrial buyers."
     tabs={[
       {
         heading: 'Specialty Solvents & Base Oils',
@@ -216,5 +284,5 @@ const metaDescription =
   />
 
   <!-- FAQ -->
-  <FAQ title="Common<br />Questions" faqs={faqs} />
+  <FAQ title="Common Questions" faqs={faqs} />
 </MainLayout>

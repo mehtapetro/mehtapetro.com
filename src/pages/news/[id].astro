@@ -1,7 +1,6 @@
 ---
 import MainLayout from '@/layouts/MainLayout.astro';
 import AvatarBlogLarge from '@components/ui/avatars/AvatarBlogLarge.astro';
-import Bookmark from '@components/ui/buttons/Bookmark.astro';
 import SocialShare from '@components/ui/buttons/SocialShare.astro';
 import { Image } from 'astro:assets';
 import { capitalize, formatDate } from '@utils/utils';
@@ -26,9 +25,11 @@ export async function getStaticPaths() {
 const { post } = Astro.props;
 const { Content } = await render(post);
 
+const newsSlug = post.id.replace(/^en\//, '');
 const pageTitle: string = `${post.data.title} | ${SITE.title}`;
 const metaDescription = post.data.description;
-const ogTitle = `${post.data.title} | News | ${SITE.title}`;
+const ogTitle = pageTitle;
+const articleUrl = `${SITE.url}/news/${newsSlug}`;
 ---
 
 <MainLayout
@@ -39,24 +40,26 @@ const ogTitle = `${post.data.title} | News | ${SITE.title}`;
     '@context': 'https://schema.org',
     '@type': 'NewsArticle',
     headline: post.data.title,
+    description: metaDescription,
     image: post.data.cardImage.src,
     datePublished: post.data.pubDate.toISOString(),
     author: {
-      '@type': 'Person',
+      '@type': 'Organization',
       name: post.data.author,
     },
     publisher: {
       '@type': 'Organization',
-      name: SITE.title,
+      name: SITE.legalName,
       logo: {
         '@type': 'ImageObject',
-        url: 'https://mehtapetro.com/favicon.ico',
+        url: `${SITE.url}/favicon.ico`,
       },
     },
     mainEntityOfPage: {
       '@type': 'WebPage',
-      '@id': `https://mehtapetro.com/news/${post.id.replace(/^en\//, '')}`,
+      '@id': articleUrl,
     },
+    url: articleUrl,
   }}
   post={post}
 >
@@ -131,15 +134,8 @@ const ogTitle = `${post.data.title} | News | ${SITE.title}`;
             ))
           }
         </div>
-        <div class="flex items-center gap-2 sm:justify-end">
-          <Bookmark />
-          <div
-            class="mx-1 hidden h-4 border-e border-[#D4E4FF] sm:mx-3 sm:block"
-          >
-          </div>
-          <div class="inline-flex">
-            <SocialShare pageTitle={post.data.title} />
-          </div>
+        <div class="flex items-center sm:justify-end">
+          <SocialShare pageTitle={post.data.title} />
         </div>
       </div>
     </div>

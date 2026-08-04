@@ -4,23 +4,20 @@ import TextInput from '@components/ui/forms/input/TextInput.astro';
 import EmailContactInput from '@components/ui/forms/input/EmailContactInput.astro';
 import PhoneInput from '@components/ui/forms/input/PhoneInput.astro';
 import TextAreaInput from '@components/ui/forms/input/TextAreaInput.astro';
-import Icon from '@components/ui/icons/Icon.astro';
 import { WEB3FORMS_ACCESS_KEY } from '@/data/web3forms';
+import { SITE } from '@data/constants';
 
-const locale: string = 'en';
 const web3FormsAccessKey = WEB3FORMS_ACCESS_KEY;
-const siteOrigin = 'https://mehtapetro.vercel.app';
-const contactPath = '/contact';
-const contactSource = `${siteOrigin}${contactPath}`;
+const contactSource = `${SITE.url}/contact`;
 
 const copy = {
   title: 'Contact us',
   subTitle:
-    "Have questions or want to discuss a project? Reach out, and let's craft the perfect solution with our tools and services.",
-  formTitle: 'Fill in the form below',
+    'Have a product requirement or commercial question? Send us a message and our team will respond promptly.',
+  formTitle: 'Send a message',
   firstName: 'First Name',
   lastName: 'Last Name',
-  details: 'Details',
+  details: 'Message',
   phoneNumber: 'Phone Number',
   countryCode: 'Country Code',
   send: 'Send Message',
@@ -30,42 +27,31 @@ const copy = {
     'Sorry, we could not send your message right now. Please try again.',
   sendingMessage: 'Sending your message…',
   directionsLabel: 'Get directions',
-  corporateHeading: 'Corporate Office Address',
-  corporateContent: 'Mehta Petro-Refineries Limited',
-  corporateAddress:
-    '509, HIVE-67, Borasapada Road, Next to Raghuleela Mall, Near Poinsure Gymkhana, Kandivali (West), Mumbai - 400067. Maharashtra',
-  factoryOneHeading: 'Factory I',
-  factoryOneContent: 'Palghar Manufacturing Facility',
-  factoryOneAddress:
-    'Plot No. 1, Dewan & Sons Udyog, Village - Mahim, Palghar - 401 404, Maharashtra',
-  factoryTwoHeading: 'Factory II',
-  factoryTwoContent: 'Dahej Manufacturing Facility',
-  factoryTwoAddress:
-    'D-2/CH-15, GIDC Dahej II, Dahej, Bharuch - 392 160, Gujarat',
-  emailHeading: 'Contact us by email',
-  emailContent: 'Prefer the written word? Drop us an email at',
 };
 
 const locations = [
   {
-    heading: copy.corporateHeading,
-    label: 'Corporate office',
-    content: copy.corporateContent,
-    address: copy.corporateAddress,
+    heading: 'Corporate Office',
+    label: 'Head office',
+    content: 'Mehta Petro-Refineries Limited',
+    address:
+      '509, HIVE-67, Borasapada Road, Next to Raghuleela Mall, Near Poinsure Gymkhana, Kandivali (West), Mumbai - 400067, Maharashtra',
     directionsUrl: 'https://maps.app.goo.gl/hgSz19X7oDFZaYdZ6',
   },
   {
-    heading: copy.factoryOneHeading,
-    label: 'Manufacturing site',
-    content: copy.factoryOneContent,
-    address: copy.factoryOneAddress,
+    heading: 'Factory I — Palghar',
+    label: 'Manufacturing',
+    content: 'Palghar Manufacturing Facility',
+    address:
+      'Plot No. 1, Dewan & Sons Udyog, Village - Mahim, Palghar - 401 404, Maharashtra',
     directionsUrl: 'https://maps.app.goo.gl/caGEQ7bkokJNAsXB9',
   },
   {
-    heading: copy.factoryTwoHeading,
-    label: 'Manufacturing site',
-    content: copy.factoryTwoContent,
-    address: copy.factoryTwoAddress,
+    heading: 'Factory II — Dahej',
+    label: 'Manufacturing',
+    content: 'Dahej Manufacturing Facility',
+    address:
+      'D-2/CH-15, GIDC Dahej II, Dahej, Bharuch - 392 160, Gujarat',
     directionsUrl: 'https://maps.app.goo.gl/uBWSCEKzM2LzDmdZ8',
   },
 ];
@@ -78,45 +64,65 @@ const inquiryOptions = [
   { value: 'support', label: 'Support' },
   { value: 'other', label: 'Other' },
 ];
+
+const fieldClass =
+  'block min-h-12 w-full rounded-xl border border-neutral-200 bg-neutral-50 px-4 py-3 text-base text-neutral-700 placeholder:text-neutral-500 focus:border-[#C0D6FF] focus:ring-3 focus:ring-[#C0D6FF]/60 focus:outline-hidden sm:min-h-11 sm:text-sm';
 ---
 
-<section class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
+<section
+  class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 sm:py-12 lg:px-8 lg:py-16"
+>
   <div class="mx-auto max-w-5xl">
-    {/* ── Page header ── */}
-    <div class="text-center">
-      <span
-        class="inline-flex rounded-full border border-[#C0D6FF] bg-white px-4 py-1 text-xs font-semibold tracking-wider text-[#0039E6] uppercase"
-        >Get in touch</span
+    <div class="max-w-3xl">
+      <p
+        class="text-xs font-semibold tracking-[0.18em] text-[#0039E6] uppercase"
       >
+        Get in touch
+      </p>
       <h1
-        class="mt-5 text-4xl font-extrabold tracking-tight text-balance text-[#0A1F4D] md:text-5xl"
+        class="mt-3 text-3xl font-extrabold tracking-tight text-balance text-[#0A1F4D] sm:text-4xl md:text-5xl"
       >
         {copy.title}
       </h1>
       <p
-        class="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-[#4A5F8C] sm:text-lg"
+        class="mt-3 text-sm leading-relaxed text-[#4A5F8C] sm:mt-4 sm:text-base md:text-lg"
       >
         {copy.subTitle}
       </p>
     </div>
 
-    {/* ── Two-column grid ── */}
-    <div
-      class="mt-12 grid gap-8 lg:grid-cols-2 lg:items-start"
-      data-contact-grid
-    >
-      {/* ── Form card ── */}
-      <div
-        data-contact-form-card
-        class="flex flex-col overflow-hidden rounded-2xl border border-[#D4E4FF] bg-white p-6 shadow-lg sm:p-8"
+    {/* Mobile quick actions */}
+    <div class="mt-6 grid grid-cols-2 gap-3 lg:hidden">
+      <a
+        href="mailto:info@mehtapetro.com"
+        class="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-[#0039E6] px-3 text-sm font-semibold text-white shadow-sm active:bg-[#0033CC]"
       >
-        <div class="border-b border-[#E3EBFF] pb-5">
+        Email
+      </a>
+      <a
+        href="tel:+912244559090"
+        class="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl border border-[#D4E4FF] bg-white px-3 text-sm font-semibold text-[#0039E6] shadow-sm active:bg-[#F5F9FF]"
+      >
+        Call
+      </a>
+    </div>
+
+    <div
+      class="mt-8 grid gap-10 sm:mt-10 lg:mt-12 lg:grid-cols-2 lg:items-start lg:gap-12"
+    >
+      {/* Form */}
+      <div
+        class="rounded-2xl border border-[#D4E4FF] bg-white shadow-[0_20px_50px_-40px_rgba(10,31,77,0.35)]"
+      >
+        <div
+          class="rounded-t-2xl border-b border-[#E3EBFF] bg-linear-to-br from-[#F7FAFF] via-white to-white px-4 py-4 sm:px-6 sm:py-5"
+        >
           <p
-            class="text-sm font-semibold tracking-wider text-[#0039E6] uppercase"
+            class="text-[11px] font-semibold tracking-wider text-[#0039E6] uppercase sm:text-xs"
           >
-            Send a message
+            Enquiry form
           </p>
-          <h2 class="mt-2 text-2xl font-bold text-[#0A1F4D]">
+          <h2 class="mt-1.5 text-xl font-bold text-[#0A1F4D] sm:text-2xl">
             {copy.formTitle}
           </h2>
         </div>
@@ -126,7 +132,7 @@ const inquiryOptions = [
           data-contact-form
           action="https://api.web3forms.com/submit"
           method="post"
-          class="mt-5 flex flex-col gap-4"
+          class="flex flex-col gap-4 px-4 py-5 sm:gap-4 sm:px-6 sm:py-6"
           data-success-message={copy.successMessage}
           data-error-message={copy.errorMessage}
           data-sending-message={copy.sendingMessage}
@@ -175,14 +181,12 @@ const inquiryOptions = [
           />
 
           <div>
-            <label for="hs-inquiry-type" class="sr-only"
-              >{locale === 'fr' ? 'Type de demande' : 'Inquiry type'}</label
-            >
+            <label for="hs-inquiry-type" class="sr-only">Inquiry type</label>
             <select
               id="hs-inquiry-type"
               name="inquiryType"
               required
-              class="block w-full rounded-lg border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm text-neutral-700 placeholder:text-neutral-500 focus:border-neutral-200 focus:ring-3 focus:ring-neutral-400 focus:outline-hidden disabled:pointer-events-none disabled:opacity-50"
+              class={fieldClass}
             >
               <option value="" disabled selected>Inquiry type</option>
               {
@@ -197,10 +201,10 @@ const inquiryOptions = [
             id="hs-about-contacts"
             label={copy.details}
             name="message"
-            rows={6}
+            rows={4}
             maxlength={500}
             showCharCount={true}
-            class="min-h-[8.5rem] resize-y sm:min-h-[10.5rem]"
+            class="min-h-[6.5rem] resize-y sm:min-h-[8rem]"
           />
 
           <p
@@ -210,176 +214,121 @@ const inquiryOptions = [
           >
           </p>
 
-          <div>
+          <div
+            class="sticky bottom-0 -mx-4 border-t border-[#E3EBFF] bg-white/95 px-4 pt-4 pb-[max(1rem,env(safe-area-inset-bottom))] backdrop-blur-sm sm:static sm:mx-0 sm:bg-transparent sm:px-0 sm:pb-0 sm:backdrop-blur-none"
+          >
             <AuthBtn title={copy.send} />
           </div>
         </form>
       </div>
 
-      {/* ── Info card ── */}
-      <div
-        data-contact-info-card
-        class="overflow-hidden rounded-2xl border border-[#D4E4FF] bg-white p-6 shadow-lg sm:p-8"
-      >
-        <div class="border-b border-[#E3EBFF] pb-5">
+      {/* Info + locations */}
+      <div class="flex flex-col gap-10">
+        <div class="hidden lg:block">
           <p
-            class="text-sm font-semibold tracking-wider text-[#0039E6] uppercase"
+            class="text-xs font-semibold tracking-[0.16em] text-[#0039E6] uppercase"
           >
-            {locale === 'fr' ? 'Coordonnées' : 'Reach us directly'}
+            Reach us directly
           </p>
-          <h2 class="mt-2 text-2xl font-bold text-[#0A1F4D]">
-            {locale === 'fr' ? 'Contact rapide' : 'Quick Contact'}
+          <h2 class="mt-2 text-xl font-bold text-[#0A1F4D] sm:text-2xl">
+            Quick contact
           </h2>
+
+          <div class="mt-5 flex flex-col gap-3">
+            <a
+              href="mailto:info@mehtapetro.com"
+              class="group flex min-h-14 items-center gap-3 rounded-xl border border-[#D4E4FF] bg-white p-4 transition-colors hover:border-[#0039E6]"
+            >
+              <div
+                class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#0039E6] text-white"
+              >
+                <svg
+                  class="h-5 w-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                  ></path>
+                </svg>
+              </div>
+              <div class="min-w-0">
+                <p class="text-xs font-medium text-[#4A5F8C]">Email</p>
+                <p class="truncate text-sm font-semibold text-[#0A1F4D]">
+                  info@mehtapetro.com
+                </p>
+              </div>
+            </a>
+
+            <a
+              href="tel:+912244559090"
+              class="group flex min-h-14 items-center gap-3 rounded-xl border border-[#D4E4FF] bg-white p-4 transition-colors hover:border-[#0039E6]"
+            >
+              <div
+                class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#0039E6] text-white"
+              >
+                <svg
+                  class="h-5 w-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                  ></path>
+                </svg>
+              </div>
+              <div class="min-w-0">
+                <p class="text-xs font-medium text-[#4A5F8C]">Phone</p>
+                <p class="text-sm font-semibold text-[#0A1F4D]">
+                  +91 22 44559090
+                </p>
+              </div>
+            </a>
+          </div>
         </div>
 
-        <div class="mt-5 flex flex-col gap-4">
-          <a
-            href="mailto:info@mehtapetro.com"
-            class="group flex items-center gap-3 overflow-hidden rounded-xl border border-[#D4E4FF] bg-[#F5F9FF] p-4 transition-all hover:border-[#0039E6] hover:bg-white hover:shadow-md"
+        <div>
+          <p
+            class="text-xs font-semibold tracking-[0.16em] text-[#0039E6] uppercase"
           >
-            <div
-              class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#0039E6] text-white"
-            >
-              <svg
-                class="h-5 w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                ></path>
-              </svg>
-            </div>
-            <div>
-              <p class="text-xs font-medium text-[#4A5F8C]">Email</p>
-              <p class="text-sm font-semibold text-[#0A1F4D]">
-                info@mehtapetro.com
-              </p>
-            </div>
-          </a>
+            Visit us
+          </p>
+          <h2 class="mt-2 text-xl font-bold text-[#0A1F4D] sm:text-2xl">
+            Our locations
+          </h2>
 
-          <a
-            href="tel:+910224455909"
-            class="group flex items-center gap-3 overflow-hidden rounded-xl border border-[#D4E4FF] bg-[#F5F9FF] p-4 transition-all hover:border-[#0039E6] hover:bg-white hover:shadow-md"
-          >
-            <div
-              class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#0039E6] text-white"
-            >
-              <svg
-                class="h-5 w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
-                ></path>
-              </svg>
-            </div>
-            <div>
-              <p class="text-xs font-medium text-[#4A5F8C]">Phone</p>
-              <p class="text-sm font-semibold text-[#0A1F4D]">
-                +91-022-44559090
-              </p>
-            </div>
-          </a>
-        </div>
-
-        <div class="mt-5 border-t border-[#E3EBFF] pt-5">
-          <h3 class="text-lg font-bold text-[#0A1F4D]">
-            {locale === 'fr' ? 'Nos emplacements' : 'Our Locations'}
-          </h3>
-
-          <div class="mt-4 flex flex-col gap-4">
+          <div class="mt-5 divide-y divide-[#D4E4FF] border-y border-[#D4E4FF]">
             {
-              locations.map((location, i) => (
-                <div class="overflow-hidden rounded-xl border border-[#D4E4FF] bg-[#F5F9FF] p-0">
-                  <button
-                    type="button"
-                    class="flex w-full items-start gap-3 overflow-hidden p-4 text-left transition-all hover:bg-white focus:outline-none"
-                    aria-expanded="false"
-                    aria-controls={`loc-panel-${i}`}
-                    data-accordion-button
+              locations.map(location => (
+                <div class="py-5">
+                  <p class="text-[11px] font-semibold tracking-wider text-[#0039E6] uppercase">
+                    {location.label}
+                  </p>
+                  <h3 class="mt-1 text-base font-bold text-[#0A1F4D]">
+                    {location.heading}
+                  </h3>
+                  <p class="mt-0.5 text-sm text-[#4A5F8C]">{location.content}</p>
+                  <p class="mt-2 text-sm leading-relaxed text-[#4A5F8C]">
+                    {location.address}
+                  </p>
+                  <a
+                    href={location.directionsUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="mt-3 inline-flex min-h-11 items-center text-sm font-semibold text-[#0039E6] transition-colors hover:text-[#0033CC]"
                   >
-                    <div class="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[#0039E6] text-white">
-                      <svg
-                        class="h-4 w-4"
-                        viewBox="0 0 24 24"
-                        fill="currentColor"
-                      >
-                        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z" />
-                      </svg>
-                    </div>
-                    <div class="min-w-0 flex-1">
-                      <div class="flex items-center justify-between">
-                        <p class="text-xs font-semibold text-[#0039E6] uppercase">
-                          {location.label}
-                        </p>
-                        <svg
-                          data-chevron
-                          class="h-4 w-4 shrink-0 text-[#4A5F8C] transition-transform"
-                          viewBox="0 0 20 20"
-                          fill="none"
-                        >
-                          <path
-                            d="M6 8l4 4 4-4"
-                            stroke="currentColor"
-                            stroke-width="1.5"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                          />
-                        </svg>
-                      </div>
-                      <h3 class="mt-1 text-sm font-bold text-[#0A1F4D]">
-                        {location.heading}
-                      </h3>
-                      <p class="mt-0.5 text-xs text-[#4A5F8C]">
-                        {location.content}
-                      </p>
-                    </div>
-                  </button>
-
-                  <div
-                    id={`loc-panel-${i}`}
-                    class="max-h-0 overflow-hidden px-4"
-                    data-accordion-panel
-                    hidden
-                    style="opacity:0;padding-top:0;padding-bottom:0;transition:max-height 350ms cubic-bezier(.2,.8,.2,1),opacity 250ms ease,padding 250ms ease;"
-                  >
-                    <div class="border-t border-[#E3EBFF] pt-3 pb-4">
-                      <p class="text-xs leading-relaxed text-[#4A5F8C]">
-                        {location.address}
-                      </p>
-                      <a
-                        href={location.directionsUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="mt-3 inline-flex items-center gap-1 text-xs font-semibold text-[#0039E6] transition hover:text-[#0033CC]"
-                      >
-                        <svg
-                          class="h-4 w-4"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"
-                          />
-                        </svg>
-                        {copy.directionsLabel}
-                      </a>
-                    </div>
-                  </div>
+                    {copy.directionsLabel}
+                  </a>
                 </div>
               ))
             }
@@ -387,166 +336,5 @@ const inquiryOptions = [
         </div>
       </div>
     </div>
-
-    <script>
-      function syncContactColumnBalance() {
-        const formCard = document.querySelector(
-          '[data-contact-form-card]'
-        ) as HTMLElement | null;
-        const infoCard = document.querySelector(
-          '[data-contact-info-card]'
-        ) as HTMLElement | null;
-
-        if (!formCard || !infoCard) return;
-
-        const isDesktop = window.matchMedia('(min-width: 1024px)').matches;
-        const accordionOpen = document.querySelector(
-          '[data-accordion-panel][data-open="true"]'
-        );
-
-        if (!isDesktop) {
-          formCard.style.minHeight = '';
-          return;
-        }
-
-        if (accordionOpen) return;
-
-        formCard.style.minHeight = '';
-        const balancedHeight = Math.max(
-          formCard.getBoundingClientRect().height,
-          infoCard.getBoundingClientRect().height
-        );
-        formCard.style.minHeight = `${balancedHeight}px`;
-      }
-
-      function initContactColumnBalance() {
-        syncContactColumnBalance();
-      }
-
-      function initContactAccordion() {
-        const buttons = Array.from(
-          document.querySelectorAll('[data-accordion-button]')
-        ) as HTMLButtonElement[];
-        if (!buttons.length) return;
-
-        function closePanel(panel: HTMLElement, chevron: HTMLElement | null) {
-          panel.style.maxHeight = panel.scrollHeight + 'px';
-          requestAnimationFrame(() => {
-            panel.style.maxHeight = '0px';
-            (panel.style as any).opacity = '0';
-            panel.style.paddingTop = '0px';
-            panel.style.paddingBottom = '0px';
-          });
-
-          panel.addEventListener(
-            'transitionend',
-            function handler(e) {
-              if (
-                (e as TransitionEvent).propertyName === 'max-height' ||
-                (e as TransitionEvent).propertyName === 'opacity'
-              ) {
-                panel.hidden = true;
-                panel.removeEventListener('transitionend', handler);
-              }
-            },
-            { once: true }
-          );
-
-          if (chevron) (chevron.style as any).transform = 'rotate(0deg)';
-          panel.setAttribute('data-open', 'false');
-        }
-
-        function openPanel(panel: HTMLElement, chevron: HTMLElement | null) {
-          panel.hidden = false;
-          panel.style.maxHeight = '0px';
-          (panel.style as any).opacity = '0';
-          panel.style.paddingTop = '0px';
-          panel.style.paddingBottom = '0px';
-
-          requestAnimationFrame(() => {
-            panel.style.maxHeight = panel.scrollHeight + 'px';
-            (panel.style as any).opacity = '1';
-            panel.style.paddingTop = '0.75rem';
-            panel.style.paddingBottom = '1.25rem';
-          });
-
-          if (chevron) (chevron.style as any).transform = 'rotate(180deg)';
-          panel.setAttribute('data-open', 'true');
-        }
-
-        buttons.forEach(btn => {
-          if (btn.dataset.accordionBound === 'true') return;
-          btn.dataset.accordionBound = 'true';
-
-          const panelId = btn.getAttribute('aria-controls')!;
-          const panel = document.getElementById(panelId) as HTMLElement | null;
-          const chevron = btn.querySelector(
-            '[data-chevron]'
-          ) as HTMLElement | null;
-
-          btn.addEventListener('click', event => {
-            event.preventDefault();
-            const isExpanded = btn.getAttribute('aria-expanded') === 'true';
-
-            buttons.forEach(otherBtn => {
-              if (otherBtn === btn) return;
-              otherBtn.setAttribute('aria-expanded', 'false');
-              const otherPanelId = otherBtn.getAttribute('aria-controls')!;
-              const otherPanel = document.getElementById(
-                otherPanelId
-              ) as HTMLElement | null;
-              const otherChevron = otherBtn.querySelector(
-                '[data-chevron]'
-              ) as HTMLElement | null;
-              if (
-                otherPanel &&
-                otherPanel.getAttribute('data-open') === 'true'
-              ) {
-                closePanel(otherPanel, otherChevron);
-              }
-            });
-
-            if (panel) {
-              if (isExpanded) {
-                btn.setAttribute('aria-expanded', 'false');
-                closePanel(panel, chevron);
-              } else {
-                btn.setAttribute('aria-expanded', 'true');
-                openPanel(panel, chevron);
-              }
-            }
-
-            window.setTimeout(syncContactColumnBalance, 400);
-          });
-
-          btn.addEventListener('keydown', (e: KeyboardEvent) => {
-            if (e.key === 'Enter' || e.key === ' ') {
-              e.preventDefault();
-              btn.click();
-            }
-          });
-
-          if (panel) {
-            panel.hidden = true;
-            panel.style.maxHeight = '0px';
-            (panel.style as any).opacity = '0';
-            panel.style.paddingTop = '0px';
-            panel.style.paddingBottom = '0px';
-            panel.setAttribute('data-open', 'false');
-            panel.style.transition =
-              'max-height 350ms cubic-bezier(.2,.8,.2,1), opacity 250ms ease, padding 250ms ease';
-          }
-        });
-      }
-
-      function initContactSection() {
-        initContactColumnBalance();
-        initContactAccordion();
-      }
-
-      initContactSection();
-      window.addEventListener('resize', initContactColumnBalance);
-      document.addEventListener('astro:page-load', initContactSection);
-    </script>
   </div>
 </section>

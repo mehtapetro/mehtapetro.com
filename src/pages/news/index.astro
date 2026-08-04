@@ -16,12 +16,12 @@ const blogPosts: CollectionEntry<'blog'>[] = englishBlogEntries.sort(
 
 const title = 'Newsroom';
 const subTitle =
-  'Explore the latest news, updates, and insights from Mehta Petro to keep up with our company developments and industry presence.';
+  'Latest news, updates, and insights from Mehta Petro.';
 
 const pageTitle = `News | ${SITE.title}`;
 const metaDescription =
-  'Stay up to date with the latest news, product updates, and company developments from Mehta Petro-Refineries Limited.';
-const ogTitle = 'Company News | Mehta Petro';
+  'Latest news, product updates, and company developments from Mehta Petro-Refineries Limited.';
+const ogTitle = pageTitle;
 ---
 
 <MainLayout
@@ -30,189 +30,83 @@ const ogTitle = 'Company News | Mehta Petro';
   customOgTitle={ogTitle}
   structuredData={{
     '@context': 'https://schema.org',
-    '@type': 'WebPage',
-    '@id': 'https://mehtapetro.com/news',
-    url: 'https://mehtapetro.com/news',
-    name: 'News | Mehta Petro',
+    '@type': 'CollectionPage',
+    '@id': `${SITE.url}/news`,
+    url: `${SITE.url}/news`,
+    name: pageTitle,
     description: metaDescription,
     isPartOf: {
       '@type': 'WebSite',
-      url: 'https://mehtapetro.com',
-      name: 'Mehta Petro',
+      url: SITE.url,
+      name: SITE.legalName,
     },
     inLanguage: 'en-US',
   }}
 >
   <section
-    class="mx-auto max-w-[85rem] px-4 py-8 sm:px-6 sm:py-10 lg:px-8 lg:py-14"
+    class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 sm:py-12 lg:px-8 lg:py-16"
   >
-    <div class="mx-auto max-w-3xl text-center">
-      <span
-        class="inline-flex rounded-full border border-[#C0D6FF] bg-white px-3 py-1 text-[0.7rem] font-semibold tracking-[0.16em] text-[#0039E6] uppercase sm:px-4 sm:text-xs"
-      >
-        Company news
-      </span>
-      <h1
-        class="mt-4 text-3xl font-extrabold tracking-tight text-balance text-[#0A1F4D] sm:mt-5 sm:text-4xl md:text-5xl"
-      >
-        {title}
-      </h1>
-      <p
-        class="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-[#4A5F8C] sm:mt-4 sm:text-base md:text-lg"
-      >
-        {subTitle}
-      </p>
-    </div>
-
     <div
-      class="mt-8 grid grid-cols-1 gap-6 sm:mt-10 lg:grid-cols-12 lg:items-start lg:gap-8"
+      class="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:items-start lg:gap-12"
     >
       <div class="lg:col-span-7">
-        {
-          blogPosts.length === 0 ? (
-            <div class="rounded-2xl border border-[#D4E4FF] bg-white p-6 text-center shadow-lg sm:p-8">
-              <p class="text-sm text-[#4A5F8C] sm:text-base">
-                No articles are available yet.
-              </p>
-            </div>
-          ) : (
-            <div class="flex flex-col gap-4">
-              {blogPosts.map(blogEntry => (
-                <CardBlog blogEntry={blogEntry} />
-              ))}
-            </div>
-          )
-        }
+        <div class="max-w-3xl">
+          <p
+            class="text-xs font-semibold tracking-[0.18em] text-[#0039E6] uppercase"
+          >
+            Company news
+          </p>
+          <h1
+            class="mt-3 text-3xl font-extrabold tracking-tight text-balance text-[#0A1F4D] sm:text-4xl md:text-5xl"
+          >
+            {title}
+          </h1>
+          <p
+            class="mt-3 text-sm leading-relaxed text-[#4A5F8C] sm:mt-4 sm:text-base md:text-lg"
+          >
+            {subTitle}
+          </p>
+        </div>
+
+        <div class="mt-8 sm:mt-10">
+          {
+            blogPosts.length === 0 ? (
+              <div class="border-y border-[#D4E4FF] py-10 text-center">
+                <p class="text-sm text-[#4A5F8C] sm:text-base">
+                  No articles are available yet.
+                </p>
+              </div>
+            ) : (
+              <div class="flex flex-col gap-3 sm:gap-4">
+                {blogPosts.map(blogEntry => (
+                  <CardBlog blogEntry={blogEntry} />
+                ))}
+              </div>
+            )
+          }
+        </div>
       </div>
 
-      <aside class="lg:sticky lg:top-24 lg:col-span-5">
+      <aside class="hidden lg:sticky lg:top-28 lg:col-span-5 lg:block">
         <div
-          class="overflow-hidden rounded-2xl border border-[#D4E4FF] bg-white shadow-lg"
+          class="flex min-h-[580px] w-full justify-center overflow-hidden rounded-2xl border border-[#D4E4FF] bg-white"
+          data-facebook-embed
+          data-facebook-href="https://www.facebook.com/mehtapetro"
+          data-facebook-height="580"
+          data-facebook-state="idle"
+          aria-label="Mehta Petro Facebook page"
         >
-          <div class="border-b border-[#E3EBFF] px-4 py-4 sm:px-6 sm:py-5">
-            <p
-              class="text-xs font-semibold tracking-[0.16em] text-[#0039E6] uppercase sm:text-sm"
+          <div
+            class="flex min-h-[580px] w-full flex-col items-center justify-center gap-3 px-4 text-center"
+            data-facebook-placeholder
+          >
+            <span
+              class="inline-flex h-8 w-8 animate-spin rounded-full border-2 border-[#1877F2]/25 border-t-[#1877F2]"
+              aria-hidden="true"></span
             >
-              Stay connected
+            <p class="text-sm font-medium text-[#4A5F8C]">
+              Loading Facebook feed…
             </p>
-            <h2
-              class="mt-1.5 text-lg font-bold text-[#0A1F4D] sm:mt-2 sm:text-xl"
-            >
-              Follow Mehta Petro
-            </h2>
-          </div>
-
-          <div class="flex flex-col gap-4 px-4 py-4 sm:gap-5 sm:px-6 sm:py-5">
-            <div class="flex flex-col gap-3 md:hidden">
-              <a
-                href="https://www.facebook.com/mehtapetro"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="flex min-h-12 items-center gap-3 rounded-xl border border-[#D4E4FF] bg-[#F7FAFF] px-4 py-3 transition active:bg-white"
-              >
-                <span
-                  class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#1877F2] text-sm font-bold text-white"
-                  >f</span
-                >
-                <span class="min-w-0">
-                  <span class="block text-sm font-semibold text-[#0A1F4D]"
-                    >Facebook</span
-                  >
-                  <span class="block truncate text-xs text-[#4A5F8C]"
-                    >Mehta Petro-Refineries</span
-                  >
-                </span>
-              </a>
-              <a
-                href="https://x.com/mehtapetro"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="flex min-h-12 items-center gap-3 rounded-xl border border-[#D4E4FF] bg-[#F7FAFF] px-4 py-3 transition active:bg-white"
-              >
-                <span
-                  class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#0A1F4D] text-white"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                    class="h-4 w-4"
-                    aria-hidden="true"
-                  >
-                    <path
-                      d="M18.244 2H21l-6.6 7.55L22 22h-5.8l-4.5-5.9L6.6 22H4l7.1-8.1L2 2h5.9l4.1 5.4L18.244 2Zm-1.02 18h1.13L7.02 4H5.86l11.36 16Z"
-                    ></path>
-                  </svg>
-                </span>
-                <span class="min-w-0">
-                  <span class="block text-sm font-semibold text-[#0A1F4D]"
-                    >X (Twitter)</span
-                  >
-                  <span class="block text-xs text-[#4A5F8C]">@mehtapetro</span>
-                </span>
-              </a>
-            </div>
-
-            <div class="hidden md:block">
-              <h3 class="text-sm font-bold text-[#0A1F4D]">Facebook</h3>
-              <div
-                class="mt-3 flex min-h-[580px] w-full justify-center overflow-hidden rounded-xl border border-[#D4E4FF] bg-[#F7FAFF]"
-                data-facebook-embed
-              >
-                <div
-                  class="fb-page w-full max-w-[500px]"
-                  data-href="https://www.facebook.com/mehtapetro"
-                  data-tabs="timeline"
-                  data-width="500"
-                  data-height="580"
-                  data-small-header="false"
-                  data-adapt-container-width="true"
-                  data-hide-cover="false"
-                  data-show-facepile="false"
-                  data-hide-cta="false"
-                >
-                  <blockquote
-                    cite="https://www.facebook.com/mehtapetro"
-                    class="fb-xfbml-parse-ignore"
-                  >
-                    <a href="https://www.facebook.com/mehtapetro"
-                      >Mehta Petro-Refineries Limited</a
-                    >
-                  </blockquote>
-                </div>
-              </div>
-            </div>
-
-            <div class="hidden border-t border-[#E3EBFF] pt-4 md:block md:pt-5">
-              <h3 class="text-sm font-bold text-[#0A1F4D]">X (Twitter)</h3>
-              <div
-                class="mt-3 rounded-xl border border-[#D4E4FF] bg-[#F7FAFF] p-4"
-              >
-                <p class="text-sm leading-6 text-[#4A5F8C]">
-                  Stay updated with company news, product updates, and industry
-                  highlights.
-                </p>
-                <a
-                  href="https://x.com/mehtapetro"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="mt-4 inline-flex min-h-11 items-center gap-2 rounded-xl bg-[#0A1F4D] px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-[#0039E6]"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                    class="h-4 w-4"
-                    aria-hidden="true"
-                  >
-                    <path
-                      d="M18.244 2H21l-6.6 7.55L22 22h-5.8l-4.5-5.9L6.6 22H4l7.1-8.1L2 2h5.9l4.1 5.4L18.244 2Zm-1.02 18h1.13L7.02 4H5.86l11.36 16Z"
-                    ></path>
-                  </svg>
-                  Follow @mehtapetro
-                </a>
-              </div>
-            </div>
           </div>
         </div>
       </aside>

@@ -45,12 +45,14 @@ export const GET: APIRoute = async () => {
 
   const manifest = {
     short_name: 'Mehta Petro',
-    name: 'Mehta Petro',
+    name: 'Mehta Petro-Refineries Limited',
+    description:
+      'Manufacturer of petrochemical solvents, specialty base oils, and industrial chemicals since 1993.',
     icons,
     display: 'minimal-ui',
     id: '/',
     start_url: '/',
-    theme_color: '#1E3AFF',
+    theme_color: '#0039E6',
     background_color: '#F8FAFC',
   };
 
