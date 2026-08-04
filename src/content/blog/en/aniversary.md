@@ -1,5 +1,5 @@
 ---
-title: '33 Years of Mehta Petro — We Are Truly Grateful'
+title: '33 Years of Mehta Petro'
 description: 'Mehta Petro marks 33 years since 1993. A heartfelt note on the journey, the people behind it, and the work that still drives us every day.'
 pubDate: 2026-08-05
 author: 'Mehta Petro'
