@@ -1,6 +1,6 @@
 import type { APIRoute, ImageMetadata } from 'astro';
 import { getImage } from 'astro:assets';
-import appIcon from '@images/icon-maskable.png';
+import appIcon from '@images/mprl--logo.jpeg';
 
 interface Favicon {
   purpose: 'any' | 'maskable' | 'monochrome';
