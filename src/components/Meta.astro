@@ -74,7 +74,7 @@ const appleTouchIcon = await getImage({
   format: 'png',
 });
 
-// News/blog posts: use the article card image for social share previews
+// News/blog posts: every article's cardImage becomes the social share preview
 const post = Astro.props.post ?? null;
 const articleImage =
   Astro.props.ogImage ?? post?.data?.cardImage ?? post?.image ?? null;
@@ -84,23 +84,21 @@ const socialImageRes = articleImage
       src: articleImage,
       width: 1200,
       height: 630,
+      // JPEG is the most reliable format for WhatsApp / Facebook / LinkedIn previews
+      format: 'jpg',
     })
   : await getImage({
       src: OG.image,
       width: 1200,
       height: 600,
+      format: 'jpg',
     });
 
 const socialImage = new URL(socialImageRes.src, Astro.site || Astro.url.origin)
   .href;
 const socialImageWidth = 1200;
 const socialImageHeight = articleImage ? 630 : 600;
-const socialImageType =
-  socialImageRes.src.endsWith('.jpg') || socialImageRes.src.endsWith('.jpeg')
-    ? 'image/jpeg'
-    : socialImageRes.src.endsWith('.webp')
-      ? 'image/webp'
-      : 'image/png';
+const socialImageType = 'image/jpeg';
 const socialImageAlt =
   Astro.props.ogImageAlt ??
   post?.data?.cardImageAlt ??

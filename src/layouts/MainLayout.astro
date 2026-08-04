@@ -18,6 +18,8 @@ const {
   meta,
   structuredData,
   post = null,
+  ogImage = null,
+  ogImageAlt = null,
   preloadImage = null,
   preloadImages = null,
   lang = 'en',
@@ -34,6 +36,9 @@ interface Props {
   meta?: string;
   structuredData?: object;
   post?: any;
+  /** Article card image — used automatically for Open Graph / Twitter share previews */
+  ogImage?: any;
+  ogImageAlt?: string | null;
   preloadImage?: string | null;
   preloadImages?: Array<{ href: string; media?: string }> | null;
   lang?: string;
@@ -56,6 +61,8 @@ interface Props {
       customDescription={customDescription}
       customOgTitle={customOgTitle}
       post={post}
+      ogImage={ogImage}
+      ogImageAlt={ogImageAlt}
       preloadImage={preloadImage}
       preloadImages={preloadImages}
     />

@@ -37,6 +37,8 @@ const articleUrl = `${SITE.url}/news/${newsSlug}`;
   customDescription={metaDescription}
   customOgTitle={ogTitle}
   post={post}
+  ogImage={post.data.cardImage}
+  ogImageAlt={post.data.cardImageAlt}
   structuredData={{
     '@context': 'https://schema.org',
     '@type': 'NewsArticle',

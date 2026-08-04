@@ -15,6 +15,7 @@ const blogCollection = defineCollection({
       authorImage: image(),
       authorImageAlt: z.string(),
       pubDate: z.date(),
+      // Required — also used automatically as the Open Graph / share preview image
       cardImage: image(),
       cardImageAlt: z.string(),
       readTime: z.number(),
