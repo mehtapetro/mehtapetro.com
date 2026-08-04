@@ -141,14 +141,10 @@
 }
 
 /* Document scroll keeps trackpad back/forward gestures working.
-   Page canvas color avoids a white rubber-band flash on overscroll. */
+   Page canvas color softens rubber-band flash without blocking pull-to-refresh. */
 html,
 body {
   background-color: #e8f0ff;
-}
-
-html {
-  overscroll-behavior-y: none;
 }
 
 #site-scroll-content {
