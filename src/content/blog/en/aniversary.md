@@ -31,4 +31,4 @@ We are happy. We are grateful. And we are still hungry to do good work clear spe
 
 If you want to see what we make today, visit our [products](/products/). If you want to talk, [reach out](/contact/). We would love to hear from you.
 
-Here is to **33 years**—and to everything still ahead.
+Here is to **33 years** and to everything still ahead.
