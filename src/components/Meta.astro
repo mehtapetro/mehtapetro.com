@@ -2,6 +2,7 @@
 import { getImage } from 'astro:assets';
 import { OG, SEO, SITE } from '@data/constants';
 import faviconSrc from '@images/icon.png';
+import appIconSrc from '@images/icon-maskable.png';
 
 // Default properties for the Meta component. These values are used if props are not provided.
 // 'meta' sets a default description meta tag to describe the page content.
@@ -72,7 +73,7 @@ const faviconPng = await getImage({
 });
 
 const appleTouchIcon = await getImage({
-  src: faviconSrc,
+  src: appIconSrc,
   width: 180,
   height: 180,
   format: 'png',

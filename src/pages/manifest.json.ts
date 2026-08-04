@@ -1,7 +1,6 @@
 import type { APIRoute, ImageMetadata } from 'astro';
 import { getImage } from 'astro:assets';
-import icon from '@images/icon.png';
-import maskableIcon from '@images/icon-maskable.png';
+import appIcon from '@images/icon-maskable.png';
 
 interface Favicon {
   purpose: 'any' | 'maskable' | 'monochrome';
@@ -13,12 +12,12 @@ const sizes = [192, 512];
 const favicons: Favicon[] = [
   {
     purpose: 'any',
-    src: icon,
+    src: appIcon,
     sizes,
   },
   {
     purpose: 'maskable',
-    src: maskableIcon,
+    src: appIcon,
     sizes,
   },
 ];
@@ -35,8 +34,8 @@ export const GET: APIRoute = async () => {
         });
         return {
           src: image.src,
-          sizes: `${image.options.width}x${image.options.height}`,
-          type: `image/${image.options.format}`,
+          sizes: `${size}x${size}`,
+          type: 'image/png',
           purpose: favicon.purpose,
         };
       })
@@ -56,5 +55,9 @@ export const GET: APIRoute = async () => {
     background_color: '#F8FAFC',
   };
 
-  return new Response(JSON.stringify(manifest));
+  return new Response(JSON.stringify(manifest), {
+    headers: {
+      'Content-Type': 'application/manifest+json',
+    },
+  });
 };
