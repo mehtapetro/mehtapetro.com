@@ -77,10 +77,7 @@ const heroLogoMobile = await getImage({
       },
     ],
   }}
-  preloadImages={[
-    { href: heroPosterMobile.src, media: '(max-width: 767px)' },
-    { href: introPoster.src, media: '(min-width: 768px)' },
-  ]}
+  preloadImages={[{ href: heroPosterMobile.src, media: '(max-width: 767px)' }]}
   fullWidth
   overlayNav
 >
@@ -88,11 +85,26 @@ const heroLogoMobile = await getImage({
   <section
     class="relative flex min-h-[100svh] flex-col overflow-hidden bg-[#07142F]"
   >
-    <div class="hero-poster absolute inset-0 bg-cover bg-center" aria-hidden="true">
+    {/* Mobile: real <img> so LCP is the poster, not the h1 */}
+    <img
+      class="pointer-events-none absolute inset-0 h-full w-full object-cover md:hidden"
+      src={heroPosterMobile.src}
+      width={heroPosterMobile.attributes.width}
+      height={heroPosterMobile.attributes.height}
+      alt=""
+      fetchpriority="high"
+      decoding="async"
+      data-hero-mobile-poster
+    />
+    {/* Desktop: original poster as CSS background (unchanged) */}
+    <div
+      class="absolute inset-0 hidden bg-cover bg-center md:block"
+      style={`background-image: url(${introPoster.src})`}
+      aria-hidden="true"
+    >
     </div>
     <video
-      class="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-0"
-      poster={introPoster.src}
+      class="pointer-events-none absolute inset-0 hidden h-full w-full object-cover opacity-0 md:block"
       muted
       loop
       playsinline
@@ -126,7 +138,7 @@ const heroLogoMobile = await getImage({
               height={mprlLogo.height}
               class="h-12 w-auto sm:h-20 md:h-24"
               decoding="async"
-              fetchpriority="high"
+              loading="eager"
             />
           </picture>
         </div>
@@ -196,68 +208,72 @@ const heroLogoMobile = await getImage({
   </section>
 
   <!-- Proof points -->
-  <section
-    class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 sm:py-14 lg:px-8 lg:py-20"
-  >
-    <div class="max-w-3xl">
-      <h2
-        class="text-2xl font-bold tracking-tight text-[#0A1F4D] sm:text-3xl md:text-4xl"
-      >
-        Built on Experience & Quality
-      </h2>
-      <p
-        class="mt-3 text-sm leading-relaxed text-[#4A5F8C] sm:mt-5 sm:text-base md:text-lg"
-      >
-        Decades of manufacturing expertise, two modern facilities, and certified
-        quality systems supporting reliable industrial supply.
-      </p>
-    </div>
-
+  <section class="bg-[#E8F0FF]">
     <div
-      class="mt-8 divide-y divide-[#C0D6FF]/70 border-y border-[#C0D6FF]/70 sm:mt-12 sm:grid sm:grid-cols-3 sm:gap-0 sm:divide-x sm:divide-y-0 sm:divide-[#C0D6FF]/70 sm:py-10"
+      class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 sm:py-14 lg:px-8 lg:py-20"
     >
-      <div class="py-6 sm:px-8 sm:py-0 first:sm:pl-0 last:sm:pr-0">
-        <p
-          class="text-4xl font-extrabold tracking-tight text-[#0039E6] sm:text-5xl"
+      <div class="max-w-3xl">
+        <h2
+          class="text-2xl font-bold tracking-tight text-[#0A1F4D] sm:text-3xl md:text-4xl"
         >
-          33+
-        </p>
-        <p class="mt-2 text-base font-bold text-[#0A1F4D] sm:mt-3">
-          Years of Experience
-        </p>
-        <p class="mt-1 text-sm text-[#4A5F8C]">
-          Serving industrial customers since 1993.
+          Built on Experience & Quality
+        </h2>
+        <p
+          class="mt-3 text-sm leading-relaxed text-[#4A5F8C] sm:mt-5 sm:text-base md:text-lg"
+        >
+          Decades of manufacturing expertise, two modern facilities, and
+          certified quality systems supporting reliable industrial supply.
         </p>
       </div>
 
-      <div class="py-6 sm:px-8 sm:py-0 first:sm:pl-0 last:sm:pr-0">
-        <p
-          class="text-4xl font-extrabold tracking-tight text-[#0039E6] sm:text-5xl"
-        >
-          2
-        </p>
-        <p class="mt-2 text-base font-bold text-[#0A1F4D] sm:mt-3">
-          Manufacturing Facilities
-        </p>
-        <p class="mt-1 text-sm text-[#4A5F8C]">
-          Palghar and Dahej supporting reliable production.
-        </p>
-      </div>
-
-      <div class="py-6 sm:px-8 sm:py-0 first:sm:pl-0 last:sm:pr-0">
-        <div class="flex h-11 items-center sm:h-14">
-          <img
-            src={isoLogo.src}
-            alt="ISO 9001:2015 Certified"
-            class="h-11 w-auto sm:h-14"
-          />
+      <div
+        class="mt-8 divide-y divide-[#C0D6FF]/70 border-y border-[#C0D6FF]/70 sm:mt-12 sm:grid sm:grid-cols-3 sm:gap-0 sm:divide-x sm:divide-y-0 sm:divide-[#C0D6FF]/70 sm:py-10"
+      >
+        <div class="py-6 sm:px-8 sm:py-0 first:sm:pl-0 last:sm:pr-0">
+          <p
+            class="text-4xl font-extrabold tracking-tight text-[#0039E6] sm:text-5xl"
+          >
+            33+
+          </p>
+          <p class="mt-2 text-base font-bold text-[#0A1F4D] sm:mt-3">
+            Years of Experience
+          </p>
+          <p class="mt-1 text-sm text-[#4A5F8C]">
+            Serving industrial customers since 1993.
+          </p>
         </div>
-        <p class="mt-2 text-base font-bold text-[#0A1F4D] sm:mt-3">
-          ISO 9001:2015 Certified
-        </p>
-        <p class="mt-1 text-sm text-[#4A5F8C]">
-          Quality systems for consistent industrial supply.
-        </p>
+
+        <div class="py-6 sm:px-8 sm:py-0 first:sm:pl-0 last:sm:pr-0">
+          <p
+            class="text-4xl font-extrabold tracking-tight text-[#0039E6] sm:text-5xl"
+          >
+            2
+          </p>
+          <p class="mt-2 text-base font-bold text-[#0A1F4D] sm:mt-3">
+            Manufacturing Facilities
+          </p>
+          <p class="mt-1 text-sm text-[#4A5F8C]">
+            Palghar and Dahej supporting reliable production.
+          </p>
+        </div>
+
+        <div class="py-6 sm:px-8 sm:py-0 first:sm:pl-0 last:sm:pr-0">
+          <div class="flex h-11 items-center sm:h-14">
+            <img
+              src={isoLogo.src}
+              alt="ISO 9001:2015 Certified"
+              class="h-11 w-auto sm:h-14"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+          <p class="mt-2 text-base font-bold text-[#0A1F4D] sm:mt-3">
+            ISO 9001:2015 Certified
+          </p>
+          <p class="mt-1 text-sm text-[#4A5F8C]">
+            Quality systems for consistent industrial supply.
+          </p>
+        </div>
       </div>
     </div>
   </section>
@@ -308,21 +324,4 @@ const heroLogoMobile = await getImage({
 
   <!-- FAQ -->
   <FAQ title="Common Questions" faqs={faqs} />
-
-  <style
-    define:vars={{
-      posterMobile: `url(${heroPosterMobile.src})`,
-      posterDesktop: `url(${introPoster.src})`,
-    }}
-  >
-    .hero-poster {
-      background-image: var(--posterMobile);
-    }
-
-    @media (min-width: 768px) {
-      .hero-poster {
-        background-image: var(--posterDesktop);
-      }
-    }
-  </style>
 </MainLayout>

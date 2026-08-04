@@ -138,12 +138,7 @@ if (post) {
 {
   Array.isArray(preloadImages) &&
     preloadImages.map(item => (
-      <link
-        rel="preload"
-        as="image"
-        href={item.href}
-        media={item.media}
-      />
+      <link rel="preload" as="image" href={item.href} media={item.media} />
     ))
 }
 {

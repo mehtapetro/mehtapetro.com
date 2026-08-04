@@ -23,65 +23,67 @@ interface Props {
 }
 ---
 
-<section
-  class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 sm:py-14 lg:px-8 lg:py-20"
->
-  <div class="max-w-3xl">
-    <h2
-      class="text-2xl font-bold tracking-tight text-[#0A1F4D] sm:text-3xl md:text-4xl"
-    >
-      {title}
-    </h2>
-    {
-      subTitle && (
-        <p class="mt-3 text-sm leading-relaxed text-[#4A5F8C] sm:mt-4 sm:text-base md:text-lg">
-          {subTitle}
-        </p>
-      )
-    }
-  </div>
-
+<section class="bg-[#E8F0FF]">
   <div
-    class="relative z-10 mt-8 grid items-center gap-6 sm:mt-12 sm:gap-10 lg:grid-cols-12 lg:gap-16"
+    class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 sm:py-14 lg:px-8 lg:py-20"
   >
-    <!-- Image first on mobile so tabs control something visible -->
-    <div
-      class="order-1 lg:order-none lg:col-span-6 lg:col-start-1 lg:row-start-1"
-    >
+    <div class="max-w-3xl">
+      <h2
+        class="text-2xl font-bold tracking-tight text-[#0A1F4D] sm:text-3xl md:text-4xl"
+      >
+        {title}
+      </h2>
       {
-        tabs.map((tab, index) => (
-          <TabContent
-            id={`tabs-with-card-${index + 1}`}
-            aria={`tabs-with-card-item-${index + 1}`}
-            src={tab.src}
-            alt={tab.alt}
-            first={tab.first}
-            second={tab.second}
-            srcName={tab.srcName}
-          />
-        ))
+        subTitle && (
+          <p class="mt-3 text-sm leading-relaxed text-[#4A5F8C] sm:mt-4 sm:text-base md:text-lg">
+            {subTitle}
+          </p>
+        )
       }
     </div>
 
     <div
-      class="order-2 lg:order-none lg:col-span-6 lg:col-start-7 lg:row-start-1"
+      class="relative z-10 mt-8 grid items-center gap-6 sm:mt-12 sm:gap-10 lg:grid-cols-12 lg:gap-16"
     >
-      <nav class="grid gap-0" aria-label="Product categories" role="tablist">
+      <!-- Image first on mobile so tabs control something visible -->
+      <div
+        class="order-1 lg:order-none lg:col-span-6 lg:col-start-1 lg:row-start-1"
+      >
         {
           tabs.map((tab, index) => (
-            <TabNav
-              id={`tabs-with-card-item-${index + 1}`}
-              dataTab={`#tabs-with-card-${index + 1}`}
-              aria={`tabs-with-card-${index + 1}`}
-              heading={tab.heading}
-              content={tab.content}
+            <TabContent
+              id={`tabs-with-card-${index + 1}`}
+              aria={`tabs-with-card-item-${index + 1}`}
+              src={tab.src}
+              alt={tab.alt}
               first={tab.first}
-            >
-              <Icon name={tab.svg} />
-            </TabNav>
+              second={tab.second}
+              srcName={tab.srcName}
+            />
           ))
         }
-      </nav>
+      </div>
+
+      <div
+        class="order-2 lg:order-none lg:col-span-6 lg:col-start-7 lg:row-start-1"
+      >
+        <nav class="grid gap-0" aria-label="Product categories" role="tablist">
+          {
+            tabs.map((tab, index) => (
+              <TabNav
+                id={`tabs-with-card-item-${index + 1}`}
+                dataTab={`#tabs-with-card-${index + 1}`}
+                aria={`tabs-with-card-${index + 1}`}
+                heading={tab.heading}
+                content={tab.content}
+                first={tab.first}
+              >
+                <Icon name={tab.svg} />
+              </TabNav>
+            ))
+          }
+        </nav>
+      </div>
     </div>
   </div>
 </section>
