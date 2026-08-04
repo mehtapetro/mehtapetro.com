@@ -1,3 +1,5 @@
+import type { ImageMetadata } from 'astro';
+
 const clientLogoModules = import.meta.glob<ImageMetadata>(
   '/src/images/clients/*.{svg,png,jpg,jpeg,webp,avif,gif}',
   {

@@ -1,5 +1,6 @@
 ---
 import MainLayout from '@/layouts/MainLayout.astro';
+import { getImage } from 'astro:assets';
 import { SITE } from '@data/constants';
 import ClientsSection from '@components/sections/landing/ClientsSection.astro';
 import FeaturesNavs from '@components/sections/features/FeaturesNavs.astro';
@@ -18,6 +19,23 @@ const pageTitle =
   'Mehta Petro-Refineries Limited | Performance Through Quality';
 const metaDescription = SITE.description;
 const ogTitle = pageTitle;
+
+// Mobile-only optimized poster (desktop uses original introPoster)
+const heroPosterMobile = await getImage({
+  src: introPoster,
+  width: 768,
+  height: 1024,
+  format: 'webp',
+  quality: 65,
+  fit: 'cover',
+});
+
+const heroLogoMobile = await getImage({
+  src: mprlLogo,
+  width: 192,
+  format: 'webp',
+  quality: 80,
+});
 ---
 
 <MainLayout
@@ -59,7 +77,10 @@ const ogTitle = pageTitle;
       },
     ],
   }}
-  preloadImage={introPoster.src}
+  preloadImages={[
+    { href: heroPosterMobile.src, media: '(max-width: 767px)' },
+    { href: introPoster.src, media: '(min-width: 768px)' },
+  ]}
   fullWidth
   overlayNav
 >
@@ -67,11 +88,7 @@ const ogTitle = pageTitle;
   <section
     class="relative flex min-h-[100svh] flex-col overflow-hidden bg-[#07142F]"
   >
-    <div
-      class="absolute inset-0 bg-cover bg-center"
-      style={`background-image: url(${introPoster.src})`}
-      aria-hidden="true"
-    >
+    <div class="hero-poster absolute inset-0 bg-cover bg-center" aria-hidden="true">
     </div>
     <video
       class="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-0"
@@ -96,15 +113,22 @@ const ogTitle = pageTitle;
     >
       <div class="w-full max-w-6xl -translate-y-3 sm:-translate-y-4">
         <div class="mb-5 sm:mb-8">
-          <img
-            src={mprlLogo.src}
-            alt="Mehta Petro-Refineries Limited"
-            width={mprlLogo.width}
-            height={mprlLogo.height}
-            class="h-12 w-auto sm:h-20 md:h-24"
-            decoding="async"
-            fetchpriority="high"
-          />
+          <picture>
+            <source
+              media="(max-width: 767px)"
+              srcset={heroLogoMobile.src}
+              type="image/webp"
+            />
+            <img
+              src={mprlLogo.src}
+              alt="Mehta Petro-Refineries Limited"
+              width={mprlLogo.width}
+              height={mprlLogo.height}
+              class="h-12 w-auto sm:h-20 md:h-24"
+              decoding="async"
+              fetchpriority="high"
+            />
+          </picture>
         </div>
 
         <h1
@@ -284,4 +308,21 @@ const ogTitle = pageTitle;
 
   <!-- FAQ -->
   <FAQ title="Common Questions" faqs={faqs} />
+
+  <style
+    define:vars={{
+      posterMobile: `url(${heroPosterMobile.src})`,
+      posterDesktop: `url(${introPoster.src})`,
+    }}
+  >
+    .hero-poster {
+      background-image: var(--posterMobile);
+    }
+
+    @media (min-width: 768px) {
+      .hero-poster {
+        background-image: var(--posterDesktop);
+      }
+    }
+  </style>
 </MainLayout>
