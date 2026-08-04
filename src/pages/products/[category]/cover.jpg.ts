@@ -1,9 +1,15 @@
 import type { APIRoute } from 'astro';
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import { getCategoryBySlug, getAllCategories } from '@/lib/productFs';
+import { getAllCategories, getCategoryBySlug } from '@/lib/productFs';
 
-export const prerender = false;
+export const prerender = true;
+
+export function getStaticPaths() {
+  return getAllCategories().map(category => ({
+    params: { category: category.slug },
+  }));
+}
 
 function resolveCategoryFolder(param: string): string | null {
   const decoded = decodeURIComponent(param);
