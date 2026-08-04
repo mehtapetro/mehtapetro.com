@@ -2,8 +2,8 @@
 import MainLayout from '@/layouts/MainLayout.astro';
 import { Image } from 'astro:assets';
 import { SITE } from '@data/constants';
-import facilityImageOne from '@images/dahej.jpeg';
-import facilityImageTwo from '@images/dahej_2.jpeg';
+import palgharImage from '@images/palghar.jpg';
+import dahejImage from '@images/dahej.jpeg';
 
 const pageTitle = `Capabilities | ${SITE.title}`;
 const metaDescription =
@@ -33,7 +33,7 @@ const facilities = [
     id: 'palghar',
     title: 'Palghar Facility',
     location: 'Palghar, Maharashtra',
-    image: facilityImageOne,
+    image: palgharImage,
     alt: 'Manufacturing facility at Palghar, Maharashtra',
     highlights: [
       '1400 KL/Month continuous distillation plant',
@@ -46,7 +46,7 @@ const facilities = [
     id: 'dahej',
     title: 'Dahej Facility',
     location: 'Dahej, Gujarat',
-    image: facilityImageTwo,
+    image: dahejImage,
     alt: 'Manufacturing facility at Dahej, Gujarat',
     highlights: [
       '5000 KL/Month continuous distillation plant under vacuum',
@@ -79,7 +79,7 @@ const facilities = [
     class="relative flex min-h-[560px] flex-col overflow-hidden bg-[#07142F] sm:min-h-[640px] lg:min-h-[720px]"
   >
     <Image
-      src={facilityImageOne}
+      src={dahejImage}
       alt=""
       class="absolute inset-0 h-full w-full object-cover"
       widths={[960, 1440, 1920]}
