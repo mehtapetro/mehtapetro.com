@@ -1,5 +1,7 @@
 /** Shared dialog helpers for product gate + inquiry modal. */
 
+import { lockSiteScroll, unlockSiteScroll } from '@scripts/scrollLock.js';
+
 const FOCUSABLE_SELECTOR =
   'a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
@@ -62,12 +64,9 @@ export function focusFirstField(container) {
 }
 
 export function lockPageScroll() {
-  document.body.classList.add('overflow-hidden');
-  window.__lenis?.stop();
+  lockSiteScroll();
 }
 
 export function unlockPageScroll() {
-  document.body.classList.remove('overflow-hidden');
-  document.body.style.overflow = '';
-  window.__lenis?.start();
+  unlockSiteScroll();
 }

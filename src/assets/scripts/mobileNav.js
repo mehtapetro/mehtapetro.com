@@ -1,14 +1,11 @@
 // Full-screen mobile navigation with document-level delegation so it
 // survives Astro view transitions when the navbar DOM is swapped.
 
+import { lockSiteScroll, unlockSiteScroll } from '@scripts/scrollLock.js';
+
 const MENU_ID = 'mobile-nav-menu';
 const TOGGLE_ID = 'mobile-nav-toggle';
 const CLOSE_ID = 'mobile-nav-close';
-
-/** @returns {import('lenis').default | undefined} */
-function getLenis() {
-  return window.__lenis;
-}
 
 function getElements() {
   const menu = document.getElementById(MENU_ID);
@@ -29,9 +26,7 @@ function openMenu(menu, toggle) {
   menu.removeAttribute('inert');
   toggle.setAttribute('aria-expanded', 'true');
   toggle.setAttribute('aria-label', 'Close menu');
-  document.documentElement.classList.add('overflow-hidden');
-  document.body.classList.add('overflow-hidden');
-  getLenis()?.stop();
+  lockSiteScroll();
 
   const closeBtn = document.getElementById(CLOSE_ID);
   if (closeBtn instanceof HTMLElement) {
@@ -51,17 +46,13 @@ function closeMenu(menu, toggle) {
   menu.setAttribute('inert', '');
   toggle.setAttribute('aria-expanded', 'false');
   toggle.setAttribute('aria-label', 'Open menu');
-  document.documentElement.classList.remove('overflow-hidden');
-  document.body.classList.remove('overflow-hidden');
-  getLenis()?.start();
+  unlockSiteScroll();
 }
 
 function resetMenuState() {
   const elements = getElements();
   if (!elements) {
-    document.documentElement.classList.remove('overflow-hidden');
-    document.body.classList.remove('overflow-hidden');
-    getLenis()?.start();
+    unlockSiteScroll();
     return;
   }
   closeMenu(elements.menu, elements.toggle);

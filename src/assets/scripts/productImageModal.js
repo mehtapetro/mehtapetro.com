@@ -1,3 +1,5 @@
+import { lockSiteScroll, unlockSiteScroll } from '@scripts/scrollLock.js';
+
 function initProductImageModals() {
   document.querySelectorAll('[data-product-image-modal]').forEach(modal => {
     if (!(modal instanceof HTMLElement)) return;
@@ -12,16 +14,14 @@ function initProductImageModals() {
       modal.classList.remove('hidden');
       modal.classList.add('flex');
       modal.setAttribute('aria-hidden', 'false');
-      document.body.style.overflow = 'hidden';
-      window.__lenis?.stop();
+      lockSiteScroll();
     };
 
     const closeModal = () => {
       modal.classList.add('hidden');
       modal.classList.remove('flex');
       modal.setAttribute('aria-hidden', 'true');
-      document.body.style.overflow = '';
-      window.__lenis?.start();
+      unlockSiteScroll();
     };
 
     openButton?.addEventListener('click', openModal);

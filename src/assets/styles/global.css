@@ -140,6 +140,21 @@
   }
 }
 
+/* Document scroll keeps trackpad back/forward gestures working.
+   Page canvas color avoids a white rubber-band flash on overscroll. */
+html,
+body {
+  background-color: #e8f0ff;
+}
+
+html {
+  overscroll-behavior-y: none;
+}
+
+#site-scroll-content {
+  min-height: 100%;
+}
+
 /* Homepage client logo marquee (motion driven by clientMarquee.js) */
 .client-marquee {
   width: 100%;

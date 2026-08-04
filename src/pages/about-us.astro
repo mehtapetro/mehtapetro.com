@@ -70,6 +70,21 @@ const sustainabilityFocus = [
     body: 'Supporting local wellbeing',
   },
 ];
+
+const groupCompanies = [
+  {
+    name: 'Mehta Esters Private Limited',
+    focus: 'Specialty esters & chemical manufacturing',
+  },
+  {
+    name: 'OM Surface Coating Products LLP',
+    focus: 'Surface coating products & solutions',
+  },
+  {
+    name: 'Mehta Logistics',
+    focus: 'Logistics & supply chain support',
+  },
+];
 ---
 
 <MainLayout
@@ -138,57 +153,129 @@ const sustainabilityFocus = [
   </section>
 
   <!-- Who We Are -->
-  <section class="mx-auto max-w-[85rem] px-4 py-14 sm:px-6 lg:px-8 lg:py-20">
-    <div class="max-w-3xl">
-      <h2 class="text-3xl font-bold tracking-tight text-[#0A1F4D] md:text-4xl">
-        Who We Are
-      </h2>
-      <p class="mt-5 text-base leading-relaxed text-[#4A5F8C] sm:text-lg">
-        Mehta Petro-Refineries Limited operates modern manufacturing facilities
-        at Palghar (Maharashtra) and Dahej II (Gujarat). We supply petrochemical
-        solvents, specialty base oils, n-paraffins, olefins, and specialty
-        chemicals to diverse industries.
-      </p>
-    </div>
-
+  <section class="bg-[#E8F0FF]">
     <div
-      class="mt-12 grid gap-8 border-y border-[#C0D6FF]/70 py-10 sm:grid-cols-3 sm:gap-0 sm:divide-x sm:divide-[#C0D6FF]/70"
+      class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 sm:py-14 lg:px-8 lg:py-20"
     >
-      {
-        proofPoints.map(point => (
-          <div class="sm:px-8 first:sm:pl-0 last:sm:pr-0">
-            <p class="text-4xl font-extrabold tracking-tight text-[#0039E6] sm:text-5xl">
-              {point.value}
-            </p>
-            <p class="mt-3 text-base font-bold text-[#0A1F4D]">{point.label}</p>
-            <p class="mt-1 text-sm text-[#4A5F8C]">{point.detail}</p>
-          </div>
-        ))
-      }
+      <div class="max-w-3xl">
+        <p
+          class="text-xs font-semibold tracking-[0.18em] text-[#0039E6] uppercase"
+        >
+          Company
+        </p>
+        <h2
+          class="mt-3 text-2xl font-bold tracking-tight text-[#0A1F4D] sm:text-3xl md:text-4xl"
+        >
+          Who We Are
+        </h2>
+        <p
+          class="mt-4 text-sm leading-relaxed text-[#4A5F8C] sm:mt-5 sm:text-base md:text-lg"
+        >
+          Mehta Petro-Refineries Limited operates modern manufacturing
+          facilities at Palghar (Maharashtra) and Dahej II (Gujarat). We supply
+          petrochemical solvents, specialty base oils, n-paraffins, olefins, and
+          specialty chemicals to diverse industries.
+        </p>
+      </div>
+
+      <div
+        class="mt-8 divide-y divide-[#C0D6FF]/70 border-y border-[#C0D6FF]/70 sm:mt-12 sm:grid sm:grid-cols-3 sm:gap-0 sm:divide-x sm:divide-y-0 sm:divide-[#C0D6FF]/70 sm:py-10"
+      >
+        {
+          proofPoints.map(point => (
+            <div class="py-6 sm:px-8 sm:py-0 first:sm:pl-0 last:sm:pr-0">
+              <p class="text-4xl font-extrabold tracking-tight text-[#0039E6] sm:text-5xl">
+                {point.value}
+              </p>
+              <p class="mt-2 text-base font-bold text-[#0A1F4D] sm:mt-3">
+                {point.label}
+              </p>
+              <p class="mt-1 text-sm text-[#4A5F8C]">{point.detail}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Our Group -->
+  <section class="border-y border-[#C0D6FF]/70 bg-white">
+    <div
+      class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 sm:py-14 lg:px-8 lg:py-20"
+    >
+      <div class="max-w-3xl">
+        <p
+          class="text-xs font-semibold tracking-[0.18em] text-[#0039E6] uppercase"
+        >
+          Group Companies
+        </p>
+        <h2
+          class="mt-3 text-2xl font-bold tracking-tight text-[#0A1F4D] sm:text-3xl md:text-4xl"
+        >
+          Our Group
+        </h2>
+        <p
+          class="mt-4 text-sm leading-relaxed text-[#4A5F8C] sm:mt-5 sm:text-base md:text-lg"
+        >
+          Mehta Petro-Refineries Limited is part of a broader group serving
+          chemical manufacturing, coatings, and logistics.
+        </p>
+      </div>
+
+      <div
+        class="mt-8 divide-y divide-[#C0D6FF]/70 border-y border-[#C0D6FF]/70 sm:mt-12 sm:grid sm:grid-cols-3 sm:gap-0 sm:divide-x sm:divide-y-0 sm:divide-[#C0D6FF]/70 sm:py-10"
+      >
+        {
+          groupCompanies.map((company, index) => (
+            <div class="py-6 sm:px-8 sm:py-0 first:sm:pl-0 last:sm:pr-0">
+              <p class="text-xs font-semibold tracking-[0.16em] text-[#0039E6] uppercase">
+                {String(index + 1).padStart(2, '0')}
+              </p>
+              <p class="mt-3 text-lg font-bold tracking-tight text-[#0A1F4D] sm:text-xl">
+                {company.name}
+              </p>
+              <p class="mt-2 text-sm leading-relaxed text-[#4A5F8C]">
+                {company.focus}
+              </p>
+            </div>
+          ))
+        }
+      </div>
     </div>
   </section>
 
   <!-- Mission / Vision / Values -->
-  <section class="bg-white/60">
-    <div class="mx-auto max-w-[85rem] px-4 py-14 sm:px-6 lg:px-8 lg:py-20">
-      <h2 class="text-3xl font-bold tracking-tight text-[#0A1F4D] md:text-4xl">
-        What Guides Us
-      </h2>
-      <p
-        class="mt-3 max-w-2xl text-base leading-relaxed text-[#4A5F8C] sm:text-lg"
-      >
-        Our mission, vision, and values shape how we manufacture, partner, and
-        grow.
-      </p>
+  <section class="bg-[#E8F0FF]">
+    <div
+      class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 sm:py-14 lg:px-8 lg:py-20"
+    >
+      <div class="max-w-3xl">
+        <p
+          class="text-xs font-semibold tracking-[0.18em] text-[#0039E6] uppercase"
+        >
+          Purpose
+        </p>
+        <h2
+          class="mt-3 text-2xl font-bold tracking-tight text-[#0A1F4D] sm:text-3xl md:text-4xl"
+        >
+          What Guides Us
+        </h2>
+        <p
+          class="mt-4 text-sm leading-relaxed text-[#4A5F8C] sm:mt-5 sm:text-base md:text-lg"
+        >
+          Our mission, vision, and values shape how we manufacture, partner, and
+          grow.
+        </p>
+      </div>
 
       <div
-        class="mt-12 grid gap-10 md:grid-cols-3 md:gap-0 md:divide-x md:divide-[#D4E4FF]"
+        class="mt-8 divide-y divide-[#C0D6FF]/70 border-y border-[#C0D6FF]/70 sm:mt-12 md:grid md:grid-cols-3 md:gap-0 md:divide-x md:divide-y-0 md:divide-[#C0D6FF]/70 md:py-10"
       >
         {
           principles.map(item => (
-            <div class="md:px-8 first:md:pl-0 last:md:pr-0">
+            <div class="py-6 md:px-8 md:py-0 first:md:pl-0 last:md:pr-0">
               <h3 class="text-xl font-bold text-[#0A1F4D]">{item.title}</h3>
-              <p class="mt-4 text-base leading-relaxed text-[#4A5F8C]">
+              <p class="mt-3 text-sm leading-relaxed text-[#4A5F8C] sm:mt-4 sm:text-base">
                 {item.body}
               </p>
             </div>
@@ -199,74 +286,91 @@ const sustainabilityFocus = [
   </section>
 
   <!-- Leadership -->
-  <section class="mx-auto max-w-[85rem] px-4 py-14 sm:px-6 lg:px-8 lg:py-20">
+  <section class="border-y border-[#C0D6FF]/70 bg-white">
     <div
-      class="grid items-center gap-10 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-16"
+      class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 sm:py-14 lg:px-8 lg:py-20"
     >
-      <div class="overflow-hidden rounded-2xl">
-        <Image
-          src={directorImage}
-          alt="Mr. Vinod I. Mehta, Chairman & Director"
-          class="aspect-[4/5] h-full w-full object-cover object-top sm:aspect-[3/4]"
-          format="avif"
-          widths={[480, 720, 960]}
-          sizes="(min-width: 1024px) 36vw, 90vw"
-          loading="lazy"
-        />
-      </div>
+      <div
+        class="grid items-center gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-16"
+      >
+        <div class="overflow-hidden rounded-2xl">
+          <Image
+            src={directorImage}
+            alt="Mr. Vinod I. Mehta, Chairman & Director"
+            class="aspect-[4/5] h-full w-full object-cover object-top sm:aspect-[3/4]"
+            format="avif"
+            widths={[480, 720, 960]}
+            sizes="(min-width: 1024px) 36vw, 90vw"
+            loading="lazy"
+          />
+        </div>
 
-      <div>
-        <p
-          class="text-xs font-semibold tracking-[0.18em] text-[#0039E6] uppercase"
-        >
-          Leadership
-        </p>
-        <h2
-          class="mt-3 text-3xl font-bold tracking-tight text-[#0A1F4D] md:text-4xl"
-        >
-          Mr. Vinod I. Mehta
-        </h2>
-        <p class="mt-2 text-base font-medium text-[#4A5F8C]">
-          Chairman & Director
-        </p>
+        <div>
+          <p
+            class="text-xs font-semibold tracking-[0.18em] text-[#0039E6] uppercase"
+          >
+            Leadership
+          </p>
+          <h2
+            class="mt-3 text-2xl font-bold tracking-tight text-[#0A1F4D] sm:text-3xl md:text-4xl"
+          >
+            Mr. Vinod I. Mehta
+          </h2>
+          <p class="mt-2 text-base font-medium text-[#4A5F8C]">
+            Chairman & Director
+          </p>
 
-        <p class="mt-6 text-base leading-relaxed text-[#4A5F8C] sm:text-lg">
-          With over 45 years of experience in the petrochemicals industry, Mr.
-          Mehta has led Mehta Petro-Refineries Limited since its incorporation.
-          His entrepreneurial vision, dedication, and high ethical standards
-          have guided the company through decades of growth and industry
-          evolution.
-        </p>
-        <p class="mt-4 text-base leading-relaxed text-[#4A5F8C] sm:text-lg">
-          Under his leadership, the company entered manufacturing over 30 years
-          ago and successfully established products in the paints, inks, and
-          agro industries—building lasting relationships with customers and
-          suppliers alike.
-        </p>
+          <p
+            class="mt-6 text-sm leading-relaxed text-[#4A5F8C] sm:text-base md:text-lg"
+          >
+            With over 45 years of experience in the petrochemicals industry, Mr.
+            Mehta has led Mehta Petro-Refineries Limited since its
+            incorporation. His entrepreneurial vision, dedication, and high
+            ethical standards have guided the company through decades of growth
+            and industry evolution.
+          </p>
+          <p
+            class="mt-4 text-sm leading-relaxed text-[#4A5F8C] sm:text-base md:text-lg"
+          >
+            Under his leadership, the company entered manufacturing over 30
+            years ago and successfully established products in the paints, inks,
+            and agro industries—building lasting relationships with customers
+            and suppliers alike.
+          </p>
 
-        <blockquote
-          class="mt-8 border-l-2 border-[#0039E6] pl-5 text-lg leading-snug font-semibold text-[#0A1F4D]"
-        >
-          Strong values and ethical business practices are the foundation of how
-          we work.
-        </blockquote>
+          <blockquote
+            class="mt-8 border-l-2 border-[#0039E6] pl-5 text-base leading-snug font-semibold text-[#0A1F4D] sm:text-lg"
+          >
+            Strong values and ethical business practices are the foundation of
+            how we work.
+          </blockquote>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- Sustainability -->
-  <section class="bg-white/60">
-    <div class="mx-auto max-w-[85rem] px-4 py-14 sm:px-6 lg:px-8 lg:py-20">
+  <section class="bg-[#E8F0FF]">
+    <div
+      class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 sm:py-14 lg:px-8 lg:py-20"
+    >
       <div
-        class="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between"
+        class="flex flex-col gap-8 sm:flex-row sm:items-end sm:justify-between"
       >
         <div class="max-w-2xl">
+          <p
+            class="text-xs font-semibold tracking-[0.18em] text-[#0039E6] uppercase"
+          >
+            Responsibility
+          </p>
           <h2
-            class="text-3xl font-bold tracking-tight text-[#0A1F4D] md:text-4xl"
+            class="mt-3 text-2xl font-bold tracking-tight text-[#0A1F4D] sm:text-3xl md:text-4xl"
           >
             Sustainability
           </h2>
-          <p class="mt-4 text-base leading-relaxed text-[#4A5F8C] sm:text-lg">
+          <p
+            class="mt-4 text-sm leading-relaxed text-[#4A5F8C] sm:text-base md:text-lg"
+          >
             We're committed to responsible operations through measurable
             environmental action across climate, energy, water, and waste
             management.
@@ -275,15 +379,17 @@ const sustainabilityFocus = [
         <img
           src={ecovadisUrl}
           alt="EcoVadis certification badge"
-          class="h-20 w-auto object-contain sm:h-24 lg:h-28"
+          class="h-16 w-auto shrink-0 object-contain sm:h-20 lg:h-24"
           loading="lazy"
         />
       </div>
 
-      <div class="mt-12 grid gap-x-10 gap-y-8 sm:grid-cols-2 lg:grid-cols-3">
+      <div
+        class="mt-10 grid gap-x-10 gap-y-0 border-t border-[#C0D6FF]/70 sm:mt-12 sm:grid-cols-2 lg:grid-cols-3"
+      >
         {
           sustainabilityFocus.map(item => (
-            <div class="border-t border-[#D4E4FF] pt-5">
+            <div class="border-b border-[#C0D6FF]/70 py-5 sm:py-6">
               <h3 class="text-base font-bold text-[#0A1F4D]">{item.title}</h3>
               <p class="mt-2 text-sm leading-relaxed text-[#4A5F8C]">
                 {item.body}

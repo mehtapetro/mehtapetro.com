@@ -20,17 +20,22 @@ const isSvg = (src: ImageMetadata) => src.format === 'svg';
 
 <section class="border-y border-[#C0D6FF]/70 bg-white">
   <div
-    class="mx-auto max-w-[85rem] px-4 pt-10 pb-8 sm:px-6 sm:pt-14 sm:pb-10 lg:px-8 lg:pt-20 lg:pb-14"
+    class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 sm:py-14 lg:px-8 lg:py-20"
   >
     <div class="max-w-3xl">
+      <p
+        class="text-xs font-semibold tracking-[0.18em] text-[#0039E6] uppercase"
+      >
+        Clients
+      </p>
       <h2
-        class="text-2xl font-bold tracking-tight text-[#0A1F4D] sm:text-3xl md:text-4xl"
+        class="mt-3 text-2xl font-bold tracking-tight text-[#0A1F4D] sm:text-3xl md:text-4xl"
       >
         {title}
       </h2>
       {
         subTitle && (
-          <p class="mt-3 text-sm leading-relaxed text-[#4A5F8C] sm:mt-4 sm:text-base md:text-lg">
+          <p class="mt-4 text-sm leading-relaxed text-[#4A5F8C] sm:mt-5 sm:text-base md:text-lg">
             {subTitle}
           </p>
         )

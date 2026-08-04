@@ -45,7 +45,7 @@ interface Props {
 }
 ---
 
-<html lang={lang} class="lenis lenis-smooth scroll-pt-16">
+<html lang={lang} class="scroll-pt-16">
   <head>
     <ClientRouter />
     {/* Adding metadata to the HTML document */}
@@ -82,33 +82,32 @@ interface Props {
     </script>
   </head>
   <body
-    class="relative flex min-h-screen flex-col bg-[#E8F0FF] text-neutral-900 selection:bg-[#0039E6] selection:text-neutral-50"
+    class="bg-[#E8F0FF] text-neutral-900 selection:bg-[#0039E6] selection:text-neutral-50"
   >
-    <a
-      href="#main-content"
-      class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-100 focus:rounded-lg focus:bg-[#1E3AFF] focus:px-4 focus:py-2 focus:text-neutral-50"
-    >
-      Skip to content
-    </a>
+    <div id="site-scroll">
+      <div id="site-scroll-content" class="relative flex min-h-dvh flex-col">
+        <a
+          href="#main-content"
+          class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-100 focus:rounded-lg focus:bg-[#1E3AFF] focus:px-4 focus:py-2 focus:text-neutral-50"
+        >
+          Skip to content
+        </a>
 
-    {
-      /*
-    Setting up the main structure of the page.
-    The Navbar is placed at the top, with a slot for the main content and FooterSection at the bottom.
-    */
-    }
-    <div
-      class:list={[
-        'relative z-10 w-full grow',
-        !fullWidth && 'mx-auto max-w-(--breakpoint-2xl) px-4 sm:px-6 lg:px-8',
-      ]}
-    >
-      <Navbar overlay={overlayNav} transition:persist="site-navbar" />
-      <main id="main-content">
-        <slot />
-      </main>
+        <div
+          class:list={[
+            'relative z-10 w-full grow',
+            !fullWidth &&
+              'mx-auto max-w-(--breakpoint-2xl) px-4 sm:px-6 lg:px-8',
+          ]}
+        >
+          <Navbar overlay={overlayNav} transition:persist="site-navbar" />
+          <main id="main-content">
+            <slot />
+          </main>
+        </div>
+        {!hideFooter && <FooterSection transition:persist />}
+      </div>
     </div>
-    {!hideFooter && <FooterSection transition:persist />}
     <Analytics />
     <SpeedInsights />
     <script>

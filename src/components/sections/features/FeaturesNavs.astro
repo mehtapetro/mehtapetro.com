@@ -28,14 +28,19 @@ interface Props {
     class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 sm:py-14 lg:px-8 lg:py-20"
   >
     <div class="max-w-3xl">
+      <p
+        class="text-xs font-semibold tracking-[0.18em] text-[#0039E6] uppercase"
+      >
+        Products
+      </p>
       <h2
-        class="text-2xl font-bold tracking-tight text-[#0A1F4D] sm:text-3xl md:text-4xl"
+        class="mt-3 text-2xl font-bold tracking-tight text-[#0A1F4D] sm:text-3xl md:text-4xl"
       >
         {title}
       </h2>
       {
         subTitle && (
-          <p class="mt-3 text-sm leading-relaxed text-[#4A5F8C] sm:mt-4 sm:text-base md:text-lg">
+          <p class="mt-4 text-sm leading-relaxed text-[#4A5F8C] sm:mt-5 sm:text-base md:text-lg">
             {subTitle}
           </p>
         )
@@ -43,7 +48,7 @@ interface Props {
     </div>
 
     <div
-      class="relative z-10 mt-8 grid items-center gap-6 sm:mt-12 sm:gap-10 lg:grid-cols-12 lg:gap-16"
+      class="relative z-10 mt-8 grid items-center gap-6 border-t border-[#C0D6FF]/70 pt-8 sm:mt-12 sm:gap-10 sm:pt-10 lg:grid-cols-12 lg:gap-16"
     >
       <!-- Image first on mobile so tabs control something visible -->
       <div
@@ -67,7 +72,11 @@ interface Props {
       <div
         class="order-2 lg:order-none lg:col-span-6 lg:col-start-7 lg:row-start-1"
       >
-        <nav class="grid gap-0" aria-label="Product categories" role="tablist">
+        <nav
+          class="grid gap-0 divide-y divide-[#C0D6FF]/70 border-y border-[#C0D6FF]/70"
+          aria-label="Product categories"
+          role="tablist"
+        >
           {
             tabs.map((tab, index) => (
               <TabNav

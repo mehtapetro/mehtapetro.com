@@ -20,6 +20,7 @@ function getLenisOptions() {
     touchMultiplier: 1,
     // Keep native touch scrolling for a smoother mobile feel
     syncTouch: false,
+    overscroll: false,
   };
 }
 
@@ -95,7 +96,7 @@ function initLenis() {
     return;
   }
 
-  // On phones, prefer native scrolling for snappier UX
+  // On phones, prefer native document scrolling for snappier UX
   if (isCoarsePointer()) {
     disableLenis();
     return;
