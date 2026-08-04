@@ -89,13 +89,15 @@ export function getAllCategories(): CategoryInfo[] {
         ['cover', 'cover-image', 'cover.jpg'],
         ['jpg', 'jpeg', 'png', 'webp', 'avif']
       );
+      const slug = slugify(folderName);
+      // Prefer slug-based cover URLs so folder names with & / spaces stay safe in src.
       const coverUrl = coverFile
-        ? `/products/${encodeURIComponent(folderName)}/${encodeURIComponent(coverFile)}`
+        ? `/products/${slug}/cover.jpg`
         : undefined;
       const displayName = meta.name || formatCategoryName(folderName);
       return {
         folderName,
-        slug: slugify(folderName),
+        slug,
         name: displayName,
         description:
           meta.description ||
