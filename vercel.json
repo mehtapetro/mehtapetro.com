@@ -192,6 +192,16 @@
       "source": "/zh-cn",
       "destination": "/",
       "permanent": true
+    },
+    {
+      "source": "/news/aniversary",
+      "destination": "/news/anniversary",
+      "permanent": true
+    },
+    {
+      "source": "/news/aniversary/",
+      "destination": "/news/anniversary/",
+      "permanent": true
     }
   ]
 }

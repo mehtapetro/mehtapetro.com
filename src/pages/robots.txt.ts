@@ -1,21 +1,19 @@
 // https://docs.astro.build/en/guides/integrations-guide/sitemap/#usage
 import type { APIRoute } from 'astro';
-import {
-  getRobotsAllowRules,
-  getRobotsInfrastructureAllowRules,
-} from '@/data/sitemapPages';
+import { SITE } from '@data/constants';
 
-const allowRules = [
-  ...getRobotsInfrastructureAllowRules(),
-  ...getRobotsAllowRules(),
-].join('\n');
+/**
+ * Allow the public site by default. Only block private / non-content paths.
+ * New marketing pages are crawlable without updating an allow-list.
+ */
+const robotsTxt = `User-agent: *
+Allow: /
 
-const robotsTxt = `
-User-agent: *
-Disallow: /
-${allowRules}
+Disallow: /api/
+Disallow: /404
+Disallow: /404/
 
-Sitemap: ${new URL('sitemap-index.xml', import.meta.env.SITE).href}
+Sitemap: ${new URL('sitemap-index.xml', SITE.url).href}
 `.trim();
 
 export const GET: APIRoute = () => {

@@ -44,35 +44,3 @@ export function isIndexablePage(pageUrl: string): boolean {
 
   return INDEXABLE_PREFIXES.some(prefix => pathname.startsWith(prefix));
 }
-
-/** robots.txt Allow rules for sitemap and other crawler infrastructure. */
-export function getRobotsInfrastructureAllowRules(): string[] {
-  return [
-    'Allow: /robots.txt$',
-    'Allow: /sitemap-index.xml$',
-    'Allow: /sitemap-0.xml$',
-  ];
-}
-
-/** robots.txt Allow rules for each indexable path and nested sections. */
-export function getRobotsAllowRules(): string[] {
-  const rules: string[] = [];
-
-  for (const path of INDEXABLE_PATHS) {
-    if (path === '/') {
-      rules.push('Allow: /$');
-      continue;
-    }
-
-    const bare = path.replace(/\/$/, '');
-    rules.push(`Allow: ${bare}$`);
-    rules.push(`Allow: ${path}$`);
-  }
-
-  // Nested product and news pages (category, product, article)
-  for (const prefix of INDEXABLE_PREFIXES) {
-    rules.push(`Allow: ${prefix}`);
-  }
-
-  return rules;
-}

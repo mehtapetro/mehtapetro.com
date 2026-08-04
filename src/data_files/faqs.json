@@ -1,29 +1,29 @@
 {
-  "subTitle": "Common questions about Mehta Petro, our product categories, and how we support industrial buyers.",
+  "subTitle": "Common questions about Mehta Petro products, supply, and how to enquire for industrial requirements.",
   "faqs": [
     {
-      "question": "What product categories does Mehta Petro supply?",
-      "answer": "Mehta Petro supplies petrochemical solvents, specialty base oils, n-paraffins, olefins, and related specialty chemical solutions for industrial applications."
+      "question": "How do I enquire about a product or grade?",
+      "answer": "Open the product or category page and use Request Product Information, or go to Contact and share the grade, approximate volume, and delivery location. Our team typically responds with specs, availability, and next steps."
     },
     {
-      "question": "Who does Mehta Petro typically work with?",
-      "answer": "We work with industrial buyers, manufacturers, processors, and commercial teams looking for dependable supply, consistent product quality, and responsive service."
+      "question": "What should I include in a commercial enquiry?",
+      "answer": "Product name or category, required grade if known, approximate quantity, destination, and timeline. If you need a COA, TDS, or sample evaluation, mention that in the message so we can prioritize the right documents."
+    },
+    {
+      "question": "What product categories does Mehta Petro supply?",
+      "answer": "We supply petrochemical solvents, specialty base oils, rubber process oils, glycols, printing ink oils, resins, petroleum ethers, and related industrial chemicals from our Palghar and Dahej facilities."
     },
     {
       "question": "Can you support recurring or larger-volume requirements?",
-      "answer": "Yes. Mehta Petro supports ongoing commercial requirements and works with customers to align supply planning, communication, and delivery expectations with their operational needs."
+      "answer": "Yes. Mehta Petro supports ongoing commercial supply. Share your planning horizon and volume range so we can align production and dispatch expectations."
     },
     {
-      "question": "How do I get product or commercial support?",
-      "answer": "You can reach our team directly through the contact page. We aim to provide practical, timely support for product inquiries, order coordination, and general business requirements."
+      "question": "Do you provide datasheets, COA, or MSDS?",
+      "answer": "Yes. Relevant TDS, COA, and MSDS documents are available on many product pages, and our team can share additional documentation for evaluation and purchasing decisions."
     },
     {
-      "question": "Do you provide documentation and product information?",
-      "answer": "Yes. We share relevant product information and commercial details to help customers evaluate requirements and make informed purchasing decisions."
-    },
-    {
-      "question": "Can Mehta Petro support specialized industrial requirements?",
-      "answer": "Yes. If you have specific application, volume, or supply needs, our team can discuss the requirement and help determine the most suitable commercial approach."
+      "question": "Where are your manufacturing facilities?",
+      "answer": "We manufacture from Palghar, Maharashtra and Dahej II, Gujarat, with ISO 9001:2015 quality systems supporting consistent industrial supply."
     }
   ]
 }

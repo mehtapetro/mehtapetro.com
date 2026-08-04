@@ -7,7 +7,7 @@ readTime: 3
 tags: ['anniversary', 'company', 'mehta-petro', 'since-1993']
 authorImage: '@/images/blog/mprl_lab.png'
 authorImageAlt: 'Mehta Petro team and laboratory'
-cardImage: '@/images/blog/aniversary.png'
+cardImage: '@/images/blog/anniversary.png'
 cardImageAlt: 'Celebrating 33 years of Mehta Petro'
 ---
 
