@@ -1,37 +1,34 @@
 ---
-title: 'Mehta Petro Turns 33: Three Decades of Industrial Chemical Manufacturing'
-description: 'Mehta Petro-Refineries Limited completes 33 years since 1993. Discover how our Palghar and Dahej plants supply solvents, base oils, and specialty chemicals with ISO 9001:2015 quality.'
+title: '33 Years of Mehta Petro — We Are Truly Grateful'
+description: 'Mehta Petro marks 33 years since 1993. A heartfelt note on the journey, the people behind it, and the work that still drives us every day.'
 pubDate: 2026-08-05
 author: 'Mehta Petro'
 readTime: 3
-tags:
-  [
-    'mehta-petro',
-    'anniversary',
-    'petrochemical-manufacturer',
-    'solvents',
-    'india',
-  ]
+tags: ['anniversary', 'company', 'mehta-petro', 'since-1993']
 authorImage: '@/images/blog/mprl_lab.png'
-authorImageAlt: 'Mehta Petro quality and laboratory operations'
+authorImageAlt: 'Mehta Petro team and laboratory'
 cardImage: '@/images/blog/aniversary.png'
-cardImageAlt: 'Mehta Petro 33rd anniversary celebration'
+cardImageAlt: 'Celebrating 33 years of Mehta Petro'
 ---
 
-In **2026**, Mehta Petro-Refineries Limited completes **33 years** of manufacturing. Since **1993**, we have supplied petrochemical solvents, specialty base oils, rubber process oils, glycols, and industrial chemicals to buyers who need consistent grades—not just another catalog.
+There are moments when you pause, look back, and feel it properly: **we made it to 33 years**.
 
-Our promise has stayed the same: **Performance Through Quality**.
+Since **1993**, Mehta Petro-Refineries Limited has been making solvents, oils, and industrial chemicals for people who need them to work day after day, order after order. That does not happen by accident. It happens because teams showed up, customers stayed with us, and we kept raising our own bar.
 
-## What 33 years look like on the ground
+This anniversary feels personal. Not like a slogan on a wall. Like something we earned.
 
-Today that promise runs through two manufacturing bases—**Palghar, Maharashtra** and **Dahej II, Gujarat**—backed by **ISO 9001:2015** systems, in-house quality checks, and technical support when you need a datasheet, COA, or grade match for your process.
+## What we feel proud of
 
-Customers come to us for aromatic and aliphatic solvents, dearomatized fluids, petroleum ethers, naphthenic oils, printing ink oils, resins, and related specialties. The range has grown with industry demand; the standard has not changed: reliable supply and clear specifications.
+We are proud of our plants in **Palghar** and **Dahej**. Proud of the quality checks, the late evenings, the batches that had to be right before they left. Proud that **Performance Through Quality** is not just a line we print it is how we try to work.
 
-## Why this milestone matters
+We are proud of the relationships too. Some of you have been with us for years. You trusted us with your production needs, asked hard questions, and pushed us to be better. That trust means more than any milestone number.
 
-Thirty-three years in chemicals is earned on the plant floor and in repeat orders. It means teams who know distillation and storage, labs that verify what leaves the gate, and relationships built on delivery you can plan around.
+## Thank you
 
-To every customer, partner, and colleague who made this possible—thank you. The next chapter is simple: keep raising product quality, strengthen supply from Palghar and Dahej, and stay easy to work with.
+To our customers, partners, and every person who has been part of Mehta Petro **thank you**. Seriously. Thirty three years is your story as much as ours.
 
-Browse our [product range](/products/), see our [manufacturing capabilities](/capabilities/), or [contact the team](/contact/) for specifications and enquiries.
+We are happy. We are grateful. And we are still hungry to do good work clear specs, reliable supply, and honest support when you need us.
+
+If you want to see what we make today, visit our [products](/products/). If you want to talk, [reach out](/contact/). We would love to hear from you.
+
+Here is to **33 years**—and to everything still ahead.
