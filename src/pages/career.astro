@@ -19,36 +19,36 @@ const steps = [
   'Submit — we’ll get back to you',
 ];
 
-const openRoles = [
-  {
-    title: 'Production / Plant Operator',
-    location: 'Palghar or Dahej',
-    type: 'Full-time',
-    summary:
-      'Support manufacturing operations, batch handling, and safe plant practices across solvents and specialty oils.',
-  },
-  {
-    title: 'Quality Control Chemist',
-    location: 'Palghar / Dahej',
-    type: 'Full-time',
-    summary:
-      'Test in-process and finished materials, maintain lab records, and help uphold ISO 9001:2015 quality standards.',
-  },
-  {
-    title: 'Sales / Business Development Executive',
-    location: 'Mumbai / Field',
-    type: 'Full-time',
-    summary:
-      'Work with industrial buyers on enquiries, grade selection, and follow-up for solvents, base oils, and specialty chemicals.',
-  },
-  {
-    title: 'Logistics & Dispatch Coordinator',
-    location: 'Mumbai / Plant',
-    type: 'Full-time',
-    summary:
-      'Coordinate dispatches, documentation, and delivery timelines with plant teams and customers.',
-  },
-];
+// const openRoles = [
+//   {
+//     title: 'Production / Plant Operator',
+//     location: 'Palghar or Dahej',
+//     type: 'Full-time',
+//     summary:
+//       'Support manufacturing operations, batch handling, and safe plant practices across solvents and specialty oils.',
+//   },
+//   {
+//     title: 'Quality Control Chemist',
+//     location: 'Palghar / Dahej',
+//     type: 'Full-time',
+//     summary:
+//       'Test in-process and finished materials, maintain lab records, and help uphold ISO 9001:2015 quality standards.',
+//   },
+//   {
+//     title: 'Sales / Business Development Executive',
+//     location: 'Mumbai / Field',
+//     type: 'Full-time',
+//     summary:
+//       'Work with industrial buyers on enquiries, grade selection, and follow-up for solvents, base oils, and specialty chemicals.',
+//   },
+//   {
+//     title: 'Logistics & Dispatch Coordinator',
+//     location: 'Mumbai / Plant',
+//     type: 'Full-time',
+//     summary:
+//       'Coordinate dispatches, documentation, and delivery timelines with plant teams and customers.',
+//   },
+// ];
 ---
 
 <MainLayout
@@ -92,55 +92,10 @@ const openRoles = [
     </div>
   </section>
 
-  <!-- Open roles -->
-  <section class="bg-[#E8F0FF]">
-    <div
-      class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 sm:py-12 lg:px-8 lg:py-14"
-    >
-      <div class="max-w-3xl">
-        <p
-          class="text-xs font-semibold tracking-[0.18em] text-[#0039E6] uppercase"
-        >
-          Open roles
-        </p>
-        <h2
-          class="mt-3 text-2xl font-bold tracking-tight text-[#0A1F4D] sm:text-3xl"
-        >
-          Roles we are hiring for
-        </h2>
-        <p class="mt-3 text-sm leading-relaxed text-[#4A5F8C] sm:text-base">
-          Don’t see your exact title? Apply anyway and tell us how you can
-          contribute — we review every application.
-        </p>
-      </div>
-
-      <ul class="mt-8 grid gap-4 sm:mt-10 sm:grid-cols-2 sm:gap-6">
-        {
-          openRoles.map(role => (
-            <li class="flex h-full flex-col border-t border-[#C0D6FF]/70 bg-white/60 px-5 py-5 sm:px-6 sm:py-6">
-              <div class="flex flex-wrap items-center gap-x-3 gap-y-1">
-                <h3 class="text-base font-bold text-[#0A1F4D] sm:text-lg">
-                  {role.title}
-                </h3>
-                <span class="text-xs font-semibold tracking-wide text-[#4A5F8C] uppercase">
-                  {role.type}
-                </span>
-              </div>
-              <p class="mt-2 text-sm font-semibold text-[#0039E6]">
-                {role.location}
-              </p>
-              <p class="mt-3 flex-1 text-sm leading-relaxed text-[#4A5F8C]">
-                {role.summary}
-              </p>
-            </li>
-          ))
-        }
-      </ul>
-    </div>
-  </section>
+  <!-- Open roles section temporarily commented out — restore openRoles data above to re-enable -->
 
   <!-- Application form -->
-  <section class="border-t border-[#C0D6FF]/70 bg-[#E8F0FF]">
+  <section class="bg-[#E8F0FF]">
     <div
       class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 sm:py-14 lg:px-8 lg:py-16"
     >
