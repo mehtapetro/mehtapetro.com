@@ -192,9 +192,6 @@ body {
   width: 10.5rem;
   height: 5.25rem;
   padding: 0.5rem 0.75rem;
-  border-radius: 0.75rem;
-  border: 1px solid #e5eeff;
-  background-color: #f7faff;
 }
 
 .client-marquee__image {
@@ -202,7 +199,7 @@ body {
   width: auto;
   height: auto;
   max-width: 100%;
-  max-height: 2.5rem;
+  max-height: 4rem;
   object-fit: contain;
   object-position: center;
 }
@@ -219,7 +216,7 @@ body {
   }
 
   .client-marquee__image {
-    max-height: 3rem;
+    max-height: 4.5rem;
   }
 }
 
@@ -231,7 +228,7 @@ body {
   }
 
   .client-marquee__image {
-    max-height: 3.5rem;
+    max-height: 5rem;
   }
 }
 
