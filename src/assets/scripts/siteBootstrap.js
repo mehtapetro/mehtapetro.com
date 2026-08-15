@@ -34,6 +34,12 @@ async function loadPageScripts() {
       '[data-product-image-modal], [data-product-image-open]',
       () => import('@scripts/productImageModal.js')
     ),
+    loadWhenPresent('[data-reveal]', () => import('@scripts/scrollReveal.js')),
+    loadWhenPresent('[data-count-to]', () => import('@scripts/countUp.js')),
+    loadWhenPresent(
+      '[data-back-to-top]',
+      () => import('@scripts/backToTop.js')
+    ),
   ]);
 }
 

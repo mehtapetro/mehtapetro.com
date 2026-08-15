@@ -212,7 +212,7 @@ const heroLogoMobile = await getImage({
     <div
       class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 sm:py-14 lg:px-8 lg:py-20"
     >
-      <div class="max-w-3xl">
+      <div data-reveal class="max-w-3xl">
         <p
           class="text-xs font-semibold tracking-[0.18em] text-[#0039E6] uppercase"
         >
@@ -232,13 +232,17 @@ const heroLogoMobile = await getImage({
       </div>
 
       <div
+        data-reveal-group
         class="mt-8 divide-y divide-[#C0D6FF]/70 border-y border-[#C0D6FF]/70 sm:mt-12 sm:grid sm:grid-cols-3 sm:gap-0 sm:divide-x sm:divide-y-0 sm:divide-[#C0D6FF]/70 sm:py-10"
       >
-        <div class="py-6 sm:px-8 sm:py-0 first:sm:pl-0 last:sm:pr-0">
+        <div
+          data-reveal
+          class="py-6 sm:px-8 sm:py-0 first:sm:pl-0 last:sm:pr-0"
+        >
           <p
             class="text-4xl font-extrabold tracking-tight text-[#0039E6] sm:text-5xl"
           >
-            33+
+            <span data-count-to="33" data-count-suffix="+">0+</span>
           </p>
           <p class="mt-2 text-base font-bold text-[#0A1F4D] sm:mt-3">
             Years of Experience
@@ -248,11 +252,14 @@ const heroLogoMobile = await getImage({
           </p>
         </div>
 
-        <div class="py-6 sm:px-8 sm:py-0 first:sm:pl-0 last:sm:pr-0">
+        <div
+          data-reveal
+          class="py-6 sm:px-8 sm:py-0 first:sm:pl-0 last:sm:pr-0"
+        >
           <p
             class="text-4xl font-extrabold tracking-tight text-[#0039E6] sm:text-5xl"
           >
-            2
+            <span data-count-to="2">0</span>
           </p>
           <p class="mt-2 text-base font-bold text-[#0A1F4D] sm:mt-3">
             Manufacturing Facilities
@@ -262,7 +269,10 @@ const heroLogoMobile = await getImage({
           </p>
         </div>
 
-        <div class="py-6 sm:px-8 sm:py-0 first:sm:pl-0 last:sm:pr-0">
+        <div
+          data-reveal
+          class="py-6 sm:px-8 sm:py-0 first:sm:pl-0 last:sm:pr-0"
+        >
           <div class="flex h-11 items-center sm:h-14">
             <img
               src={isoLogo.src}
@@ -309,7 +319,7 @@ const heroLogoMobile = await getImage({
         heading: 'N-Paraffins & Olefins',
         content:
           'Reliable supply of n-paraffins and olefins for manufacturing. Batch-tested quality with complete traceability.',
-        svg: 'dashboard',
+        svg: 'flask',
         src: dashboard,
         alt: 'Chemical processing and quality control',
         srcName: 'solvemntshome.jpg',
@@ -319,7 +329,7 @@ const heroLogoMobile = await getImage({
         heading: 'Custom Requirements',
         content:
           'Need something specific? We work with clients on custom formulations, packaging, and delivery schedules.',
-        svg: 'house',
+        svg: 'tune',
         src: construction,
         alt: 'Custom chemical solutions',
         srcName: 'nparaffinshome.jpg',

@@ -3,6 +3,7 @@
 import Meta from '@components/Meta.astro';
 import Navbar from '@components/sections/navbar&footer/Navbar.astro';
 import FooterSection from '@components/sections/navbar&footer/FooterSection.astro';
+import BackToTop from '@components/ui/buttons/BackToTop.astro';
 import Analytics from '@vercel/analytics/astro';
 import SpeedInsights from '@vercel/speed-insights/astro';
 import { ClientRouter } from 'astro:transitions';
@@ -119,6 +120,7 @@ interface Props {
         {!hideFooter && <FooterSection transition:persist />}
       </div>
     </div>
+    <BackToTop transition:persist="back-to-top" />
     <Analytics />
     <SpeedInsights />
     <script>

@@ -1,0 +1,20 @@
+---
+import Icon from '@components/ui/icons/Icon.astro';
+---
+
+<button
+  type="button"
+  data-back-to-top
+  aria-label="Back to top"
+  class="pointer-events-none fixed right-4 bottom-6 z-40 inline-flex h-11 w-11 translate-y-3 items-center justify-center rounded-full border border-[#C0D6FF] bg-white text-[#0039E6] opacity-0 shadow-[0_16px_40px_-20px_rgba(0,57,230,0.45)] transition duration-300 hover:border-[#0039E6] hover:bg-[#F5F9FF] sm:right-6 sm:bottom-8"
+>
+  <Icon name="arrowUp" />
+</button>
+
+<style>
+  [data-back-to-top].is-visible {
+    pointer-events: auto;
+    transform: translateY(0);
+    opacity: 1;
+  }
+</style>
