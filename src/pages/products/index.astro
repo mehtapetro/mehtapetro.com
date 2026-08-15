@@ -348,19 +348,23 @@ const ogTitle = pageTitle;
     <h2 class="mb-4 text-xl font-bold text-[#0A1F4D] sm:mb-6 sm:text-2xl">
       Browse by category
     </h2>
-    <div class="grid gap-4 sm:grid-cols-2 sm:gap-6 xl:grid-cols-3">
+    <div
+      data-reveal-group
+      class="grid gap-4 sm:grid-cols-2 sm:gap-6 xl:grid-cols-3"
+    >
       {
         categoryCards.map(category => (
           <a
+            data-reveal
             href={category.href}
-            class="group overflow-hidden rounded-2xl border border-[#D4E4FF] bg-white shadow-lg transition-colors hover:border-[#0039E6]"
+            class="group overflow-hidden rounded-2xl border border-[#D4E4FF] bg-white shadow-lg transition-all duration-300 hover:-translate-y-1 hover:border-[#0039E6] hover:shadow-2xl"
           >
             <div class="relative overflow-hidden border-b border-[#E5EEFF] bg-[#F5F9FF]">
               {category.image ? (
                 <img
                   src={category.image}
                   alt={category.imageAlt}
-                  class="h-40 w-full object-cover sm:h-52"
+                  class="h-40 w-full object-cover transition-transform duration-500 group-hover:scale-105 sm:h-52"
                   loading="lazy"
                   decoding="async"
                 />

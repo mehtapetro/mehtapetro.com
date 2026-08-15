@@ -127,7 +127,7 @@ const facilities = [
     <div
       class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 sm:py-14 lg:px-8 lg:py-20"
     >
-      <div class="max-w-3xl">
+      <div data-reveal class="max-w-3xl">
         <p
           class="text-xs font-semibold tracking-[0.18em] text-[#0039E6] uppercase"
         >
@@ -147,11 +147,15 @@ const facilities = [
       </div>
 
       <div
+        data-reveal-group
         class="mt-8 divide-y divide-[#C0D6FF]/70 border-y border-[#C0D6FF]/70 sm:mt-12 sm:grid sm:grid-cols-3 sm:gap-0 sm:divide-x sm:divide-y-0 sm:divide-[#C0D6FF]/70 sm:py-10"
       >
         {
           proofPoints.map(point => (
-            <div class="py-6 sm:px-8 sm:py-0 first:sm:pl-0 last:sm:pr-0">
+            <div
+              data-reveal
+              class="py-6 sm:px-8 sm:py-0 first:sm:pl-0 last:sm:pr-0"
+            >
               <p class="text-4xl font-extrabold tracking-tight text-[#0039E6] sm:text-5xl">
                 {point.value}
               </p>
@@ -171,7 +175,7 @@ const facilities = [
     <div
       class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 sm:py-14 lg:px-8 lg:py-20"
     >
-      <div class="max-w-3xl">
+      <div data-reveal class="max-w-3xl">
         <p
           class="text-xs font-semibold tracking-[0.18em] text-[#0039E6] uppercase"
         >
@@ -195,6 +199,7 @@ const facilities = [
           facilities.map((facility, facilityIndex) => (
             <article
               id={facility.id}
+              data-reveal
               class:list={[
                 'grid items-center gap-8 border-t border-[#C0D6FF]/70 pt-10 sm:gap-10 sm:pt-12 lg:grid-cols-2 lg:gap-16',
                 facilityIndex % 2 === 1 && 'lg:[&>*:first-child]:order-2',

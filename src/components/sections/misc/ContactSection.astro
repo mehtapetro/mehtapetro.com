@@ -73,7 +73,7 @@ const fieldClass =
   <div
     class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 sm:py-14 lg:px-8 lg:py-16"
   >
-    <div class="max-w-3xl">
+    <div data-reveal class="max-w-3xl">
       <p
         class="text-xs font-semibold tracking-[0.18em] text-[#0039E6] uppercase"
       >
@@ -250,7 +250,7 @@ const fieldClass =
   <div
     class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 sm:py-14 lg:px-8 lg:py-16"
   >
-    <div class="max-w-3xl">
+    <div data-reveal class="max-w-3xl">
       <p
         class="text-xs font-semibold tracking-[0.18em] text-[#0039E6] uppercase"
       >
@@ -264,11 +264,15 @@ const fieldClass =
     </div>
 
     <div
+      data-reveal-group
       class="mt-8 grid gap-0 border-y border-[#C0D6FF]/70 sm:mt-10 md:grid-cols-3"
     >
       {
         locations.map(location => (
-          <div class="border-[#C0D6FF]/70 px-0 py-6 md:border-r md:px-6 md:py-8 md:first:pl-0 md:last:border-r-0 md:last:pr-0">
+          <div
+            data-reveal
+            class="border-[#C0D6FF]/70 px-0 py-6 md:border-r md:px-6 md:py-8 md:first:pl-0 md:last:border-r-0 md:last:pr-0"
+          >
             <p class="text-[11px] font-semibold tracking-wider text-[#0039E6] uppercase">
               {location.label}
             </p>

@@ -4,7 +4,7 @@ const { product, categorySlug } = Astro.props;
 
 <a
   href={`/products/${categorySlug}/${product.slug}`}
-  class="group overflow-hidden rounded-2xl border border-[#D4E4FF] bg-white shadow-lg transition-colors hover:border-[#0039E6]"
+  class="group flex h-full flex-col overflow-hidden rounded-2xl border border-[#D4E4FF] bg-white shadow-lg transition-all duration-300 hover:-translate-y-1 hover:border-[#0039E6] hover:shadow-2xl"
 >
   <div class="relative overflow-hidden border-b border-[#E5EEFF] bg-[#F5F9FF]">
     {
@@ -12,7 +12,7 @@ const { product, categorySlug } = Astro.props;
         <img
           src={product.imageUrl}
           alt={product.name}
-          class="h-40 w-full object-cover sm:h-52"
+          class="h-40 w-full object-cover transition-transform duration-500 group-hover:scale-105 sm:h-52"
           loading="lazy"
         />
       ) : (
@@ -25,7 +25,7 @@ const { product, categorySlug } = Astro.props;
     </div>
   </div>
 
-  <div class="p-4 sm:p-6">
+  <div class="flex flex-1 flex-col p-4 sm:p-6">
     <p
       class="text-[11px] font-semibold tracking-wide text-[#0039E6] uppercase sm:text-xs"
     >
@@ -44,7 +44,7 @@ const { product, categorySlug } = Astro.props;
       )
     }
     <div
-      class="mt-4 text-sm font-semibold text-[#0039E6] group-hover:text-[#0033CC] sm:mt-5"
+      class="mt-4 text-sm font-semibold text-[#0039E6] group-hover:text-[#0033CC] sm:mt-5 sm:mt-auto"
     >
       View details
     </div>

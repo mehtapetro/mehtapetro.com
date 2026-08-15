@@ -13,13 +13,13 @@ const href = `/news/${blogEntry.id.replace(/^en\//, '')}/`;
 ---
 
 <a
-  class="group block overflow-hidden rounded-2xl border border-[#D4E4FF] bg-white transition duration-300 hover:border-[#0039E6] active:bg-[#F7FAFF] sm:flex sm:items-center sm:gap-5 sm:p-4"
+  class="group block overflow-hidden rounded-2xl border border-[#D4E4FF] bg-white transition duration-300 hover:border-[#0039E6] hover:shadow-xl active:bg-[#F7FAFF] sm:flex sm:items-center sm:gap-5 sm:p-4"
   href={href}
   data-astro-prefetch
 >
   <div class="shrink-0 overflow-hidden sm:rounded-xl">
     <Image
-      class="aspect-[16/9] h-auto w-full object-cover transition duration-500 group-hover:scale-[1.02] sm:aspect-auto sm:h-24 sm:w-32"
+      class="aspect-[16/9] h-auto w-full object-cover transition duration-500 group-hover:scale-105 sm:aspect-auto sm:h-24 sm:w-32"
       src={blogEntry.data.cardImage}
       alt={blogEntry.data.cardImageAlt}
       draggable={false}

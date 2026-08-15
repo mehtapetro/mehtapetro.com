@@ -291,11 +291,16 @@ const ogTitle = pageTitle;
         </h2>
       </div>
 
-      <div class="mt-8 grid gap-4 sm:mt-12 sm:grid-cols-2 xl:grid-cols-3">
+      <div
+        data-reveal-group
+        class="mt-8 grid gap-4 sm:mt-12 sm:grid-cols-2 xl:grid-cols-3"
+      >
         {
           relatedProducts.length ? (
             relatedProducts.map(p => (
-              <ProductCard product={p} categorySlug={categoryId} />
+              <div data-reveal class="h-full">
+                <ProductCard product={p} categorySlug={categoryId} />
+              </div>
             ))
           ) : (
             <div class="border-t border-[#C0D6FF]/70 pt-6 text-sm text-[#4A5F8C] sm:col-span-2 xl:col-span-3">
