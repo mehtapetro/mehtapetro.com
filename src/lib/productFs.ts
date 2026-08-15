@@ -86,7 +86,7 @@ export function getAllCategories(): CategoryInfo[] {
       const meta = safeReadJSON(path.join(folderPath, 'category.json')) || {};
       const coverFile = findFileInsensitive(
         folderPath,
-        ['cover', 'cover-image', 'cover.jpg'],
+        ['cover', 'cover-image'],
         ['jpg', 'jpeg', 'png', 'webp', 'avif']
       );
       const slug = slugify(folderName);
@@ -125,7 +125,7 @@ export function getProductsForCategory(slug: string): ProductInfo[] {
     const meta = safeReadJSON(path.join(productPath, 'product.json')) || {};
     let imageFile = findFileInsensitive(
       productPath,
-      ['image', 'image.jpg', 'photo'],
+      ['image', 'photo'],
       ['jpg', 'jpeg', 'png', 'webp', 'avif']
     );
     // fallback: pick the first image file in the folder

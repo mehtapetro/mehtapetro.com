@@ -29,7 +29,13 @@ export const GET: APIRoute = async ({ params }) => {
 
   const folderPath = path.join(process.cwd(), 'public', 'products', folderName);
 
-  const candidates = ['cover.jpg', 'cover.jpeg', 'cover.png', 'cover.webp'];
+  const candidates = [
+    'cover.jpg',
+    'cover.jpeg',
+    'cover.png',
+    'cover.webp',
+    'cover.avif',
+  ];
   for (const fileName of candidates) {
     const filePath = path.join(folderPath, fileName);
     try {
@@ -40,7 +46,9 @@ export const GET: APIRoute = async ({ params }) => {
           ? 'image/png'
           : ext === 'webp'
             ? 'image/webp'
-            : 'image/jpeg';
+            : ext === 'avif'
+              ? 'image/avif'
+              : 'image/jpeg';
       return new Response(image, {
         headers: {
           'Content-Type': type,

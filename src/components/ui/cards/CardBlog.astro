@@ -3,17 +3,13 @@ import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
 import { formatDate } from '@utils/utils';
 
-const { blogEntry, blogLocale = '' } = Astro.props;
+const { blogEntry } = Astro.props;
 
 interface Props {
   blogEntry: CollectionEntry<'blog'>;
-  blogLocale?: string;
 }
 
-const href =
-  blogLocale && blogLocale !== 'en'
-    ? `/${blogLocale}/news/${blogEntry.id.replace(/^fr\//, '')}/`
-    : `/news/${blogEntry.id.replace(/^en\//, '')}/`;
+const href = `/news/${blogEntry.id.replace(/^en\//, '')}/`;
 ---
 
 <a

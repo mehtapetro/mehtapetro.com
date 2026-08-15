@@ -29,35 +29,3 @@ If URL is '/' (home page), assign ID as 'home'
 >
   {name}
 </a>
-
-<script>
-  const updateActiveNavLink = () => {
-    const currentPath = window.location.pathname;
-    const navLinks = document.querySelectorAll('[data-nav-url]');
-
-    navLinks.forEach(link => {
-      const href = link.getAttribute('data-nav-url');
-      if (!href) return;
-
-      const isActive =
-        href === '/'
-          ? currentPath === '/'
-          : currentPath === href || currentPath.startsWith(`${href}/`);
-
-      link.classList.remove('bg-[#E8F0FF]', 'text-[#0039E6]');
-      link.classList.add('text-[#4A5F8C]');
-      link.classList.remove('hover:bg-[#F5F9FF]', 'hover:text-[#0039E6]');
-
-      if (isActive) {
-        link.classList.remove('text-[#4A5F8C]');
-        link.classList.add('bg-[#E8F0FF]', 'text-[#0039E6]');
-        link.setAttribute('aria-current', 'page');
-      } else {
-        link.removeAttribute('aria-current');
-      }
-    });
-  };
-
-  document.addEventListener('DOMContentLoaded', updateActiveNavLink);
-  document.addEventListener('astro:page-load', updateActiveNavLink);
-</script>

@@ -102,6 +102,8 @@ async function submitContactForm(form) {
   return data;
 }
 
+const successTimeouts = new WeakMap();
+
 async function handleContactFormSubmit(event) {
   const form = event.target;
   if (!(form instanceof HTMLFormElement)) return;
@@ -123,7 +125,12 @@ async function handleContactFormSubmit(event) {
     'Sorry, we could not send your message right now. Please try again.';
   const sendingMessage = form.dataset.sendingMessage || 'Sending your message…';
   const successStorageKey = form.dataset.successStorageKey?.trim();
-  let successTimeoutId = 0;
+
+  const pendingTimeoutId = successTimeouts.get(form);
+  if (pendingTimeoutId) {
+    window.clearTimeout(pendingTimeoutId);
+    successTimeouts.delete(form);
+  }
 
   if (!form.checkValidity()) {
     form.reportValidity();
@@ -165,10 +172,13 @@ async function handleContactFormSubmit(event) {
         detail: { message: successMessage },
       })
     );
-    successTimeoutId = window.setTimeout(() => {
-      hideStatus(status);
-      successTimeoutId = 0;
-    }, 5000);
+    successTimeouts.set(
+      form,
+      window.setTimeout(() => {
+        hideStatus(status);
+        successTimeouts.delete(form);
+      }, 5000)
+    );
   } catch (error) {
     const message =
       error instanceof Error && error.message ? error.message : errorMessage;
