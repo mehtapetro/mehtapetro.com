@@ -17,10 +17,15 @@ interface Props {
 
 const firstClass = first ? '' : 'hidden';
 const imageClass =
-  'aspect-[16/10] w-full rounded-2xl object-cover sm:aspect-[4/3] lg:aspect-square';
+  'aspect-[16/10] w-full object-cover lg:h-full lg:aspect-auto';
 ---
 
-<div id={id} role="tabpanel" class={firstClass} aria-labelledby={aria}>
+<div
+  id={id}
+  role="tabpanel"
+  class:list={[firstClass, 'product-preview lg:absolute lg:inset-0']}
+  aria-labelledby={aria}
+>
   <Image
     src={src}
     alt={alt}
@@ -28,8 +33,22 @@ const imageClass =
     draggable={'false'}
     format={'avif'}
     widths={[640, 960, 1280]}
-    sizes="(min-width: 1024px) 40vw, 90vw"
+    sizes="(min-width: 1024px) 55vw, 95vw"
     loading="lazy"
     decoding="async"
   />
 </div>
+
+<style>
+  @media (prefers-reduced-motion: no-preference) {
+    .product-preview:not(.hidden) {
+      animation: preview-in 350ms ease-out both;
+    }
+  }
+
+  @keyframes preview-in {
+    from {
+      opacity: 0.65;
+    }
+  }
+</style>

@@ -3,7 +3,8 @@
  * Uses rAF + pixel translate so it works even when % CSS transforms fail
  * under max-content widths / view transitions.
  */
-const SPEED_PX_PER_SEC = 60;
+const SPEED_PX_PER_SEC = 34;
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
 /** @type {WeakMap<Element, { stop: () => void }>} */
 const running = new WeakMap();
@@ -14,6 +15,8 @@ const running = new WeakMap();
 function startMarquee(root) {
   const existing = running.get(root);
   if (existing) existing.stop();
+  root.tabIndex = 0;
+  if (reducedMotion.matches) return;
 
   const viewport = root.querySelector('.client-marquee__viewport');
   const sequence = root.querySelector('.client-marquee__sequence');
@@ -27,13 +30,13 @@ function startMarquee(root) {
   let offset = 0;
   let frame = 0;
   let last = performance.now();
-  let paused = false;
+  let hovered = false;
 
   const onEnter = () => {
-    paused = true;
+    hovered = true;
   };
   const onLeave = () => {
-    paused = false;
+    hovered = false;
     last = performance.now();
   };
 
@@ -42,13 +45,12 @@ function startMarquee(root) {
 
   const tick = now => {
     if (!root.isConnected) {
-      cancelAnimationFrame(frame);
-      running.delete(root);
+      running.get(root)?.stop();
       return;
     }
 
     const loopWidth = sequence.offsetWidth;
-    if (loopWidth > 0 && !paused) {
+    if (loopWidth > 0 && !hovered) {
       const dt = Math.min((now - last) / 1000, 0.064);
       offset -= SPEED_PX_PER_SEC * dt;
       if (-offset >= loopWidth) {
@@ -60,7 +62,9 @@ function startMarquee(root) {
     frame = requestAnimationFrame(tick);
   };
 
-  viewport.style.animation = 'none';
+  root.setAttribute('data-moving', '');
+  root.removeAttribute('tabindex');
+  root.scrollLeft = 0;
   viewport.style.willChange = 'transform';
   frame = requestAnimationFrame(tick);
 
@@ -69,7 +73,11 @@ function startMarquee(root) {
       cancelAnimationFrame(frame);
       root.removeEventListener('pointerenter', onEnter);
       root.removeEventListener('pointerleave', onLeave);
+      root.removeAttribute('data-moving');
+      root.tabIndex = 0;
       viewport.style.willChange = '';
+      viewport.style.transform = '';
+      running.delete(root);
     },
   });
 }
@@ -91,5 +99,6 @@ if (document.readyState === 'loading') {
 }
 
 document.addEventListener('astro:page-load', boot);
+reducedMotion.addEventListener('change', boot);
 
 export {};

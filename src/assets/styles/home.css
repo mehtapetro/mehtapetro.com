@@ -1,0 +1,50 @@
+.home-container {
+  width: 100%;
+  max-width: 85rem;
+  margin-inline: auto;
+  padding-inline: 1rem;
+}
+
+.home-section-space {
+  padding-block: clamp(3rem, 6vw, 5.5rem);
+}
+
+.home-section-title {
+  color: #0a1f4d;
+  font-size: clamp(1.875rem, 3.4vw, 3rem);
+  font-weight: 650;
+  line-height: 1.1;
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+}
+
+.home-section-copy {
+  color: #4a5f8c;
+  font-size: clamp(1rem, 1.25vw, 1.125rem);
+  line-height: 1.65;
+  text-wrap: pretty;
+}
+
+.home-faq .hs-accordion-group {
+  border-color: #d4e4ff;
+}
+
+.home-faq .hs-accordion {
+  border-color: #d4e4ff;
+}
+
+.home-faq .hs-accordion-toggle {
+  font-weight: 600;
+}
+
+@media (min-width: 640px) {
+  .home-container {
+    padding-inline: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .home-container {
+    padding-inline: 2rem;
+  }
+}

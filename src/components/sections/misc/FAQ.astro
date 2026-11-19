@@ -1,7 +1,7 @@
 ---
 import AccordionItem from '@components/ui/blocks/AccordionItem.astro';
 
-const { title, faqs } = Astro.props;
+const { title, faqs, homepage = false } = Astro.props;
 
 interface Faq {
   question: string;
@@ -16,30 +16,49 @@ interface FaqGroup {
 interface Props {
   title: string;
   faqs: FaqGroup;
+  homepage?: boolean;
 }
 
 const makeId = (base: string, index: number) => `${base}${index + 1}`;
 ---
 
-<section class="border-t border-[#C0D6FF]/70 bg-white">
+<section
+  class={homepage
+    ? 'home-faq bg-white'
+    : 'border-t border-[#C0D6FF]/70 bg-white'}
+  aria-labelledby={homepage ? 'common-questions-title' : undefined}
+>
   <div
-    class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 sm:py-14 lg:px-8 lg:py-20"
+    class={homepage
+      ? 'home-container home-section-space'
+      : 'mx-auto max-w-[85rem] px-4 py-10 sm:px-6 sm:py-14 lg:px-8 lg:py-20'}
   >
     <div class="grid gap-8 sm:gap-10 md:grid-cols-5 md:gap-14">
       <div class="md:col-span-2">
-        <p
-          class="text-xs font-semibold tracking-[0.18em] text-[#0039E6] uppercase"
-        >
-          FAQ
-        </p>
+        {
+          !homepage && (
+            <p class="text-xs font-semibold tracking-[0.18em] text-[#0039E6] uppercase">
+              FAQ
+            </p>
+          )
+        }
         <h2
-          class="mt-3 text-2xl font-bold tracking-tight text-[#0A1F4D] sm:text-3xl md:text-4xl"
+          id={homepage ? 'common-questions-title' : undefined}
+          class={homepage
+            ? 'home-section-title'
+            : 'mt-3 text-2xl font-bold tracking-tight text-[#0A1F4D] sm:text-3xl md:text-4xl'}
         >
           <Fragment set:html={title} />
         </h2>
         {
           faqs.subTitle && (
-            <p class="mt-4 text-sm leading-relaxed text-[#4A5F8C] sm:mt-5 sm:text-base md:text-lg">
+            <p
+              class={
+                homepage
+                  ? 'home-section-copy mt-4'
+                  : 'mt-4 text-sm leading-relaxed text-[#4A5F8C] sm:mt-5 sm:text-base md:text-lg'
+              }
+            >
               {faqs.subTitle}
             </p>
           )

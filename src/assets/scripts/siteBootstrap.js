@@ -22,7 +22,7 @@ async function loadPageScripts() {
       () => import('@scripts/heroVideo.js')
     ),
     loadWhenPresent(
-      '.client-marquee',
+      '[data-client-marquee]',
       () => import('@scripts/clientMarquee.js')
     ),
     loadWhenPresent(

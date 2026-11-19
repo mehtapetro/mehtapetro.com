@@ -1,5 +1,6 @@
 ---
 import MainLayout from '@/layouts/MainLayout.astro';
+import '@styles/home.css';
 import { getImage } from 'astro:assets';
 import { SITE } from '@data/constants';
 import ClientsSection from '@components/sections/landing/ClientsSection.astro';
@@ -29,7 +30,6 @@ const heroPosterMobile = await getImage({
   quality: 65,
   fit: 'cover',
 });
-
 const heroLogoMobile = await getImage({
   src: mprlLogo,
   width: 192,
@@ -83,7 +83,7 @@ const heroLogoMobile = await getImage({
 >
   <!-- Hero Section -->
   <section
-    class="relative flex min-h-[100svh] flex-col overflow-hidden bg-[#07142F]"
+    class="relative flex min-h-[78svh] flex-col overflow-hidden bg-[#07142F] md:min-h-[100svh]"
   >
     {/* Mobile: real <img> so LCP is the poster, not the h1 */}
     <img
@@ -115,17 +115,11 @@ const heroLogoMobile = await getImage({
       data-hero-src={introVideo}></video>
 
     <div
-      class="pointer-events-none absolute inset-0 bg-[#061022]/45"
-      aria-hidden="true"
+      class="home-container relative z-10 flex flex-1 flex-col justify-start pt-[max(8.5rem,env(safe-area-inset-top))] pb-[max(5rem,env(safe-area-inset-bottom))] md:justify-center md:pt-28 md:pb-24"
     >
-    </div>
-
-    <div
-      class="relative z-10 mx-auto flex min-h-[100svh] w-full max-w-[85rem] flex-1 flex-col justify-center px-4 pt-[max(5.5rem,env(safe-area-inset-top))] pb-[max(2rem,env(safe-area-inset-bottom))] sm:px-6 sm:pt-28 sm:pb-24 lg:px-8"
-    >
-      <div class="w-full max-w-6xl -translate-y-3 sm:-translate-y-4">
-        <div class="mb-5 sm:mb-8">
-          <picture>
+      <div class="hero-copy relative isolate w-full max-w-[60rem]">
+        <div class="mb-4 flex items-center gap-4 sm:mb-6 sm:gap-5">
+          <picture class="block shrink-0">
             <source
               media="(max-width: 767px)"
               srcset={heroLogoMobile.src}
@@ -133,68 +127,63 @@ const heroLogoMobile = await getImage({
             />
             <img
               src={mprlLogo.src}
-              alt="Mehta Petro-Refineries Limited"
+              alt=""
               width={mprlLogo.width}
               height={mprlLogo.height}
-              class="h-12 w-auto sm:h-20 md:h-24"
+              class="h-12 w-auto sm:h-14 lg:h-16"
               decoding="async"
-              loading="eager"
             />
           </picture>
+          <p
+            class="border-l border-[#0A1F4D]/30 pl-4 text-xs font-bold tracking-[0.17em] text-[#001552] uppercase sm:pl-5"
+          >
+            Since 1993
+          </p>
         </div>
 
         <h1
-          class="w-full max-w-6xl text-[1.85rem] leading-tight font-extrabold tracking-tight text-balance text-white sm:text-5xl sm:leading-tight md:text-6xl lg:text-[4.35rem] lg:leading-none lg:whitespace-nowrap"
+          class="text-[min(6.15vw,4.1rem)] leading-[1.06] font-bold tracking-[-0.045em] whitespace-nowrap text-[#002285] md:text-[min(4.45vw,4.1rem)]"
         >
           Mehta Petro-Refineries Limited
         </h1>
 
         <h2
-          class="mt-4 text-sm font-semibold tracking-[0.16em] text-[#8EC5FF] uppercase sm:mt-6 sm:text-xl sm:tracking-[0.2em]"
+          class="mt-4 text-base font-semibold tracking-tight text-[#001552] sm:mt-5 sm:text-2xl"
         >
           Performance Through Quality
         </h2>
 
         <p
-          class="mt-2 max-w-2xl text-sm leading-relaxed text-white/86 sm:text-base"
+          class="mt-1.5 max-w-xl text-base leading-relaxed font-medium text-[#0A1F4D] sm:mt-2 sm:text-lg"
         >
           Manufacturers of Petrochemicals & Specialty Base Oils
         </p>
 
-        <p
-          class="mt-1.5 text-xs font-semibold tracking-[0.18em] text-white/90 uppercase sm:mt-2 sm:text-base sm:tracking-[0.2em]"
-        >
-          Since 1993
-        </p>
-
-        <div class="mt-7 flex flex-col gap-3 sm:mt-9 sm:flex-row sm:gap-4">
+        <div class="mt-6 flex flex-col gap-2.5 sm:mt-8 sm:flex-row sm:gap-3">
           <a
             href="/contact"
-            class="inline-flex min-h-12 items-center justify-center rounded-xl bg-[#0039E6] px-6 py-3.5 text-base font-semibold text-white shadow-lg transition-colors hover:bg-[#0033CC] sm:min-h-0 sm:px-7 sm:py-4"
+            class="inline-flex min-h-12 items-center justify-center gap-2.5 rounded-lg border border-transparent bg-[#0039E6] px-6 py-3.5 text-base font-semibold text-white shadow-sm transition-colors hover:bg-[#0033CC] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#0039E6] sm:min-h-0 sm:px-7 sm:py-4"
           >
             Get in Touch
+            <span aria-hidden="true">↗</span>
           </a>
           <a
             href="/products"
-            class="inline-flex min-h-12 items-center justify-center rounded-xl border border-white/24 bg-white/12 px-6 py-3.5 text-base font-semibold text-white backdrop-blur-md transition-colors hover:bg-white/18 sm:min-h-0 sm:px-7 sm:py-4"
+            class="inline-flex min-h-12 items-center justify-center rounded-lg border border-[#0A1F4D]/40 bg-white/65 px-6 py-3.5 text-base font-semibold text-[#0A1F4D] transition-colors hover:bg-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#0039E6] sm:min-h-0 sm:px-7 sm:py-4"
           >
             View Our Products
           </a>
         </div>
 
         <div
-          class="mt-6 hidden flex-wrap gap-3 text-sm text-white/90 sm:mt-8 sm:flex"
+          class="mt-6 hidden flex-wrap gap-x-4 gap-y-2 text-sm text-[#0A1F4D] sm:mt-8 md:flex"
         >
-          <span
-            class="rounded-full border border-white/18 bg-white/10 px-4 py-2 backdrop-blur-sm"
+          <span class="border-l border-[#9FB7FF] pl-3"
             >Aromatic & aliphatic solvents</span
           >
-          <span
-            class="rounded-full border border-white/18 bg-white/10 px-4 py-2 backdrop-blur-sm"
-            >Base oils & glycols</span
+          <span class="border-l border-[#9FB7FF] pl-3">Base oils & glycols</span
           >
-          <span
-            class="rounded-full border border-white/18 bg-white/10 px-4 py-2 backdrop-blur-sm"
+          <span class="border-l border-[#9FB7FF] pl-3"
             >Drilling fluids & additives</span
           >
         </div>
@@ -202,94 +191,105 @@ const heroLogoMobile = await getImage({
     </div>
 
     <div
-      class="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-linear-to-t from-[#E8F0FF] to-transparent sm:h-24"
+      class="pointer-events-none absolute inset-x-0 bottom-0 h-12 bg-linear-to-t from-[#E8F0FF] to-transparent sm:h-16"
     >
     </div>
   </section>
 
-  <!-- Proof points -->
-  <section class="bg-[#E8F0FF]">
-    <div
-      class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 sm:py-14 lg:px-8 lg:py-20"
-    >
-      <div data-reveal class="max-w-3xl">
-        <p
-          class="text-xs font-semibold tracking-[0.18em] text-[#0039E6] uppercase"
-        >
-          Proof
-        </p>
-        <h2
-          class="mt-3 text-2xl font-bold tracking-tight text-[#0A1F4D] sm:text-3xl md:text-4xl"
-        >
+  <!-- Experience and quality -->
+  <section
+    class="bg-linear-to-b from-[#E8F0FF] to-white"
+    aria-labelledby="experience-title"
+  >
+    <div class="home-container home-section-space">
+      <div data-reveal class="grid items-end gap-4 lg:grid-cols-2 lg:gap-12">
+        <h2 id="experience-title" class="home-section-title max-w-xl">
           Built on Experience & Quality
         </h2>
-        <p
-          class="mt-4 text-sm leading-relaxed text-[#4A5F8C] sm:mt-5 sm:text-base md:text-lg"
-        >
+        <p class="home-section-copy max-w-xl lg:justify-self-end">
           Decades of manufacturing expertise, two modern facilities, and
           certified quality systems supporting reliable industrial supply.
         </p>
       </div>
 
-      <div
+      <ul
         data-reveal-group
-        class="mt-8 divide-y divide-[#C0D6FF]/70 border-y border-[#C0D6FF]/70 sm:mt-12 sm:grid sm:grid-cols-3 sm:gap-0 sm:divide-x sm:divide-y-0 sm:divide-[#C0D6FF]/70 sm:py-10"
+        class="mt-8 grid gap-3 sm:gap-4 md:grid-cols-3 lg:mt-10 lg:gap-5"
       >
-        <div
-          data-reveal
-          class="py-6 sm:px-8 sm:py-0 first:sm:pl-0 last:sm:pr-0"
-        >
-          <p
-            class="text-4xl font-extrabold tracking-tight text-[#0039E6] sm:text-5xl"
+        <li data-reveal class="quality-card">
+          <div
+            class="mb-5 flex h-12 items-center justify-between gap-4 sm:mb-6"
           >
-            <span data-count-to="33" data-count-suffix="+">0+</span>
-          </p>
-          <p class="mt-2 text-base font-bold text-[#0A1F4D] sm:mt-3">
+            <span class="quality-stat" data-count-to="33" data-count-suffix="+"
+              >33+</span
+            >
+            <span class="quality-symbol" aria-hidden="true">
+              <!-- Google Material Symbols Outlined · workspace_premium · Apache-2.0 -->
+              <svg
+                viewBox="0 -960 960 960"
+                width="24"
+                height="24"
+                fill="currentColor"
+              >
+                <path
+                  d="m387-412 35-114-92-74h114l36-112 36 112h114l-93 74 35 114-92-71-93 71ZM240-40v-309q-38-42-59-96t-21-115q0-134 93-227t227-93q134 0 227 93t93 227q0 61-21 115t-59 96v309l-240-80-240 80Zm240-280q100 0 170-70t70-170q0-100-70-170t-170-70q-100 0-170 70t-70 170q0 100 70 170t170 70ZM320-159l160-41 160 41v-124q-35 20-75.5 31.5T480-240q-44 0-84.5-11.5T320-283v124Zm160-62Z"
+                ></path>
+              </svg>
+            </span>
+          </div>
+          <h3 class="text-base font-semibold text-[#0A1F4D] lg:text-lg">
             Years of Experience
-          </p>
-          <p class="mt-1 text-sm text-[#4A5F8C]">
+          </h3>
+          <p class="mt-2 text-sm leading-relaxed text-[#4A5F8C]">
             Serving industrial customers since 1993.
           </p>
-        </div>
+        </li>
 
-        <div
-          data-reveal
-          class="py-6 sm:px-8 sm:py-0 first:sm:pl-0 last:sm:pr-0"
-        >
-          <p
-            class="text-4xl font-extrabold tracking-tight text-[#0039E6] sm:text-5xl"
+        <li data-reveal class="quality-card">
+          <div
+            class="mb-5 flex h-12 items-center justify-between gap-4 sm:mb-6"
           >
-            <span data-count-to="2">0</span>
-          </p>
-          <p class="mt-2 text-base font-bold text-[#0A1F4D] sm:mt-3">
+            <span class="quality-stat" data-count-to="2">2</span>
+            <span class="quality-symbol" aria-hidden="true">
+              <!-- Google Material Symbols Outlined · location_on · Apache-2.0 -->
+              <svg
+                viewBox="0 -960 960 960"
+                width="24"
+                height="24"
+                fill="currentColor"
+              >
+                <path
+                  d="M480-480q33 0 56.5-23.5T560-560q0-33-23.5-56.5T480-640q-33 0-56.5 23.5T400-560q0 33 23.5 56.5T480-480Zm0 294q122-112 181-203.5T720-552q0-109-69.5-178.5T480-800q-101 0-170.5 69.5T240-552q0 71 59 162.5T480-186Zm0 106Q319-217 239.5-334.5T160-552q0-150 96.5-239T480-880q127 0 223.5 89T800-552q0 100-79.5 217.5T480-80Zm0-480Z"
+                ></path>
+              </svg>
+            </span>
+          </div>
+          <h3 class="text-base font-semibold text-[#0A1F4D] lg:text-lg">
             Manufacturing Facilities
-          </p>
-          <p class="mt-1 text-sm text-[#4A5F8C]">
+          </h3>
+          <p class="mt-2 text-sm leading-relaxed text-[#4A5F8C]">
             Palghar and Dahej supporting reliable production.
           </p>
-        </div>
+        </li>
 
-        <div
-          data-reveal
-          class="py-6 sm:px-8 sm:py-0 first:sm:pl-0 last:sm:pr-0"
-        >
-          <div class="flex h-11 items-center sm:h-14">
+        <li data-reveal class="quality-card">
+          <div class="mb-5 flex h-12 items-center sm:mb-6">
             <img
               src={isoLogo.src}
-              alt="ISO 9001:2015 Certified"
-              class="h-11 w-auto sm:h-14"
+              alt=""
+              class="h-12 w-auto"
               loading="lazy"
               decoding="async"
             />
           </div>
-          <p class="mt-2 text-base font-bold text-[#0A1F4D] sm:mt-3">
+          <h3 class="text-base font-semibold text-[#0A1F4D] lg:text-lg">
             ISO 9001:2015 Certified
-          </p>
-          <p class="mt-1 text-sm text-[#4A5F8C]">
+          </h3>
+          <p class="mt-2 text-sm leading-relaxed text-[#4A5F8C]">
             Quality systems for consistent industrial supply.
           </p>
-        </div>
-      </div>
+        </li>
+      </ul>
     </div>
   </section>
 
@@ -309,7 +309,6 @@ const heroLogoMobile = await getImage({
         heading: 'Specialty Solvents & Base Oils',
         content:
           'High-purity solvents and base oils for industrial applications. Consistent specs, full documentation, and bulk quantities available.',
-        svg: 'tools',
         src: tools,
         alt: 'Chemical products and laboratory',
         srcName: 'researching-laboratory.jpg',
@@ -319,7 +318,6 @@ const heroLogoMobile = await getImage({
         heading: 'N-Paraffins & Olefins',
         content:
           'Reliable supply of n-paraffins and olefins for manufacturing. Batch-tested quality with complete traceability.',
-        svg: 'flask',
         src: dashboard,
         alt: 'Chemical processing and quality control',
         srcName: 'solvemntshome.jpg',
@@ -329,7 +327,6 @@ const heroLogoMobile = await getImage({
         heading: 'Custom Requirements',
         content:
           'Need something specific? We work with clients on custom formulations, packaging, and delivery schedules.',
-        svg: 'tune',
         src: construction,
         alt: 'Custom chemical solutions',
         srcName: 'nparaffinshome.jpg',
@@ -338,5 +335,75 @@ const heroLogoMobile = await getImage({
   />
 
   <!-- FAQ -->
-  <FAQ title="Common Questions" faqs={faqs} />
+  <FAQ title="Common Questions" faqs={faqs} homepage />
 </MainLayout>
+
+<style>
+  .quality-card {
+    border: 1px solid #d4e4ff;
+    border-radius: 1rem;
+    background: white;
+    padding: clamp(1.25rem, 2.5vw, 2rem);
+    box-shadow: 0 10px 24px -20px rgb(0 34 133 / 35%);
+  }
+
+  .quality-stat {
+    color: #002285;
+    font-size: clamp(2.5rem, 4vw, 3.125rem);
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.055em;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .quality-symbol {
+    display: grid;
+    width: 2.75rem;
+    height: 2.75rem;
+    place-items: center;
+    border-radius: 0.75rem;
+    background: #f5f9ff;
+    color: #002285;
+  }
+
+  .hero-copy::before {
+    position: absolute;
+    z-index: -1;
+    inset: -4rem -1rem;
+    background: linear-gradient(
+      180deg,
+      transparent,
+      rgb(255 255 255 / 72%) 16%,
+      rgb(255 255 255 / 72%) 74%,
+      transparent
+    );
+    content: '';
+    pointer-events: none;
+  }
+
+  @media (min-width: 768px) {
+    .hero-copy::before {
+      inset: -6rem -8rem -6rem -4rem;
+      background: linear-gradient(
+        90deg,
+        rgb(255 255 255 / 77%),
+        rgb(255 255 255 / 70%) 49%,
+        rgb(255 255 255 / 58%) 76%,
+        transparent
+      );
+      mask-image: linear-gradient(
+        180deg,
+        transparent,
+        black 21%,
+        black 79%,
+        transparent
+      );
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .hero-copy::before {
+      left: -8rem;
+    }
+  }
+</style>

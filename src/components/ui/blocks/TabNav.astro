@@ -11,7 +11,7 @@ interface Props {
 }
 
 const BUTTON_CLASS =
-  'group w-full py-4 text-start outline-hidden transition-colors focus-visible:ring-3 focus-visible:ring-[#C0D6FF] sm:py-5';
+  'group w-full border-l-2 border-l-transparent px-3 py-3.5 text-start transition-colors hover:bg-white/60 focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-[#0039E6] hs-tab-active:border-l-[#0039E6] hs-tab-active:bg-[#E8F0FF]/60 sm:px-4';
 ---
 
 <button
@@ -23,21 +23,12 @@ const BUTTON_CLASS =
   aria-selected={first ? 'true' : 'false'}
   role="tab"
 >
-  <span class="flex gap-3 sm:gap-4">
-    <span
-      class="hs-tab-active:bg-[#0039E6] hs-tab-active:text-white mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[#E8F0FF] text-[#0039E6] transition-colors sm:h-10 sm:w-10"
-    >
-      <slot />
-    </span>
-    <span class="min-w-0 grow">
-      <span
-        class="hs-tab-active:text-[#0039E6] block text-base font-bold text-[#0A1F4D] sm:text-lg"
-        >{heading}</span
-      >
-      <span
-        class="hs-tab-active:block mt-1 hidden text-sm leading-relaxed text-[#4A5F8C] sm:mt-1.5 sm:block sm:text-base"
-        >{content}</span
-      >
-    </span>
-  </span>
+  <span
+    class="hs-tab-active:text-[#002285] block text-base leading-snug font-semibold text-[#0A1F4D] transition-colors group-hover:text-[#0039E6] sm:text-lg"
+    >{heading}</span
+  >
+  <span
+    class="hs-tab-active:block mt-1.5 hidden max-w-[48ch] text-sm leading-[1.65] text-pretty text-[#4A5F8C] lg:block"
+    >{content}</span
+  >
 </button>

@@ -1,14 +1,12 @@
 ---
 import TabNav from '@components/ui/blocks/TabNav.astro';
 import TabContent from '@components/ui/blocks/TabContent.astro';
-import Icon from '@components/ui/icons/Icon.astro';
 
 const { title, subTitle, tabs } = Astro.props;
 
 interface Tab {
   heading: string;
   content: string;
-  svg: string;
   src: any;
   alt: string;
   first?: boolean;
@@ -23,76 +21,86 @@ interface Props {
 }
 ---
 
-<section class="bg-[#E8F0FF]">
+<section
+  class="bg-[#F5F9FF]"
+  aria-labelledby="product-categories-title"
+  data-product-rotation
+>
   <div
-    class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 sm:py-14 lg:px-8 lg:py-20"
+    class="home-container home-section-space grid gap-y-6 lg:grid-cols-12 lg:gap-x-12 xl:gap-x-16"
   >
-    <div data-reveal class="max-w-3xl">
-      <p
-        class="text-xs font-semibold tracking-[0.18em] text-[#0039E6] uppercase"
-      >
-        Products
-      </p>
-      <h2
-        class="mt-3 text-2xl font-bold tracking-tight text-[#0A1F4D] sm:text-3xl md:text-4xl"
-      >
+    <div
+      data-reveal
+      class="max-w-xl lg:col-span-5 lg:col-start-1 lg:row-start-1"
+    >
+      <h2 id="product-categories-title" class="home-section-title max-w-[16ch]">
         {title}
       </h2>
       {
         subTitle && (
-          <p class="mt-4 text-sm leading-relaxed text-[#4A5F8C] sm:mt-5 sm:text-base md:text-lg">
-            {subTitle}
-          </p>
+          <p class="home-section-copy mt-4 max-w-[44ch]">{subTitle}</p>
         )
       }
     </div>
 
-    <div
-      class="relative z-10 mt-8 grid items-center gap-6 border-t border-[#C0D6FF]/70 pt-8 sm:mt-12 sm:gap-10 sm:pt-10 lg:grid-cols-12 lg:gap-16"
-    >
-      <!-- Image first on mobile so tabs control something visible -->
-      <div
-        class="order-1 lg:order-none lg:col-span-6 lg:col-start-1 lg:row-start-1"
+    <div class="lg:col-span-5 lg:col-start-1 lg:row-start-2">
+      <nav
+        class="divide-y divide-[#D4E4FF] border-y border-[#D4E4FF]"
+        aria-label="Product categories"
+        role="tablist"
+        aria-orientation="vertical"
       >
         {
           tabs.map((tab, index) => (
-            <TabContent
-              id={`tabs-with-card-${index + 1}`}
-              aria={`tabs-with-card-item-${index + 1}`}
-              src={tab.src}
-              alt={tab.alt}
+            <TabNav
+              id={`tabs-with-card-item-${index + 1}`}
+              dataTab={`#tabs-with-card-${index + 1}`}
+              aria={`tabs-with-card-${index + 1}`}
+              heading={tab.heading}
+              content={tab.content}
               first={tab.first}
-              second={tab.second}
-              srcName={tab.srcName}
             />
           ))
         }
-      </div>
-
-      <div
-        class="order-2 lg:order-none lg:col-span-6 lg:col-start-7 lg:row-start-1"
+      </nav>
+    </div>
+    <!-- Keep the preview below the category controls on mobile. -->
+    <div
+      class="relative overflow-hidden rounded-2xl bg-[#E8F0FF] lg:col-span-7 lg:col-start-6 lg:row-span-3 lg:row-start-1"
+    >
+      {
+        tabs.map((tab, index) => (
+          <TabContent
+            id={`tabs-with-card-${index + 1}`}
+            aria={`tabs-with-card-item-${index + 1}`}
+            src={tab.src}
+            alt={tab.alt}
+            first={tab.first}
+            second={tab.second}
+            srcName={tab.srcName}
+          />
+        ))
+      }
+    </div>
+    <div
+      class="flex flex-wrap items-center justify-between gap-x-4 gap-y-1 lg:col-span-5 lg:col-start-1 lg:row-start-3"
+    >
+      <a
+        href="/products"
+        class="inline-flex min-h-11 items-center border-b border-[#9FB7FF] font-semibold text-[#002285] transition-colors hover:border-[#0039E6] hover:text-[#0039E6] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#0039E6]"
+        >View all products</a
       >
-        <nav
-          class="grid gap-0 divide-y divide-[#C0D6FF]/70 border-y border-[#C0D6FF]/70"
-          aria-label="Product categories"
-          role="tablist"
-        >
-          {
-            tabs.map((tab, index) => (
-              <TabNav
-                id={`tabs-with-card-item-${index + 1}`}
-                dataTab={`#tabs-with-card-${index + 1}`}
-                aria={`tabs-with-card-${index + 1}`}
-                heading={tab.heading}
-                content={tab.content}
-                first={tab.first}
-              >
-                <Icon name={tab.svg} />
-              </TabNav>
-            ))
-          }
-        </nav>
-      </div>
+      <button
+        type="button"
+        hidden
+        data-product-rotation-toggle
+        class="min-h-11 rounded-md px-2 text-sm font-medium text-[#4A5F8C] underline-offset-4 hover:text-[#002285] hover:underline focus-visible:outline-2 focus-visible:outline-[#0039E6]"
+        >Pause rotation</button
+      >
     </div>
   </div>
 </section>
+
+<script>
+  import '@scripts/productCategoryRotation.js';
+</script>
